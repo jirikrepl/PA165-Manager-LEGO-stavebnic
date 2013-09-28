@@ -1,6 +1,7 @@
 PA165 Manager LEGO stavebnic
 ============================
 Oficiální zadání:
+
 Vžijme se opět do dětských let. Mějme firmu prodávající stavebnice Lego.
 Aplikace bude sloužit jako manažer, který obstarává správu stavebnic,
 setů skládajících se z různých kombinací a kategorií do kterých jsou zařazeny. 
