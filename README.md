@@ -1,4 +1,4 @@
-PA165 Manager LEGO stavebnic
+PA165 Manažer LEGO stavebnic
 ============================
 Oficiální zadání:
 
