@@ -20,5 +20,6 @@ public class App
         
         BrickDao bDao = new BrickDao();
         bDao.createBrick(b);
+        bDao.remove(b);
     }
 }

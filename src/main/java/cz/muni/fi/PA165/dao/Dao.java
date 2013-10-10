@@ -48,7 +48,10 @@ public class Dao<E, K extends Serializable> {
      * @param entity entity which has to be removed
      */
     public void remove(E entity) {
+        entityManager.getTransaction().begin();
         entityManager.remove(entity);
+        entityManager.getTransaction().commit();
+        
     }
 
     /**
@@ -57,7 +60,7 @@ public class Dao<E, K extends Serializable> {
      * @param id find an instance of entity by its id
      * @return entity which was found
      */
-    public E findById(K id) {
-        return (E) entityManager.find(entityClass, id);
-    }
+//    public E findById(K id) {
+//        return (E) entityManager.find(entityClass, id);
+//    }
 }

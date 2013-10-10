@@ -11,7 +11,7 @@ import javax.persistence.Query;
  * @author jirikrepl
  */
 public class BrickDao extends Dao<Brick, Long> {
-    
+
     /**
      * uses superclass constructor
      */
