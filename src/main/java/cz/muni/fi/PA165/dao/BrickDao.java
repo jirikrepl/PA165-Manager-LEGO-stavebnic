@@ -11,10 +11,17 @@ import javax.persistence.Query;
  * @author jirikrepl
  */
 public class BrickDao extends Dao<Brick, Long> {
+    
+    /**
+     * uses superclass constructor
+     */
+    public BrickDao() {
+        super();
+    }
 
     /**
      * persist given brick entity
-     * 
+     *
      * @param brick instance of brick entity class
      */
     public void createBrick(Brick brick) {
@@ -23,7 +30,7 @@ public class BrickDao extends Dao<Brick, Long> {
 
     /**
      * remove brick entity from table
-     * 
+     *
      * @param brick instance of brick entity class, which has to be removed
      */
     public void removeBrick(Brick brick) {
@@ -32,7 +39,7 @@ public class BrickDao extends Dao<Brick, Long> {
 
     /**
      * update brick entity in db table
-     * 
+     *
      * @param brick instance of brick entity class, which has to be updated
      */
     public void updateBrick(Brick brick) {
@@ -52,7 +59,7 @@ public class BrickDao extends Dao<Brick, Long> {
 
     /**
      * find all bricks of desired color
-     * 
+     *
      * @param color Enum color of bricks
      * @return List<Brick> list of brick with desired color
      */
@@ -65,7 +72,7 @@ public class BrickDao extends Dao<Brick, Long> {
 
     /**
      * find all entities by given color name
-     * 
+     *
      * @param name String, name of brick
      * @return List<Brick> list of brick with desired color
      */
@@ -76,5 +83,4 @@ public class BrickDao extends Dao<Brick, Long> {
         q.setParameter("brick_color", name);
         return (List<Brick>) q.getResultList();
     }
-
 }
