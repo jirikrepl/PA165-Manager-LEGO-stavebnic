@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package cz.muni.fi.PA165.domain;
 
 import java.io.Serializable;
@@ -13,10 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
- * @author pc
- */
-@Entity
+*
+* @author pc
+*/
+//@Entity
 public class BuildingKit implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -109,5 +109,5 @@ public class BuildingKit implements Serializable {
     public String toString() {
         return "cz.muni.fi.PA165.domain.BuildingKit[ id=" + id + " ]";
     }
-    
+
 }
