@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 /**
  * this entity class represents lego brick
- * 
+ *
  * @author jirikrepl
  */
 @Entity
@@ -45,7 +45,7 @@ public class Brick implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -76,6 +76,6 @@ public class Brick implements Serializable {
 
     @Override
     public String toString() {
-        return "cz.muni.fi.PA165.domain.Brick[ id=" + id + " ]";
+        return "Brick{" + "id=" + id + ", color=" + color + ", name=" + name + ", description=" + description + '}';
     }
 }

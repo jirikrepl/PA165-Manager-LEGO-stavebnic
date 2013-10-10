@@ -24,8 +24,8 @@ public class BrickDao extends Dao<Brick, Long> {
      *
      * @param brick instance of brick entity class
      */
-    public void createBrick(Brick brick) {
-        persist(brick);
+    public void storeBrick(Brick brick) {
+        store(brick);
     }
 
     /**
@@ -34,16 +34,7 @@ public class BrickDao extends Dao<Brick, Long> {
      * @param brick instance of brick entity class, which has to be removed
      */
     public void removeBrick(Brick brick) {
-        remove(brick);
-    }
-
-    /**
-     * update brick entity in db table
-     *
-     * @param brick instance of brick entity class, which has to be updated
-     */
-    public void updateBrick(Brick brick) {
-        //TODO
+        delete(brick);
     }
 
     /**
@@ -79,7 +70,7 @@ public class BrickDao extends Dao<Brick, Long> {
     public List<Brick> findByName(String name) {
         // MUZOU MIT DVE KOSTICKY STEJNE JMENO?
         Query q = entityManager.createQuery(
-                "SELECT b FROM Brick b WHERE color = :brick_color", Brick.class);
+                "SELECT b FROM Brick b WHERE name = :brick_color", Brick.class);
         q.setParameter("brick_color", name);
         return (List<Brick>) q.getResultList();
     }
