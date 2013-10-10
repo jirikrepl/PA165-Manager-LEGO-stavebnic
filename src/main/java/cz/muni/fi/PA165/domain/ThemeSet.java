@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author PALO
+ * @author Pavol Bako
  */
 @Entity
 public class ThemeSet implements Serializable {
