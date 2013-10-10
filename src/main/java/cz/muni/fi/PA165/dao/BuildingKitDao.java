@@ -14,21 +14,21 @@ import javax.persistence.Query;
  *
  * @author pc
  */
-public class BuildingKitDao extends Dao<BuildingKit, Long> {
+public class BuildingKitDao extends Dao<BuildingKit> {
     
-    public void CreateBuildingKit(BuildingKit buildingKit)
-    {
-       persist(buildingKit);
-    }
-    
-    public void RemoveBuildingKit(BuildingKit buildingKit) {
-        remove(buildingKit);
-    }
-    
-    public void UpdateBuildingKit(BuildingKit buildingKit)
-    {
-       persist(buildingKit);
-    }
+//    public void CreateBuildingKit(BuildingKit buildingKit)
+//    {
+//       persist(buildingKit);
+//    }
+//
+//    public void RemoveBuildingKit(BuildingKit buildingKit) {
+//        remove(buildingKit);
+//    }
+//
+//    public void UpdateBuildingKit(BuildingKit buildingKit)
+//    {
+//       persist(buildingKit);
+//    }
     
     public List<BuildingKit> findAll() {
         Query q = entityManager.createQuery(
