@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.domain.daoInterface.DaoInterface;
+import cz.muni.fi.PA165.daoInterface.DaoInterface;
 import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

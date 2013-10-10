@@ -2,7 +2,7 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Color;
-import cz.muni.fi.PA165.domain.daoInterface.BrickDaoInterface;
+import cz.muni.fi.PA165.daoInterface.BrickDaoInterface;
 import java.util.List;
 import javax.persistence.Query;
 
