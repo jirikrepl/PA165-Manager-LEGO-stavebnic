@@ -14,20 +14,20 @@ import javax.persistence.Query;
  *
  * @author pc
  */
-public class BuildingKitDao extends Dao<BuildingKit> {
+public class BuildingKitDao extends Dao<BuildingKit, Long> {
     
     public void CreateBuildingKit(BuildingKit buildingKit)
     {
-       store(buildingKit);
+       persist(buildingKit);
     }
     
     public void RemoveBuildingKit(BuildingKit buildingKit) {
-        delete(buildingKit);
+        remove(buildingKit);
     }
     
     public void UpdateBuildingKit(BuildingKit buildingKit)
     {
-       store(buildingKit);
+       persist(buildingKit);
     }
     
     public List<BuildingKit> findAll() {
