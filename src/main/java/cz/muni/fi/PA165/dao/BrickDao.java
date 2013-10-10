@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Color;
+import cz.muni.fi.PA165.domain.daoInterface.BrickDaoInterface;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -10,7 +11,7 @@ import javax.persistence.Query;
  *
  * @author jirikrepl
  */
-public class BrickDao extends Dao<Brick, Long> {
+public class BrickDao extends Dao<Brick> implements BrickDaoInterface{
 
     /**
      * uses superclass constructor

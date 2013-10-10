@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.dao;
 
-import java.io.Serializable;
+import cz.muni.fi.PA165.domain.daoInterface.DaoInterface;
 import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,9 +13,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author jirikrepl
  * @param <E> generic type for instance of entity class
- * @param <K> generic type for key variable
  */
-public class Dao<E, K extends Serializable> {
+public abstract class Dao<E> implements DaoInterface<E>{
 
     protected Class<E> entityClass;
     @PersistenceContext
@@ -26,7 +25,7 @@ public class Dao<E, K extends Serializable> {
      */
     public Dao() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[1];
+        this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         Dao.entityManager = emf.createEntityManager();
@@ -65,7 +64,7 @@ public class Dao<E, K extends Serializable> {
      * @param id find an instance of entity by its id
      * @return entity which was found
      */
-    public E retrieveById(K id) {
+    public E retrieveById(Long id) {
         return entityManager.find(entityClass, id);
     }
 }
