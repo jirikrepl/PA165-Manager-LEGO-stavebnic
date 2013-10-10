@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,7 +28,9 @@ public class BuildingKit implements Serializable {
     private int yearFrom;
     private BigDecimal price;
     private String description;
+    @ManyToMany
     private List<Brick> bricks;
+    @ManyToOne
     private List<ThemeSet> themeSet;
 
     public Long getId() {
