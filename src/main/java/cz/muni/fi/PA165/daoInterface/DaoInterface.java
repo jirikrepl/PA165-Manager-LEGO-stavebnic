@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.PA165.daoInterface;
+package cz.muni.fi.PA165.domain.daoInterface;
 
 /**
  *
