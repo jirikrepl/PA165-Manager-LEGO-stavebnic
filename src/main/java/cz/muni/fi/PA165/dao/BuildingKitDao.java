@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.daoInterface.BuildingKitDaoInterface;
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.BuildingKit;
 import java.math.BigDecimal;
@@ -14,21 +15,22 @@ import javax.persistence.Query;
  *
  * @author pc
  */
-public class BuildingKitDao extends Dao<BuildingKit> {
+public class BuildingKitDao extends Dao<BuildingKit> 
+    implements BuildingKitDaoInterface {
     
-//    public void CreateBuildingKit(BuildingKit buildingKit)
-//    {
-//       persist(buildingKit);
-//    }
-//
-//    public void RemoveBuildingKit(BuildingKit buildingKit) {
-//        remove(buildingKit);
-//    }
-//
-//    public void UpdateBuildingKit(BuildingKit buildingKit)
-//    {
-//       persist(buildingKit);
-//    }
+    public void CreateBuildingKit(BuildingKit buildingKit)
+    {
+       store(buildingKit);
+    }
+
+    public void RemoveBuildingKit(BuildingKit buildingKit) {
+        delete(buildingKit);
+    }
+
+    public void UpdateBuildingKit(BuildingKit buildingKit)
+    {
+       store(buildingKit);
+    }
     
     public List<BuildingKit> findAll() {
         Query q = entityManager.createQuery(
