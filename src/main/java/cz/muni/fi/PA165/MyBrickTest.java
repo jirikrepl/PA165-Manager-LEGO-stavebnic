@@ -1,6 +1,9 @@
-package cz.muni.fi.PA165.domain;
+package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.domain.Brick;
+import cz.muni.fi.PA165.domain.Color;
+
 import java.util.List;
 
 public class MyBrickTest {

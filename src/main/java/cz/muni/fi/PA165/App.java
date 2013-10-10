@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.domain.MyBrickTest;
-
 /**
  * Hello world!
  *

@@ -1,21 +1,40 @@
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.daoInterface.CategoryDaoInterface;
+import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Category;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
  * @author: Martin Rumanek
  * @version: 10/8/13
  */
-public interface CategoryDao {
+public class CategoryDao extends Dao<Category> implements CategoryDaoInterface {
 
-    public void createCategory(Category category);
 
-    public void removeCategory(Category category);
+    @Override
+    public void storeCategory(Category category) {
+        store(category);
+    }
 
-    public void updateCategory(Category category);
+    @Override
+    public void removeCategory(Category category) {
+        delete(category);
+    }
 
-    public List<Category> findAll();
+    @Override
+    public List<Category> findAll() {
+        Query q = entityManager.createQuery(
+                "SELECT b FROM Category b", Brick.class);
+        return (List<Category>) q.getResultList();
+    }
 
+    @Override
+    public List<Category> findByName(String name) {
+        return null;
+    }
 }

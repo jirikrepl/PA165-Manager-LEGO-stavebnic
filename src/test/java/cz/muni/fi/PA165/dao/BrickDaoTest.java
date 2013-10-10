@@ -1,6 +1,7 @@
-package cz.muni.fi.PA165;
+package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.domain.Color;
 import junit.framework.TestCase;
 
 /**
@@ -23,14 +24,25 @@ public class BrickDaoTest extends TestCase {
         super.tearDown();
     }
 
-    public void testCreate() {
+    public void testStoreBrick() {
         System.out.println("create");
 
-        //try {
-        //    dao.storeBrick(null);
-       //     fail();
-        //} catch (IllegalArgumentException ex) {
-        //
-        //}
+        try {
+            dao.storeBrick(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
+    }
+
+    public void testRemoveBrick() {
+
+    }
+
+    public void testFindByColor() {
+
+    }
+
+    public void findByName() {
+
     }
 }
