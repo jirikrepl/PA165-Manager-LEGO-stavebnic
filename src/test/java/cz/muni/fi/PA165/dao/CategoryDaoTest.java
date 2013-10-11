@@ -66,7 +66,6 @@ public class CategoryDaoTest extends TestCase {
         
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
-        assertNotNull(category);
         
         Long id = category.getId();
         Category retrivedCat = dao.findById(id);
