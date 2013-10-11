@@ -51,7 +51,6 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      * @return List<Brick> list of brick with desired color
      */
     public List<Brick> findByName(String name) {
-        // MUZOU MIT DVE KOSTICKY STEJNE JMENO?
         Query q = entityManager.createQuery(
                 "SELECT b FROM Brick b WHERE name = :brick_color", Brick.class);
         q.setParameter("brick_color", name);

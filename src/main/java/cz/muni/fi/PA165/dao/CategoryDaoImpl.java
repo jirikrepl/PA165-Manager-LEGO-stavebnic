@@ -24,6 +24,8 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         Query q = entityManager.createQuery(
                 "SELECT c FROM Category c WHERE name = :category_name", Category.class);
         q.setParameter("category_name", name);
-        return (Category) q.getSingleResult();
+        Category c = (Category) q.getSingleResult();
+        //return (Category) q.getSingleResult();
+        return c;
     }
 }

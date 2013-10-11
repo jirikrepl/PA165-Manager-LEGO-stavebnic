@@ -80,7 +80,9 @@ public abstract class AbstractDao<E> {
      */
     @Deprecated
     public void delete(E entity) {
+        entityManager.getTransaction().begin();
         entityManager.remove(entity);
+        entityManager.getTransaction().commit();
     }
 
     public void delete(Long id) {
@@ -88,7 +90,14 @@ public abstract class AbstractDao<E> {
             throw new IllegalArgumentException("Id cannot be null");
         }
         E entity = retrieveById(id);
-        entityManager.remove(entity);
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        } catch (PersistenceException e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
     /**

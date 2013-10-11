@@ -32,5 +32,7 @@ public interface CategoryDao {
     public void create(Category category);
 
     public void close();
-
+    
+    public Category retrieveById(Long id);
+    
 }
