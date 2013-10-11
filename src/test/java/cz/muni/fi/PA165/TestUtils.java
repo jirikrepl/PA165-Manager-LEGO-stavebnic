@@ -2,6 +2,7 @@ package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.BuildingKit;
+import cz.muni.fi.PA165.domain.Category;
 import cz.muni.fi.PA165.domain.Color;
 
 import java.math.BigDecimal;
@@ -32,6 +33,14 @@ public class TestUtils {
         buildingKit.setBricks(listBricks);
 
         return buildingKit;
+    }
+    
+    public static Category createCateogry(String name, String description) {
+        Category category = new Category();
+        category.setName(name);
+        category.setDescription(description);
+        
+        return category;
     }
 
 }

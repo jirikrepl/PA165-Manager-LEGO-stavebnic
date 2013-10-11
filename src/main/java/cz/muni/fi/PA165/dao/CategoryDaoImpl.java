@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Category;
 
 import javax.persistence.Query;
@@ -16,12 +15,15 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
     @Override
     public List<Category> findAll() {
         Query q = entityManager.createQuery(
-                "SELECT b FROM Category b", Brick.class);
+                "SELECT c FROM Category c", Category.class);
         return (List<Category>) q.getResultList();
     }
 
     @Override
-    public List<Category> findByName(String name) {
-        return null;
+    public Category findByName(String name) {
+        Query q = entityManager.createQuery(
+                "SELECT c FROM Category c WHERE name = :category_name", Category.class);
+        q.setParameter("category_name", name);
+        return (Category) q.getSingleResult();
     }
 }

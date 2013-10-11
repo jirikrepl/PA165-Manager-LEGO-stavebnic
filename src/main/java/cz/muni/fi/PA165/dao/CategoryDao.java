@@ -23,7 +23,7 @@ public interface CategoryDao {
      * @param name String, name of brick
      * @return List<Brick> list of brick with desired color
      */
-    public List<Category> findByName(String name);
+    public Category findByName(String name);
 
     public void update(Category category);
 
