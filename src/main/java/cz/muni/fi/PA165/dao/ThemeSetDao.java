@@ -12,14 +12,7 @@ import java.util.List;
  */
 public interface ThemeSetDao {
     
- 
-    /**
-     * removes the ThemeSet instance
-     *
-     * @param set instance of ThemeSet entity class
-     */
-    public void removeThemeSet(ThemeSet set);
-    
+     
     /**
      * finds all entities in DB
      *
@@ -35,5 +28,13 @@ public interface ThemeSetDao {
     public List<ThemeSet> findByPrice(BigDecimal price);
 
     public void setEntityManager(EntityManager entityManager);
+    
+    public void update(ThemeSet set);
+
+    public void delete(ThemeSet set);
+
+    public void create(ThemeSet set);
+
+    public void close();
     
 }
