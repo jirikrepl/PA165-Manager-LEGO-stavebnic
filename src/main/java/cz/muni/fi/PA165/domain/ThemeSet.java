@@ -2,10 +2,13 @@ package cz.muni.fi.PA165.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,8 +24,12 @@ public class ThemeSet implements Serializable {
     private BigDecimal price;
     private String description;
     private String name;
+    
+    @ManyToOne
     private Category category;
     
+    @OneToMany(mappedBy ="themeSet")
+    private List<BuildingKit> buildingKits;
     
     
 
@@ -49,6 +56,32 @@ public class ThemeSet implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<BuildingKit> getBuildingKits() {
+        return buildingKits;
+    }
+
+    public void setBuildingKits(List<BuildingKit> buildingKits) {
+        this.buildingKits = buildingKits;
+    }
+    
+    
 
     @Override
     public int hashCode() {
