@@ -55,23 +55,27 @@ public class Brick implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Brick brick = (Brick) o;
+
+        if (color != brick.color) return false;
+        if (description != null ? !description.equals(brick.description) : brick.description != null) return false;
+        if (id != null ? !id.equals(brick.id) : brick.id != null) return false;
+        if (name != null ? !name.equals(brick.name) : brick.name != null) return false;
+
+        return true;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Brick)) {
-            return false;
-        }
-        Brick other = (Brick) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -7,6 +7,12 @@ import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author: Martin Rumanek
@@ -61,6 +67,12 @@ public class BrickDaoTest extends TestCase {
         dao.delete(brick.getId());
 
         try {
+            dao.retrieveById(brick.getId());
+            fail();
+        } catch(IllegalArgumentException ex) {
+        }
+
+        try {
             Brick brickDeleted = dao.retrieveById(brick.getId());
             fail();
         } catch (IllegalArgumentException ex) {
@@ -98,16 +110,87 @@ public class BrickDaoTest extends TestCase {
     }
 
     public void testFindAll() {
+        System.out.println("find all");
 
+        assertNotNull(dao.findAll());
+
+        assertEquals(dao.findAll().size(), 0);
+        Brick[] bricks = new Brick[4];
+        bricks[0] =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        bricks[1] =  TestUtils.createBrick("TestBrick", Color.BRIGHTBLUE, "Some description");
+        bricks[2] =  TestUtils.createBrick("TestBrick", Color.MEDIUMLILAC, "Some description");
+        bricks[3] =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+
+        Set<Brick> setOfBricks = new HashSet<Brick>();
+        setOfBricks.addAll(Arrays.asList(bricks));
+
+        for (Brick br : setOfBricks) {
+            dao.create(br);
+        }
+
+        assertEquals(new HashSet(dao.findAll()), setOfBricks);
     }
 
     public void testFindByColor() {
+        System.out.println("find by color");
 
+        try {
+            dao.findByColor(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
 
+        assertNotNull(dao.findByColor(Color.BLACK));
+        assertEquals(dao.findByColor(Color.BLACK).size(), 0);
 
+        Brick[] bricks = new Brick[4];
+        bricks[0] =  TestUtils.createBrick("TestBrick1", Color.BLACK, "Some description");
+        bricks[1] =  TestUtils.createBrick("TestBrick2", Color.BRIGHTBLUE, "Some description");
+        bricks[2] =  TestUtils.createBrick("TestBrick3", Color.MEDIUMLILAC, "Some description");
+        bricks[3] =  TestUtils.createBrick("TestBrick4", Color.BLACK, "Some description");
+        Set<Brick> setOfBricks = new HashSet<Brick>();
+        setOfBricks.addAll(Arrays.asList(bricks));
+
+        for (Brick br : setOfBricks) {
+            dao.create(br);
+        }
+
+        List<Brick> brickList = dao.findByColor(Color.BLACK);
+
+        assertTrue(brickList.contains(bricks[0]));
+        assertTrue(brickList.contains(bricks[3]));
+        assertEquals(brickList.size(), 2);
     }
 
     public void testFindByName() {
+        System.out.println("find all");
+
+        try {
+            dao.findByColor(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
+
+        assertNotNull(dao.findByColor(Color.BLACK));
+        assertEquals(dao.findByColor(Color.BLACK).size(), 0);
+
+        Brick[] bricks = new Brick[4];
+        bricks[0] =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        bricks[1] =  TestUtils.createBrick("TestBrick2", Color.BRIGHTBLUE, "Some description");
+        bricks[2] =  TestUtils.createBrick("TestBrick3", Color.MEDIUMLILAC, "Some description");
+        bricks[3] =  TestUtils.createBrick("TestBrick", Color.DARKBROWN, "Some description");
+        Set<Brick> setOfBricks = new HashSet<Brick>();
+        setOfBricks.addAll(Arrays.asList(bricks));
+
+        for (Brick br : setOfBricks) {
+            dao.create(br);
+        }
+
+        List<Brick> brickList = dao.findByName("TestBrick");
+
+        assertTrue(brickList.contains(bricks[0]));
+        assertTrue(brickList.contains(bricks[3]));
+        assertEquals(brickList.size(), 2);
 
     }
 }
