@@ -30,9 +30,7 @@ public interface CategoryDao {
     public void delete(Category category);
 
     public void create(Category category);
-
-    public void close();
     
-    public Category retrieveById(Long id);
+    public Category findById(Long id);
     
 }

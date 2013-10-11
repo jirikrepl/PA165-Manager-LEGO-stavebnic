@@ -1,4 +1,3 @@
-
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
@@ -82,7 +81,7 @@ public class BuildingKitDaoTest extends TestCase {
         Long iD = kit.getId();
         buildingKitDao.delete(kit);
         
-        assertNull(buildingKitDao.retrieveById(iD));
+        assertNull(buildingKitDao.findById(iD));
         
     }
 

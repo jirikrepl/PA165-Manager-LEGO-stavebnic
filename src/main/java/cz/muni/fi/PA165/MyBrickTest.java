@@ -97,7 +97,5 @@ public class MyBrickTest {
         for (int i = 0; i < bList.size(); i++) {
             System.err.println(bList.get(i).toString());
         }
-
-        brickDao.close();
     }
 }

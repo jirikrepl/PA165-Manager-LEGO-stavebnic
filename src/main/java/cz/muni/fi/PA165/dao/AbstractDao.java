@@ -36,10 +36,6 @@ public abstract class AbstractDao<E> {
         this.entityManager = entityManager;
     }
 
-    public void close() {
-        entityManager.close();
-    }
-
     /**
      * persists an entity
      *
@@ -89,7 +85,7 @@ public abstract class AbstractDao<E> {
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
-        E entity = retrieveById(id);
+        E entity = findById(id);
         try {
             entityManager.getTransaction().begin();
             entityManager.remove(entity);
@@ -106,7 +102,7 @@ public abstract class AbstractDao<E> {
      * @param id find an instance of entity by its id
      * @return entity which was found
      */
-    public E retrieveById(Long id) {
+    public E findById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
