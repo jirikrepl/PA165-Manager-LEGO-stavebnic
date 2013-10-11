@@ -9,7 +9,7 @@ import javax.persistence.Id;
 /**
  * this entity class represents lego brick
  *
- * @author jirikrepl
+ * @author Jiri Krepl
  */
 @Entity
 public class Brick implements Serializable {

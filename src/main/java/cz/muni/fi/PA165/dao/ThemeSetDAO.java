@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.dao;
 
 import static cz.muni.fi.PA165.dao.Dao.entityManager;
 import cz.muni.fi.PA165.daoInterface.ThemeSetDaoInterface;
-import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.ThemeSet;
 import java.math.BigDecimal;
 import java.util.List;

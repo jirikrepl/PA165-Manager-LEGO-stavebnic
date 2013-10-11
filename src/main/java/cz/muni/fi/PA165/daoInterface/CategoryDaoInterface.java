@@ -33,5 +33,4 @@ public interface CategoryDaoInterface {
      * @return List<Brick> list of brick with desired color
      */
     public List<Category> findByName(String name);
-
 }

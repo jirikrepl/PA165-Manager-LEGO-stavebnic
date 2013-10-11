@@ -6,11 +6,14 @@ import cz.muni.fi.PA165.domain.Color;
 
 import java.util.List;
 
+/**
+ *
+ * @author Jiri Krepl
+ */
 public class MyBrickTest {
 
     /**
-     * example and test of brick entity
-     * just for test purposes
+     * example and test of brick entity just for test purposes
      */
     public static void brickTest() {
         Brick b1 = new Brick();
@@ -81,19 +84,19 @@ public class MyBrickTest {
         for (int i = 0; i < bList.size(); i++) {
             System.err.println(bList.get(i).toString());
         }
-        
+
         bList = brickDao.findByColor(Color.WHITE);
         System.err.println("\nFind all brick by desired COLOR: ");
         for (int i = 0; i < bList.size(); i++) {
             System.err.println(bList.get(i).toString());
         }
-        
+
         bList = brickDao.findByName("Plate 1 x 2");
         System.err.println("\nFind all brick by desired NAME: ");
         for (int i = 0; i < bList.size(); i++) {
             System.err.println(bList.get(i).toString());
         }
-        
+
         brickDao.close();
     }
 }

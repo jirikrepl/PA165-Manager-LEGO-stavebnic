@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author jirikrepl
+ * @author Jiri Krepl
  */
 public interface BrickDaoInterface {
 

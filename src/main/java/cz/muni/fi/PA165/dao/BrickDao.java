@@ -9,7 +9,7 @@ import javax.persistence.Query;
 /**
  * DAO class for brick
  *
- * @author jirikrepl
+ * @author Jiri Krepl
  */
 public class BrickDao extends Dao<Brick> implements BrickDaoInterface{
 

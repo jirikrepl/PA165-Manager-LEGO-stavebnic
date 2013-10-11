@@ -13,7 +13,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author pc
+ * @author Tomas Kopecky
  */
 public class BuildingKitDao extends Dao<BuildingKit> 
     implements BuildingKitDaoInterface {

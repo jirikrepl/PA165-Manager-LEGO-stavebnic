@@ -6,9 +6,10 @@ package cz.muni.fi.PA165.daoInterface;
 
 /**
  *
- * @author jirikrepl
+ * @author Jiri Krepl
  */
 public interface DaoInterface<E> {
+
     void close();
 
     /**

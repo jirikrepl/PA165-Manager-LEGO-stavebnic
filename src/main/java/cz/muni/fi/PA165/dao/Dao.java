@@ -8,13 +8,14 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 /**
- * general class for Dao, specific entity Dao classes subclass this class
- * this class contains basic CRUD operations 
+ * general class for Dao, specific entity Dao classes subclass this class this
+ * class contains basic CRUD operations
  *
- * @author jirikrepl
+ * @author Jiri Krepl
+ *
  * @param <E> generic type for instance of entity class
  */
-public abstract class Dao<E> implements DaoInterface<E>{
+public abstract class Dao<E> implements DaoInterface<E> {
 
     protected Class<E> entityClass;
     @PersistenceContext
@@ -30,7 +31,7 @@ public abstract class Dao<E> implements DaoInterface<E>{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         Dao.entityManager = emf.createEntityManager();
     }
-    
+
     public void close() {
         entityManager.close();
     }
@@ -55,7 +56,7 @@ public abstract class Dao<E> implements DaoInterface<E>{
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
-        
+
     }
 
     /**
