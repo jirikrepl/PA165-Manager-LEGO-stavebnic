@@ -143,7 +143,7 @@ public class BuildingKitDaoTest extends TestCase {
         List<Brick>list = storeBricks();
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2004, list);
         buildingKitDao.create(kit);
         buildingKitDao.create(kit2);
         
