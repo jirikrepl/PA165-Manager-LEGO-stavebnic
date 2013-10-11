@@ -81,8 +81,12 @@ public class BuildingKitDaoTest extends TestCase {
         buildingKitDao.create(kit);
         Long iD = kit.getId();
         buildingKitDao.delete(kit.getId());
-        
-        assertNull(buildingKitDao.findById(iD));
+
+        try {
+            buildingKitDao.findById(iD);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
         
     }
 
@@ -97,16 +101,20 @@ public class BuildingKitDaoTest extends TestCase {
 
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
+        Brick brick3 = TestUtils.createBrick("TestBrickC", Color.BLACK, "Test");
+        Brick brick4 = TestUtils.createBrick("TestBrickD", Color.BLACK, "Test");
 
         brickDao.create(brick1);
         brickDao.create(brick2);
+        brickDao.create(brick3);
+        brickDao.create(brick4);
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
         list.add(brick2);
         List<Brick> newList = new ArrayList<Brick>();
-        newList.add(brick2);
-        newList.add(brick1);
+        newList.add(brick3);
+        newList.add(brick4);
         
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
@@ -129,8 +137,10 @@ public class BuildingKitDaoTest extends TestCase {
         assertEquals(kit.getName(), "newName");
         assertEquals(kit.getDescription(), "newDescription");
         assertEquals(kit.getPrice(), BigDecimal.TEN);
-        assertEquals(kit.getYearFrom(), 2010);
-        assertEquals(kit.getBricks(), newList);
+        assertEquals(kit.getYearFrom(), 2004);
+        assertTrue(kit.getBricks().contains(brick3));
+        assertTrue(kit.getBricks().contains(brick4));
+        assertEquals(kit.getBricks().size(), 2);
 
     }
 
