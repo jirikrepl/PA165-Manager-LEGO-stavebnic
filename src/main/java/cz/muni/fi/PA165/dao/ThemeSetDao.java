@@ -12,13 +12,7 @@ import java.util.List;
  */
 public interface ThemeSetDao {
     
-    /**
-     * creates and updates ThemeSet instance
-     *
-     * @param set instance of ThemeSet entity class, which has to be changed
-     */
-    public void createOrUpdateThemeSet(ThemeSet set);
-    
+ 
     /**
      * removes the ThemeSet instance
      *

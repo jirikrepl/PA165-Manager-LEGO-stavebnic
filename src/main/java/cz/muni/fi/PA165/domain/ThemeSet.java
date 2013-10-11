@@ -20,6 +20,11 @@ public class ThemeSet implements Serializable {
     private Long id;
     private BigDecimal price;
     private String description;
+    private String name;
+    private Category category;
+    
+    
+    
 
     public Long getId() {
         return id;
