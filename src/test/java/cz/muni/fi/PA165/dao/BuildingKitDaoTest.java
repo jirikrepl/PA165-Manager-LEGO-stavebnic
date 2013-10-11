@@ -118,8 +118,8 @@ public class BuildingKitDaoTest extends TestCase {
         //BuildingKit newKit = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.TEN, 2010, newList);
         kit.setName("newName");
         kit.setDescription("newDescription");
-        kit.setPrice(BigDecimal.ZERO);
-        kit.setYearFrom(2010);
+        kit.setPrice(BigDecimal.TEN);
+        kit.setYearFrom(2004);
         kit.setBricks(newList);
         
         buildingKitDao.update(kit);
