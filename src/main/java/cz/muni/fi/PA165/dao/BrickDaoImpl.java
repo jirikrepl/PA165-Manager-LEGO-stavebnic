@@ -3,8 +3,8 @@ package cz.muni.fi.PA165.dao;
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Color;
 
-import java.util.List;
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  * DAO class for brick

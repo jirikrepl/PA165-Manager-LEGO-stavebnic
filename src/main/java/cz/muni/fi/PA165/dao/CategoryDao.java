@@ -54,6 +54,11 @@ public interface CategoryDao {
      */
     public Category findById(Long id);
 
+    /**
+     * sets the EntityManager
+     *
+     * @param EntityManager takes entityManager as parameter
+     */
     public void setEntityManager(EntityManager entityManager);
     
 }

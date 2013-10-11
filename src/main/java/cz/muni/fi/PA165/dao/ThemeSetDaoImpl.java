@@ -1,9 +1,10 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.domain.ThemeSet;
+
+import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Query;
 
 /**
  * DAO class for ThemeSet

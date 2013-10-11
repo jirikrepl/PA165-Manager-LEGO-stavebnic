@@ -6,16 +6,11 @@ import cz.muni.fi.PA165.domain.BuildingKit;
 import cz.muni.fi.PA165.domain.Color;
 import junit.framework.TestCase;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
 
 /**
  * @author Pavol Bako

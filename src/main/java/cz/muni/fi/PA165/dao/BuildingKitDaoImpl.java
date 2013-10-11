@@ -4,11 +4,11 @@
  */
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.BuildingKit;
+
+import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Query;
 
 /**
  *

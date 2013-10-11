@@ -2,12 +2,10 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.domain.Category;
+import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.List;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
-import junit.framework.TestCase;
 
 /**
  *
