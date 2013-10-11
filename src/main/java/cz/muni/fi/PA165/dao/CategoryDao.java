@@ -10,15 +10,6 @@ import java.util.List;
  */
 public interface CategoryDao {
 
-    public void storeCategory(Category category);
-
-    /**
-     * remove category entity from table
-     *
-     * @param category instance of brick entity class, which has to be removed
-     */
-    public void removeCategory(Category category);
-
     /**
      * find all brick entities in db table
      *
@@ -33,6 +24,12 @@ public interface CategoryDao {
      * @return List<Brick> list of brick with desired color
      */
     public List<Category> findByName(String name);
+
+    public void update(Category category);
+
+    public void delete(Category category);
+
+    public void create(Category category);
 
     public void close();
 

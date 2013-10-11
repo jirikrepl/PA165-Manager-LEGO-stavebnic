@@ -14,16 +14,6 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
 
     @Override
-    public void storeCategory(Category category) {
-        create(category);
-    }
-
-    @Override
-    public void removeCategory(Category category) {
-        delete(category);
-    }
-
-    @Override
     public List<Category> findAll() {
         Query q = entityManager.createQuery(
                 "SELECT b FROM Category b", Brick.class);
