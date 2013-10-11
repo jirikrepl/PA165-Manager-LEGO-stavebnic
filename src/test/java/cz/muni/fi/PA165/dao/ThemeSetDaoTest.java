@@ -70,7 +70,7 @@ public class ThemeSetDaoTest extends TestCase {
         
         dao.create(ts1);
         Long id = ts1.getId();
-        ThemeSet ts2 = dao.retrieveById(id);
+        ThemeSet ts2 = dao.findById(id);
         
         assertEquals(ts1.getId(), ts2.getId());
         assertEquals(ts1.getBuildingKits(), ts2.getBuildingKits());
@@ -99,7 +99,7 @@ public class ThemeSetDaoTest extends TestCase {
         ThemeSet ts = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
         
         dao.create(ts);
-        dao.delete(ts);
+        dao.delete(ts.getId());
         
         assertNull(ts.getId());
         assertNull(ts.getBuildingKits());

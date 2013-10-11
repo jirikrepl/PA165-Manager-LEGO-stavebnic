@@ -27,12 +27,10 @@ public interface CategoryDao {
 
     public void update(Category category);
 
-    public void delete(Category category);
+    public void delete(Long id);
 
     public void create(Category category);
-
-    public void close();
     
-    public Category retrieveById(Long id);
+    public Category findById(Long id);
     
 }

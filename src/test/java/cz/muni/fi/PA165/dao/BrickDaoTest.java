@@ -57,7 +57,7 @@ public class BrickDaoTest extends TestCase {
         System.out.println("delete");
 
         try {
-            dao.retrieveById(null);
+            dao.findById(null);
             fail();
         } catch (IllegalArgumentException ex) {
         }
@@ -67,13 +67,13 @@ public class BrickDaoTest extends TestCase {
         dao.delete(brick.getId());
 
         try {
-            dao.retrieveById(brick.getId());
+            dao.findById(brick.getId());
             fail();
         } catch(IllegalArgumentException ex) {
         }
 
         try {
-            Brick brickDeleted = dao.retrieveById(brick.getId());
+            Brick brickDeleted = dao.findById(brick.getId());
             fail();
         } catch (IllegalArgumentException ex) {
         }
@@ -93,7 +93,7 @@ public class BrickDaoTest extends TestCase {
         System.out.println("get by id");
 
         try {
-            dao.retrieveById(null);
+            dao.findById(null);
             fail();
         } catch (IllegalArgumentException ex) {
         }
@@ -101,7 +101,7 @@ public class BrickDaoTest extends TestCase {
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
         dao.create(brick);
         assertNotNull(brick.getId());
-        dao.retrieveById(brick.getId());
+        dao.findById(brick.getId());
 
         assertNotNull(brick.getId());
         assertEquals(brick.getName(), "TestBrick");

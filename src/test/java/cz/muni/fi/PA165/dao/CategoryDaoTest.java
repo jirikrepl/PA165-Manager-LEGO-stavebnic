@@ -66,16 +66,15 @@ public class CategoryDaoTest extends TestCase {
         
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
-        assertNotNull(category);
         
         Long id = category.getId();
-        Category retrivedCat = dao.retrieveById(id);
+        Category retrivedCat = dao.findById(id);
         
         retrivedCat.setName("newTestName");
         retrivedCat.setDescription("newTestDescription");
         
         dao.update(category);
-        Category updatedRetrivedCat = dao.retrieveById(id);
+        Category updatedRetrivedCat = dao.findById(id);
         assertEquals(updatedRetrivedCat.getName(), retrivedCat.getName());
         assertEquals(updatedRetrivedCat.getDescription(), retrivedCat.getDescription());
     }
@@ -84,7 +83,7 @@ public class CategoryDaoTest extends TestCase {
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
         assertNotNull(category);
-        dao.delete(category);
+        dao.delete(category.getId());
         
         List<Category> exptRslt = new ArrayList<Category>();
         
@@ -121,17 +120,17 @@ public class CategoryDaoTest extends TestCase {
     
     public void testFindById() {
         try {
-            dao.retrieveById(null);
+            dao.findById(null);
             fail();
         } catch (IllegalArgumentException ex) {
         }
         
-        System.out.println("testing method 'retrieveById' of CategoryDaoImpl class");
+        System.out.println("testing method 'findById' of CategoryDaoImpl class");
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
         
         assertNotNull(category.getId());
-        Category retrievedCat = dao.retrieveById(category.getId());
+        Category retrievedCat = dao.findById(category.getId());
         assertEquals(category, retrievedCat);
         
     }

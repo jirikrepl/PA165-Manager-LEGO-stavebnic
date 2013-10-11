@@ -19,7 +19,7 @@ public interface BuildingKitDao {
     
     public void create(BuildingKit buildingKit);
 
-    public void delete(BuildingKit buildingKit);
+    public void delete(Long id);
 
     public void update(BuildingKit buildingKit);
 
@@ -31,7 +31,6 @@ public interface BuildingKitDao {
 
     public List<BuildingKit> findByYearFrom(int yearFrom);
 
-    public BuildingKit retrieveById(Long id);
+    public BuildingKit findById(Long id);
 
-    public void close();
 }
