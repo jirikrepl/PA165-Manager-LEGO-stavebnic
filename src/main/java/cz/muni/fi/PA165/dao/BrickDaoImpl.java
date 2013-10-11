@@ -38,6 +38,9 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      * @return List<Brick> list of brick with desired color
      */
     public List<Brick> findByColor(Color color) {
+        if (color == null) {
+            throw new IllegalArgumentException("Color can not be null");
+        }
         Query q = entityManager.createQuery(
                 "SELECT b FROM Brick b WHERE color = :brick_color", Brick.class);
         q.setParameter("brick_color", color);
@@ -51,6 +54,11 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      * @return List<Brick> list of brick with desired color
      */
     public List<Brick> findByName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name can not be null");
+        }
+
+        // MUZOU MIT DVE KOSTICKY STEJNE JMENO?
         Query q = entityManager.createQuery(
                 "SELECT b FROM Brick b WHERE name = :brick_color", Brick.class);
         q.setParameter("brick_color", name);
