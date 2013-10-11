@@ -17,14 +17,21 @@ import java.util.List;
  */
 public interface BrickDao {
 
-    public void storeBrick(Brick brick);
+    /**
+     * persist given brick entity
+     *
+     * @param brick instance of brick entity class
+     */
+    public void create(Brick brick);
+
+    public void update(Brick brick);
 
     /**
      * remove brick entity from table
      *
      * @param brick instance of brick entity class, which has to be removed
      */
-    public void removeBrick(Brick brick);
+    public void delete(Brick brick);
 
     /**
      * find all brick entities in db table
@@ -32,6 +39,8 @@ public interface BrickDao {
      * @return List<Brick> list of brick objects
      */
     public List<Brick> findAll();
+
+    public Brick retrieveById(Long id);
 
     /**
      * find all bricks of desired color

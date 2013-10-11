@@ -50,8 +50,8 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
 
-        brickDao.storeBrick(brick1);
-        brickDao.storeBrick(brick2);
+        brickDao.create(brick1);
+        brickDao.create(brick2);
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
@@ -78,8 +78,8 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
 
-        brickDao.storeBrick(brick1);
-        brickDao.storeBrick(brick2);
+        brickDao.create(brick1);
+        brickDao.create(brick2);
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
@@ -109,8 +109,8 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
-        brickDao.storeBrick(brick1);
-        brickDao.storeBrick(brick2);
+        brickDao.create(brick1);
+        brickDao.create(brick2);
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
@@ -151,8 +151,8 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
-        brickDao.storeBrick(brick1);
-        brickDao.storeBrick(brick2);
+        brickDao.create(brick1);
+        brickDao.create(brick2);
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);

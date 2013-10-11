@@ -69,16 +69,16 @@ public class MyBrickTest {
 
         BrickDao brickDao = new BrickDaoImpl();
 
-        brickDao.storeBrick(b1);
-        brickDao.storeBrick(b2);
-        brickDao.storeBrick(b3);
-        brickDao.storeBrick(b4);
-        brickDao.storeBrick(b5);
-        brickDao.storeBrick(b6);
-        brickDao.storeBrick(b7);
-        brickDao.storeBrick(b8);
-        brickDao.storeBrick(b9);
-        brickDao.storeBrick(b10);
+        brickDao.create(b1);
+        brickDao.create(b2);
+        brickDao.create(b3);
+        brickDao.create(b4);
+        brickDao.create(b5);
+        brickDao.create(b6);
+        brickDao.create(b7);
+        brickDao.create(b8);
+        brickDao.create(b9);
+        brickDao.create(b10);
 
         List<Brick> bList = brickDao.findAll();
         System.err.println("\nFind all bricks in db table: ");

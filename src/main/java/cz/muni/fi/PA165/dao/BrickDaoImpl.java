@@ -21,24 +21,6 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
     }
 
     /**
-     * persist given brick entity
-     *
-     * @param brick instance of brick entity class
-     */
-    public void storeBrick(Brick brick) {
-        create(brick);
-    }
-
-    /**
-     * remove brick entity from table
-     *
-     * @param brick instance of brick entity class, which has to be removed
-     */
-    public void removeBrick(Brick brick) {
-        delete(brick);
-    }
-
-    /**
      * find all brick entities in db table
      *
      * @return List<Brick> list of brick objects

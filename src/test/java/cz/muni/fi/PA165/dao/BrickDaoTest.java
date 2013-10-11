@@ -35,24 +35,35 @@ public class BrickDaoTest extends TestCase {
         System.out.println("create");
 
         try {
-            dao.storeBrick(null);
+            dao.create(null);
             fail();
         } catch (IllegalArgumentException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
-        dao.storeBrick(brick);
+        dao.create(brick);
         assertNotNull(brick.getId());
         assertEquals(brick.getName(), "TestBrick");
         assertEquals(brick.getColor(), Color.BLACK);
         assertEquals(brick.getDescription(), "Some description");
 
+    }
 
+    public void testDeleteBrick() {
+        System.out.println("delete");
 
 
     }
 
-    public void testRemoveBrick() {
+    public void retrieveById() {
+        System.out.println("get by id");
+
+        Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        dao.create(brick);
+
+
+
+
 
     }
 
