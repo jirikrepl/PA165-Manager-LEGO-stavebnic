@@ -42,7 +42,7 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST CreateBuildingKit");
 
         try {
-            buildingKitDao.createBuildingKit(null);
+            buildingKitDao.create(null);
             fail("creating NULL building kit");
         } catch (IllegalArgumentException ex) {
         }
@@ -58,7 +58,7 @@ public class BuildingKitDaoTest extends TestCase {
         list.add(brick2);
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        buildingKitDao.createBuildingKit(kit);
+        buildingKitDao.create(kit);
         assertNotNull(kit.getId());
         assertEquals(kit.getName(), "name");
         assertEquals(kit.getDescription(), "description");
@@ -70,7 +70,7 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST CreateBuildingKit");
         
         try{
-        buildingKitDao.RemoveBuildingKit(null);
+        buildingKitDao.delete(null);
         fail("removing NULL building kit");
         } catch (IllegalArgumentException ex){
         }
@@ -86,8 +86,8 @@ public class BuildingKitDaoTest extends TestCase {
         list.add(brick2);
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        buildingKitDao.CreateBuildingKit(kit);
-        buildingKitDao.RemoveBuildingKit(kit);
+        buildingKitDao.create(kit);
+        buildingKitDao.delete(kit);
         
         assertNull(kit.getId());
         assertNull(kit.getName());
@@ -101,7 +101,7 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST UpdateBuildingKit");
 
         try {
-            buildingKitDao.UpdateBuildingKit(null);
+            buildingKitDao.update(null);
             fail("updating NULL building kit");
         } catch (IllegalArgumentException ex) {
         }
@@ -121,7 +121,7 @@ public class BuildingKitDaoTest extends TestCase {
         
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        buildingKitDao.CreateBuildingKit(kit);
+        buildingKitDao.create(kit);
         
         //BuildingKit newKit = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.TEN, 2010, newList);
         kit.setName("newName");
@@ -130,7 +130,7 @@ public class BuildingKitDaoTest extends TestCase {
         kit.setYearFrom(2010);
         kit.setBricks(newList);
         
-        buildingKitDao.UpdateBuildingKit(kit);
+        buildingKitDao.update(kit);
         
         
         /*Long kitID = kit.getId();*/
@@ -146,7 +146,20 @@ public class BuildingKitDaoTest extends TestCase {
     }
 
     public void findAllTest() {
+        System.out.println("TEST Find All");
+        
+        Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
+        Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
+        brickDao.storeBrick(brick1);
+        brickDao.storeBrick(brick2);
+
+        List<Brick> list = new ArrayList<Brick>();
+        list.add(brick1);
+        list.add(brick2);
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        buildingKitDao.create(kit);
     }
 
     public void findByPrice() {
