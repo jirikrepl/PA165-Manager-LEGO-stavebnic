@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
 /**
@@ -47,16 +48,7 @@ public class BuildingKitDaoTest extends TestCase {
         } catch (IllegalArgumentException ex) {
         }
 
-        Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
-        Brick brick2 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
-
-        brickDao.create(brick1);
-        brickDao.create(brick2);
-
-        List<Brick> list = new ArrayList<Brick>();
-        list.add(brick1);
-        list.add(brick2);
-
+        List<Brick> list = storeBricks();
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
         buildingKitDao.create(kit);
         assertNotNull(kit.getId());
@@ -66,7 +58,7 @@ public class BuildingKitDaoTest extends TestCase {
         assertEquals(kit.getYearFrom(), 2005);
     }
 
-    public void removeBuildingKitTest() {
+    public void testRemoveBuildingKit() {
         System.out.println("TEST CreateBuildingKit");
         
         try{
@@ -97,7 +89,7 @@ public class BuildingKitDaoTest extends TestCase {
         assertNull(kit.getBricks());
     }
 
-    public void updateBuildingKitTest() {
+    public void testUpdateBuildingKit() {
         System.out.println("TEST UpdateBuildingKit");
 
         try {
@@ -145,9 +137,61 @@ public class BuildingKitDaoTest extends TestCase {
 
     }
 
-    public void findAllTest() {
+    public void testFindAll() {
         System.out.println("TEST Find All");
         
+        List<Brick>list = storeBricks();
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        buildingKitDao.create(kit);
+        buildingKitDao.create(kit2);
+        
+        List<BuildingKit> kitList = buildingKitDao.findAll();
+        
+        assertNotNull(kitList);
+        assertTrue(kitList.contains(kit));
+        assertTrue(kitList.contains(kit2));
+    }
+
+
+    public void testFindByPrice() {
+        System.out.println("TEST Find By Price");
+        
+        List<Brick>list = storeBricks();
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.TEN, 2005, list);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        buildingKitDao.create(kit);
+        buildingKitDao.create(kit2);
+        
+        List<BuildingKit> kitList = buildingKitDao.findByPrice(BigDecimal.ZERO);
+        
+        assertNotNull(kitList);
+        assertFalse(kitList.contains(kit));
+        assertTrue(kitList.contains(kit2));
+
+    }
+
+    public void testFindByYearFrom() {
+        System.out.println("TEST Find By Year From");
+        
+        List<Brick>list = storeBricks();
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        buildingKitDao.create(kit);
+        buildingKitDao.create(kit2);
+        
+        List<BuildingKit> kitList = buildingKitDao.findByYearFrom(2005);
+        
+        assertNotNull(kitList);
+        assertTrue(kitList.contains(kit));
+        assertFalse(kitList.contains(kit2));
+
+    }
+    
+    public List<Brick> storeBricks(){
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
@@ -157,16 +201,6 @@ public class BuildingKitDaoTest extends TestCase {
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
         list.add(brick2);
-
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        buildingKitDao.create(kit);
-    }
-
-    public void findByPrice() {
-
-    }
-
-    public void findByYearFrom() {
-
+        return list;
     }
 }

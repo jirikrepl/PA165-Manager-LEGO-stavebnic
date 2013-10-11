@@ -17,14 +17,7 @@ import javax.persistence.Query;
 public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
     implements BuildingKitDao {
     
-    public void create(BuildingKit buildingKit)
-    {
-       create(buildingKit);
-    }
 
-    public void delete(BuildingKit buildingKit) {
-        delete(buildingKit);
-    }
 
     public void update(BuildingKit buildingKit)
     {
