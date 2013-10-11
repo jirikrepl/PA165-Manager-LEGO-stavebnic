@@ -4,18 +4,17 @@
  */
 package cz.muni.fi.PA165.domain;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
- *
  * @author Tomas Kopecky
  */
 @Entity
@@ -32,7 +31,7 @@ public class BuildingKit implements Serializable {
     @ManyToMany
     private List<Brick> bricks;
     @ManyToOne
-    private List<ThemeSet> themeSet;
+    private ThemeSet themeSet;
 
     public Long getId() {
         return id;
@@ -82,11 +81,11 @@ public class BuildingKit implements Serializable {
         this.bricks = bricks;
     }
 
-    public List<ThemeSet> getThemeSet() {
+    public ThemeSet getThemeSet() {
         return themeSet;
     }
 
-    public void setThemeSet(List<ThemeSet> themeSet) {
+    public void setThemeSet(ThemeSet themeSet) {
         this.themeSet = themeSet;
     }
 

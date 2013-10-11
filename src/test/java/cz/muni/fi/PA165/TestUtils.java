@@ -3,7 +3,9 @@ package cz.muni.fi.PA165;
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.BuildingKit;
 import cz.muni.fi.PA165.domain.Color;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -17,16 +19,18 @@ public class TestUtils {
         brick.setName(name);
         brick.setColor(color);
         brick.setDescription(description);
+
         return brick;
     }
     
-    public static BuildingKit createBuildingKit(String name, String description, BigDecimal price, int year){
+    public static BuildingKit createBuildingKit(String name, String description, BigDecimal price, int year, List<Brick> listBricks){
         BuildingKit buildingKit = new BuildingKit();
         buildingKit.setName(name);
         buildingKit.setDescription(description);
         buildingKit.setPrice(price);
         buildingKit.setYearFrom(year);
-        
+        buildingKit.setBricks(listBricks);
+
         return buildingKit;
     }
 
