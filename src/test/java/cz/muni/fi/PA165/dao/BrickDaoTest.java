@@ -7,8 +7,6 @@ import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
