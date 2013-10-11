@@ -23,4 +23,5 @@ public interface BuildingKitDao {
     public List<BuildingKit> findAll();
     public List<BuildingKit> findByPrice(BigDecimal price);
     public List<BuildingKit> findByYearFrom(int yearFrom);
+    public BuildingKit retrieveById(Long id);
 }
