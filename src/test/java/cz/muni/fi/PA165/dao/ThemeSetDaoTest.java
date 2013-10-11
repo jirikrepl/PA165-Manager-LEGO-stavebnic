@@ -31,6 +31,7 @@ import static junit.framework.Assert.fail;
 public class ThemeSetDaoTest extends TestCase {
 
     private ThemeSetDao dao;
+    private CategoryDao categoryDao;
 
     public ThemeSetDaoTest(String testName) {
         super(testName);
@@ -42,7 +43,9 @@ public class ThemeSetDaoTest extends TestCase {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         dao = new ThemeSetDaoImpl();
+        categoryDao = new CategoryDaoImpl();
         dao.setEntityManager(emf.createEntityManager());
+        categoryDao.setEntityManager(emf.createEntityManager());
     }
 
     @Override
@@ -63,6 +66,7 @@ public class ThemeSetDaoTest extends TestCase {
         }
 
         Category cat = TestUtils.createCategory("jmeno", "popis");
+        categoryDao.create(cat);
         BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
         bks.add(bk);
@@ -93,6 +97,7 @@ public class ThemeSetDaoTest extends TestCase {
         }
         
         Category cat = TestUtils.createCategory("jmeno", "popis");
+        categoryDao.create(cat);
         BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
         bks.add(bk);
@@ -104,7 +109,8 @@ public class ThemeSetDaoTest extends TestCase {
             ThemeSet tsDeleted = dao.findById(ts.getId());
             fail("deleted entity still exists");
         }
-        catch (IllegalArgumentException ex) {}
+        catch (IllegalArgumentException ex) {
+        }
     }
 
     public void testUpdateThemeSet() {
@@ -119,6 +125,7 @@ public class ThemeSetDaoTest extends TestCase {
         }
 
         Category cat = TestUtils.createCategory("jmeno", "popis");
+        categoryDao.create(cat);
         BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
         bks.add(bk);
@@ -130,6 +137,8 @@ public class ThemeSetDaoTest extends TestCase {
         ts.setName("newName");
         ts.setPrice(BigDecimal.valueOf(25));
         Category cat2 = TestUtils.createCategory("newJmeno", "newPopis");
+        categoryDao.create(cat2);
+
         BuildingKit bk2 = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks2 = new ArrayList<BuildingKit>();
         bks2.add(bk2);
@@ -137,19 +146,21 @@ public class ThemeSetDaoTest extends TestCase {
         ts.setBuildingKits(bks2);
         
         dao.update(ts);
-        
+
         assertNotNull(ts.getId());
         assertEquals(ts.getName(), "newName");
         assertEquals(ts.getDescription(), "newDescription");
         assertEquals(ts.getPrice(), BigDecimal.valueOf(25));
         assertEquals(ts.getCategory(), cat2);
-        assertEquals(ts.getBuildingKits(), bks2);
+        assertTrue(ts.getBuildingKits().contains(bk2));
+        assertEquals(ts.getBuildingKits().size(), 1);
     }
     
     public void testFindAll() {
         System.out.println("TEST Find All");
         
         Category cat = TestUtils.createCategory("jmeno", "popis");
+        categoryDao.create(cat);
         BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
         bks.add(bk);
@@ -169,6 +180,7 @@ public class ThemeSetDaoTest extends TestCase {
         System.out.println("TEST Find By Price");
         
         Category cat = TestUtils.createCategory("jmeno", "popis");
+        categoryDao.create(cat);
         BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
         ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
         bks.add(bk);
