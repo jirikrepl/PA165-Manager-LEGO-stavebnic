@@ -34,7 +34,6 @@ public interface ThemeSetDao {
     public void delete(ThemeSet set);
 
     public void create(ThemeSet set);
-
-    public void close();
     
+    public ThemeSet retrieveById(Long id);
 }
