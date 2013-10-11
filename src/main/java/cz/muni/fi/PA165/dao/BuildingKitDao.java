@@ -11,9 +11,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * Dao Class for BuildingKit
+ * 
  * @author Tomas Kopecky
  */
 public interface BuildingKitDao {
+    
     public void create(BuildingKit buildingKit);
 
     public void delete(BuildingKit buildingKit);
