@@ -1,4 +1,3 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -40,7 +39,7 @@ public interface BrickDao {
      */
     public List<Brick> findAll();
 
-    public Brick retrieveById(Long id);
+    public Brick findById(Long id);
 
     /**
      * find all bricks of desired color
@@ -59,6 +58,4 @@ public interface BrickDao {
     public List<Brick> findByName(String name);
 
     public void setEntityManager(EntityManager entityManager);
-
-    public void close();
 }
