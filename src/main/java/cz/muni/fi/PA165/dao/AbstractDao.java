@@ -78,7 +78,16 @@ public abstract class AbstractDao<E> {
      *
      * @param entity entity which has to be removed
      */
+    @Deprecated
     public void delete(E entity) {
+        entityManager.remove(entity);
+    }
+
+    public void delete(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id cannot be null");
+        }
+        E entity = retrieveById(id);
         entityManager.remove(entity);
     }
 
@@ -89,6 +98,13 @@ public abstract class AbstractDao<E> {
      * @return entity which was found
      */
     public E retrieveById(Long id) {
-        return entityManager.find(entityClass, id);
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+        E entity =  entityManager.find(entityClass, id);
+        if (entity == null) {
+            throw new IllegalArgumentException("Object not found");
+        }
+        return entity;
     }
 }

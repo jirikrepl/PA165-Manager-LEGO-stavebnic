@@ -26,8 +26,6 @@ public class BrickDaoTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        //dao.close();
-
         super.tearDown();
     }
 
@@ -52,26 +50,64 @@ public class BrickDaoTest extends TestCase {
     public void testDeleteBrick() {
         System.out.println("delete");
 
-
-    }
-
-    public void retrieveById() {
-        System.out.println("get by id");
+        try {
+            dao.retrieveById(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
         dao.create(brick);
+        dao.delete(brick.getId());
+
+        try {
+            Brick brickDeleted = dao.retrieveById(brick.getId());
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
+
+
+        try {
+            dao.delete(new Long(-1L));
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
 
 
 
+    }
 
+    public void testRetrieveById() {
+        System.out.println("get by id");
+
+        try {
+            dao.retrieveById(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
+
+        Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        dao.create(brick);
+        assertNotNull(brick.getId());
+        dao.retrieveById(brick.getId());
+
+        assertNotNull(brick.getId());
+        assertEquals(brick.getName(), "TestBrick");
+        assertEquals(brick.getColor(), Color.BLACK);
+        assertEquals(brick.getDescription(), "Some description");
+    }
+
+    public void testFindAll() {
 
     }
 
     public void testFindByColor() {
 
+
+
     }
 
-    public void findByName() {
+    public void testFindByName() {
 
     }
 }
