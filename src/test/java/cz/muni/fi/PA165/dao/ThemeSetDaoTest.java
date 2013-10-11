@@ -99,7 +99,7 @@ public class ThemeSetDaoTest extends TestCase {
         ThemeSet ts = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
         
         dao.create(ts);
-        dao.delete(ts);
+        dao.delete(ts.getId());
         
         assertNull(ts.getId());
         assertNull(ts.getBuildingKits());

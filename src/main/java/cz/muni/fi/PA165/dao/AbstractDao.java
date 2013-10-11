@@ -69,18 +69,6 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    /**
-     * remove entity from context
-     *
-     * @param entity entity which has to be removed
-     */
-    @Deprecated
-    public void delete(E entity) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(entity);
-        entityManager.getTransaction().commit();
-    }
-
     public void delete(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");

@@ -84,7 +84,7 @@ public class CategoryDaoTest extends TestCase {
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
         assertNotNull(category);
-        dao.delete(category);
+        dao.delete(category.getId());
         
         List<Category> exptRslt = new ArrayList<Category>();
         

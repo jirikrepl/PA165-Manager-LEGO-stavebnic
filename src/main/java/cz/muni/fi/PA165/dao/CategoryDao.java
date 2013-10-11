@@ -27,7 +27,7 @@ public interface CategoryDao {
 
     public void update(Category category);
 
-    public void delete(Category category);
+    public void delete(Long id);
 
     public void create(Category category);
     

@@ -31,7 +31,7 @@ public interface ThemeSetDao {
     
     public void update(ThemeSet set);
 
-    public void delete(ThemeSet set);
+    public void delete(Long id);
 
     public void create(ThemeSet set);
 

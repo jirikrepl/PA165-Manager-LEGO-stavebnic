@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.domain.BuildingKit;
 import cz.muni.fi.PA165.domain.Color;
 import junit.framework.TestCase;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
@@ -79,7 +80,7 @@ public class BuildingKitDaoTest extends TestCase {
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
         buildingKitDao.create(kit);
         Long iD = kit.getId();
-        buildingKitDao.delete(kit);
+        buildingKitDao.delete(kit.getId());
         
         assertNull(buildingKitDao.findById(iD));
         
@@ -174,16 +175,17 @@ public class BuildingKitDaoTest extends TestCase {
         
         List<Brick>list = storeBricks();
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, list);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, list);
         buildingKitDao.create(kit);
         buildingKitDao.create(kit2);
         
-        List<BuildingKit> kitList = buildingKitDao.findByYearFrom(2005);
+        List<BuildingKit> kitList = buildingKitDao.findByYearFrom(15);
         
         assertNotNull(kitList);
         assertTrue(kitList.contains(kit));
         assertFalse(kitList.contains(kit2));
+        assertEquals(kitList.size(), 1);
 
     }
     

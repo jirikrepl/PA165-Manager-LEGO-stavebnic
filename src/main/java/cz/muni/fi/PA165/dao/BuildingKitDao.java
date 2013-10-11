@@ -16,7 +16,7 @@ import java.util.List;
 public interface BuildingKitDao {
     public void create(BuildingKit buildingKit);
 
-    public void delete(BuildingKit buildingKit);
+    public void delete(Long id);
 
     public void update(BuildingKit buildingKit);
 
