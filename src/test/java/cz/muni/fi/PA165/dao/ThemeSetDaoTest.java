@@ -100,13 +100,11 @@ public class ThemeSetDaoTest extends TestCase {
         
         dao.create(ts);
         dao.delete(ts.getId());
-        
-        assertNull(ts.getId());
-        assertNull(ts.getBuildingKits());
-        assertNull(ts.getCategory());
-        assertNull(ts.getDescription());
-        assertNull(ts.getName());
-        assertNull(ts.getPrice());
+        try {
+            ThemeSet tsDeleted = dao.findById(ts.getId());
+            fail("deleted entity still exists");
+        }
+        catch (IllegalArgumentException ex) {}
     }
 
     public void testUpdateThemeSet() {
