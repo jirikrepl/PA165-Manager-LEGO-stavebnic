@@ -26,7 +26,7 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      * @param brick instance of brick entity class
      */
     public void storeBrick(Brick brick) {
-        store(brick);
+        create(brick);
     }
 
     /**

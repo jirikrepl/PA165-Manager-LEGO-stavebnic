@@ -25,7 +25,7 @@ public class ThemeSetDaoImpl extends AbstractDao<ThemeSet> implements ThemeSetDa
      * @param set instance of ThemeSet entity class, which has to be changed
      */
     public void createOrUpdateThemeSet(ThemeSet set) {
-        store(set);
+        create(set);
     }
 
     /**

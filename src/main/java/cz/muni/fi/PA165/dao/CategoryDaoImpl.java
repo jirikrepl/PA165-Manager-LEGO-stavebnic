@@ -15,7 +15,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     @Override
     public void storeCategory(Category category) {
-        store(category);
+        create(category);
     }
 
     @Override

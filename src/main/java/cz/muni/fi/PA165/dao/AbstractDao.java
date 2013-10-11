@@ -45,13 +45,27 @@ public abstract class AbstractDao<E> {
      *
      * @param entity some entity to be persisted
      */
-    public void store(E entity) {
+    public void create(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity is NULL");
+            throw new IllegalArgumentException("Entity can not be NULL");
         }
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (PersistenceException e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void update(E entity) {
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity can not be NULL");
+        }
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(entity);
             entityManager.getTransaction().commit();
         } catch (PersistenceException e) {
             entityManager.getTransaction().rollback();

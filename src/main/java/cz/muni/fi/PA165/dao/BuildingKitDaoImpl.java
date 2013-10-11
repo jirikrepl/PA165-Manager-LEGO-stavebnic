@@ -19,7 +19,7 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
     
     public void CreateBuildingKit(BuildingKit buildingKit)
     {
-       store(buildingKit);
+       create(buildingKit);
     }
 
     public void RemoveBuildingKit(BuildingKit buildingKit) {
@@ -28,7 +28,7 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
 
     public void UpdateBuildingKit(BuildingKit buildingKit)
     {
-       store(buildingKit);
+       create(buildingKit);
     }
     
     public List<BuildingKit> findAll() {
