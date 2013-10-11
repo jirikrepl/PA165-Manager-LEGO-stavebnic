@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author pc
+ * @author Tomas Kopecky
  */
 public interface BuildingKitDao {
     public void CreateBuildingKit(BuildingKit buildingKit);

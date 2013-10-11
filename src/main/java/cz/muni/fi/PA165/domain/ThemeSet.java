@@ -13,13 +13,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class ThemeSet implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private BigDecimal price;
-    
     private String description;
 
     public Long getId() {
@@ -46,7 +45,6 @@ public class ThemeSet implements Serializable {
         this.description = description;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -71,5 +69,4 @@ public class ThemeSet implements Serializable {
     public String toString() {
         return "cz.muni.fi.PA165.domain.ThemeSet[ id=" + id + " ]";
     }
-    
 }

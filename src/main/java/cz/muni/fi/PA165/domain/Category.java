@@ -12,12 +12,10 @@ import java.io.Serializable;
  */
 @Entity
 public class Category implements Serializable {
+
     private static final long serialVersionUID = 1L;
-
     private Long id;
-
     private String name;
-
     private String description;
 
     @Id
@@ -48,12 +46,18 @@ public class Category implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Category category = (Category) o;
 
-        if (id != null ? !id.equals(category.id) : category.id != null) return false;
+        if (id != null ? !id.equals(category.id) : category.id != null) {
+            return false;
+        }
 
         return true;
     }
