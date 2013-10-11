@@ -58,7 +58,6 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
             throw new IllegalArgumentException("Name can not be null");
         }
 
-        // MUZOU MIT DVE KOSTICKY STEJNE JMENO?
         Query q = entityManager.createQuery(
                 "SELECT b FROM Brick b WHERE name = :brick_color", Brick.class);
         q.setParameter("brick_color", name);
