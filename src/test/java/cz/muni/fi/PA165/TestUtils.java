@@ -37,6 +37,7 @@ public class TestUtils {
         return buildingKit;
     }
     
+
     public static ThemeSet createThemeSet(String name,
             String description, BigDecimal price,
             List<BuildingKit> listKits, Category category){
@@ -48,6 +49,15 @@ public class TestUtils {
         //themeSet.setCategory(category);
 
         return themeSet;
+    }
+
+    public static Category createCategory(String name, String description) {
+        Category category = new Category();
+        category.setName(name);
+        category.setDescription(description);
+        
+        return category;
+
     }
 
 }

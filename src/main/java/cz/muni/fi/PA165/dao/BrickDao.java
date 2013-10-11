@@ -29,9 +29,9 @@ public interface BrickDao {
     /**
      * remove brick entity from table
      *
-     * @param brick instance of brick entity class, which has to be removed
+     * @param brick id of brick entity class, which has to be removed
      */
-    public void delete(Brick brick);
+    public void delete(Long id);
 
     /**
      * find all brick entities in db table
