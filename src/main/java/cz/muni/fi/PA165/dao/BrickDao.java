@@ -23,6 +23,10 @@ public interface BrickDao {
      */
     public void create(Brick brick);
 
+    /**
+     * updates instance of brick entity
+     * @param brick instance of brick entity
+     */
     public void update(Brick brick);
 
     /**
@@ -39,6 +43,11 @@ public interface BrickDao {
      */
     public List<Brick> findAll();
 
+    /**
+     * 
+     * @param id finds entity by given id
+     * @return instance of Brick entity
+     */
     public Brick findById(Long id);
 
     /**
@@ -57,5 +66,10 @@ public interface BrickDao {
      */
     public List<Brick> findByName(String name);
 
+    /**
+     * sets the entity manager
+     *
+     * @param entityManager instance of EntityManager class
+     */
     public void setEntityManager(EntityManager entityManager);
 }

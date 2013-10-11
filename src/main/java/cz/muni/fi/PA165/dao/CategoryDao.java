@@ -26,12 +26,32 @@ public interface CategoryDao {
      */
     public Category findByName(String name);
 
+    /**
+     * updates given category
+     *
+     * @param category instance of Category entity class
+     */
     public void update(Category category);
 
+    /**
+     * deletes given category
+     *
+     * @param id id of the instance of the category to remove
+     */
     public void delete(Long id);
 
+    /**
+     * persist given category
+     *
+     * @param category instance of Category entity class
+     */
     public void create(Category category);
     
+    /**
+     * retrieves category with given id from the database
+     *
+     * @param id the given id
+     */
     public Category findById(Long id);
 
     public void setEntityManager(EntityManager entityManager);
