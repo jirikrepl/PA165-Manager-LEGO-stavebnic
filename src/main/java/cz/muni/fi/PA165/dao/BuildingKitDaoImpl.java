@@ -26,13 +26,13 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
     
     public List<BuildingKit> findAll() {
         Query q = entityManager.createQuery(
-                "SELECT b FROM BuildingKit b", Brick.class);
+                "SELECT b FROM BuildingKit b", BuildingKit.class);
         return (List<BuildingKit>) q.getResultList();
     }
 
     public List<BuildingKit> findByPrice(BigDecimal price) {
         Query q = entityManager.createQuery("SELECT b FROM " + 
-                "BuildingKit b WHERE price <= :price",
+                "BuildingKit b WHERE price <= :price)",
                 BuildingKit.class);
         q.setParameter("price", price);
         return (List<BuildingKit>) q.getResultList();

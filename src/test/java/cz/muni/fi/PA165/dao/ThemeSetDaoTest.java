@@ -4,23 +4,34 @@
  */
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.TestUtils;
+import cz.muni.fi.PA165.domain.Brick;
+import cz.muni.fi.PA165.domain.BuildingKit;
+import cz.muni.fi.PA165.domain.Color;
 import cz.muni.fi.PA165.domain.ThemeSet;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
 /**
  *
  * @author pc
  */
-public class ThemeSetDAOTest extends TestCase {
+public class ThemeSetDaoTest extends TestCase {
 
     private ThemeSetDao dao;
 
-    public ThemeSetDAOTest(String testName) {
+    public ThemeSetDaoTest(String testName) {
         super(testName);
     }
 
@@ -37,16 +48,14 @@ public class ThemeSetDAOTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-
+/*
     /**
      * Test of createOrUpdateThemeSet method, of class ThemeSetDaoImpl.
      */
     public void testCreateOrUpdateThemeSet() {
         System.out.println("createOrUpdateThemeSet");
-        ThemeSet set = null;
-        dao.createOrUpdateThemeSet(set);
-        //TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ThemeSet set = TestUtils.createThemeSet("StarWars", null, new BigDecimal(500), null, null);
+        //dao.createOrUpdateThemeSet(set);
     }
 
     /**
@@ -87,4 +96,5 @@ public class ThemeSetDAOTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
 }
