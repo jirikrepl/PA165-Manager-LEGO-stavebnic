@@ -7,6 +7,7 @@ package cz.muni.fi.PA165.dao;
 import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.BuildingKit;
+import cz.muni.fi.PA165.domain.Category;
 import cz.muni.fi.PA165.domain.Color;
 import cz.muni.fi.PA165.domain.ThemeSet;
 import java.math.BigDecimal;
@@ -48,53 +49,141 @@ public class ThemeSetDaoTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-/*
-    /**
-     * Test of createOrUpdateThemeSet method, of class ThemeSetDaoImpl.
-     */
-    public void testCreateOrUpdateThemeSet() {
-        System.out.println("createOrUpdateThemeSet");
-        ThemeSet set = TestUtils.createThemeSet("StarWars", null, new BigDecimal(500), null, null);
-        //dao.createOrUpdateThemeSet(set);
+
+
+    public void testCreateThemeSet() {
+        System.out.println("TEST CreateThemeSet");
+
+        try {
+            dao.create(null);
+            fail("creating NULL building kit");
+        } 
+        catch (IllegalArgumentException ex) {
+            
+        }
+
+        Category cat = TestUtils.createCategory("jmeno", "popis");
+        BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
+        bks.add(bk);
+        ThemeSet ts1 = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
+        
+        dao.create(ts1);
+        Long id = ts1.getId();
+        ThemeSet ts2 = dao.retrieveById(id);
+        
+        assertEquals(ts1.getId(), ts2.getId());
+        assertEquals(ts1.getBuildingKits(), ts2.getBuildingKits());
+        assertEquals(ts1.getCategory(), ts2.getCategory());
+        assertEquals(ts1.getDescription(), ts2.getDescription());
+        assertEquals(ts1.getName(), ts2.getName());
+        assertEquals(ts1.getPrice(), ts2.getPrice());
     }
 
-    /**
-     * Test of removeThemeSet method, of class ThemeSetDaoImpl.
-     */
     public void testRemoveThemeSet() {
-        System.out.println("removeThemeSet");
-        ThemeSet set = null;
-        ThemeSetDaoImpl instance = new ThemeSetDaoImpl();
-        instance.removeThemeSet(set);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TEST RemoveThemeSet");
+        
+        try {
+            dao.delete(null);
+            fail("removing NULL building kit");
+        }
+        catch (IllegalArgumentException ex)
+        {
+            
+        }
+        
+        Category cat = TestUtils.createCategory("jmeno", "popis");
+        BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
+        bks.add(bk);
+        ThemeSet ts = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
+        
+        dao.create(ts);
+        dao.delete(ts);
+        
+        assertNull(ts.getId());
+        assertNull(ts.getBuildingKits());
+        assertNull(ts.getCategory());
+        assertNull(ts.getDescription());
+        assertNull(ts.getName());
+        assertNull(ts.getPrice());
     }
 
-    /**
-     * Test of findAll method, of class ThemeSetDaoImpl.
-     */
+    public void testUpdateThemeSet() {
+        System.out.println("TEST UpdateThemeSet");
+
+        try {
+            dao.update(null);
+            fail("updating NULL theme set");
+        }
+        catch (IllegalArgumentException ex) {
+            
+        }
+
+        Category cat = TestUtils.createCategory("jmeno", "popis");
+        BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
+        bks.add(bk);
+        ThemeSet ts = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
+
+        dao.create(ts);
+        
+        ts.setDescription("newDescription");
+        ts.setName("newName");
+        ts.setPrice(BigDecimal.valueOf(25));
+        Category cat2 = TestUtils.createCategory("newJmeno", "newPopis");
+        BuildingKit bk2 = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks2 = new ArrayList<BuildingKit>();
+        bks2.add(bk2);
+        ts.setCategory(cat2);
+        ts.setBuildingKits(bks2);
+        
+        dao.update(ts);
+        
+        assertNotNull(ts.getId());
+        assertEquals(ts.getName(), "newName");
+        assertEquals(ts.getDescription(), "newDescription");
+        assertEquals(ts.getPrice(), BigDecimal.valueOf(25));
+        assertEquals(ts.getCategory(), cat2);
+        assertEquals(ts.getBuildingKits(), bks2);
+    }
+    
     public void testFindAll() {
-        System.out.println("findAll");
-        ThemeSetDaoImpl instance = new ThemeSetDaoImpl();
-        List expResult = null;
-        List result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TEST Find All");
+        
+        Category cat = TestUtils.createCategory("jmeno", "popis");
+        BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
+        bks.add(bk);
+        ThemeSet ts1 = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
+        ThemeSet ts2 = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.ZERO, bks, cat);
+        
+        dao.create(ts1);
+        dao.create(ts2);
+        
+        List<ThemeSet> setList = dao.findAll();
+        assertNotNull(setList);
+        assertTrue(setList.contains(ts1));
+        assertTrue(setList.contains(ts2));
     }
-
-    /**
-     * Test of findByPrice method, of class ThemeSetDaoImpl.
-     */
+    
     public void testFindByPrice() {
-        System.out.println("findByPrice");
-        BigDecimal price = null;
-        ThemeSetDaoImpl instance = new ThemeSetDaoImpl();
-        List expResult = null;
-        List result = instance.findByPrice(price);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("TEST Find By Price");
+        
+        Category cat = TestUtils.createCategory("jmeno", "popis");
+        BuildingKit bk = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, null);
+        ArrayList<BuildingKit> bks = new ArrayList<BuildingKit>();
+        bks.add(bk);
+        ThemeSet ts1 = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.TEN, bks, cat);
+        ThemeSet ts2 = TestUtils.createThemeSet("Star wars", "Star wars theme set", BigDecimal.ZERO, bks, cat);
+        
+        dao.create(ts1);
+        dao.create(ts2);
+        
+        List<ThemeSet> setList = dao.findByPrice(BigDecimal.ZERO);
+        assertNotNull(setList);
+        assertFalse(setList.contains(ts1));
+        assertTrue(setList.contains(ts2));
     }
-
+    
 }
