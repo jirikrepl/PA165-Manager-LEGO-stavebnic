@@ -47,6 +47,7 @@ public class CategoryDaoTest extends TestCase {
         // create category and store it into db
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
+        assertNotNull(category);
         // retrieve category and test its properties
         Category retrievedCat = dao.findByName("testCategory");
         assertNotNull(retrievedCat.getId());
@@ -65,6 +66,7 @@ public class CategoryDaoTest extends TestCase {
         
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
+        assertNotNull(category);
         
         Long id = category.getId();
         Category retrivedCat = dao.retrieveById(id);
@@ -81,6 +83,7 @@ public class CategoryDaoTest extends TestCase {
     public void testDelete() {
         Category category = TestUtils.createCategory("testCategory", "testDescription");
         dao.create(category);
+        assertNotNull(category);
         dao.delete(category);
         
         List<Category> exptRslt = new ArrayList<Category>();
@@ -110,14 +113,27 @@ public class CategoryDaoTest extends TestCase {
         entity.setName("testName");
         entity.setDescription("testDescription");
         dao.create(entity);
-        
+        assertNotNull(entity.getId());
         
         Category retrievedEntity = dao.findByName(entity.getName());
         assertEquals(entity, retrievedEntity);
     }
     
     public void testFindById() {
+        try {
+            dao.retrieveById(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+        }
+        
         System.out.println("testing method 'retrieveById' of CategoryDaoImpl class");
+        Category category = TestUtils.createCategory("testCategory", "testDescription");
+        dao.create(category);
+        
+        assertNotNull(category.getId());
+        Category retrievedCat = dao.retrieveById(category.getId());
+        assertEquals(category, retrievedCat);
+        
     }
 }
 
