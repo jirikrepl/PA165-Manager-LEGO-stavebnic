@@ -19,15 +19,7 @@ public class ThemeSetDaoImpl extends AbstractDao<ThemeSet> implements ThemeSetDa
         super();
     }
     
-    /**
-     * creates and updates ThemeSet instance
-     *
-     * @param set instance of ThemeSet entity class, which has to be changed
-     */
-    public void createOrUpdateThemeSet(ThemeSet set) {
-        create(set);
-    }
-
+       
     /**
      * removes the ThemeSet instance
      *
