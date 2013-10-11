@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.dao.BrickDaoImpl;
 import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Color;
 
@@ -63,7 +64,7 @@ public class MyBrickTest {
         b10.setName("Brick Round 1 x 1");
         b10.setDescription("Brick Round 1 x 1 with Open Stud");
 
-        BrickDao brickDao = new BrickDao();
+        BrickDao brickDao = new BrickDaoImpl();
 
         brickDao.storeBrick(b1);
         brickDao.storeBrick(b2);

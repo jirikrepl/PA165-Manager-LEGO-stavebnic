@@ -1,40 +1,39 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.daoInterface.CategoryDaoInterface;
-import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Category;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
  * @author: Martin Rumanek
  * @version: 10/8/13
  */
-public class CategoryDao extends Dao<Category> implements CategoryDaoInterface {
+public interface CategoryDao {
 
+    public void storeCategory(Category category);
 
-    @Override
-    public void storeCategory(Category category) {
-        store(category);
-    }
+    /**
+     * remove category entity from table
+     *
+     * @param category instance of brick entity class, which has to be removed
+     */
+    public void removeCategory(Category category);
 
-    @Override
-    public void removeCategory(Category category) {
-        delete(category);
-    }
+    /**
+     * find all brick entities in db table
+     *
+     * @return List<Category> list of brick objects
+     */
+    public List<Category> findAll();
 
-    @Override
-    public List<Category> findAll() {
-        Query q = entityManager.createQuery(
-                "SELECT b FROM Category b", Brick.class);
-        return (List<Category>) q.getResultList();
-    }
+    /**
+     * find all entities by given color name
+     *
+     * @param name String, name of brick
+     * @return List<Brick> list of brick with desired color
+     */
+    public List<Category> findByName(String name);
 
-    @Override
-    public List<Category> findByName(String name) {
-        return null;
-    }
+    public void close();
+
 }

@@ -1,6 +1,8 @@
-package cz.muni.fi.PA165.daoInterface;
+package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.domain.ThemeSet;
+
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  *
  * @author Pavol Bako
  */
-public interface ThemeSetDaoInterface {
+public interface ThemeSetDao {
     
     /**
      * creates and updates ThemeSet instance
@@ -37,5 +39,7 @@ public interface ThemeSetDaoInterface {
      * @return List<ThemeSet> of all entities with given price
      */
     public List<ThemeSet> findByPrice(BigDecimal price);
+
+    public void setEntityManager(EntityManager entityManager);
     
 }

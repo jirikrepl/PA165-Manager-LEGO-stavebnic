@@ -1,8 +1,12 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.TestUtils;
+import cz.muni.fi.PA165.domain.Brick;
 import cz.muni.fi.PA165.domain.Color;
 import junit.framework.TestCase;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  * @author: Martin Rumanek
@@ -15,12 +19,15 @@ public class BrickDaoTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-
-        dao = new BrickDao();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
+        dao = new BrickDaoImpl();
+        dao.setEntityManager(emf.createEntityManager());
     }
 
     @Override
     protected void tearDown() throws Exception {
+        //dao.close();
+
         super.tearDown();
     }
 
@@ -32,6 +39,17 @@ public class BrickDaoTest extends TestCase {
             fail();
         } catch (IllegalArgumentException ex) {
         }
+
+        Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        dao.storeBrick(brick);
+        assertNotNull(brick.getId());
+        assertEquals(brick.getName(), "TestBrick");
+        assertEquals(brick.getColor(), Color.BLACK);
+        assertEquals(brick.getDescription(), "Some description");
+
+
+
+
     }
 
     public void testRemoveBrick() {

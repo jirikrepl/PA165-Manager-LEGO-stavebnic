@@ -1,36 +1,41 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.daoInterface.DaoInterface;
-import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import java.lang.reflect.ParameterizedType;
 
 /**
- * general class for Dao, specific entity Dao classes subclass this class
- * this class contains basic CRUD operations 
+ * general class for AbstractDao, specific entity AbstractDao classes subclass this class
+ * this class contains basic CRUD operations
  *
- * @author jirikrepl
  * @param <E> generic type for instance of entity class
+ * @author jirikrepl
+ * @author Martin Rumanek
  */
-public abstract class Dao<E> implements DaoInterface<E>{
+public abstract class AbstractDao<E> {
 
     protected Class<E> entityClass;
     @PersistenceContext
-    protected static EntityManager entityManager;
+    protected EntityManager entityManager;
 
     /**
      * costructor uses reflection to get proper entity class
      */
-    public Dao() {
+    public AbstractDao() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
-        Dao.entityManager = emf.createEntityManager();
+        entityManager = emf.createEntityManager();
     }
-    
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     public void close() {
         entityManager.close();
     }
@@ -41,9 +46,17 @@ public abstract class Dao<E> implements DaoInterface<E>{
      * @param entity some entity to be persisted
      */
     public void store(E entity) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity is NULL");
+        }
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (PersistenceException e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -52,10 +65,7 @@ public abstract class Dao<E> implements DaoInterface<E>{
      * @param entity entity which has to be removed
      */
     public void delete(E entity) {
-        entityManager.getTransaction().begin();
         entityManager.remove(entity);
-        entityManager.getTransaction().commit();
-        
     }
 
     /**
