@@ -55,6 +55,10 @@ public abstract class AbstractDao<E> {
         }
     }
 
+    /**
+     * generic method for updating entity in db
+     * @param entity generic entity instance, which has to be updated
+     */
     public void update(E entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be NULL");
@@ -69,6 +73,10 @@ public abstract class AbstractDao<E> {
         }
     }
 
+    /**
+     * generic method of deleting entity from db
+     * @param id id of entity which has to deleted
+     */
     public void delete(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
