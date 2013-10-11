@@ -14,9 +14,9 @@ import javax.persistence.EntityManager;
  * @author Tomas Kopecky
  */
 public interface BuildingKitDao {
-    public void CreateBuildingKit(BuildingKit buildingKit);
-    public void RemoveBuildingKit(BuildingKit buildingKit);
-    public void UpdateBuildingKit(BuildingKit buildingKit);
+    public void createBuildingKit(BuildingKit buildingKit);
+    public void removeBuildingKit(BuildingKit buildingKit);
+    public void updateBuildingKit(BuildingKit buildingKit);
     
     public void setEntityManager(EntityManager entityManager);
     

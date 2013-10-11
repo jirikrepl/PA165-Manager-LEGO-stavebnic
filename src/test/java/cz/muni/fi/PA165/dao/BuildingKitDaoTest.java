@@ -39,7 +39,7 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST CreateBuildingKit");
 
         try {
-            buildingKitDao.CreateBuildingKit(null);
+            buildingKitDao.createBuildingKit(null);
             fail("creating NULL building kit");
         } catch (IllegalArgumentException ex) {
         }
@@ -55,7 +55,7 @@ public class BuildingKitDaoTest extends TestCase {
         list.add(brick2);
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        buildingKitDao.CreateBuildingKit(kit);
+        buildingKitDao.createBuildingKit(kit);
         assertNotNull(kit.getId());
         assertEquals(kit.getName(), "name");
         assertEquals(kit.getDescription(), "description");

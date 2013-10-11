@@ -17,16 +17,16 @@ import javax.persistence.Query;
 public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
     implements BuildingKitDao {
     
-    public void CreateBuildingKit(BuildingKit buildingKit)
+    public void createBuildingKit(BuildingKit buildingKit)
     {
        create(buildingKit);
     }
 
-    public void RemoveBuildingKit(BuildingKit buildingKit) {
+    public void removeBuildingKit(BuildingKit buildingKit) {
         delete(buildingKit);
     }
 
-    public void UpdateBuildingKit(BuildingKit buildingKit)
+    public void updateBuildingKit(BuildingKit buildingKit)
     {
        create(buildingKit);
     }
