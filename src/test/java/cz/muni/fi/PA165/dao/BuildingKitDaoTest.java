@@ -79,14 +79,11 @@ public class BuildingKitDaoTest extends TestCase {
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
         buildingKitDao.create(kit);
+        Long iD = kit.getId();
         buildingKitDao.delete(kit);
         
-        assertNull(kit.getId());
-        assertNull(kit.getName());
-        assertNull(kit.getDescription());
-        assertNull(kit.getPrice());
-        assertNull(kit.getYearFrom());
-        assertNull(kit.getBricks());
+        assertNull(buildingKitDao.retrieveById(iD));
+        
     }
 
     public void testUpdateBuildingKit() {
