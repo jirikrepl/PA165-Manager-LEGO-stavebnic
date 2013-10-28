@@ -20,6 +20,11 @@ public abstract class AbstractDao<E> {
     protected Class<E> entityClass;
     @PersistenceContext
     protected EntityManager entityManager;
+    protected EntityManagerFactory entityManagerFactory;
+
+    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     /**
      * costructor uses reflection to get proper entity class

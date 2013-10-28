@@ -23,8 +23,9 @@ public class BrickDaoTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
+        
         dao = new BrickDaoImpl();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         dao.setEntityManager(emf.createEntityManager());
     }
 
