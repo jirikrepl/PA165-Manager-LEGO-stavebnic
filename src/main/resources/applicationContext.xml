@@ -9,15 +9,17 @@
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
     
     
-    <jee:jndi-lookup id="myEmf" jndi-name="persistence/TestPU"/>
+    <!--<jee:jndi-lookup id="myEmf" jndi-name="persistence/TestPU"/>-->
     
+
+
+
+    <!--<bean id="brickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl">-->
+        <!--<property name="entityManagerFactory" ref="myEmf"/>-->
+    <!--</bean>-->
     
-    <bean id="brickDaoBean" class="cz.muni.fi.PA165.dao.BrickDaoImpl">
-        <property name="entityManagerFactory" ref="myEmf"/>
-    </bean>
-    
-    <bean id="brickServiceBean" class="cz.muni.fi.PA165.service.BrickServiceImpl">
-        <property name="brickDao" ref="brickDaoBean"/>
+    <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
+        <!--<property name="brickDao" ref="brickDao" />-->
     </bean>
     
 </beans>
