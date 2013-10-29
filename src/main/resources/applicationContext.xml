@@ -21,5 +21,9 @@
     <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
         <!--<property name="brickDao" ref="brickDao" />-->
     </bean>
+    <bean id="themeSetService" class="cz.muni.fi.PA165.service.ThemeSetServiceImpl">
+        <!--<property name="themeSetDao" ref="themeSetDao" />-->
+    </bean>
+    
     
 </beans>
