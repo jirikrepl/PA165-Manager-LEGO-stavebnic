@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BrickServiceImpl implements BrickService {
 
-    @Autowired
+    //@Autowired
     private BrickDao brickDao;
 
     public void setBrickDao(BrickDao brickDao) {

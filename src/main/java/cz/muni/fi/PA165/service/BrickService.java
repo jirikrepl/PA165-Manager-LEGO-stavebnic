@@ -6,6 +6,7 @@
 
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Color;
 import java.util.List;
@@ -64,4 +65,10 @@ public interface BrickService {
      * @return List<Brick> list of brick with desired color
      */
     public List<BrickDto> findByName(String name);
+    
+    /**
+     * set brick dao object
+     * @param brickDao dao object for brick entity
+     */
+    public void setBrickDao(BrickDao brickDao);
 }
