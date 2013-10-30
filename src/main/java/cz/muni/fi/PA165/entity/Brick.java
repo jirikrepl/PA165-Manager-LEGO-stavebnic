@@ -55,18 +55,7 @@ public class Brick implements Serializable {
         this.id = id;
     }
     
-    /**
-     * creates DTO object from this entity
-     * @return BrickDto dto object
-     */
-    public BrickDto createDto() {
-        BrickDto brickDto = new BrickDto();
-        brickDto.setId(id);
-        brickDto.setName(name);
-        brickDto.setColor(color);
-        brickDto.setDescription(description);
-        return brickDto;
-    }
+    
 
     @Override
     public boolean equals(Object o) {

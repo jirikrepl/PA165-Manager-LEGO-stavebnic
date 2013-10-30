@@ -6,6 +6,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
@@ -31,12 +32,12 @@ public class BrickServiceImpl implements BrickService {
     }
 
     public void create(BrickDto brickDto) {
-        Brick brickEntity = brickDto.createEntity();
+        Brick brickEntity = BrickConversion.convertToEntity(brickDto);
         brickDao.create(brickEntity);
     }
 
     public void update(BrickDto brickDto) {
-        Brick brickEntity = brickDto.createEntity();
+        Brick brickEntity = BrickConversion.convertToEntity(brickDto);
         brickDao.update(brickEntity);
     }
 
@@ -48,21 +49,21 @@ public class BrickServiceImpl implements BrickService {
         List<Brick> brickEntitites = brickDao.findAll();
         List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
         for (Brick brick : brickEntitites) {
-            brickDtoList.add(brick.createDto());
+            brickDtoList.add(BrickConversion.convertToDto(brick));
         }
         return brickDtoList;
     }
 
     public BrickDto findById(Long id) {
         Brick entity = brickDao.findById(id);
-        return entity.createDto();
+        return BrickConversion.convertToDto(entity);
     }
 
     public List<BrickDto> findByColor(Color color) {
         List<Brick> brickEntitites = brickDao.findByColor(color);
         List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
         for (Brick brick : brickEntitites) {
-            brickDtoList.add(brick.createDto());
+            brickDtoList.add(BrickConversion.convertToDto(brick));
         }
         return brickDtoList;
     }
@@ -71,7 +72,7 @@ public class BrickServiceImpl implements BrickService {
         List<Brick> brickEntitites = brickDao.findByName(name);
         List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
         for (Brick brick : brickEntitites) {
-            brickDtoList.add(brick.createDto());
+            brickDtoList.add(BrickConversion.convertToDto(brick));
         }
         return brickDtoList;
     }
