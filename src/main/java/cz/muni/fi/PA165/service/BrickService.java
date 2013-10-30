@@ -6,8 +6,8 @@
 
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.domain.Brick;
-import cz.muni.fi.PA165.domain.Color;
+import cz.muni.fi.PA165.dto.BrickDto;
+import cz.muni.fi.PA165.entity.Color;
 import java.util.List;
 
 /**
@@ -20,13 +20,13 @@ public interface BrickService {
      *
      * @param brick instance of brick entity class
      */
-    public void create(Brick brick);
+    public void create(BrickDto brick);
 
     /**
      * updates instance of brick entity
      * @param brick instance of brick entity
      */
-    public void update(Brick brick);
+    public void update(BrickDto brick);
 
     /**
      * remove brick entity from table
@@ -40,14 +40,14 @@ public interface BrickService {
      *
      * @return List<Brick> list of brick objects
      */
-    public List<Brick> findAll();
+    public List<BrickDto> findAll();
 
     /**
      * 
      * @param id finds entity by given id
      * @return instance of Brick entity
      */
-    public Brick findById(Long id);
+    public BrickDto findById(Long id);
 
     /**
      * find all bricks of desired color
@@ -55,7 +55,7 @@ public interface BrickService {
      * @param color Enum color of bricks
      * @return List<Brick> list of brick with desired color
      */
-    public List<Brick> findByColor(Color color);
+    public List<BrickDto> findByColor(Color color);
 
     /**
      * find all entities by given color name
@@ -63,5 +63,5 @@ public interface BrickService {
      * @param name String, name of brick
      * @return List<Brick> list of brick with desired color
      */
-    public List<Brick> findByName(String name);
+    public List<BrickDto> findByName(String name);
 }

@@ -5,9 +5,9 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.domain.BuildingKit;
-import cz.muni.fi.PA165.domain.Category;
-import cz.muni.fi.PA165.domain.ThemeSet;
+import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.ThemeSet;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;

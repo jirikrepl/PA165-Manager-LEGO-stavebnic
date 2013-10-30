@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.PA165.domain;
+package cz.muni.fi.PA165.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

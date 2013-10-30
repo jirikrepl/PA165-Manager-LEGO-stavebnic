@@ -1,4 +1,4 @@
-package cz.muni.fi.PA165.domain;
+package cz.muni.fi.PA165.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

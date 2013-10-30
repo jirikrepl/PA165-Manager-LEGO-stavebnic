@@ -1,7 +1,7 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.domain.Category;
+import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

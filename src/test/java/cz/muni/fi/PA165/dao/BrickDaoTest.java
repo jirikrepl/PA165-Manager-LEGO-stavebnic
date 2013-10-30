@@ -1,8 +1,8 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.domain.Brick;
-import cz.muni.fi.PA165.domain.Color;
+import cz.muni.fi.PA165.entity.Brick;
+import cz.muni.fi.PA165.entity.Color;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;

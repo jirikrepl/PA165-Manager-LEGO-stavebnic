@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.domain.ThemeSet;
+import cz.muni.fi.PA165.entity.ThemeSet;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;

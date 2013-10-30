@@ -6,7 +6,7 @@
 
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.domain.Brick;
+import cz.muni.fi.PA165.entity.Brick;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

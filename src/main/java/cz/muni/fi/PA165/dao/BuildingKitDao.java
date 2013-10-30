@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.domain.BuildingKit;
+import cz.muni.fi.PA165.entity.BuildingKit;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;

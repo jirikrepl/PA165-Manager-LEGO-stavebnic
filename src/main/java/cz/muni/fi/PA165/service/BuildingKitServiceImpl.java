@@ -5,7 +5,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BuildingKitDao;
-import cz.muni.fi.PA165.domain.BuildingKit;
+import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -1,10 +1,10 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.domain.Brick;
-import cz.muni.fi.PA165.domain.BuildingKit;
-import cz.muni.fi.PA165.domain.Category;
-import cz.muni.fi.PA165.domain.Color;
-import cz.muni.fi.PA165.domain.ThemeSet;
+import cz.muni.fi.PA165.entity.Brick;
+import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.Color;
+import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.math.BigDecimal;
 import java.util.List;

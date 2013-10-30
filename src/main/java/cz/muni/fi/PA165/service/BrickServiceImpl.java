@@ -6,8 +6,8 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BrickDao;
-import cz.muni.fi.PA165.domain.Brick;
-import cz.muni.fi.PA165.domain.Color;
+import cz.muni.fi.PA165.dto.BrickDto;
+import cz.muni.fi.PA165.entity.Color;
 import java.util.List;
 
 /**
@@ -22,11 +22,11 @@ public class BrickServiceImpl implements BrickService{
         this.brickDao = brickDao;
     }
 
-    public void create(Brick brick) {
+    public void create(BrickDto brick) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void update(Brick brick) {
+    public void update(BrickDto brick) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -34,20 +34,22 @@ public class BrickServiceImpl implements BrickService{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Brick> findAll() {
+    public List<BrickDto> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Brick findById(Long id) {
+    public BrickDto findById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Brick> findByColor(Color color) {
+    public List<BrickDto> findByColor(Color color) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Brick> findByName(String name) {
+    public List<BrickDto> findByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
 }
