@@ -8,21 +8,16 @@
     <aop:aspectj-autoproxy/>
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
     
-    
     <!--<jee:jndi-lookup id="myEmf" jndi-name="persistence/TestPU"/>-->
     
-
-
-
-    <!--<bean id="brickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl">-->
-        <!--<property name="entityManagerFactory" ref="myEmf"/>-->
-    <!--</bean>-->
-    
+    <bean id="brickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl" />
     <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
-        <!--<property name="brickDao" ref="brickDao" />-->
+        <property name="brickDao" ref="brickDao" />
     </bean>
+    
+    <bean id="themeSetDao" class="cz.muni.fi.PA165.dao.ThemeSetDaoImpl" />
     <bean id="themeSetService" class="cz.muni.fi.PA165.service.ThemeSetServiceImpl">
-        <!--<property name="themeSetDao" ref="themeSetDao" />-->
+        <property name="themeSetDao" ref="themeSetDao" />
     </bean>
     
     

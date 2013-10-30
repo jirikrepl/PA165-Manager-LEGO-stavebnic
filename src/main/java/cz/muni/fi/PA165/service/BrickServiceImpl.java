@@ -7,49 +7,72 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dto.BrickDto;
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jiri Krepl
  */
-public class BrickServiceImpl implements BrickService{
+@Service
+@Transactional
+public class BrickServiceImpl implements BrickService {
 
+    @Autowired
     private BrickDao brickDao;
 
     public void setBrickDao(BrickDao brickDao) {
         this.brickDao = brickDao;
     }
 
-    public void create(BrickDto brick) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void create(BrickDto brickDto) {
+        Brick brickEntity = brickDto.createEntity();
+        brickDao.create(brickEntity);
     }
 
-    public void update(BrickDto brick) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(BrickDto brickDto) {
+        Brick brickEntity = brickDto.createEntity();
+        brickDao.update(brickEntity);
     }
 
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        brickDao.delete(id);
     }
 
     public List<BrickDto> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Brick> brickEntitites = brickDao.findAll();
+        List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
+        for (Brick brick : brickEntitites) {
+            brickDtoList.add(brick.createDto());
+        }
+        return brickDtoList;
     }
 
     public BrickDto findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Brick entity = brickDao.findById(id);
+        return entity.createDto();
     }
 
     public List<BrickDto> findByColor(Color color) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Brick> brickEntitites = brickDao.findByColor(color);
+        List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
+        for (Brick brick : brickEntitites) {
+            brickDtoList.add(brick.createDto());
+        }
+        return brickDtoList;
     }
 
     public List<BrickDto> findByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Brick> brickEntitites = brickDao.findByName(name);
+        List<BrickDto> brickDtoList = new ArrayList<BrickDto>();
+        for (Brick brick : brickEntitites) {
+            brickDtoList.add(brick.createDto());
+        }
+        return brickDtoList;
     }
-
-   
-
 }

@@ -1,42 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.AbstractIntegrationTest;
+import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.entity.Brick;
-import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author Jiri
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class BrickServiceTest {
+public class BrickServiceTest extends AbstractIntegrationTest {
 
-    @Autowired
-    private BrickService service;
-
+//    @Autowired
+//    private BrickDao brickDao;
 
     @Test
-    public void testBlah() {
-        try {
-//            service.create(new Brick());
-        } catch (UnsupportedOperationException e) {
-
-        }
-
-        int x = 1;
+    public void testCreateBrick() {
+        Brick blah = new Brick();
+//        Customer customer = bankService.createNewCustomer("Firstname", "Lastname");
+//        assertNotNull(customer.getId());
+        assertNotNull(blah);
     }
 
-    // TODO add test methods here. The name must begin with 'test'. For example:
-    // public void testHello() {}
+    @Test
+    public void testUpdateBrick() {
+        int x = 1;
+//        bankService.createNewCustomer("Firstname1", "Lastname1");
+//        bankService.createNewCustomer("Firstname2", "Lastname2");
+//        
+//        List<Customer> customersList = bankService.getAllCustomers();
+//        assertEquals(2, customersList.size());
+    }
 }

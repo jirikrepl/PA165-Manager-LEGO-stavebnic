@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.dto;
 
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
 
 public class BrickDto {
@@ -39,6 +40,18 @@ public class BrickDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    /**
+     * creates entity Brick from this dto object
+     * @return Brick entity
+     */
+    public Brick createEntity() {
+        Brick brick = new Brick();
+        brick.setColor(color);
+        brick.setDescription(description);
+        brick.setName(name);
+        return brick;
     }
 
     @Override

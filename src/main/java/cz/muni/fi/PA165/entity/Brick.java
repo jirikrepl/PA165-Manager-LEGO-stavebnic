@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
+import cz.muni.fi.PA165.dto.BrickDto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,6 +53,19 @@ public class Brick implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    /**
+     * creates DTO object from this entity
+     * @return BrickDto dto object
+     */
+    public BrickDto createDto() {
+        BrickDto brickDto = new BrickDto();
+        brickDto.setId(id);
+        brickDto.setName(name);
+        brickDto.setColor(color);
+        brickDto.setDescription(description);
+        return brickDto;
     }
 
     @Override
