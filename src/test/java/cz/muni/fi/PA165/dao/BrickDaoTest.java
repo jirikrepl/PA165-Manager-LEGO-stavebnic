@@ -37,12 +37,6 @@ public class BrickDaoTest extends TestCase {
     public void testStoreBrick() {
         System.out.println("create");
 
-        try {
-            dao.create(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-        }
-
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
         dao.create(brick);
         assertNotNull(brick.getId());
