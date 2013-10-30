@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
+import cz.muni.fi.PA165.dto.ThemeSetDto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -81,6 +82,15 @@ public class ThemeSet implements Serializable {
         this.buildingKits = buildingKits;
     }
     
+    public ThemeSetDto createDto(){
+        ThemeSetDto tsDto = new ThemeSetDto();
+        tsDto.setName(name);
+        tsDto.setPrice(price);
+        tsDto.setDescription(description);
+        tsDto.setCategory(category);
+        tsDto.setBuildingKits(buildingKits);
+        return tsDto;
+    }
     
 
     @Override

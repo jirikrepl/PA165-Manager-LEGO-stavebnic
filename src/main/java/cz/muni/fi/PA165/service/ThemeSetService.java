@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,21 +20,21 @@ public interface ThemeSetService {
      *
      * @return List<ThemeSet> all entities in DB
      */
-    public List<ThemeSet> findAll();
+    public List<ThemeSetDto> findAll();
 
     /**
      * finds entities in DB with given price
      *
      * @return List<ThemeSet> of all entities with given price
      */
-    public List<ThemeSet> findByPrice(BigDecimal price);
+    public List<ThemeSetDto> findByPrice(BigDecimal price);
 
     /**
      * updates the ThemeSet in DB
      *
      * @param ThemeSet takes ThemeSet as parameter
      */
-    public void update(ThemeSet set);
+    public void update(ThemeSetDto setDto);
 
     /**
      * deletes the ThemeSet in DB according to ID
@@ -47,7 +48,7 @@ public interface ThemeSetService {
      *
      * @param ThemeSet
      */
-    public void create(ThemeSet set);
+    public void create(ThemeSetDto setDto);
 
     /**
      * finds ThemeSet entity according to ID
@@ -55,5 +56,5 @@ public interface ThemeSetService {
      * @param Long
      * @return ThemeSet
      */
-    public ThemeSet findById(Long id);
+    public ThemeSetDto findById(Long id);
 }
