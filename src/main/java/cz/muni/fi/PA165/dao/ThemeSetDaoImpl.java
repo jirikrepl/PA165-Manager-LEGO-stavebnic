@@ -5,12 +5,14 @@ import cz.muni.fi.PA165.entity.ThemeSet;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * DAO class for ThemeSet
  *
  * @author Pavol Bako
  */
+@Repository
 public class ThemeSetDaoImpl extends AbstractDao<ThemeSet> implements ThemeSetDao {
 
     /**
