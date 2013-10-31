@@ -10,11 +10,12 @@ import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BrickServiceImpl implements BrickService {
 
-    //@Autowired
+    @Autowired
     private BrickDao brickDao;
 
     public void setBrickDao(BrickDao brickDao) {

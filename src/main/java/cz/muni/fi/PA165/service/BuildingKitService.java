@@ -5,9 +5,9 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dto.BuildingKitDto;
+
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  * Interface for BuildingKit service

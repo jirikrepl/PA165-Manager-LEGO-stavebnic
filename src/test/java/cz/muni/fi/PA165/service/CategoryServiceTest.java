@@ -1,23 +1,21 @@
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.AbstractIntegrationTest;
-import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dao.CategoryDao;
-import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.entity.Color;
+import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
-public class CategoryServiceTest extends AbstractIntegrationTest {
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class CategoryServiceTest extends TestCase {
 
     private CategoryService categoryService;
     private CategoryDao categoryDao;

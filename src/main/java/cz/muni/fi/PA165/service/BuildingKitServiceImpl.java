@@ -8,11 +8,13 @@ import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -22,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BuildingKitServiceImpl implements BuildingKitService {
 
-    //@Autowired
+    @Autowired
     private BuildingKitDao buildingKitDao;
 
     public void setBuildingKitDao(BuildingKitDao dao) {

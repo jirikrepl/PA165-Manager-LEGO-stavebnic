@@ -19,6 +19,11 @@
     <bean id="themeSetService" class="cz.muni.fi.PA165.service.ThemeSetServiceImpl">
         <property name="themeSetDao" ref="themeSetDao" />
     </bean>
+
+    <bean id="categoryDao" class="cz.muni.fi.PA165.dao.CategoryDaoImpl" />
+    <bean id="categoryService" class="cz.muni.fi.PA165.service.CategoryServiceImpl">
+        <property name="categorySetDao" ref="categorySetDao" />
+    </bean>
     
     
 </beans>

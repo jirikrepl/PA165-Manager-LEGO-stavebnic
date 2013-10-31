@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.dto.BrickDto;
-import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 
 import javax.persistence.EntityManager;

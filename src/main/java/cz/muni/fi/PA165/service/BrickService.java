@@ -9,6 +9,7 @@ package cz.muni.fi.PA165.service;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Color;
+
 import java.util.List;
 
 /**

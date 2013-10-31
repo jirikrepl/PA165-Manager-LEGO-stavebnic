@@ -5,7 +5,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dto.ThemeSetDto;
-import cz.muni.fi.PA165.entity.ThemeSet;
+
 import java.math.BigDecimal;
 import java.util.List;
 

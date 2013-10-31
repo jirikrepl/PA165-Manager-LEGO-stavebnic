@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.dao;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,6 +17,8 @@ import java.lang.reflect.ParameterizedType;
  * @author jirikrepl
  * @author Martin Rumanek
  */
+
+@Repository
 public abstract class AbstractDao<E> {
 
     protected Class<E> entityClass;

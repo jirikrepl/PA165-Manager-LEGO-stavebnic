@@ -4,10 +4,9 @@
  */
 package cz.muni.fi.PA165.dto;
 
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

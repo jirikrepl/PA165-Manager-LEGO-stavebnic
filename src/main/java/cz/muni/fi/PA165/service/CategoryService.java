@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Category;
 
 import java.util.List;
 
