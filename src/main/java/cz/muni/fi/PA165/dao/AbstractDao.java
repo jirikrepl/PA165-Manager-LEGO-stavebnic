@@ -22,13 +22,9 @@ import java.lang.reflect.ParameterizedType;
 public abstract class AbstractDao<E> {
 
     protected Class<E> entityClass;
+
     @PersistenceContext
     protected EntityManager entityManager;
-    protected EntityManagerFactory entityManagerFactory;
-
-    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
 
     /**
      * costructor uses reflection to get proper entity class
@@ -36,9 +32,6 @@ public abstract class AbstractDao<E> {
     public AbstractDao() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
-        entityManager = emf.createEntityManager();
     }
 
     public void setEntityManager(EntityManager entityManager) {
@@ -54,14 +47,8 @@ public abstract class AbstractDao<E> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be NULL");
         }
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(entity);
-            entityManager.getTransaction().commit();
-        } catch (PersistenceException e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }
+
+        entityManager.persist(entity);
     }
 
     /**
@@ -72,14 +59,8 @@ public abstract class AbstractDao<E> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be NULL");
         }
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(entity);
-            entityManager.getTransaction().commit();
-        } catch (PersistenceException e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }
+       entityManager.merge(entity);
+
     }
 
     /**
@@ -91,14 +72,9 @@ public abstract class AbstractDao<E> {
             throw new IllegalArgumentException("Id cannot be null");
         }
         E entity = findById(id);
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.remove(entity);
-            entityManager.getTransaction().commit();
-        } catch (PersistenceException e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }
+
+        entityManager.remove(entity);
+
     }
 
     /**
