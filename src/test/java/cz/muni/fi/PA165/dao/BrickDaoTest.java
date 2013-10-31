@@ -53,7 +53,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
@@ -63,20 +63,20 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(brick.getId());
             fail();
-        } catch(IllegalArgumentException ex) {
+        } catch(DaoException ex) {
         }
 
         try {
             Brick brickDeleted = dao.findById(brick.getId());
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
 
         try {
             dao.delete(new Long(-1L));
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
 
@@ -89,7 +89,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");

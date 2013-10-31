@@ -53,7 +53,7 @@ public class ThemeSetDaoTest extends TestCase {
             dao.create(null);
             fail("creating NULL building kit");
         } 
-        catch (IllegalArgumentException ex) {
+        catch (DaoException ex) {
             
         }
 
@@ -83,7 +83,7 @@ public class ThemeSetDaoTest extends TestCase {
             dao.delete(null);
             fail("removing NULL building kit");
         }
-        catch (IllegalArgumentException ex)
+        catch (DaoException ex)
         {
             
         }
@@ -101,7 +101,7 @@ public class ThemeSetDaoTest extends TestCase {
             ThemeSet tsDeleted = dao.findById(ts.getId());
             fail("deleted entity still exists");
         }
-        catch (IllegalArgumentException ex) {
+        catch (DaoException ex) {
         }
     }
 
@@ -112,7 +112,7 @@ public class ThemeSetDaoTest extends TestCase {
             dao.update(null);
             fail("updating NULL theme set");
         }
-        catch (IllegalArgumentException ex) {
+        catch (DaoException ex) {
             
         }
 

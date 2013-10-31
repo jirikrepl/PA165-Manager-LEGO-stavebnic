@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Brick;
@@ -36,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findByName(String name) {
         if(name == null) {
-            throw new IllegalArgumentException();
+            throw new DaoException("error - category cannot be null");
         }
         Category category = categoryDao.findByName(name);
 
@@ -52,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void update(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new IllegalArgumentException();
+            throw new DaoException("error - category cannot be null");
         }
         Category category = categoryDto.createEntity();
         categoryDao.update(category);
@@ -61,7 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(Long id) {
         if(id == null) {
-            throw new IllegalArgumentException();
+            throw new DaoException("error - category cannot be null");
         }
         categoryDao.delete(id);
     }
@@ -69,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void create(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new IllegalArgumentException();
+            throw new DaoException("error - category cannot be null");
         }
         Category categoryEntity = categoryDto.createEntity();
         categoryDao.create(categoryEntity);
@@ -78,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findById(Long id) {
         if(id == null) {
-            throw new IllegalArgumentException();
+            throw new DaoException("error - category cannot be null");
         }
         Category entity = categoryDao.findById(id);
         

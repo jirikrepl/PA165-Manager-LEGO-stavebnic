@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.service;
 import cz.muni.fi.PA165.AbstractIntegrationTest;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Brick;
@@ -42,7 +43,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.create(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         // on Dao layer, create method with null argument was never called
         // new IllegeaArgumentException was throws on service Layer method create
@@ -78,7 +79,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.update(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -108,7 +109,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.delete(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -166,7 +167,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");
@@ -192,7 +193,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.findByName(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");
