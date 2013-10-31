@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.PA165.daoDtoConversion;
 
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
@@ -21,7 +22,7 @@ public class ThemeSetConversion {
      */
     public static ThemeSetDto convertToDto(ThemeSet themeSet) {
         if (themeSet == null) {
-            throw new IllegalArgumentException("Entity can not be NULL");
+            throw new DaoException("Entity can not be NULL");
         }
         ThemeSetDto dto = new ThemeSetDto();
         dto.setId(themeSet.getId());
@@ -39,7 +40,7 @@ public class ThemeSetConversion {
      */
     public static ThemeSet convertToEntity(ThemeSetDto themeSetDto) {
         if (themeSetDto == null) {
-            throw new IllegalArgumentException("Dto can not be NULL");
+            throw new DaoException("Dto can not be NULL");
         }
         ThemeSet themeSet = new ThemeSet();
         

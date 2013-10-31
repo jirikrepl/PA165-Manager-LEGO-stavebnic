@@ -5,17 +5,24 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BuildingKitDao;
+import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
+import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tomas Kopecky
  */
+@Transactional
+@Service
 public class BuildingKitServiceImpl implements BuildingKitService {
 
+    //@Autowired
     private BuildingKitDao buildingKitDao;
 
     public void setBuildingKitDao(BuildingKitDao dao) {
@@ -27,31 +34,43 @@ public class BuildingKitServiceImpl implements BuildingKitService {
     }
 
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        buildingKitDao.delete(id);
     }
 
     public void update(BuildingKitDto buildingKit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        buildingKitDao.update(buildingKit.createEntity());
     }
 
     public List<BuildingKitDto> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<BuildingKit> buildingKitEntities = buildingKitDao.findAll();
+        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
+        for (BuildingKit bk : buildingKitEntities) {
+            buildingKitDtoList.add(BuildingKitConversion.convertToDto(bk));
+        }
+        return buildingKitDtoList;
     }
 
     public List<BuildingKitDto> findByPrice(BigDecimal price) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<BuildingKit> buildingKitEntities = buildingKitDao.findByPrice(price);
+        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
+        for (BuildingKit bk : buildingKitEntities) {
+            buildingKitDtoList.add(BuildingKitConversion.convertToDto(bk));
+        }
+        return buildingKitDtoList;
     }
 
     public List<BuildingKitDto> findByYearFrom(int yearFrom) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<BuildingKit> buildingKitEntities = buildingKitDao.findByYearFrom(yearFrom);
+        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
+        for (BuildingKit bk : buildingKitEntities) {
+            buildingKitDtoList.add(BuildingKitConversion.convertToDto(bk));
+        }
+        return buildingKitDtoList;
     }
 
     public BuildingKitDto findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BuildingKit entity = buildingKitDao.findById(id);
+        return BuildingKitConversion.convertToDto(entity);
     }
     
 }

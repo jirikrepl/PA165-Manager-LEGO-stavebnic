@@ -1,19 +1,13 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.AbstractIntegrationTest;
-import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dao.CategoryDao;
-import cz.muni.fi.PA165.dto.BrickDto;
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.entity.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -29,10 +23,6 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         categoryService.setCategoryDao(categoryDao);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-    }
-
     /**
      * test create category method on service layer
      */
@@ -42,7 +32,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.create(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         // on Dao layer, create method with null argument was never called
         // new IllegeaArgumentException was throws on service Layer method create
@@ -78,7 +68,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.update(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -108,7 +98,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.delete(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -166,7 +156,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");
@@ -192,7 +182,7 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         try {
             categoryService.findByName(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");

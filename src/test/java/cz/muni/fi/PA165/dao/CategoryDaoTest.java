@@ -40,7 +40,7 @@ public class CategoryDaoTest extends TestCase {
         try {
             dao.create(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         // create category and store it into db
         Category category = TestUtils.createCategory("testCategory", "testDescription");
@@ -59,7 +59,7 @@ public class CategoryDaoTest extends TestCase {
         try {
             dao.update(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         Category category = TestUtils.createCategory("testCategory", "testDescription");
@@ -120,7 +120,7 @@ public class CategoryDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
         System.out.println("testing method 'findById' of CategoryDaoImpl class");

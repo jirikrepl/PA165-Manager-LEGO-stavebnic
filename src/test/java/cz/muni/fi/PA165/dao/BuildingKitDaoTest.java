@@ -40,7 +40,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.create(null);
             fail("creating NULL building kit");
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         List<Brick> list = storeBricks();
@@ -59,7 +59,7 @@ public class BuildingKitDaoTest extends TestCase {
         try{
         buildingKitDao.delete(null);
         fail("removing NULL building kit");
-        } catch (IllegalArgumentException ex){
+        } catch (DaoException ex){
         }
         
         Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
@@ -80,7 +80,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.findById(iD);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
         
     }
@@ -91,7 +91,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.update(null);
             fail("updating NULL building kit");
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");

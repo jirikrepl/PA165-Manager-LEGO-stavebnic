@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.lang.reflect.ParameterizedType;
+import org.springframework.stereotype.Repository;
 
 /**
  * general class for AbstractDao, specific entity AbstractDao classes subclass this class
@@ -15,6 +16,8 @@ import java.lang.reflect.ParameterizedType;
  * @author jirikrepl
  * @author Martin Rumanek
  */
+
+@Repository
 public abstract class AbstractDao<E> {
 
     protected Class<E> entityClass;
@@ -48,7 +51,7 @@ public abstract class AbstractDao<E> {
      */
     public void create(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity can not be NULL");
+            throw new DaoException("Entity can not be NULL");
         }
         try {
             entityManager.getTransaction().begin();
@@ -66,7 +69,7 @@ public abstract class AbstractDao<E> {
      */
     public void update(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity can not be NULL");
+            throw new DaoException("Entity can not be NULL");
         }
         try {
             entityManager.getTransaction().begin();
@@ -84,7 +87,7 @@ public abstract class AbstractDao<E> {
      */
     public void delete(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
+            throw new DaoException("Id cannot be null");
         }
         E entity = findById(id);
         try {
@@ -105,11 +108,11 @@ public abstract class AbstractDao<E> {
      */
     public E findById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
+            throw new DaoException("ID cannot be null");
         }
         E entity =  entityManager.find(entityClass, id);
         if (entity == null) {
-            throw new IllegalArgumentException("Object not found");
+            throw new DaoException("Object not found");
         }
         return entity;
     }
