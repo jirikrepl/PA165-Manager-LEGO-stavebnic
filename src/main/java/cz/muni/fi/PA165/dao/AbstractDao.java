@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.lang.reflect.ParameterizedType;
+import org.springframework.stereotype.Repository;
 
 /**
  * general class for AbstractDao, specific entity AbstractDao classes subclass this class
@@ -15,6 +16,8 @@ import java.lang.reflect.ParameterizedType;
  * @author jirikrepl
  * @author Martin Rumanek
  */
+
+@Repository
 public abstract class AbstractDao<E> {
 
     protected Class<E> entityClass;

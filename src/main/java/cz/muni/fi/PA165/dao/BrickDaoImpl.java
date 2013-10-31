@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.entity.Color;
 
 import javax.persistence.Query;
 import java.util.List;
+import org.springframework.dao.DataAccessException;
 
 /**
  * DAO class for brick
@@ -39,7 +40,7 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      */
     public List<Brick> findByColor(Color color) {
         if (color == null) {
-            throw new IllegalArgumentException("Color can not be null");
+            throw new DataAccessException("Color can not be null") {};
         }
         Query q = entityManager.createQuery(
                 "SELECT b FROM Brick b WHERE color = :brick_color", Brick.class);
@@ -55,7 +56,7 @@ public class BrickDaoImpl extends AbstractDao<Brick> implements BrickDao {
      */
     public List<Brick> findByName(String name) {
         if (name == null) {
-            throw new IllegalArgumentException("Name can not be null");
+            throw new DataAccessException("Name can not be null") {};
         }
 
         Query q = entityManager.createQuery(

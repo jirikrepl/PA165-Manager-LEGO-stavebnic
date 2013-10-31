@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.dao.DataAccessException;
 
 /**
  * @author: Martin Rumanek
@@ -130,7 +131,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findByColor(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessException ex) {
         }
 
         assertNotNull(dao.findByColor(Color.BLACK));
@@ -161,7 +162,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findByColor(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessException ex) {
         }
 
         assertNotNull(dao.findByColor(Color.BLACK));
