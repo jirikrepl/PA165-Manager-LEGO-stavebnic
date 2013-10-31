@@ -1,20 +1,13 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.AbstractIntegrationTest;
-import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dao.DaoException;
-import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.entity.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -28,10 +21,6 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         categoryDao = mock(CategoryDao.class);
         categoryService = new CategoryServiceImpl();
         categoryService.setCategoryDao(categoryDao);
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
     }
 
     /**
