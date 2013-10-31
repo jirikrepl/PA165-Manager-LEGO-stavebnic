@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 
@@ -53,4 +54,10 @@ public interface CategoryService {
      * @param id the given id
      */
     public CategoryDto findById(Long id);
+    
+    /**
+     * set category dao object
+     * @param categoryDao category dao object
+     */
+    public void setCategoryDao(CategoryDao categoryDao);
 }

@@ -35,6 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto findByName(String name) {
+        if(name == null) {
+            throw new IllegalArgumentException();
+        }
         Category category = categoryDao.findByName(name);
 
         return category.createDto();
@@ -42,24 +45,43 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void update(CategoryDto categoryDto) {
+        if(categoryDto == null) {
+            throw new IllegalArgumentException();
+        }
         Category category = categoryDto.createEntity();
         categoryDao.update(category);
     }
 
     @Override
     public void delete(Long id) {
+        if(id == null) {
+            throw new IllegalArgumentException();
+        }
         categoryDao.delete(id);
     }
 
     @Override
     public void create(CategoryDto categoryDto) {
+        if(categoryDto == null) {
+            throw new IllegalArgumentException();
+        }
         Category categoryEntity = categoryDto.createEntity();
         categoryDao.create(categoryEntity);
     }
 
     @Override
     public CategoryDto findById(Long id) {
+        if(id == null) {
+            throw new IllegalArgumentException();
+        }
         Category entity = categoryDao.findById(id);
-        return entity.createDto();
+        
+        CategoryDto dto = null;
+        try {
+            dto = entity.createDto();
+        } catch (Exception e) {
+            return dto;
+        }
+        return dto;
     }
 }

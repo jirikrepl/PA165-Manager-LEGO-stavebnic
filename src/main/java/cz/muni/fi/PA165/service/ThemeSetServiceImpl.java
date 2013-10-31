@@ -31,6 +31,9 @@ public class ThemeSetServiceImpl implements ThemeSetService{
     }
     
     public void create(ThemeSetDto setDto) {
+        if (setDto == null) {
+            throw new IllegalArgumentException("DTO can not be NULL");
+        }
         ThemeSet ts = setDto.createEntity();
         themeSetDao.create(ts);
     }
