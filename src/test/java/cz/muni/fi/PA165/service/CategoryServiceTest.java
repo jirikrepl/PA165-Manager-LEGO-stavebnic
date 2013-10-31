@@ -15,11 +15,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.fail;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CategoryServiceTest extends AbstractIntegrationTest {
 
@@ -161,7 +157,11 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         
     }
 
+    /**
+     * test findById method on service Layer
+     */
     public void testFindById() {
+        System.out.println("testing findAll method on Service layer");
         // test null argument
         try {
             categoryService.findById(null);
@@ -169,14 +169,43 @@ public class CategoryServiceTest extends AbstractIntegrationTest {
         } catch (IllegalArgumentException ex) {
         }
 
+        CategoryDto categoryDto = createCategoryDto("name1", "desc1");
+        
+        // test, when no entity is in table
+        when(categoryDao.findById(categoryDto.getId())).thenReturn(null);
+        CategoryDto returnedDto = categoryService.findById(categoryDto.getId());
+        assertNull(returnedDto);
+        
+        // test - save some entity in table, return it by id
+        when(categoryDao.findById(categoryDto.getId())).thenReturn(categoryDto.createEntity());
+        returnedDto = categoryService.findById(categoryDto.getId());
+        verify(categoryDao, times(2)).findById(categoryDto.getId());
+        assertEquals(returnedDto, categoryDto);
     }
     
+    /**
+     * test method findByName on serviceLayer
+     */
     public void testFindByName() {
+        System.out.println("testing findMyName method on Service layer");
         // test null argument
         try {
             categoryService.findByName(null);
             fail();
         } catch (IllegalArgumentException ex) {
         }
+        
+        CategoryDto categoryDto = createCategoryDto("name1", "desc1");
+        
+        // test, when no entity is in table
+        when(categoryDao.findByName(categoryDto.getName())).thenReturn(null);
+        CategoryDto returnedDto = categoryService.findByName(categoryDto.getName());
+        assertNull(returnedDto);
+        
+        // test - save some entity in table, return it by id
+        when(categoryDao.findByName(categoryDto.getName())).thenReturn(categoryDto.createEntity());
+        returnedDto = categoryService.findByName(categoryDto.getName());
+        verify(categoryDao, times(2)).findByName(categoryDto.getName());
+        assertEquals(returnedDto, categoryDto);
     }
 }

@@ -40,7 +40,13 @@ public class CategoryServiceImpl implements CategoryService {
         }
         Category category = categoryDao.findByName(name);
 
-        return category.createDto();
+        CategoryDto dto = null;
+        try {
+            dto = category.createDto();
+        } catch (Exception e) {
+            return dto;
+        }
+        return dto;
     }
 
     @Override
