@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import java.math.BigDecimal;
 import java.util.List;
@@ -69,4 +70,8 @@ public interface BuildingKitService {
      * @param id the given id
      */
     public BuildingKitDto findById(Long id);
+
+    public void setBuildingKitDao(BuildingKitDao kitDao);
+
+    
 }

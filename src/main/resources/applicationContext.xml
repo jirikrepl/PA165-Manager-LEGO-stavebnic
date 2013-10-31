@@ -20,5 +20,10 @@
         <property name="themeSetDao" ref="themeSetDao" />
     </bean>
     
+    <!--<bean id="buildingKitDao" class="cz.muni.fi.PA165.dao.BuildingKitDaoImpl"/>
+    <bean id="buildingKitService" class="cz.muni.fi.PA165.service.BuildingKitServiceImpl">
+        <property name="buildingKitDao" ref="buildingKitDao"/>
+    </bean>-->
+    
     
 </beans>
