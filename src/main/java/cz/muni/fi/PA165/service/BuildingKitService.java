@@ -35,14 +35,7 @@ public interface BuildingKitService {
      * @param buildingKit instance of BuildingKit entity class
      */
     public void update(BuildingKitDto buildingKit);
-
-    /**
-     * sets the entity manager
-     *
-     * @param entityManager instance of EntityManager class
-     */
-    public void setEntityManager(EntityManager entityManager);
-
+    
     /**
      * retrieves all building kits from the database
      *
