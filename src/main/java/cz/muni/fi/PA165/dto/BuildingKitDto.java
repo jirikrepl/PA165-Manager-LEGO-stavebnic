@@ -137,7 +137,7 @@ public class BuildingKitDto {
         kit.setName(this.getName());
         kit.setYearFrom(this.getYearFrom());
         kit.setPrice(this.getPrice());
-        kit.setThemeSet(this.getThemeSet().createEntity());
+        //kit.setThemeSet(this.getThemeSet().createEntity());
         
         /*
         List<Brick> brickEntities = new ArrayList<Brick>();

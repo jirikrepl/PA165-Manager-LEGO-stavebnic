@@ -74,16 +74,17 @@ public class ThemeSetDto {
     }
     
     
-    
+   /* 
     public ThemeSet createEntity(){
         ThemeSet ts = new ThemeSet();
-        ts.setName(name);
-        ts.setPrice(price);
-        ts.setDescription(description);
-        ts.setCategory(category);
-        ts.setBuildingKits(buildingKits);
+        ts.setId(this.getId());
+        ts.setName(this.name);
+        ts.setPrice(this.price);
+        ts.setCategory(this.category);
+        ts.setDescription(this.description);
+        ts.setBuildingKits(this.buildingKits);
         return ts;
-    }
+    }*/
 
     @Override
     public int hashCode() {
