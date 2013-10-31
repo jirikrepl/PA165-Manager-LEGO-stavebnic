@@ -5,7 +5,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BuildingKitDao;
-import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.dto.BuildingKitDto;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,15 +22,15 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         buildingKitDao = dao;
     }
     
-    public void create(BuildingKit buildingKit) {
-        buildingKitDao.create(buildingKit);
+    public void create(BuildingKitDto buildingKit) {
+        buildingKitDao.create(buildingKit.createEntity());
     }
 
     public void delete(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void update(BuildingKit buildingKit) {
+    public void update(BuildingKitDto buildingKit) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -38,19 +38,19 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<BuildingKit> findAll() {
+    public List<BuildingKitDto> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<BuildingKit> findByPrice(BigDecimal price) {
+    public List<BuildingKitDto> findByPrice(BigDecimal price) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<BuildingKit> findByYearFrom(int yearFrom) {
+    public List<BuildingKitDto> findByYearFrom(int yearFrom) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public BuildingKit findById(Long id) {
+    public BuildingKitDto findById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
