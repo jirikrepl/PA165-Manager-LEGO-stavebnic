@@ -5,7 +5,6 @@
 
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
 import cz.muni.fi.PA165.dao.ThemeSetDaoImpl;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
@@ -152,7 +151,7 @@ public class ThemeSetServiceTest {
         try {
             service.findByPrice(null);
             fail();
-        } catch (DaoException e) {
+        } catch (DataAccessException e) {
             
         }
 
@@ -194,7 +193,7 @@ public class ThemeSetServiceTest {
         try {
             service.findById(null);
             fail();
-        } catch (DaoException e) {
+        } catch (DataAccessException e) {
             
         }
 

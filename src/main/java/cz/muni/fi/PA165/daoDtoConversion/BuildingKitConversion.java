@@ -4,11 +4,12 @@
  */
 package cz.muni.fi.PA165.daoDtoConversion;
 
-import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import org.hibernate.exception.DataException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class BuildingKitConversion {
      */
     public static BuildingKitDto convertToDto(BuildingKit buildingKit) {
         if (buildingKit == null) {
-            throw new DaoException("Entity can not be NULL");
+                throw new IllegalArgumentException("Entity can not be NULL");
         }
         BuildingKitDto buildingKitDto = new BuildingKitDto();
         buildingKitDto.setId(buildingKit.getId());
@@ -50,7 +51,7 @@ public class BuildingKitConversion {
      */
     public static BuildingKit convertToEntity(BuildingKitDto buildingKitDto) {
         if (buildingKitDto == null) {
-            throw new DaoException("Dto can not be NULL");
+            throw new IllegalArgumentException("Dto can not be NULL");
         }
         BuildingKit kit = new BuildingKit();
         kit.setId(buildingKitDto.getId());
