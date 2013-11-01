@@ -7,9 +7,10 @@ package cz.muni.fi.PA165.daoDtoConversion;
 
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
+import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
-import org.hibernate.exception.DataException;
+import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,11 @@ public class BuildingKitConversion {
         buildingKitDto.setYearFrom(buildingKit.getYearFrom());
         buildingKitDto.setPrice(buildingKit.getPrice());
         buildingKitDto.setDescription(buildingKit.getDescription());
-        buildingKitDto.setThemeSet(ThemeSetConversion.convertToDto(buildingKit.getThemeSet()));
+        
+        ThemeSet themeSet = buildingKit.getThemeSet();
+        if (themeSet != null) {
+            buildingKitDto.setThemeSet(ThemeSetConversion.convertToDto(themeSet));
+        }
         
         List<BrickDto> bricksDto = new ArrayList<BrickDto>();
         List<Brick> bricks = buildingKit.getBricks();
@@ -61,7 +66,11 @@ public class BuildingKitConversion {
         kit.setName(buildingKitDto.getName());
         kit.setYearFrom(buildingKitDto.getYearFrom());
         kit.setPrice(buildingKitDto.getPrice());
-        kit.setThemeSet(ThemeSetConversion.convertToEntity(buildingKitDto.getThemeSet()));
+        
+        ThemeSetDto themeSet = buildingKitDto.getThemeSet();
+        if (themeSet != null) {
+            kit.setThemeSet(ThemeSetConversion.convertToEntity(themeSet));
+        }
         
         List<Brick> brickEntities = new ArrayList<Brick>();
         List<BrickDto> bricks = buildingKitDto.getBricks();
