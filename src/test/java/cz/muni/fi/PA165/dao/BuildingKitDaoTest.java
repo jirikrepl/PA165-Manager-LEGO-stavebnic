@@ -28,10 +28,10 @@ public class BuildingKitDaoTest extends TestCase {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         em = emf.createEntityManager();
         buildingKitDao = new BuildingKitDaoImpl();
-        buildingKitDao.setEntityManager(emf.createEntityManager());
-        brickDao = new BrickDaoImpl();
+        buildingKitDao.setEntityManager(em);
         
-        brickDao.setEntityManager(emf.createEntityManager());
+        brickDao = new BrickDaoImpl();
+        brickDao.setEntityManager(em);
     }
 
     public void tearDow() throws Exception {
@@ -49,7 +49,9 @@ public class BuildingKitDaoTest extends TestCase {
 
         List<Brick> list = storeBricks();
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
         assertNotNull(kit.getId());
         assertEquals(kit.getName(), "name");
         assertEquals(kit.getDescription(), "description");
@@ -86,7 +88,7 @@ public class BuildingKitDaoTest extends TestCase {
         em.getTransaction().commit();
         Long iD = kit.getId();
         em.getTransaction().begin();
-        buildingKitDao.delete(iD);
+        buildingKitDao.delete(kit.getId());
         em.getTransaction().commit();
 
         try {
@@ -111,11 +113,19 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick3 = TestUtils.createBrick("TestBrickC", Color.BLACK, "Test");
         Brick brick4 = TestUtils.createBrick("TestBrickD", Color.BLACK, "Test");
 
+        em.getTransaction().begin();
         brickDao.create(brick1);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         brickDao.create(brick2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         brickDao.create(brick3);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         brickDao.create(brick4);
-
+        em.getTransaction().commit();
+        
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
         list.add(brick2);
@@ -228,9 +238,12 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
+        em.getTransaction().begin();
         brickDao.create(brick1);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         brickDao.create(brick2);
-
+        em.getTransaction().commit();
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
         list.add(brick2);
