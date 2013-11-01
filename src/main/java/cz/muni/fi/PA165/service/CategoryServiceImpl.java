@@ -3,10 +3,12 @@ package cz.muni.fi.PA165.service;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
+
 import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
  * @author: Martin Rumanek
  * @version: 10/30/13
  */
+@Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired

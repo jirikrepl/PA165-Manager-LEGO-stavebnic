@@ -9,13 +9,14 @@ import cz.muni.fi.PA165.dao.ThemeSetDao;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.ThemeSet;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-
 public class ThemeSetServiceImpl implements ThemeSetService{
     
     @Autowired

@@ -4,12 +4,14 @@
  */
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.AbstractIntegrationTest;
+
 import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.dao.DaoException;
+import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import java.util.Random;
+import junit.framework.TestCase;
 import static org.mockito.Mockito.*;
 import org.springframework.dao.DataAccessException;
 
@@ -17,7 +19,7 @@ import org.springframework.dao.DataAccessException;
  *
  * @author PALO
  */
-public class BuildingKitServiceTest extends AbstractIntegrationTest{
+public class BuildingKitServiceTest extends TestCase{
     
     private BuildingKitDao kitDao;
     private BuildingKitService kitService;
@@ -27,12 +29,12 @@ public class BuildingKitServiceTest extends AbstractIntegrationTest{
         kitDao = mock(BuildingKitDao.class);
         kitService = new BuildingKitServiceImpl();
         kitService.setBuildingKitDao(kitDao);
-        super.setUp();
+        
     }
     
     @Override
     protected void tearDown() throws Exception{
-        super.tearDown();
+        
     }
     
     public void testCreate(){
@@ -77,19 +79,19 @@ public class BuildingKitServiceTest extends AbstractIntegrationTest{
         BuildingKitDto dto = createBuildingKitDto("name","desc");
         kitService.create(dto);
         verify(kitService).create(dto);
-        verify(kitDao).create(dto.createEntity());
+        verify(kitDao).create(BuildingKitConversion.convertToEntity(dto));
         
         //update
         dto.setName("name2");
         kitService.update(dto);
         verify(kitService).update(dto);
-        verify(kitDao).update(dto.createEntity());
+        verify(kitDao).update(BuildingKitConversion.convertToEntity(dto));
         
         //if the service.findById is called, it is expected, that it will be 
         // called the dao.getId in the dao layer
         Long id = dto.getId();
         //is this really not redundant?
-        when(kitDao.findById(id)).thenReturn(dto.createEntity());
+        when(kitDao.findById(id)).thenReturn(BuildingKitConversion.convertToEntity(dto));
         BuildingKitDto retrievedDto = kitService.findById(id);
         assertEquals(retrievedDto, dto);
     }
@@ -116,3 +118,16 @@ public class BuildingKitServiceTest extends AbstractIntegrationTest{
     
 }
 
+//public class BuildingKitServiceTest extends TestCase{
+//
+//    private BuildingKitDao kitDao;
+//    private BuildingKitService kitService;
+//
+//    @Override
+//    protected void setUp() throws Exception{
+//        kitDao = mock(BuildingKitDao.class);
+//        kitService = new BuildingKitServiceImpl();
+//    }
+//
+//    //TODO Will be done
+//}

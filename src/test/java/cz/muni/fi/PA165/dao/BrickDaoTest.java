@@ -4,7 +4,10 @@ import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
 import junit.framework.TestCase;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Arrays;
@@ -20,6 +23,7 @@ import org.springframework.dao.DataAccessException;
 public class BrickDaoTest extends TestCase {
 
     private BrickDao dao;
+    private EntityManager em;
 
     @Override
     protected void setUp() throws Exception {
@@ -27,7 +31,10 @@ public class BrickDaoTest extends TestCase {
         
         dao = new BrickDaoImpl();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
-        dao.setEntityManager(emf.createEntityManager());
+        em = emf.createEntityManager();
+        dao.setEntityManager(em);
+
+
     }
 
     @Override
@@ -39,7 +46,9 @@ public class BrickDaoTest extends TestCase {
         System.out.println("create");
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        em.getTransaction().begin();
         dao.create(brick);
+        em.getTransaction().commit();
         assertNotNull(brick.getId());
         assertEquals(brick.getName(), "TestBrick");
         assertEquals(brick.getColor(), Color.BLACK);
@@ -57,8 +66,13 @@ public class BrickDaoTest extends TestCase {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        em.getTransaction().begin();
         dao.create(brick);
+        em.getTransaction().commit();
+
+        em.getTransaction().begin();
         dao.delete(brick.getId());
+        em.getTransaction().commit();
 
         try {
             dao.findById(brick.getId());
@@ -93,7 +107,9 @@ public class BrickDaoTest extends TestCase {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
+        em.getTransaction().begin();
         dao.create(brick);
+        em.getTransaction().commit();
         assertNotNull(brick.getId());
         dao.findById(brick.getId());
 
@@ -117,10 +133,11 @@ public class BrickDaoTest extends TestCase {
 
         Set<Brick> setOfBricks = new HashSet<Brick>();
         setOfBricks.addAll(Arrays.asList(bricks));
-
+        em.getTransaction().begin();
         for (Brick br : setOfBricks) {
             dao.create(br);
         }
+        em.getTransaction().commit();
 
         assertEquals(new HashSet(dao.findAll()), setOfBricks);
     }
@@ -145,9 +162,11 @@ public class BrickDaoTest extends TestCase {
         Set<Brick> setOfBricks = new HashSet<Brick>();
         setOfBricks.addAll(Arrays.asList(bricks));
 
+        em.getTransaction().begin();
         for (Brick br : setOfBricks) {
             dao.create(br);
         }
+        em.getTransaction().commit();
 
         List<Brick> brickList = dao.findByColor(Color.BLACK);
 
@@ -176,9 +195,11 @@ public class BrickDaoTest extends TestCase {
         Set<Brick> setOfBricks = new HashSet<Brick>();
         setOfBricks.addAll(Arrays.asList(bricks));
 
+        em.getTransaction().begin();
         for (Brick br : setOfBricks) {
             dao.create(br);
         }
+        em.getTransaction().commit();
 
         List<Brick> brickList = dao.findByName("TestBrick");
 

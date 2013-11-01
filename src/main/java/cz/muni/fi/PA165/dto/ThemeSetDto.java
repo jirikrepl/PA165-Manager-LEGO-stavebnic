@@ -6,7 +6,7 @@ package cz.muni.fi.PA165.dto;
 
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.entity.ThemeSet;
+
 import java.math.BigDecimal;
 import java.util.List;
 

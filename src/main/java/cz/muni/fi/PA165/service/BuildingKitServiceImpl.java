@@ -11,6 +11,7 @@ import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,15 +31,24 @@ public class BuildingKitServiceImpl implements BuildingKitService {
     }
     
     public void create(BuildingKitDto buildingKit) {
-        buildingKitDao.create(buildingKit.createEntity());
+        if (buildingKit == null) {
+            throw new DataAccessException("Building kit cannot be null.") {};
+        }
+        buildingKitDao.create(BuildingKitConversion.convertToEntity(buildingKit));
     }
 
     public void delete(Long id) {
+        if (id == null) {
+            throw new DataAccessException("Id of the building kit cannot be null.") {};
+        }
         buildingKitDao.delete(id);
     }
 
     public void update(BuildingKitDto buildingKit) {
-        buildingKitDao.update(buildingKit.createEntity());
+        if (buildingKit == null) {
+            throw new DataAccessException("Building kit cannot be null.") {};
+        }
+        buildingKitDao.update(BuildingKitConversion.convertToEntity(buildingKit));
     }
 
     public List<BuildingKitDto> findAll() {
@@ -51,6 +61,9 @@ public class BuildingKitServiceImpl implements BuildingKitService {
     }
 
     public List<BuildingKitDto> findByPrice(BigDecimal price) {
+        if (price == null){
+            throw new DataAccessException("Price cannot be null.") {};
+        }
         List<BuildingKit> buildingKitEntities = buildingKitDao.findByPrice(price);
         List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
         for (BuildingKit bk : buildingKitEntities) {
@@ -69,6 +82,9 @@ public class BuildingKitServiceImpl implements BuildingKitService {
     }
 
     public BuildingKitDto findById(Long id) {
+        if (id == null) {
+            throw new DataAccessException("Id of the building kit cannot be null.") {};
+        }
         BuildingKit entity = buildingKitDao.findById(id);
         return BuildingKitConversion.convertToDto(entity);
     }

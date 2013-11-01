@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.AbstractIntegrationTest;
+
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.CategoryDto;
@@ -10,8 +10,22 @@ import java.util.List;
 import java.util.Random;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.dto.CategoryDto;
+import cz.muni.fi.PA165.entity.Category;
+import junit.framework.TestCase;
 
-public class CategoryServiceTest extends AbstractIntegrationTest {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class CategoryServiceTest extends TestCase {
 
     private CategoryService categoryService;
     private CategoryDao categoryDao;

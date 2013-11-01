@@ -1,11 +1,11 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.ThemeSet;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.stereotype.Repository;
 
 /**
  * DAO class for ThemeSet

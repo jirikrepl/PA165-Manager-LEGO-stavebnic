@@ -1,22 +1,20 @@
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.AbstractIntegrationTest;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
+import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.List;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
-import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BrickServiceTest extends AbstractIntegrationTest {
+public class BrickServiceTest extends TestCase {
 
     private BrickService brickService;
     private BrickDao brickDao;

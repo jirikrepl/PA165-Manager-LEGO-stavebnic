@@ -4,10 +4,9 @@
  */
 package cz.muni.fi.PA165.dto;
 
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -128,24 +127,5 @@ public class BuildingKitDto {
     @Override
     public String toString() {
         return "BuildingKitDto{" + "id=" + id + ", name=" + name + ", yearFrom=" + yearFrom + ", price=" + price + ", description=" + description + ", bricks=" + bricks + ", themeSet=" + themeSet + '}';
-    }
-    
-    public BuildingKit createEntity() {
-        BuildingKit kit = new BuildingKit();
-        kit.setId(this.getId());
-        kit.setDescription(this.getDescription());
-        kit.setName(this.getName());
-        kit.setYearFrom(this.getYearFrom());
-        kit.setPrice(this.getPrice());
-        //kit.setThemeSet(this.getThemeSet().createEntity());
-        
-        /*
-        List<Brick> brickEntities = new ArrayList<Brick>();
-        List<BrickDto> bricks = this.getBricks();
-        for (BrickDto br : bricks) {
-            brickEntities.add(br.createEntity());
-        }
-        */
-        return kit;
     }
 }
