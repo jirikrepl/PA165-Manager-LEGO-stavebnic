@@ -1,30 +1,23 @@
 package cz.muni.fi.PA165.service;
-
-
-import cz.muni.fi.PA165.dao.CategoryDao;
-
-import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.entity.Category;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * test of the category class on service layer
+ * 
+ * @author Jiri Krepl
+ */
 public class CategoryServiceTest extends TestCase {
 
     private CategoryService categoryService;

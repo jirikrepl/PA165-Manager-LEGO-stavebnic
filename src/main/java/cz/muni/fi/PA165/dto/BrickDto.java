@@ -2,6 +2,10 @@ package cz.muni.fi.PA165.dto;
 
 import cz.muni.fi.PA165.entity.Color;
 
+/**
+ * this class represent Dto object of Brick entity
+ * @author Jiri Krepl
+ */
 public class BrickDto {
 
     private Long id;

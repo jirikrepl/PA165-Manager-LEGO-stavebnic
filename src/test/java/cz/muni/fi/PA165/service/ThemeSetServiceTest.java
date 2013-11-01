@@ -321,6 +321,7 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException ex) {
             
         }
+        verify(dao, never()).update(null);
         
         ThemeSetDto themeSetDto = new ThemeSetDto();
         doNothing().when(dao).update(ThemeSetConversion.convertToEntity(themeSetDto));
@@ -340,6 +341,7 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException ex) {
             
         }
+        verify(dao, never()).delete(null);
         
         doNothing().when(dao).delete(1L);
         service.delete(1L);
@@ -387,6 +389,7 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException e) {
             
         }
+        verify(dao, never()).findByPrice(null);
 
         BigDecimal nonExistingPrice = BigDecimal.valueOf(151.151);
         ThemeSetDto tsDto = new ThemeSetDto();
@@ -428,7 +431,8 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException e) {
             
         }
-
+        verify(dao, never()).create(null);
+        
         Long nonExistingId = 5656L;
 
         when(dao.findById(nonExistingId)).thenReturn(null);
