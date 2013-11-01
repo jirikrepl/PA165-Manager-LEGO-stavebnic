@@ -10,6 +10,9 @@ import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import junit.framework.TestCase;
 import static org.mockito.Mockito.*;
@@ -50,9 +53,9 @@ public class BuildingKitServiceTest extends TestCase{
         
         BuildingKitDto kitDto = createBuildingKitDto("name","desc");
         kitService.create(kitDto);
-        //Tom, prosim vytvor v cz.muni.fi.PA165.daoDtoConversion takuto staticku triedu
-        //BuildingKit kit = BuildingKitConversion.convertToEntity(kitDto);
-        //verify(kitDao).create(kit);
+        
+        BuildingKit kit = BuildingKitConversion.convertToEntity(kitDto);
+        verify(kitDao).create(kit);
     }
     
     /*
@@ -95,6 +98,7 @@ public class BuildingKitServiceTest extends TestCase{
         BuildingKitDto retrievedDto = kitService.findById(id);
         assertEquals(retrievedDto, dto);
     }
+    
     public void testDelete() {
         System.out.println("testing DELETE method of BuildingKitService");
         // test null argument
@@ -114,20 +118,104 @@ public class BuildingKitServiceTest extends TestCase{
         assertNull(deleted);
     }
     
+    public void testFindAll(){
+        System.out.println("testing FINDALL method of BuildingKitService");
+        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
+        //test, when no entities are in table
+        when(kitDao.findAll()).thenReturn(new ArrayList<BuildingKit>());
+        List<BuildingKitDto> returnedBuildingKitDtoList = kitService.findAll();
+        
+        assertEquals(buildingKitDtoList, returnedBuildingKitDtoList);
+        
+        
+        BuildingKitDto firstBKDto = createBuildingKitDto("name1","desc1");
+        BuildingKitDto secondBKDto = createBuildingKitDto("name2","desc2");
+        buildingKitDtoList.add(firstBKDto);
+        buildingKitDtoList.add(secondBKDto);
+     
+        BuildingKit firstEntity = new BuildingKit();
+        firstEntity.setName("name1");
+        firstEntity.setDescription("desc1");
+        BuildingKit secondEntity = new BuildingKit();
+        secondEntity.setName("name2");
+        secondEntity.setDescription("desc2");
+        List<BuildingKit> entities = new ArrayList<BuildingKit>();
+        entities.add(firstEntity);
+        entities.add(secondEntity);
+        
+        when(kitDao.findAll()).thenReturn(entities);
+        returnedBuildingKitDtoList = kitService.findAll();
+        assertEquals(buildingKitDtoList, returnedBuildingKitDtoList);
+        
+    }
+    
+    public void testFindById(){
+        System.out.println("testing method FINDBYID");
+        try {
+            kitService.findById(null);
+            fail();
+        } catch (DataAccessExceptionService ex) {
+        }
+        
+        BuildingKitDto dto = createBuildingKitDto("name1","desc1");
+        when(kitDao.findById(dto.getId())).thenReturn(null);
+        BuildingKitDto returnedDto = kitService.findById(dto.getId());
+        assertNull(returnedDto);
+        
+        when(kitDao.findById(dto.getId())).thenReturn(BuildingKitConversion.convertToEntity(dto));
+        returnedDto = kitService.findById(dto.getId());
+        verify(kitDao, times(2)).findById(dto.getId());
+        assertEquals(returnedDto, dto);
+    }
+    
+    public void testFindByPrice(){
+        System.out.println("testinf FINDBYPRICE method of BuildingKitService");
+        
+        try {
+            kitService.findById(null);
+            fail();
+        } catch (DataAccessExceptionService ex) {
+        }
+        
+        verify(kitDao, never()).findByPrice(null);
+        
+        BigDecimal nonExistingPrice = BigDecimal.valueOf(151.151);
+        when(kitDao.findByPrice(nonExistingPrice)).thenReturn(new ArrayList<BuildingKit>());
+        List<BuildingKitDto> returnedDtoList = kitService.findByPrice(nonExistingPrice);
+        List<BuildingKitDto> emptyDtoList = new ArrayList<BuildingKitDto>();
+        assertEquals(returnedDtoList, emptyDtoList);
+        
+        BigDecimal existingPrice = BigDecimal.valueOf(100);
+        BuildingKitDto bkDto2 = new BuildingKitDto();
+        bkDto2.setName("Sada s existujici cenou");
+        bkDto2.setPrice(existingPrice);
+
+        List<BuildingKitDto> existingList = new ArrayList<BuildingKitDto>();
+        existingList.add(bkDto2);
+
+        List<BuildingKit> entityList = new ArrayList<BuildingKit>();
+        entityList.add(BuildingKitConversion.convertToEntity(bkDto2));
+        when(kitDao.findByPrice(existingPrice)).thenReturn(entityList);
+        
+        assertEquals(existingList, kitService.findByPrice(existingPrice));
+        
+        verify(kitDao, times(1)).findByPrice(nonExistingPrice);
+        verify(kitDao, times(1)).findByPrice(existingPrice);
+    
+    }
+    
+    public void testFindByYearFrom(){
+        System.out.println("testinf FINDBYYEARFROM method of BuildingKitService");
+        
+        try {
+            kitService.findById(null);
+            fail();
+        } catch (DataAccessExceptionService ex) {
+        }
+        
+    }
     //TODO Will be done 
     
 }
 
-//public class BuildingKitServiceTest extends TestCase{
-//
-//    private BuildingKitDao kitDao;
-//    private BuildingKitService kitService;
-//
-//    @Override
-//    protected void setUp() throws Exception{
-//        kitDao = mock(BuildingKitDao.class);
-//        kitService = new BuildingKitServiceImpl();
-//    }
-//
-//    //TODO Will be done
-//}
+
