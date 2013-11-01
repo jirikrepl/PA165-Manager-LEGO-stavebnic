@@ -3,14 +3,11 @@ package cz.muni.fi.PA165.service;
 import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
-import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.dto.BrickDto;
-import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Color;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.DataAccessException;
-
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -18,6 +15,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+/**
+ * test for the brick class on service layer
+ * 
+ * @author Martin Rumanek
+ */
 public class BrickServiceTest {
 
     private BrickService brickService;

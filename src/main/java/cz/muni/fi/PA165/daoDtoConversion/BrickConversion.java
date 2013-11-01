@@ -3,6 +3,10 @@ package cz.muni.fi.PA165.daoDtoConversion;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 
+/**
+ * methods of this class converts brick entity objects to Dto and back
+ * @author Jiri Krepl
+ */
 public class BrickConversion {
 
     /**

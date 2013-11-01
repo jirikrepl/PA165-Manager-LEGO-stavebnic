@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BrickDao;
@@ -13,8 +7,9 @@ import cz.muni.fi.PA165.entity.Color;
 import java.util.List;
 
 /**
- *
- * @author Jiri
+ * this is interface of Brick class on service layer
+ * 
+ * @author Jiri Krepl
  */
 public interface BrickService {
     /**
