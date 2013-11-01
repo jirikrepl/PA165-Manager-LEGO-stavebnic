@@ -25,6 +25,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author: Martin Rumanek
+ * @version: 1/11/13
+ */
 public class BrickServiceTest {
 
     private BrickService brickService;
