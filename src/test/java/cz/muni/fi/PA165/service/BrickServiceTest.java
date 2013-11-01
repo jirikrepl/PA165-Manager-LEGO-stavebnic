@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.Color;
@@ -33,12 +34,12 @@ public class BrickServiceTest extends TestCase {
 
     public void testCreateBrick() {
       System.out.println("testing createBrick on Service layer");  
-      doThrow(new IllegalArgumentException()).when(brickDao).create(null);
+      doThrow(new DaoException("error - brick cannot be null")).when(brickDao).create(null);
       
       try {
             brickService.create(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
     }
 //
@@ -57,7 +58,7 @@ public class BrickServiceTest extends TestCase {
     public void testFindByColor() {
         System.out.println("Testing findByColor on Service layer");
         
-        when(brickDao.findByColor(null)).thenThrow(new IllegalArgumentException("Color cannot be null"));
+        when(brickDao.findByColor(null)).thenThrow(new DaoException("Color cannot be null"));
         Brick blackBrick = new Brick();
         blackBrick.setColor(Color.BLACK);
         List<Brick> bricks = new ArrayList<Brick>();
@@ -70,7 +71,7 @@ public class BrickServiceTest extends TestCase {
         try {
             brickService.findByColor(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         assertNotNull(brickService.findByColor(Color.WHITE));

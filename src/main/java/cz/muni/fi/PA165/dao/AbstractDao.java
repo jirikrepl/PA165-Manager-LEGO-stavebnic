@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
+import org.springframework.stereotype.Repository;
 
 /**
  * general class for AbstractDao, specific entity AbstractDao classes subclass this class
@@ -42,7 +43,7 @@ public abstract class AbstractDao<E> {
      */
     public void create(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity can not be NULL");
+            throw new DaoException("Entity can not be NULL");
         }
 
         entityManager.persist(entity);
@@ -54,7 +55,7 @@ public abstract class AbstractDao<E> {
      */
     public void update(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("Entity can not be NULL");
+            throw new DaoException("Entity can not be NULL");
         }
        entityManager.merge(entity);
 
@@ -66,7 +67,7 @@ public abstract class AbstractDao<E> {
      */
     public void delete(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
+            throw new DaoException("Id cannot be null");
         }
         E entity = findById(id);
 
@@ -82,11 +83,11 @@ public abstract class AbstractDao<E> {
      */
     public E findById(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
+            throw new DaoException("ID cannot be null");
         }
         E entity =  entityManager.find(entityClass, id);
         if (entity == null) {
-            throw new IllegalArgumentException("Object not found");
+            throw new DaoException("Object not found");
         }
         return entity;
     }

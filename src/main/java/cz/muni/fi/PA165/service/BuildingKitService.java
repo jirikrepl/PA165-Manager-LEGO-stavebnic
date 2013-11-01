@@ -64,10 +64,8 @@ public interface BuildingKitService {
      * @param id the given id
      */
     public BuildingKitDto findById(Long id);
-    
-    /**
-     * set buildingkit dao object
-     * @param buildingKitDao dao object for building kit entity
-     */
-    public void setBuildingKitDao(BuildingKitDao buildingKitDao);
+
+
+    public void setBuildingKitDao(BuildingKitDao kitDao);
+
 }

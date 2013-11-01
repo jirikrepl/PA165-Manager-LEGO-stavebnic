@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.dao.DataAccessException;
 
 /**
  * @author: Martin Rumanek
@@ -61,7 +62,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
@@ -76,20 +77,20 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(brick.getId());
             fail();
-        } catch(IllegalArgumentException ex) {
+        } catch(DaoException ex) {
         }
 
         try {
             Brick brickDeleted = dao.findById(brick.getId());
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
 
         try {
             dao.delete(new Long(-1L));
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
 
@@ -102,7 +103,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DaoException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
@@ -147,7 +148,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findByColor(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessException ex) {
         }
 
         assertNotNull(dao.findByColor(Color.BLACK));
@@ -180,7 +181,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findByColor(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessException ex) {
         }
 
         assertNotNull(dao.findByColor(Color.BLACK));
