@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  * @author Pavol Bako
@@ -19,14 +20,17 @@ public class BuildingKitDaoTest extends TestCase {
 
     private BuildingKitDao buildingKitDao;
     private BrickDao brickDao;
+    private EntityManager em;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
+        em = emf.createEntityManager();
         buildingKitDao = new BuildingKitDaoImpl();
         buildingKitDao.setEntityManager(emf.createEntityManager());
         brickDao = new BrickDaoImpl();
+        
         brickDao.setEntityManager(emf.createEntityManager());
     }
 
@@ -57,7 +61,9 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST CreateBuildingKit");
         
         try{
+        em.getTransaction().begin();
         buildingKitDao.delete(null);
+        em.getTransaction().commit();
         fail("removing NULL building kit");
         } catch (IllegalArgumentException ex){
         }
@@ -65,17 +71,25 @@ public class BuildingKitDaoTest extends TestCase {
         Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
 
+        em.getTransaction().begin();
         brickDao.create(brick1);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         brickDao.create(brick2);
+        em.getTransaction().commit();
 
         List<Brick> list = new ArrayList<Brick>();
         list.add(brick1);
         list.add(brick2);
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        em.getTransaction().commit();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
         Long iD = kit.getId();
+        em.getTransaction().begin();
         buildingKitDao.delete(kit.getId());
+        em.getTransaction().commit();
 
         try {
             buildingKitDao.findById(iD);
@@ -113,7 +127,9 @@ public class BuildingKitDaoTest extends TestCase {
         
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
         
         //BuildingKit newKit = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.TEN, 2010, newList);
         kit.setName("newName");
@@ -122,7 +138,9 @@ public class BuildingKitDaoTest extends TestCase {
         kit.setYearFrom(2004);
         kit.setBricks(newList);
         
+        em.getTransaction().begin();
         buildingKitDao.update(kit);
+        em.getTransaction().commit();
         
         
         //
@@ -148,8 +166,12 @@ public class BuildingKitDaoTest extends TestCase {
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
         BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2004, list);
 
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         buildingKitDao.create(kit2);
+        em.getTransaction().commit();
         
         List<BuildingKit> kitList = buildingKitDao.findAll();
         
@@ -166,8 +188,12 @@ public class BuildingKitDaoTest extends TestCase {
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.TEN, 2005, list);
         BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         buildingKitDao.create(kit2);
+        em.getTransaction().commit();
         
         List<BuildingKit> kitList = buildingKitDao.findByPrice(BigDecimal.ZERO);
         
@@ -184,8 +210,12 @@ public class BuildingKitDaoTest extends TestCase {
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, list);
         BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, list);
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         buildingKitDao.create(kit2);
+        em.getTransaction().commit();
         
         List<BuildingKit> kitList = buildingKitDao.findByYearFrom(15);
         
