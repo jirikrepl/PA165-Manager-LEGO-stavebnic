@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
@@ -25,15 +24,6 @@ public class TestUtils {
         brick.setDescription(description);
 
         return brick;
-    }
-
-    public static BrickDto createBrickDto(String name, Color color, String description) {
-        BrickDto brickDto = new BrickDto();
-        brickDto.setName(name);
-        brickDto.setColor(color);
-        brickDto.setDescription(description);
-
-        return brickDto;
     }
     
     public static BuildingKit createBuildingKit(String name, String description, BigDecimal price, int year, List<Brick> listBricks){

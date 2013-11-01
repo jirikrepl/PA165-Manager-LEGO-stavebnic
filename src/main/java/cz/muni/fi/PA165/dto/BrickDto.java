@@ -9,6 +9,15 @@ public class BrickDto {
     private String name;
     private String description;
 
+    public BrickDto( String name, Color color, String description) {
+        this.color = color;
+        this.name = name;
+        this.description = description;
+    }
+
+    public BrickDto() {
+    }
+
     public Color getColor() {
         return color;
     }
