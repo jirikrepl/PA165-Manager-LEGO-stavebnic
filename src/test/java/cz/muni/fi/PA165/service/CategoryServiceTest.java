@@ -46,7 +46,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.create(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessExceptionService ex) {
         }
         // on Dao layer, create method with null argument was never called
         // new IllegeaArgumentException was throws on service Layer method create
@@ -82,7 +82,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.update(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessExceptionService ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -112,7 +112,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.delete(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessExceptionService ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -170,7 +170,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.findById(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessExceptionService ex) {
         }
 
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");
@@ -196,7 +196,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.findByName(null);
             fail();
-        } catch (IllegalArgumentException ex) {
+        } catch (DataAccessExceptionService ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");

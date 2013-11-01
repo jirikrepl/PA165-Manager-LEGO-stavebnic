@@ -24,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     public void setCategoryDao(CategoryDao categoryDao) {
         if (categoryDao == null) {
-            throw new IllegalArgumentException("CategoryDao cannot be NULL");
+            throw new DataAccessExceptionService("CategoryDao cannot be NULL");
         }
 
         this.categoryDao = categoryDao;
@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findByName(String name) {
         if(name == null) {
-            throw new DataAccessException("parameter name cannot be NULL") {};
+            throw new DataAccessExceptionService("parameter name cannot be NULL");
         }
         Category category = categoryDao.findByName(name);
 
@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void update(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new DataAccessException("DTO object cannot be NULL") {};
+            throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
         Category category = categoryDto.createEntity();
         categoryDao.update(category);
@@ -68,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(Long id) {
         if(id == null) {
-            throw new DataAccessException("ID cannot be NULL") {};
+            throw new DataAccessExceptionService("ID cannot be NULL");
         }
         categoryDao.delete(id);
     }
@@ -76,7 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void create(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new DataAccessException("DTO object cannot be NULL") {};
+            throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
         Category categoryEntity = categoryDto.createEntity();
         categoryDao.create(categoryEntity);
@@ -85,7 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findById(Long id) {
         if(id == null) {
-            throw new DataAccessException("ID cannot be NULL") {};
+            throw new DataAccessExceptionService("ID cannot be NULL");
         }
         Category entity = categoryDao.findById(id);
         
