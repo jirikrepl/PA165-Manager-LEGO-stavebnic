@@ -13,6 +13,7 @@ import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.dao.DataAccessException;
 
 /**
  *

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author PALO
+ * @author Pavol Bako
  */
 public interface ThemeSetService {
     

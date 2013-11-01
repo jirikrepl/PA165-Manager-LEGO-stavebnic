@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author PALO
+ * @author Pavol Bako
  */
 public class ThemeSetDto {
     

@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author PALO
+ * @author Pavol Bako
  */
 @Service
 @Transactional
