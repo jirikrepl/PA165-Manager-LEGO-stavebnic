@@ -6,6 +6,7 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.AbstractIntegrationTest;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
+import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class BuildingKitServiceTest extends AbstractIntegrationTest{
         try{
             kitService.create(null);
             fail();
-        } catch (DataAccessException daex){
+        } catch (DaoException daex){
             
         }
         
@@ -64,5 +65,54 @@ public class BuildingKitServiceTest extends AbstractIntegrationTest{
         dto.setDescription(desc);
         return dto;
     }
+    
+    public void testUpdate(){
+        System.out.println("Testing method UPDATE of buildingkitService");
+        try{
+            kitService.update(null);
+            fail();
+        } catch (DaoException dex){
+            
+        }
+        BuildingKitDto dto = createBuildingKitDto("name","desc");
+        kitService.create(dto);
+        verify(kitService).create(dto);
+        verify(kitDao).create(dto.createEntity());
+        
+        //update
+        dto.setName("name2");
+        kitService.update(dto);
+        verify(kitService).update(dto);
+        verify(kitDao).update(dto.createEntity());
+        
+        //if the service.findById is called, it is expected, that it will be 
+        // called the dao.getId in the dao layer
+        Long id = dto.getId();
+        //is this really not redundant?
+        when(kitDao.findById(id)).thenReturn(dto.createEntity());
+        BuildingKitDto retrievedDto = kitService.findById(id);
+        assertEquals(retrievedDto, dto);
+    }
+    public void testDelete() {
+        System.out.println("testing DELETE method of BuildingKitService");
+        // test null argument
+        try {
+            kitService.delete(null);
+            fail();
+        } catch (DaoException ex) {
+        }
+        
+        BuildingKitDto dto = createBuildingKitDto("name", "desc");
+        kitService.delete(dto.getId());
+        Long id = dto.getId();
+        verify(kitDao).delete(id);
+        
+        when(kitDao.findById(id)).thenReturn(null);
+        BuildingKitDto deleted = kitService.findById(id);
+        assertNull(deleted);
+    }
+    
     //TODO Will be done 
+    
 }
+
