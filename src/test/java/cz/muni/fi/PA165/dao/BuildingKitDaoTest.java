@@ -61,9 +61,7 @@ public class BuildingKitDaoTest extends TestCase {
         System.out.println("TEST CreateBuildingKit");
         
         try{
-        em.getTransaction().begin();
         buildingKitDao.delete(null);
-        em.getTransaction().commit();
         fail("removing NULL building kit");
         } catch (IllegalArgumentException ex){
         }
@@ -83,12 +81,12 @@ public class BuildingKitDaoTest extends TestCase {
         list.add(brick2);
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        em.getTransaction().commit();
+        em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
         Long iD = kit.getId();
         em.getTransaction().begin();
-        buildingKitDao.delete(kit.getId());
+        buildingKitDao.delete(iD);
         em.getTransaction().commit();
 
         try {
