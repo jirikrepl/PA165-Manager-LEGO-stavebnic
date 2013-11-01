@@ -435,9 +435,13 @@ public class ThemeSetServiceTest {
         
         Long nonExistingId = 5656L;
 
-        when(dao.findById(nonExistingId)).thenReturn(null);
-        ThemeSetDto returnedThemeSet = service.findById(nonExistingId);
-        assertTrue(returnedThemeSet == null);
+        when(dao.findById(nonExistingId)).thenThrow(new DataAccessException("ID cannot be NULL") {});
+        try {
+            ThemeSetDto returnedThemeSet = service.findById(nonExistingId);
+        }
+        catch (DataAccessException e) {
+            
+        }
         
         Long existingId = 0L;
         ThemeSetDto tsDto = new ThemeSetDto();
