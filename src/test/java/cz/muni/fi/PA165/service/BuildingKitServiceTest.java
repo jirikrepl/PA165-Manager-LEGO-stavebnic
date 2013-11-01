@@ -193,7 +193,8 @@ public class BuildingKitServiceTest extends TestCase {
         entityList.add(BuildingKitConversion.convertToEntity(bkDto2));
         when(kitDao.findByPrice(existingPrice)).thenReturn(entityList);
 
-        assertEquals(existingList, kitService.findByPrice(existingPrice));
+        List<BuildingKitDto> retrievedList = kitService.findByPrice(existingPrice);
+        assertEquals(existingList, retrievedList);
 
         verify(kitDao, times(1)).findByPrice(nonExistingPrice);
         verify(kitDao, times(1)).findByPrice(existingPrice);
