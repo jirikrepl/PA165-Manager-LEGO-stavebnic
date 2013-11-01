@@ -11,19 +11,20 @@ import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
+ * 
  * @author Tomas Kopecky
  */
 @Transactional
 @Service
 public class BuildingKitServiceImpl implements BuildingKitService {
 
-    //@Autowired
+    @Autowired
     private BuildingKitDao buildingKitDao;
 
     public void setBuildingKitDao(BuildingKitDao dao) {
