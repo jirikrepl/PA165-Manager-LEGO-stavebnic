@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.dto.ThemeSetDto;
@@ -36,7 +35,7 @@ public class ThemeSetServiceImpl implements ThemeSetService{
     public void create(ThemeSetDto setDto) {
 
         if (setDto == null) {
-            throw new DaoException("DTO can not be NULL");
+            throw new IllegalArgumentException("DTO can not be NULL");
 
         }
         ThemeSet ts = ThemeSetConversion.convertToEntity(setDto);

@@ -2,7 +2,7 @@ package cz.muni.fi.PA165.service;
 
 
 import cz.muni.fi.PA165.dao.CategoryDao;
-import cz.muni.fi.PA165.dao.DaoException;
+
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.create(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         // on Dao layer, create method with null argument was never called
         // new IllegeaArgumentException was throws on service Layer method create
@@ -82,7 +82,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.update(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -112,7 +112,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.delete(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name", "desc");
@@ -170,7 +170,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.findById(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");
@@ -196,7 +196,7 @@ public class CategoryServiceTest extends TestCase {
         try {
             categoryService.findByName(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         
         CategoryDto categoryDto = createCategoryDto("name1", "desc1");

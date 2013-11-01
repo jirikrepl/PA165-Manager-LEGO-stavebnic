@@ -1,80 +1,65 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.dao.BrickDao;
-import cz.muni.fi.PA165.dao.DaoException;
+import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
+import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.dto.BrickDto;
-import cz.muni.fi.PA165.entity.Brick;
+import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Color;
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.doThrow;
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
-public class BrickServiceTest extends TestCase {
+public class BrickServiceTest {
 
     private BrickService brickService;
     private BrickDao brickDao;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         brickDao = mock(BrickDao.class);
         brickService = new BrickServiceImpl();
         brickService.setBrickDao(brickDao);
-        super.setUp();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    public void testCreateBrick() {
-      System.out.println("testing createBrick on Service layer");  
-      doThrow(new DaoException("error - brick cannot be null")).when(brickDao).create(null);
-      
-      try {
+    @Test
+    public void testCreate() {
+        try {
             brickService.create(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (DataAccessException ex) {
         }
-    }
-//
-//    public void testUpdateBrick() {
-//    }
+        verify(brickDao, never()).create(null);
+        verify(brickDao, never()).update(null);
 
-    public void testFindAll() {
-        System.out.println("testing findAll on Service layer");
-        List<Brick> bricks = new ArrayList<Brick>();
-        when(brickDao.findAll()).thenReturn(bricks);
-        
-        List<BrickDto> mockedList = brickService.findAll();
-        assertNotNull(mockedList);
+        BrickDto brickDto = TestUtils.createBrickDto("TestBrick", Color.BLACK, "Some description");;
+        doNothing().when(brickDao).update(BrickConversion.convertToEntity(brickDto));
+
+
+        brickService.create(brickDto);
+        verify(brickDao).create(BrickConversion.convertToEntity(brickDto));
+        verify(brickDao, never()).delete(anyLong());
     }
 
-    public void testFindByColor() {
-        System.out.println("Testing findByColor on Service layer");
-        
-        when(brickDao.findByColor(null)).thenThrow(new DaoException("Color cannot be null"));
-        Brick blackBrick = new Brick();
-        blackBrick.setColor(Color.BLACK);
-        List<Brick> bricks = new ArrayList<Brick>();
-        bricks.add(blackBrick);
-        when(brickDao.findByColor(Color.BLACK)).thenReturn(bricks);
-        
-        bricks = new ArrayList<Brick>();
-        when(brickDao.findByColor(Color.WHITE)).thenReturn(bricks);
-        
+    @Test
+    public void testUpdate() {
         try {
-            brickService.findByColor(null);
+            brickService.update(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (DataAccessException ex) {
         }
+        //verify(dao).update(null);
+        //verify(brickDao)
 
-        assertNotNull(brickService.findByColor(Color.WHITE));
-        assertEquals(brickService.findByColor(Color.BLACK).size(), 1);
     }
+
+
 }

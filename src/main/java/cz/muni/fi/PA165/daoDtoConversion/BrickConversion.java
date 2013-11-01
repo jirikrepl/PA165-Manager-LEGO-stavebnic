@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.daoDtoConversion;
 
-import cz.muni.fi.PA165.dao.DaoException;
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 
@@ -12,7 +11,7 @@ public class BrickConversion {
      */
     public static BrickDto convertToDto(Brick brick) {
         if (brick == null) {
-            throw new DaoException("Entity can not be NULL");
+            throw new IllegalArgumentException("Entity can not be NULL");
         }
         BrickDto brickDto = new BrickDto();
         brickDto.setId(brick.getId());
@@ -28,7 +27,7 @@ public class BrickConversion {
      */
     public static Brick convertToEntity(BrickDto brickDto) {
         if (brickDto == null) {
-            throw new DaoException("Dto can not be NULL");
+            throw new IllegalArgumentException("Dto can not be NULL");
         }
         Brick brick = new Brick();
         brick.setColor(brickDto.getColor());

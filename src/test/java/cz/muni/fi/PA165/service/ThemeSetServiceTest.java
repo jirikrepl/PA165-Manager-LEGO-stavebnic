@@ -60,14 +60,14 @@
 //    public void testCreate() {
 //        //vim, ze skutecny DAO objekt vyvola vyjimku, pokud mu do create dam null
 //        //timto rikam, ze mock objekt se ma chovat stejne, tj. kdyz na mock objektu dao
-//        //zavolam create s parametrem null, ma vyvolat DaoException
-//        doThrow(new DaoException()).when(dao).create(null);
+//        //zavolam create s parametrem null, ma vyvolat IllegalArgumentException
+//        doThrow(new IllegalArgumentException()).when(dao).create(null);
 //        //tady vim, ze service.create mi ma volat DAO tridu a na te pri parametru null dojde
 //        //k vyvolani vyjimky. Takze vyjimku odchytnu a vse je v poradku. Pokud ne, dojde k failu testu.
 //        try {
 //            service.create(null);
 //            fail();
-//        } catch (DaoException ex) {
+//        } catch (IllegalArgumentException ex) {
 //            
 //        }
 //        //timto kontroluju, ze na mock objektu dao byla volana metoda create s parametrem null
@@ -90,11 +90,11 @@
 //    @Test
 //    public void testUpdate() {
 //        //pri volani dao.update(null) vyvolej vyjimku
-//        doThrow(new DaoException()).when(dao).update(null);
+//        doThrow(new IllegalArgumentException()).when(dao).update(null);
 //        try {
 //            service.update(null);
 //            fail();
-//        } catch (DaoException ex) {
+//        } catch (IllegalArgumentException ex) {
 //            
 //        }
 //        verify(dao).update(null);
@@ -113,11 +113,11 @@
 //     */
 //    @Test
 //    public void testDelete() {
-//        doThrow(new DaoException()).when(dao).delete(null);
+//        doThrow(new IllegalArgumentException()).when(dao).delete(null);
 //        try {
 //            service.delete(null);
 //            fail();
-//        } catch (DaoException ex) {
+//        } catch (IllegalArgumentException ex) {
 //            
 //        }
 //        
@@ -165,11 +165,11 @@
 //     */
 //    @Test
 //    public void testFindByPrice() {
-//        when(dao.findByPrice(null)).thenThrow(new DaoException());
+//        when(dao.findByPrice(null)).thenThrow(new IllegalArgumentException());
 //        try {
 //            service.findByPrice(null);
 //            fail();
-//        } catch (DaoException e) {
+//        } catch (IllegalArgumentException e) {
 //            
 //        }
 //
@@ -208,11 +208,11 @@
 //     */
 //    @Test
 //    public void testFindById() {
-//        when(dao.findById(null)).thenThrow(new DaoException());
+//        when(dao.findById(null)).thenThrow(new IllegalArgumentException());
 //        try {
 //            service.findById(null);
 //            fail();
-//        } catch (DaoException e) {
+//        } catch (IllegalArgumentException e) {
 //            
 //        }
 //

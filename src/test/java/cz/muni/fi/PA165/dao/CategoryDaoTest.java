@@ -44,7 +44,7 @@ public class CategoryDaoTest extends TestCase {
             dao.create(null);
             em.getTransaction().commit();
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         // create category and store it into db
         Category category = TestUtils.createCategory("testCategory", "testDescription");
@@ -72,7 +72,7 @@ public class CategoryDaoTest extends TestCase {
             dao.update(null);
             em.getTransaction().commit();
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         if (em.getTransaction().isActive()) {
@@ -148,7 +148,7 @@ public class CategoryDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         System.out.println("testing method 'findById' of CategoryDaoImpl class");

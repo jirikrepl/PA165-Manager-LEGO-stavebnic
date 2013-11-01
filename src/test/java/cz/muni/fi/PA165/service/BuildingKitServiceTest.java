@@ -6,7 +6,7 @@ package cz.muni.fi.PA165.service;
 
 
 import cz.muni.fi.PA165.dao.BuildingKitDao;
-import cz.muni.fi.PA165.dao.DaoException;
+
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
@@ -42,7 +42,7 @@ public class BuildingKitServiceTest extends TestCase{
         try{
             kitService.create(null);
             fail();
-        } catch (DaoException daex){
+        } catch (IllegalArgumentException daex){
             
         }
         
@@ -73,7 +73,7 @@ public class BuildingKitServiceTest extends TestCase{
         try{
             kitService.update(null);
             fail();
-        } catch (DaoException dex){
+        } catch (IllegalArgumentException dex){
             
         }
         BuildingKitDto dto = createBuildingKitDto("name","desc");
@@ -101,7 +101,7 @@ public class BuildingKitServiceTest extends TestCase{
         try {
             kitService.delete(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         
         BuildingKitDto dto = createBuildingKitDto("name", "desc");

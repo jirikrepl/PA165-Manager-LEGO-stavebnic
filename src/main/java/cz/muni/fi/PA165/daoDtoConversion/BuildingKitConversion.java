@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.PA165.daoDtoConversion;
 
-import cz.muni.fi.PA165.dao.DaoException;
+
 import cz.muni.fi.PA165.dto.BrickDto;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.Brick;
@@ -27,7 +27,7 @@ public class BuildingKitConversion {
     public static BuildingKitDto convertToDto(BuildingKit buildingKit) {
         if (buildingKit == null) {
 
-            throw new DaoException("Entity can not be NULL");
+            throw new IllegalArgumentException("Entity can not be NULL");
         }
         BuildingKitDto buildingKitDto = new BuildingKitDto();
         buildingKitDto.setId(buildingKit.getId());

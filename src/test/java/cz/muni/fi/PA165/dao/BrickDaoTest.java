@@ -33,8 +33,6 @@ public class BrickDaoTest extends TestCase {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPU");
         em = emf.createEntityManager();
         dao.setEntityManager(em);
-
-
     }
 
     @Override
@@ -62,7 +60,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
@@ -77,20 +75,20 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(brick.getId());
             fail();
-        } catch(DaoException ex) {
+        } catch(IllegalArgumentException ex) {
         }
 
         try {
             Brick brickDeleted = dao.findById(brick.getId());
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
 
         try {
             dao.delete(new Long(-1L));
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
 
@@ -103,7 +101,7 @@ public class BrickDaoTest extends TestCase {
         try {
             dao.findById(null);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         Brick brick =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");

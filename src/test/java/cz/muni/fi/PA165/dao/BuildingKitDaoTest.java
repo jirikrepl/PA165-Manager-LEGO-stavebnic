@@ -40,7 +40,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.create(null);
             fail("creating NULL building kit");
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         List<Brick> list = storeBricks();
@@ -59,7 +59,7 @@ public class BuildingKitDaoTest extends TestCase {
         try{
         buildingKitDao.delete(null);
         fail("removing NULL building kit");
-        } catch (DaoException ex){
+        } catch (IllegalArgumentException ex){
         }
         
         Brick brick1 = TestUtils.createBrick("TestBrick", Color.BLACK, "Test");
@@ -80,7 +80,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.findById(iD);
             fail();
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
         
     }
@@ -91,7 +91,7 @@ public class BuildingKitDaoTest extends TestCase {
         try {
             buildingKitDao.update(null);
             fail("updating NULL building kit");
-        } catch (DaoException ex) {
+        } catch (IllegalArgumentException ex) {
         }
 
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
@@ -125,7 +125,8 @@ public class BuildingKitDaoTest extends TestCase {
         buildingKitDao.update(kit);
         
         
-        /*Long kitID = kit.getId();*/
+        //
+        // Long kitID = kit.getId();*/
         //newKit.setId(kit.getId());
         //buildingKitDao.UpdateBuildingKit(newKit);
         assertNotNull(kit.getId());
@@ -146,6 +147,7 @@ public class BuildingKitDaoTest extends TestCase {
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
         BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2004, list);
+
         buildingKitDao.create(kit);
         buildingKitDao.create(kit2);
         
