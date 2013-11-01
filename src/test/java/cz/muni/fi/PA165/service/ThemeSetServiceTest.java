@@ -29,7 +29,7 @@ import org.springframework.dao.DataAccessException;
 public class ThemeSetServiceTest {
     
     private ThemeSetDao dao;
-    private ThemeSetService service;
+    private ThemeSetServiceImpl service;
     
     public ThemeSetServiceTest() {
     }
@@ -44,9 +44,9 @@ public class ThemeSetServiceTest {
     
     @Before
     public void setUp() {
-        dao = mock(ThemeSetDaoImpl.class);
+        dao = mock(ThemeSetDao.class);
         service = new ThemeSetServiceImpl();
-        ((ThemeSetServiceImpl)service).setThemeSetDao(dao);
+        service.setThemeSetDao(dao);
     }
     
     @After
@@ -62,9 +62,10 @@ public class ThemeSetServiceTest {
             service.create(null);
             fail();
         } catch (DataAccessException ex) { }
+        verify(dao, never()).create(null);
         
         ThemeSetDto themeSetDto = new ThemeSetDto();
-        doNothing().when(dao).create(ThemeSetConversion.convertToEntity(themeSetDto));
+        doNothing().when(dao).update(ThemeSetConversion.convertToEntity(themeSetDto));
 
         service.create(themeSetDto);
         verify(dao).create(ThemeSetConversion.convertToEntity(themeSetDto));
@@ -81,18 +82,15 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException ex) {
             
         }
-        verify(dao).update(null);
-        verify(dao, never()).delete(null);
         
         ThemeSetDto themeSetDto = new ThemeSetDto();
         doNothing().when(dao).update(ThemeSetConversion.convertToEntity(themeSetDto));
 
         service.update(themeSetDto);
-
         verify(dao).update(ThemeSetConversion.convertToEntity(themeSetDto));
     }
     
-        /**
+     /**
      * Test of delete method, of class ThemeSetService.
      */
     @Test
@@ -103,9 +101,6 @@ public class ThemeSetServiceTest {
         } catch (DataAccessException ex) {
             
         }
-        
-        verify(dao).delete(null);
-        verify(dao, never()).update(null);
         
         doNothing().when(dao).delete(1L);
         service.delete(1L);
@@ -139,7 +134,6 @@ public class ThemeSetServiceTest {
 
         assertEquals(list, service.findAll());
 
-        //kontrola, ze se na DAO objektu volala dvakrat metoda findAll
         verify(dao, times(2)).findAll();
     }
     
@@ -180,7 +174,6 @@ public class ThemeSetServiceTest {
         assertEquals(existingList, service.findByPrice(existingPrice));
 
 
-        verify(dao, times(1)).findByPrice(null);
         verify(dao, times(1)).findByPrice(nonExistingPrice);
         verify(dao, times(1)).findByPrice(existingPrice);
     }
@@ -200,7 +193,8 @@ public class ThemeSetServiceTest {
         Long nonExistingId = 5656L;
 
         when(dao.findById(nonExistingId)).thenReturn(null);
-        assertEquals(null, service.findById(nonExistingId));
+        ThemeSetDto returnedThemeSet = service.findById(nonExistingId);
+        assertTrue(returnedThemeSet == null);
         
         Long existingId = 0L;
         ThemeSetDto tsDto = new ThemeSetDto();
@@ -212,7 +206,6 @@ public class ThemeSetServiceTest {
         assertEquals(tsDto, service.findById(existingId));
 
 
-        verify(dao, times(1)).findById(null);
         verify(dao, times(1)).findById(nonExistingId);
         verify(dao, times(1)).findById(existingId);
     }
