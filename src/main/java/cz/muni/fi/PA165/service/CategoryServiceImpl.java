@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,10 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     public void setCategoryDao(CategoryDao categoryDao) {
+        if (categoryDao == null) {
+            throw new IllegalArgumentException("CategoryDao cannot be NULL");
+        }
+
         this.categoryDao = categoryDao;
     }
 
@@ -38,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findByName(String name) {
         if(name == null) {
-            throw new IllegalArgumentException();
+            throw new DataAccessException("parameter name cannot be NULL") {};
         }
         Category category = categoryDao.findByName(name);
 
@@ -54,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void update(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new IllegalArgumentException();
+            throw new DataAccessException("DTO object cannot be NULL") {};
         }
         Category category = categoryDto.createEntity();
         categoryDao.update(category);
@@ -63,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(Long id) {
         if(id == null) {
-            throw new IllegalArgumentException();
+            throw new DataAccessException("ID cannot be NULL") {};
         }
         categoryDao.delete(id);
     }
@@ -71,7 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void create(CategoryDto categoryDto) {
         if(categoryDto == null) {
-            throw new IllegalArgumentException();
+            throw new DataAccessException("DTO object cannot be NULL") {};
         }
         Category categoryEntity = categoryDto.createEntity();
         categoryDao.create(categoryEntity);
@@ -80,7 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findById(Long id) {
         if(id == null) {
-            throw new IllegalArgumentException();
+            throw new DataAccessException("ID cannot be NULL") {};
         }
         Category entity = categoryDao.findById(id);
         
