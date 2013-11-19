@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>legoManager-web</artifactId>
     <packaging>war</packaging>
-    <name>legoManager-web</name>
+    <name>legoManager-web Maven Stripes Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -89,8 +89,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.5</source>
+                    <target>1.5</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
