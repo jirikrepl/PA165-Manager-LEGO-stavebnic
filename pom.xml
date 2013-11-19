@@ -9,6 +9,6 @@
     <modules>
         <module>legoManager-backend</module>
         <module>legoManager-api</module>
-    <module>legoManager-web</module>
-  </modules>
+        <module>legoManager-web</module>
+    </modules>
 </project>
