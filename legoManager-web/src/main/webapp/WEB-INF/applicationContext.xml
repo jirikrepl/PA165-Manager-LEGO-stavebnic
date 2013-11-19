@@ -11,8 +11,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <context:component-scan base-package="cz.muni.fi.PA165.action"/>
 
-    <bean class="cz.muni.fi.PA165.action.BeanTest" >
-    </bean>
 
 
 
