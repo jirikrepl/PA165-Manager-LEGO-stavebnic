@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+        
+    <aop:aspectj-autoproxy/>
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+    
+    <!--<jee:jndi-lookup id="myEmf" jndi-name="persistence/TestPU"/>-->
+    
+    <bean id="brickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl" />
+    <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
+        <property name="brickDao" ref="brickDao" />
+    </bean>
+    
+    <bean id="themeSetDao" class="cz.muni.fi.PA165.dao.ThemeSetDaoImpl" />
+    <bean id="themeSetService" class="cz.muni.fi.PA165.service.ThemeSetServiceImpl">
+        <property name="themeSetDao" ref="themeSetDao" />
+    </bean>
+
+    <bean id="categoryDao" class="cz.muni.fi.PA165.dao.CategoryDaoImpl" />
+    <bean id="categoryService" class="cz.muni.fi.PA165.service.CategoryServiceImpl">
+        <property name="categorySetDao" ref="categorySetDao" />
+    </bean>
+    
+    <bean id="buildingKitDao" class="cz.muni.fi.PA165.dao.BuildingKitDaoImpl"/>
+    <bean id="buildingKitService" class="cz.muni.fi.PA165.service.BuildingKitServiceImpl">
+        <property name="buildingKitDao" ref="buildingKitDao"/>
+    </bean>
+    
+    
+</beans>
