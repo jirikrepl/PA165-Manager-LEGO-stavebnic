@@ -1,0 +1,23 @@
+# Eclipse
+.project
+.classpath
+.settings/
+.factorypath
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea
+out/
+
+
+# Maven
+target/
+
+
+# Logs
+*.log
+/logs
+
+*~
