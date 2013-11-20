@@ -11,7 +11,7 @@
             <s:layout-component name="html-head"/>
         </head>
         <body>
-            <h1><f:message key="${titlekey}"/></h1>
+            
             <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
@@ -49,14 +49,15 @@
                             </li>
 
                         </ul>
-                    </nav>
-                </div>
+                                </nav>
+                    </div>
                 <s:layout-component name="header"/>
                 <!-- do ostatnych jsp vlozit layout-render header -->
             </div>
+              
             <div id="content">
-                <s:messages/>
-                
+                  <h1><f:message key="${titlekey}"/></h1>
+                <s:layout-component name="body"/>
             </div>
         </body>
     </html>
