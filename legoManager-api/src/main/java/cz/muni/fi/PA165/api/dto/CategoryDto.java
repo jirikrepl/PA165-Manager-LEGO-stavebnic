@@ -1,4 +1,4 @@
-package cz.muni.fi.PA165.dto;
+package cz.muni.fi.PA165.api.dto;
 
 //import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.api.service.Color;

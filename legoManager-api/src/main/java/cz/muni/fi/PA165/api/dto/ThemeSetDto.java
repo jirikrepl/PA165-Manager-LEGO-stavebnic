@@ -1,11 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.muni.fi.PA165.dto;
-
-import cz.muni.fi.PA165.entity.BuildingKit;
-import cz.muni.fi.PA165.entity.Category;
+package cz.muni.fi.PA165.api.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,9 +14,9 @@ public class ThemeSetDto {
     private String description;
     private String name;
     
-    private Category category;
+    private CategoryDto categoryDto;
     
-    private List<BuildingKit> buildingKits;
+    private List<BuildingKitDto> buildingKitsDto;
 
     public Long getId() {
         return id;
@@ -57,35 +50,22 @@ public class ThemeSetDto {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryDto(CategoryDto category) {
+        this.categoryDto = category;
     }
 
-    public List<BuildingKit> getBuildingKits() {
-        return buildingKits;
+    public List<BuildingKitDto> getBuildingKitsDto() {
+        return buildingKitsDto;
     }
 
-    public void setBuildingKits(List<BuildingKit> buildingKits) {
-        this.buildingKits = buildingKits;
+    public void setBuildingKitsDto(List<BuildingKitDto> buildingKits) {
+        this.buildingKitsDto = buildingKits;
     }
     
-    
-   /* 
-    public ThemeSet createEntity(){
-        ThemeSet ts = new ThemeSet();
-        ts.setId(this.getId());
-        ts.setName(this.name);
-        ts.setPrice(this.price);
-        ts.setCategory(this.category);
-        ts.setDescription(this.description);
-        ts.setBuildingKits(this.buildingKits);
-        return ts;
-    }*/
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -111,6 +91,5 @@ public class ThemeSetDto {
     public String toString() {
         return "ThemeSetDto{" + "id=" + id + ", price=" + price + ", description=" + description + ", name=" + name + '}';
     }
-    
     
 }

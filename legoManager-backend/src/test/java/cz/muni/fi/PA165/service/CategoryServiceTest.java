@@ -1,11 +1,8 @@
 package cz.muni.fi.PA165.service;
-import cz.muni.fi.PA165.service.CategoryServiceImpl;
-import cz.muni.fi.PA165.service.CategoryService;
-import cz.muni.fi.PA165.service.DataAccessExceptionService;
 import static org.junit.Assert.*;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
-import cz.muni.fi.PA165.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import static org.mockito.Mockito.when;
  */
 public class CategoryServiceTest extends TestCase {
 
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
     private CategoryDao categoryDao;
 
     @Override
@@ -52,7 +49,7 @@ public class CategoryServiceTest extends TestCase {
         // test creation with ServiceDto object
         CategoryDto categoryDto = createCategoryDto("name", "desc");
         categoryService.create(categoryDto);
-        Category category = CategoryConversion.conversionToEntity(categoryDto);
+        Category category = CategoryConversion.convertToEntity(categoryDto);
         // veryfy that create method was called on mock categoryDao object
         verify(categoryDao).create(category);
     }
@@ -85,16 +82,16 @@ public class CategoryServiceTest extends TestCase {
         CategoryDto categoryDto = createCategoryDto("name", "desc");
         Long id = categoryDto.getId();
         categoryService.create(categoryDto);
-        Category entity = CategoryConversion.conversionToEntity(categoryDto);
+        Category entity = CategoryConversion.convertToEntity(categoryDto);
         verify(categoryDao).create(entity);
         
         //update
         categoryDto.setName("name2");
         categoryService.update(categoryDto);
-        verify(categoryDao).update(CategoryConversion.conversionToEntity(categoryDto));
+        verify(categoryDao).update(CategoryConversion.convertToEntity(categoryDto));
         
         // mock dao
-        when(categoryDao.findById(id)).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
+        when(categoryDao.findById(id)).thenReturn(CategoryConversion.convertToEntity(categoryDto));
         CategoryDto retrievedDto = categoryService.findById(id);
         assertEquals(retrievedDto, categoryDto);
 
@@ -179,7 +176,7 @@ public class CategoryServiceTest extends TestCase {
         assertNull(returnedDto);
         
         // test - save some entity in table, return it by id
-        when(categoryDao.findById(categoryDto.getId())).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
+        when(categoryDao.findById(categoryDto.getId())).thenReturn(CategoryConversion.convertToEntity(categoryDto));
         returnedDto = categoryService.findById(categoryDto.getId());
         verify(categoryDao, times(2)).findById(categoryDto.getId());
         assertEquals(returnedDto, categoryDto);
@@ -205,7 +202,7 @@ public class CategoryServiceTest extends TestCase {
         assertNull(returnedDto);
         
         // test - save some entity in table, return it by id
-        when(categoryDao.findByName(categoryDto.getName())).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
+        when(categoryDao.findByName(categoryDto.getName())).thenReturn(CategoryConversion.convertToEntity(categoryDto));
         returnedDto = categoryService.findByName(categoryDto.getName());
         verify(categoryDao, times(2)).findByName(categoryDto.getName());
         assertEquals(returnedDto, categoryDto);

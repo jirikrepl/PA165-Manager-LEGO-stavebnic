@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.muni.fi.PA165.service;
+package cz.muni.fi.PA165.api.service;
 
-import cz.muni.fi.PA165.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,8 +10,8 @@ import java.util.List;
  * @author Pavol Bako
  */
 public interface ThemeSetService {
-    
-        /**
+
+    /**
      * finds all ThemeSet entities in DB
      *
      * @return List<ThemeSet> all entities in DB

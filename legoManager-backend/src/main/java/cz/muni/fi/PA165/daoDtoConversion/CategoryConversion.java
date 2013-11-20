@@ -4,8 +4,8 @@
  */
 package cz.muni.fi.PA165.daoDtoConversion;
 
-import cz.muni.fi.PA165.dto.CategoryDto;
-import cz.muni.fi.PA165.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Category;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class CategoryConversion {
         return categoryDto;
     }
     
-    public static Category conversionToEntity(CategoryDto categoryDto){
+    public static Category convertToEntity(CategoryDto categoryDto){
         if (categoryDto == null){
             throw new IllegalArgumentException("Entity cannost be NULL");            
         }

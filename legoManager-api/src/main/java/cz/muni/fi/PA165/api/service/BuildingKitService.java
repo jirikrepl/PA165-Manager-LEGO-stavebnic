@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.muni.fi.PA165.service;
+package cz.muni.fi.PA165.api.service;
 
-import cz.muni.fi.PA165.dao.BuildingKitDao;
-import cz.muni.fi.PA165.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -66,6 +61,6 @@ public interface BuildingKitService {
     public BuildingKitDto findById(Long id);
 
 
-    public void setBuildingKitDao(BuildingKitDao kitDao);
+    //public void setBuildingKitDao(BuildingKitDao kitDao);
 
 }

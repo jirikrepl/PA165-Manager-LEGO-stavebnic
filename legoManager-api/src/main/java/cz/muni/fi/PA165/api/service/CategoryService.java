@@ -1,7 +1,7 @@
-package cz.muni.fi.PA165.service;
+package cz.muni.fi.PA165.api.service;
 
-import cz.muni.fi.PA165.dao.CategoryDao;
-import cz.muni.fi.PA165.dto.CategoryDto;
+//import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 
 import java.util.List;
 
@@ -58,5 +58,5 @@ public interface CategoryService {
      * set category dao object
      * @param categoryDao category dao object
      */
-    public void setCategoryDao(CategoryDao categoryDao);
+    //public void setCategoryDao(CategoryDao categoryDao);
 }

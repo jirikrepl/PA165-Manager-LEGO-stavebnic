@@ -1,18 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.PA165.daoDtoConversion;
 
-
-import cz.muni.fi.PA165.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Pavol Bako
  */
-
 
 public class ThemeSetConversion {
     
@@ -28,9 +28,23 @@ public class ThemeSetConversion {
         dto.setId(themeSet.getId());
         dto.setName(themeSet.getName());
         dto.setPrice(themeSet.getPrice());
-        dto.setCategory(themeSet.getCategory());
+        
+        Category category = themeSet.getCategory();
+        CategoryDto categoryDto = CategoryConversion.conversionToDto(category);
+        
+        dto.setCategoryDto(categoryDto);
         dto.setDescription(themeSet.getDescription());
-        dto.setBuildingKits(themeSet.getBuildingKits());
+        
+        // creates list of building kits dtos from list of building kit entities
+        List<BuildingKit> kitsList = themeSet.getBuildingKits();
+        List<BuildingKitDto> kitsDtoList = new ArrayList();
+        
+        for (BuildingKit kit : kitsList) {
+            BuildingKitDto kitDto = BuildingKitConversion.convertToDto(kit);
+            kitsDtoList.add(kitDto);
+        }
+        
+        dto.setBuildingKitsDto(kitsDtoList);
         return dto;
     }
     
@@ -47,9 +61,23 @@ public class ThemeSetConversion {
         themeSet.setId(themeSetDto.getId());
         themeSet.setDescription(themeSetDto.getDescription());
         themeSet.setName(themeSetDto.getName());
-        themeSet.setCategory(themeSetDto.getCategory());
+        
+        // convesion of category dto to category entity
+        CategoryDto categoryDto = themeSetDto.getCategoryDto();
+        Category category = CategoryConversion.convertToEntity(categoryDto);
+        
+        themeSet.setCategory(category);
         themeSet.setPrice(themeSetDto.getPrice());
-        themeSet.setBuildingKits(themeSetDto.getBuildingKits());
+        
+        List<BuildingKitDto> kitsDtoList = themeSetDto.getBuildingKitsDto();
+        List<BuildingKit> kitsList = new ArrayList();
+        
+        for(BuildingKitDto kitDto : kitsDtoList) {
+            BuildingKit kit = BuildingKitConversion.convertToEntity(kitDto);
+            kitsList.add(kit);
+        }
+        
+        themeSet.setBuildingKits(kitsList);
         return themeSet;
     }
 }

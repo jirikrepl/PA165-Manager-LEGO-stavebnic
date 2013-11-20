@@ -5,15 +5,14 @@
 package cz.muni.fi.PA165.daoDtoConversion;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
-import cz.muni.fi.PA165.dto.BuildingKitDto;
-import cz.muni.fi.PA165.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.dao.DataAccessException;
 
 /**
  *

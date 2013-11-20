@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.api.service.ThemeSetService;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
-import cz.muni.fi.PA165.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +42,7 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         List<ThemeSet> themeSetEntities = themeSetDao.findAll();
         List<ThemeSetDto> themeSetDtoList = new ArrayList<ThemeSetDto>();
         for (ThemeSet ts : themeSetEntities) {
-            themeSetDtoList.add(ts.createDto());
+            themeSetDtoList.add(ThemeSetConversion.convertToDto(ts));
         }
         return themeSetDtoList;
     }
@@ -58,7 +55,7 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         List<ThemeSet> tsList = themeSetDao.findByPrice(price);
         List<ThemeSetDto> themeSetDtoList = new ArrayList<ThemeSetDto>();
         for (ThemeSet ts : tsList) {
-            themeSetDtoList.add(ts.createDto());
+            themeSetDtoList.add(ThemeSetConversion.convertToDto(ts));
         }
         return themeSetDtoList;
     }

@@ -1,8 +1,9 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.api.service.CategoryService;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
-import cz.muni.fi.PA165.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -62,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
-        Category category = CategoryConversion.conversionToEntity(categoryDto);
+        Category category = CategoryConversion.convertToEntity(categoryDto);
         categoryDao.update(category);
     }
 
@@ -79,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
-        Category categoryEntity = CategoryConversion.conversionToEntity(categoryDto);
+        Category categoryEntity = CategoryConversion.convertToEntity(categoryDto);
         categoryDao.create(categoryEntity);
     }
 

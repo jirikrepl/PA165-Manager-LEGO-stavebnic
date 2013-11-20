@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.PA165.service;
  
 import cz.muni.fi.PA165.dao.BuildingKitDao;
 
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
-import cz.muni.fi.PA165.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,7 +22,7 @@ import org.springframework.dao.DataAccessException;
 public class BuildingKitServiceTest extends TestCase {
  
     private BuildingKitDao kitDao;
-    private BuildingKitService kitService;
+    private BuildingKitServiceImpl kitService;
  
     @Override
     protected void setUp() throws Exception {

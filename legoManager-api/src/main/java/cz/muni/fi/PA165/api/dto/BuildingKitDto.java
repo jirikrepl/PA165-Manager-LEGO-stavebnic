@@ -1,11 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.muni.fi.PA165.dto;
-
-import cz.muni.fi.PA165.api.dto.BrickDto;
-import cz.muni.fi.PA165.entity.BuildingKit;
+package cz.muni.fi.PA165.api.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
