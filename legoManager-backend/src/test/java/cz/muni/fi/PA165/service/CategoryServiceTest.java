@@ -1,5 +1,10 @@
 package cz.muni.fi.PA165.service;
+import cz.muni.fi.PA165.service.CategoryServiceImpl;
+import cz.muni.fi.PA165.service.CategoryService;
+import cz.muni.fi.PA165.service.DataAccessExceptionService;
+import static org.junit.Assert.*;
 import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
@@ -47,7 +52,7 @@ public class CategoryServiceTest extends TestCase {
         // test creation with ServiceDto object
         CategoryDto categoryDto = createCategoryDto("name", "desc");
         categoryService.create(categoryDto);
-        Category category = categoryDto.createEntity();
+        Category category = CategoryConversion.conversionToEntity(categoryDto);
         // veryfy that create method was called on mock categoryDao object
         verify(categoryDao).create(category);
     }
@@ -80,15 +85,16 @@ public class CategoryServiceTest extends TestCase {
         CategoryDto categoryDto = createCategoryDto("name", "desc");
         Long id = categoryDto.getId();
         categoryService.create(categoryDto);
-        verify(categoryDao).create(categoryDto.createEntity());
+        Category entity = CategoryConversion.conversionToEntity(categoryDto);
+        verify(categoryDao).create(entity);
         
         //update
         categoryDto.setName("name2");
         categoryService.update(categoryDto);
-        verify(categoryDao).update(categoryDto.createEntity());
+        verify(categoryDao).update(CategoryConversion.conversionToEntity(categoryDto));
         
         // mock dao
-        when(categoryDao.findById(id)).thenReturn(categoryDto.createEntity());
+        when(categoryDao.findById(id)).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
         CategoryDto retrievedDto = categoryService.findById(id);
         assertEquals(retrievedDto, categoryDto);
 
@@ -173,7 +179,7 @@ public class CategoryServiceTest extends TestCase {
         assertNull(returnedDto);
         
         // test - save some entity in table, return it by id
-        when(categoryDao.findById(categoryDto.getId())).thenReturn(categoryDto.createEntity());
+        when(categoryDao.findById(categoryDto.getId())).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
         returnedDto = categoryService.findById(categoryDto.getId());
         verify(categoryDao, times(2)).findById(categoryDto.getId());
         assertEquals(returnedDto, categoryDto);
@@ -199,7 +205,7 @@ public class CategoryServiceTest extends TestCase {
         assertNull(returnedDto);
         
         // test - save some entity in table, return it by id
-        when(categoryDao.findByName(categoryDto.getName())).thenReturn(categoryDto.createEntity());
+        when(categoryDao.findByName(categoryDto.getName())).thenReturn(CategoryConversion.conversionToEntity(categoryDto));
         returnedDto = categoryService.findByName(categoryDto.getName());
         verify(categoryDao, times(2)).findByName(categoryDto.getName());
         assertEquals(returnedDto, categoryDto);

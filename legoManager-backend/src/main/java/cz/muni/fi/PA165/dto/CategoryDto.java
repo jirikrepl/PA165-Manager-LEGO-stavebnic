@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.dto;
 
-import cz.muni.fi.PA165.entity.Category;
+//import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.api.service.Color;
 
 /**
@@ -70,12 +70,12 @@ public class CategoryDto {
         return result;
     }
 
-    public Category createEntity() {
-        Category category = new Category();
-        category.setId(this.getId());
-        category.setDescription(this.getDescription());
-        category.setName(this.getName());
-
-        return category;
-    }
+    //public Category createEntity() {
+    //    Category category = new Category();
+    //    category.setId(this.getId());
+    //    category.setDescription(this.getDescription());
+    //    category.setName(this.getName());
+//
+  //      return category;
+    //}
 }

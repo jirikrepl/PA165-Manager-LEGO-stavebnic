@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
-import cz.muni.fi.PA165.dto.CategoryDto;
+//import cz.muni.fi.PA165.dto.CategoryDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,11 +80,11 @@ public class Category implements Serializable {
      * creates DTO object from this entity
      * @return BrickDto dto object
      */
-    public CategoryDto createDto() {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(id);
-        categoryDto.setName(name);
-        categoryDto.setDescription(description);
-        return categoryDto;
-    }
+    //public CategoryDto createDto() {
+       // CategoryDto categoryDto = new CategoryDto();
+       // categoryDto.setId(id);
+       // categoryDto.setName(name);
+       // categoryDto.setDescription(description);
+       // return categoryDto;
+    //}
 }

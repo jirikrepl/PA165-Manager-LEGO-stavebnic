@@ -1,9 +1,11 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.CategoryDao;
+import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> brickEntitites = categoryDao.findAll();
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
         for (Category category : brickEntitites) {
-            categoryDtoList.add(category.createDto());
+            categoryDtoList.add(CategoryConversion.conversionToDto(category));
         }
         return categoryDtoList;
     }
@@ -48,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryDto dto = null;
         try {
-            dto = category.createDto();
+            dto = CategoryConversion.conversionToDto(category);
         } catch (Exception e) {
             return dto;
         }
@@ -60,7 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
-        Category category = categoryDto.createEntity();
+        Category category = CategoryConversion.conversionToEntity(categoryDto);
         categoryDao.update(category);
     }
 
@@ -77,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
         }
-        Category categoryEntity = categoryDto.createEntity();
+        Category categoryEntity = CategoryConversion.conversionToEntity(categoryDto);
         categoryDao.create(categoryEntity);
     }
 
@@ -90,7 +92,7 @@ public class CategoryServiceImpl implements CategoryService {
         
         CategoryDto dto = null;
         try {
-            dto = entity.createDto();
+            dto = CategoryConversion.conversionToDto(entity);
         } catch (Exception e) {
             return dto;
         }
