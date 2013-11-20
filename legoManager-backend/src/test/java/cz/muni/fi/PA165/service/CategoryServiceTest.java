@@ -1,8 +1,4 @@
 package cz.muni.fi.PA165.service;
-import cz.muni.fi.PA165.service.impl.CategoryServiceImpl;
-import cz.muni.fi.PA165.service.impl.CategoryService;
-import cz.muni.fi.PA165.service.impl.DataAccessExceptionService;
-import static org.junit.Assert.*;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;

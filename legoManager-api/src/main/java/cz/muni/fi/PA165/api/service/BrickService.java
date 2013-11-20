@@ -1,7 +1,8 @@
 package cz.muni.fi.PA165.api.service;
 
-import cz.muni.muni.PA165.api.dto.BrickDto;
 
+
+import cz.muni.fi.PA165.api.dto.BrickDto;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * 
  * @author Jiri Krepl
  */
-public interface BrickService {
+public interface    BrickService {
     /**
      * persist given brick entity
      *

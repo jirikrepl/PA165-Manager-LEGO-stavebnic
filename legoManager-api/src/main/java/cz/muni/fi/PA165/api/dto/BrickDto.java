@@ -1,4 +1,4 @@
-package cz.muni.muni.PA165.api.dto;
+package cz.muni.fi.PA165.api.dto;
 
 import cz.muni.fi.PA165.api.service.Color;
 

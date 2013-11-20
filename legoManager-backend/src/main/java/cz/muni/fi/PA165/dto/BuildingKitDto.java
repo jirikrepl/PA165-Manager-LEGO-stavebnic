@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.PA165.dto;
 
-import cz.muni.muni.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.entity.BuildingKit;
 
 import java.math.BigDecimal;

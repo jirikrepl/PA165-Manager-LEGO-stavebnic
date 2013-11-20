@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.daoDtoConversion;
 
-import cz.muni.muni.PA165.api.dto.BrickDto;
+
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.entity.Brick;
 
 /**

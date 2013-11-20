@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.PA165.service.impl;
+package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dto.ThemeSetDto;
 

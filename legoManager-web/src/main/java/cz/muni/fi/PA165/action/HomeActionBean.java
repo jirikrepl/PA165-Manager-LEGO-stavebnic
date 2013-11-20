@@ -1,12 +1,19 @@
 package cz.muni.fi.PA165.action;
 
+import cz.muni.fi.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.service.BrickService;
+import cz.muni.fi.PA165.api.service.Color;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UrlBinding("/Home.htm")
 public class HomeActionBean extends BaseActionBean {
+
+    @Autowired
+    BrickService service;
 
     @DefaultHandler
     public Resolution view() {
@@ -14,7 +21,9 @@ public class HomeActionBean extends BaseActionBean {
     }
 
     public String getJavaVersion() {
-        return System.getProperty("java.version");
+        service.create(new BrickDto("panak", Color.BLACK, "policajt s cepici"));
+        return service.findAll().toString();
+        //return System.getProperty("java.version");
     }
 
     public String getOsName() {

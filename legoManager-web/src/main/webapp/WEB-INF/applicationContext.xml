@@ -13,7 +13,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <!--<context:annotation-config/>-->
     <!--<tx:annotation-driven/>-->
-    <context:component-scan base-package="fi.muni.pa165"/>
+    <context:component-scan base-package="cz.muni.fi.PA165.action"/>
 
 
 </beans>

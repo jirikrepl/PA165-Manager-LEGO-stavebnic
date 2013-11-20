@@ -4,11 +4,8 @@
  */
 package cz.muni.fi.PA165.service;
  
-import cz.muni.fi.PA165.service.impl.BuildingKitServiceImpl;
-import cz.muni.fi.PA165.service.impl.BuildingKitService;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
- 
-import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
+
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.dto.BuildingKitDto;
 import cz.muni.fi.PA165.entity.BuildingKit;

@@ -5,9 +5,7 @@
 
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.service.impl.ThemeSetServiceImpl;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
-import cz.muni.fi.PA165.dao.ThemeSetDaoImpl;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.ThemeSet;

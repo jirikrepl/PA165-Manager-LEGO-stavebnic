@@ -1,10 +1,9 @@
-package cz.muni.fi.PA165.service.impl;
+package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
