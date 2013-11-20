@@ -7,6 +7,13 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <!-- JSTL -->
+    <context-param>
+        <description>JSTL tags will use localized string from the same source as Stripes</description>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>StripesResources</param-value>
+    </context-param>
 
     <filter>
         <filter-name>StripesFilter</filter-name>
@@ -18,6 +25,11 @@
         <init-param>
             <param-name>Extension.Packages</param-name>
             <param-value>cz.muni.fi.PA165.extensions, cz.muni.fi.PA165.reload.extensions, net.sourceforge.stripes.integration.spring</param-value>
+        </init-param>
+        <init-param>
+            <description>locales and encodings in the app</description>
+            <param-name>LocalePicker.Locales</param-name>
+            <param-value>cs:utf-8,en:utf-8</param-value>
         </init-param>
     </filter>
 

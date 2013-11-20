@@ -6,7 +6,7 @@
     <!DOCTYPE html>
     <html lang="${pageContext.request.locale}">
         <head>
-            <title>LEGO<f:message key="${titlekey}"/></title>
+            <title><f:message key="${titlekey}"/></title>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
             <s:layout-component name="html-head"/>
         </head>
