@@ -30,7 +30,7 @@
                                 <s:link href="/buildingkit.jsp"><f:message key="navigation.buildingkit"/></s:link>
                             </li>
                             <li>
-                                <s:link href="/brick.jsp"><f:message key="navigation.brick"/></s:link>
+                                <s:link beanclass="cz.muni.fi.PA165.action.BrickActionBean"><f:message key="navigation.brick"/></s:link>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
