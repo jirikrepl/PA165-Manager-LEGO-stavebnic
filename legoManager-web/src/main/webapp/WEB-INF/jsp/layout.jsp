@@ -8,6 +8,7 @@
         <head>
             <title><f:message key="${titlekey}"/></title>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/style.css" />
             <s:layout-component name="html-head"/>
         </head>
         <body>
@@ -56,7 +57,8 @@
             </div>
               
             <div id="content">
-                  <h1><f:message key="${titlekey}"/></h1>
+                  <!--sem sa vyrenderuje obsah stranok. Pre kazdu stranku specificky obsah.-->
+                  <!-- do ostatnych jsp vlozit layout-render body -->
                 <s:layout-component name="body"/>
             </div>
         </body>
