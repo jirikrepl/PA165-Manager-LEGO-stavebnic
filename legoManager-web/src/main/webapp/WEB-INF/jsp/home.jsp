@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/taglibs.jsp" %>
 
 <s:layout-render name="/WEB-INF/jsp/layout.jsp" title="Welcome">
-  <s:layout-component name="body">
+  <s:layout-component name="header">
     <p>Congratulations, you've set up a Stripes project!</p>
     <p>
       You are running Java version ${actionBean.javaVersion}
