@@ -28,7 +28,7 @@
                                 <s:link href="/themeset.jsp"><f:message key="navigation.themeset"/></s:link>
                                 </li>
                                 <li>
-                                <s:link href="/buildingkit.jsp"><f:message key="navigation.buildingkit"/></s:link>
+                                    <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"><f:message key="navigation.buildingkit"/></s:link>
                                 </li>
                                 <li>
                                 <s:link beanclass="cz.muni.fi.PA165.action.BrickActionBean"><f:message key="navigation.brick"/></s:link>

@@ -37,4 +37,14 @@
     </bean>
     <bean id="categoryDao" class="cz.muni.fi.PA165.dao.CategoryDaoImpl"/>
 
+    <bean id="themeSetService" class="cz.muni.fi.PA165.service.ThemeSetServiceImpl">
+        <property name="themeSetDao" ref="themeSetDao"/>
+    </bean>
+    <bean id="themeSetDao" class="cz.muni.fi.PA165.dao.ThemeSetDaoImpl"/>
+
+    <bean id="buildingKitService" class="cz.muni.fi.PA165.service.BuildingKitServiceImpl">
+        <property name="buildingKitDao" ref="buildingKitDao"/>
+    </bean>
+    <bean id="buildingKitDao" class="cz.muni.fi.PA165.dao.BuildingKitDaoImpl"/>
+
 </beans>
