@@ -1,64 +1,21 @@
-<%@page contentType="text/html" pageEncoding="windows-1250"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Všechny stavebnice</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" type="text/css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css"/>
-    </head>
-    <body>
-        <h1 align="center">Všechny stavebnice</h1>
-        <br/>
-        <div class="row"/>
-            <div class="col-md-offset-1">
-                <button type="button" class="btn btn-primary btn-lg">Nová stavebnice</button>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-md-offset-1">
-                <table class="table">
-                    <tr>
-                        <th>Název stavebnice</th>
-                        <th>Kategorie</th>
-                        <th>Sada</th>
-                        <th>cena</th>
-                        <th>od (vìk)</th>
-                        <th>možnosti</th>
-                    <tr/>
-                    <tr>
-                        <td>
-                            Nazev 1
-                        </td>
-                        <td>
-                            Nejaka kategorie
-                        </td>
-                        <td>
-                            Sada1
-                        </td>
-                        <td>
-                            500
-                        </td>
-                        <td>
-                            10
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+<s:layout-render name="/layout.jsp" titlekey="trol">
 
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </body>
-</html>
+    <s:layout-component name="body">
+
+        <s:form beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+            <fieldset><legend><f:message key="book.list.newbook"/></legend>
+                <%@include file="form.jsp"%>
+                <s:submit name="add">VytvoÅ™it novou stavebnici</s:submit>
+            </fieldset>
+        </s:form>
+
+
+
+
+    </s:layout-component>
+</s:layout-render>

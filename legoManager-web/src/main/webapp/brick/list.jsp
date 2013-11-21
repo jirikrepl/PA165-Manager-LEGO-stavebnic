@@ -24,8 +24,16 @@
                     <td>${brick.id}</td>
                     <td><c:out value="${brick.name}"/></td>
                     <td><f:message key="brick.color.${brick.color}"/></td>
+                    
                     <td><c:out value=""/></td>
-                    <td><c:out value=""/></td>
+                    
+                    <td>
+                        <s:form beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                            <s:hidden name="book.id" value="${brick.id}"/>
+                            <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
+                        </s:form>
+                    </td>
+                    
                 </tr>
             </c:forEach>
         </table>
