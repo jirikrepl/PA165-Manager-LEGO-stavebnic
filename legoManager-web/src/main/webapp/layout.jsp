@@ -25,7 +25,7 @@
                                 <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean"><f:message key="navigation.category"/></s:link>
                                 </li>
                                 <li>
-                                <s:link href="/themeset.jsp"><f:message key="navigation.themeset"/></s:link>
+                                <s:link beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean"><f:message key="navigation.themeset"/></s:link>
                                 </li>
                                 <li>
                                     <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"><f:message key="navigation.buildingkit"/></s:link>
