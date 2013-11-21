@@ -12,25 +12,24 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-
-
     <context:annotation-config/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <context:component-scan base-package="cz.muni.fi.pa165.dao"/>
+    <context:component-scan base-package="cz.muni.fi.PA165.dao"/>
 
 
-    <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
-        <property name="persistenceUnitName" value="TestPU" />
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="LegoPU"/>
     </bean>
 
-    <bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="myEmf"/>
-    </bean>
 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
 
     <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
-        <property name="brickDao" ref="brickDao" />
+        <property name="brickDao" ref="BrickDao"/>
     </bean>
+    <bean id="BrickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl"/>
 
 </beans>
