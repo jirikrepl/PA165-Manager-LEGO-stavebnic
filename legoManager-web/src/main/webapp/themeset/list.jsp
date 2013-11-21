@@ -14,21 +14,19 @@
             <table class="table">
             <tr>
                 <th>id</th>
-                <th><f:message key="table.brick.name"/></th>
-                <th><f:message key="table.brick.price"/></th>
-                <th><f:message key="table.brick.description"/></th>
-                <th><f:message key="table.category"/></th>
+                <th><f:message key="table.themeset.name"/></th>
+                <th><f:message key="table.themeset.price"/></th>
+                <th><f:message key="table.themeset.description"/></th>
+                <th><f:message key="table.themeset.category"/></th>
             </tr>
-            
-            <!--creates lines of table in loop-->
-            <!--uses bricks from getter from action bean-->
-            <c:forEach items="${actionBean.themeSets}" var="dto">
+
+            <c:forEach items="${actionBean.themeSets}" var="themeSet">
                 <tr>
-                    <td>${dto.id}</td>
-                    <td><c:out value="${dto.name}"/></td>
-                    <td><c:out value=""/></td>
-                    <td><c:out value=""/></td>
-                    <td><c:out value=""/></td>
+                    <td>${themeSet.id}</td>
+                    <td><c:out value="${themeSet.name}"/></td>
+                    <td><c:out value="${themeSet.name}"/></td>
+                    <td><c:out value="${themeSet.name}"/></td>
+                    <td><c:out value="${themeSet.name}"/></td>
                 </tr>
             </c:forEach>
         </table>
