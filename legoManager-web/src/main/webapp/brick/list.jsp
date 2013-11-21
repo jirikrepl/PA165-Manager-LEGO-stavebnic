@@ -29,7 +29,7 @@
                     
                     <td>
                         <s:form beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                            <s:hidden name="book.id" value="${brick.id}"/>
+                            <s:hidden name="brick.id" value="${brick.id}"/>
                             <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
                         </s:form>
                     </td>

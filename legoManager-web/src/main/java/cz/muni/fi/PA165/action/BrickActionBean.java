@@ -16,7 +16,7 @@ public class BrickActionBean extends BaseActionBean {
     @SpringBean
     private BrickService brickService;
     private List<BrickDto> bricks;
-    private BrickDto brickDto; //one brick used for some operations (deletition, edit)
+    private BrickDto brick; //one brick used for some operations (deletition, edit)
     
     /**
      * return all books for table in some jsp
@@ -48,8 +48,8 @@ public class BrickActionBean extends BaseActionBean {
 //        getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML(book.getTitle()),escapeHTML(book.getAuthor())));
 //        return new RedirectResolution(this.getClass(), "list");
         
-        brickDto = brickService.findById(brickDto.getId());
-        brickService.delete(brickDto.getId());
+        brick = brickService.findById(brick.getId());
+        brickService.delete(brick.getId());
 
         // getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML(book.getTitle()),escapeHTML(book.getAuthor())));
         
