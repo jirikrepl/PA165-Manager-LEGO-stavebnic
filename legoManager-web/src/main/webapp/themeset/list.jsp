@@ -18,6 +18,7 @@
                 <th><f:message key="table.themeset.price"/></th>
                 <th><f:message key="table.themeset.description"/></th>
                 <th><f:message key="table.themeset.category"/></th>
+                <th><f:message key="table.options"/></th>
             </tr>
 
             <c:forEach items="${actionBean.themeSets}" var="themeSet">
@@ -27,6 +28,8 @@
                     <td><c:out value="${themeSet.name}"/></td>
                     <td><c:out value="${themeSet.name}"/></td>
                     <td><c:out value="${themeSet.name}"/></td>
+                    <td><c:out value="${themeSet.name}"/></td>
+                    
                 </tr>
             </c:forEach>
         </table>
