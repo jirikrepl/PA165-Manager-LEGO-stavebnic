@@ -9,7 +9,8 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
-@UrlBinding("/brick/list.jsp")
+//@UrlBinding("/brick/list.jsp")
+@UrlBinding("/brick/{event}/{brick.id}")
 public class BrickActionBean extends BaseActionBean {
     
     @SpringBean
@@ -19,7 +20,7 @@ public class BrickActionBean extends BaseActionBean {
     
     @DefaultHandler
     public Resolution list() {
-        //bricks = brickService.findAll();
+        bricks = brickService.findAll();
         return new ForwardResolution("/brick/list.jsp");
     }
 
