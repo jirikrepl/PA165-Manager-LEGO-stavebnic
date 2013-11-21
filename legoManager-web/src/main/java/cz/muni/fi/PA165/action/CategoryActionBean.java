@@ -4,6 +4,8 @@ import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.service.CategoryService;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
@@ -26,12 +28,41 @@ public class CategoryActionBean extends BaseActionBean {
         return categories;
     }
 
+    private CategoryDto categoryDto;
+
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
+    }
+
+    public void setCategoryDto(CategoryDto categoryDto) {
+        this.categoryDto = categoryDto;
+    }
+
     @DefaultHandler
     public Resolution list() {
         return new ForwardResolution("/category/list.jsp");
     }
 
     public Resolution add() {
-        return new ForwardResolution("/category/list.jsp");
+        service.create(categoryDto);
+        return new RedirectResolution(this.getClass(), "list");
     }
+
+
+    public Resolution edit() {
+        return new ForwardResolution("/category/edit.jsp");
+    }
+
+    public Resolution save() {
+        service.update(categoryDto);
+        return new RedirectResolution(this.getClass(), "list");
+    }
+
+    public Resolution delete() {
+
+        service.delete(categoryDto.getId());
+
+        return new RedirectResolution(this.getClass(), "list");
+    }
+
 }

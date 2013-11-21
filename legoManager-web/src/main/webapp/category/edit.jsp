@@ -10,9 +10,10 @@
 
 
         <s:form beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+            <s:hidden name="categoryDto.id"/>
             <fieldset><legend><f:message key="Novakategorie"/></legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="add">Vytvořit novou kategorii</s:submit>
+                <s:submit name="save">Upravit kategorii</s:submit>
             </fieldset>
         </s:form>
 
