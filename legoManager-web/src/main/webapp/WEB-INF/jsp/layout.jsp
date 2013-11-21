@@ -21,7 +21,7 @@
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <s:link href="/category.jsp"><f:message key="navigation.category"/></s:link>
+                                <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean"><f:message key="navigation.category"/></s:link>
                             </li>
                             <li>
                                 <s:link href="/themeset.jsp"><f:message key="navigation.themeset"/></s:link>

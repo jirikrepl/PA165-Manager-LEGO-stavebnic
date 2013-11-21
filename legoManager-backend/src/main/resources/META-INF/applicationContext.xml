@@ -28,8 +28,13 @@
     </bean>
 
     <bean id="brickService" class="cz.muni.fi.PA165.service.BrickServiceImpl">
-        <property name="brickDao" ref="BrickDao"/>
+        <property name="brickDao" ref="brickDao"/>
     </bean>
-    <bean id="BrickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl"/>
+    <bean id="brickDao" class="cz.muni.fi.PA165.dao.BrickDaoImpl"/>
+
+    <bean id="categoryService" class="cz.muni.fi.PA165.service.CategoryServiceImpl">
+        <property name="categoryDao" ref="categoryDao"/>
+    </bean>
+    <bean id="categoryDao" class="cz.muni.fi.PA165.dao.CategoryDaoImpl"/>
 
 </beans>
