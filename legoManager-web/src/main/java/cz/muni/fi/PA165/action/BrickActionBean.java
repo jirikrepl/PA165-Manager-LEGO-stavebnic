@@ -43,7 +43,7 @@ public class BrickActionBean extends BaseActionBean {
     @DefaultHandler
     public Resolution list() {
         bricks = brickService.findAll();
-        return new ForwardResolution("/brick/list.jsp");
+        return new ForwardResolution("/brick/brickList.jsp");
     }
     
     /**
@@ -59,5 +59,13 @@ public class BrickActionBean extends BaseActionBean {
         
         // returns back to list (in fact call lis() method from this class)
         return new RedirectResolution(this.getClass(), "list");
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Resolution brickCreate() {
+        return new ForwardResolution("/brick/brickCreate.jsp");
     }
 }
