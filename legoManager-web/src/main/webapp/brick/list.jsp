@@ -29,6 +29,7 @@
                     
                     <td>
                         <s:form beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                            <s:errors/>
                             <s:hidden name="brick.id" value="${brick.id}"/>
                             <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
                         </s:form>

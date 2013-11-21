@@ -10,7 +10,16 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
-@UrlBinding("/brick/{$event}/{brick.id}")
+/**
+ * brick actionbean
+ * 
+ * @author Jiri Krepl
+ */
+
+// tohle url by melo byt jine nez url slozky z jsp, jinak to dela bordel
+// predtim tam bylo "/brick/{event}" -- nefungovalo volani jine metody nez list s @defaultHandlerem
+// ted je tu: "brick/{event}" -- funguje i pro delete ^_^
+@UrlBinding("/bricks/{$event}")
 public class BrickActionBean extends BaseActionBean {
     
     @SpringBean
@@ -42,15 +51,10 @@ public class BrickActionBean extends BaseActionBean {
      * @return resolution Redirects to list
      */
     public Resolution delete() {
-        //only id is filled by the form
-//        book = bookLibrary.getBook(book.getId());
-//        bookLibrary.deleteBook(book.getId());
-//        getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML(book.getTitle()),escapeHTML(book.getAuthor())));
-//        return new RedirectResolution(this.getClass(), "list");
-        
-        brick = brickService.findById(brick.getId());
+        // get id from form in jsp
+        String id = getContext().getRequest().getParameter("brick.id");
+        brick = brickService.findById(Long.parseLong(id)); // find this brickDto by that and deletes it
         brickService.delete(brick.getId());
-
         // getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML(book.getTitle()),escapeHTML(book.getAuthor())));
         
         // returns back to list (in fact call lis() method from this class)
