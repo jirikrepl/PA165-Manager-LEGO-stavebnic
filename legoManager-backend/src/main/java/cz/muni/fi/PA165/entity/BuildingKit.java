@@ -27,6 +27,8 @@ public class BuildingKit implements Serializable {
     private java.util.Map<Brick, Integer> bricks;
     @ManyToOne
     private ThemeSet themeSet;
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
@@ -82,6 +84,14 @@ public class BuildingKit implements Serializable {
 
     public void setThemeSet(ThemeSet themeSet) {
         this.themeSet = themeSet;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

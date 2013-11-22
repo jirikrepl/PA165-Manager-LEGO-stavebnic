@@ -6,15 +6,19 @@ package cz.muni.fi.PA165.daoDtoConversion;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion.convertToDto;
 
 /**
  *
@@ -43,6 +47,11 @@ public class BuildingKitConversion {
         ThemeSet themeSet = buildingKit.getThemeSet();
         if (themeSet != null) {
             buildingKitDto.setThemeSet(ThemeSetConversion.convertToDto(themeSet));
+        }
+
+        Category category = buildingKit.getCategory();
+        if (category != null) {
+            buildingKitDto.setCategory(CategoryConversion.conversionToDto(category));
         }
 
         Map<BrickDto, Integer> bricksDto = new HashMap<BrickDto, Integer>();
@@ -76,6 +85,11 @@ public class BuildingKitConversion {
         ThemeSetDto themeSet = buildingKitDto.getThemeSet();
         if (themeSet != null) {
             kit.setThemeSet(ThemeSetConversion.convertToEntity(themeSet));
+        }
+
+        CategoryDto category = buildingKitDto.getCategory();
+        if (category != null) {
+            kit.setCategory(CategoryConversion.convertToEntity(category));
         }
 
         Map<Brick, Integer> brickEntities = new HashMap<Brick, Integer>();

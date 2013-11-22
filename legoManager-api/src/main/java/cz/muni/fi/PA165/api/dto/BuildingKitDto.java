@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.api.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -16,6 +17,7 @@ public class BuildingKitDto {
     private String description;
     private Map<BrickDto, Integer> bricks;
     private ThemeSetDto themeSet;
+    private CategoryDto category;
 
     public Long getId() {
         return id;
@@ -71,6 +73,14 @@ public class BuildingKitDto {
 
     public void setThemeSet(ThemeSetDto themeSet) {
         this.themeSet = themeSet;
+    }
+
+    public CategoryDto getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryDto category) {
+        this.category = category;
     }
 
     @Override
