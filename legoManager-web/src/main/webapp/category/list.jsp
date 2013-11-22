@@ -35,27 +35,16 @@
                     <td>${category.id}</td>
                     <td>${category.name}</td>
                     <td>${category.description}</td>
-
-                    <td><c:out value=""/></td>
-
-                    <td>
-                        <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean" event="edit"><s:param name="categoryDto.id" value="${category.id}"/>edit</s:link>
-                        <s:form beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-                            <s:errors/>
-                            <s:hidden name="categoryDto.id" value="${category.id}"/>
-                            <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
-                        </s:form>
-                    </td>
                     <td>
                         <span>
                             <!--table buttons-->
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+                                <s:hidden name="categoryDto.id" value="${category.id}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
                             </s:form>
 
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+                                <s:hidden name="categoryDto.id" value="${category.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>
