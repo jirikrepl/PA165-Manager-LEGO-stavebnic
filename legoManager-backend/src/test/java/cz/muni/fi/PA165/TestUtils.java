@@ -8,6 +8,7 @@ import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,13 +27,13 @@ public class TestUtils {
         return brick;
     }
     
-    public static BuildingKit createBuildingKit(String name, String description, BigDecimal price, int year, List<Brick> listBricks){
+    public static BuildingKit createBuildingKit(String name, String description, BigDecimal price, int year, Map<Brick, Integer> mapBricks){
         BuildingKit buildingKit = new BuildingKit();
         buildingKit.setName(name);
         buildingKit.setDescription(description);
         buildingKit.setPrice(price);
         buildingKit.setYearFrom(year);
-        buildingKit.setBricks(listBricks);
+        buildingKit.setBricks(mapBricks);
 
         return buildingKit;
     }

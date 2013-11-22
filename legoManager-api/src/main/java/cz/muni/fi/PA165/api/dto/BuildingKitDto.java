@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.api.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,7 +14,7 @@ public class BuildingKitDto {
     private int yearFrom;
     private BigDecimal price;
     private String description;
-    private List<BrickDto> bricks;
+    private Map<BrickDto, Integer> bricks;
     private ThemeSetDto themeSet;
 
     public Long getId() {
@@ -56,11 +57,11 @@ public class BuildingKitDto {
         this.description = description;
     }
 
-    public List<BrickDto> getBricks() {
+    public Map<BrickDto, Integer> getBricks() {
         return bricks;
     }
 
-    public void setBricks(List<BrickDto> bricks) {
+    public void setBricks(Map<BrickDto, Integer> bricks) {
         this.bricks = bricks;
     }
 

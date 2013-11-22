@@ -12,7 +12,9 @@ import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -43,11 +45,11 @@ public class BuildingKitConversion {
             buildingKitDto.setThemeSet(ThemeSetConversion.convertToDto(themeSet));
         }
 
-        List<BrickDto> bricksDto = new ArrayList<BrickDto>();
-        List<Brick> bricks = buildingKit.getBricks();
+        Map<BrickDto, Integer> bricksDto = new HashMap<BrickDto, Integer>();
+        Map<Brick, Integer> bricks = buildingKit.getBricks();
         if (bricks != null) {
-            for (Brick brick : bricks) {
-                bricksDto.add(BrickConversion.convertToDto(brick));
+            for (Brick brick : bricks.keySet()) {
+                bricksDto.put(BrickConversion.convertToDto(brick), bricks.get(brick));
             }
             buildingKitDto.setBricks(bricksDto);
         }
@@ -76,11 +78,11 @@ public class BuildingKitConversion {
             kit.setThemeSet(ThemeSetConversion.convertToEntity(themeSet));
         }
 
-        List<Brick> brickEntities = new ArrayList<Brick>();
-        List<BrickDto> bricks = buildingKitDto.getBricks();
+        Map<Brick, Integer> brickEntities = new HashMap<Brick, Integer>();
+        Map<BrickDto, Integer> bricks = buildingKitDto.getBricks();
         if (bricks != null) {
-            for (BrickDto br : bricks) {
-                brickEntities.add(BrickConversion.convertToEntity(br));
+            for (BrickDto br : bricks.keySet()) {
+                brickEntities.put(BrickConversion.convertToEntity(br), bricks.get(br));
             }
             kit.setBricks(brickEntities);
         }

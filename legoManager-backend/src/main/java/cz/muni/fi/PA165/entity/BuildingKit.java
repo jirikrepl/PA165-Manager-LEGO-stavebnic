@@ -4,15 +4,10 @@
  */
 package cz.muni.fi.PA165.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tomas Kopecky
@@ -28,8 +23,8 @@ public class BuildingKit implements Serializable {
     private int yearFrom;
     private BigDecimal price;
     private String description;
-    @ManyToMany
-    private List<Brick> bricks;
+    @ElementCollection
+    private java.util.Map<Brick, Integer> bricks;
     @ManyToOne
     private ThemeSet themeSet;
 
@@ -73,11 +68,11 @@ public class BuildingKit implements Serializable {
         this.description = description;
     }
 
-    public List<Brick> getBricks() {
+    public Map<Brick, Integer> getBricks() {
         return bricks;
     }
 
-    public void setBricks(List<Brick> bricks) {
+    public void setBricks(Map<Brick, Integer> bricks) {
         this.bricks = bricks;
     }
 

@@ -10,7 +10,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 
 /**
@@ -47,8 +49,8 @@ public class BuildingKitDaoTest extends TestCase {
         } catch (IllegalArgumentException ex) {
         }
 
-        List<Brick> list = storeBricks();
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        Map<Brick, Integer> map = storeBricks();
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, map);
         em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
@@ -78,11 +80,11 @@ public class BuildingKitDaoTest extends TestCase {
         brickDao.create(brick2);
         em.getTransaction().commit();
 
-        List<Brick> list = new ArrayList<Brick>();
-        list.add(brick1);
-        list.add(brick2);
+        Map<Brick, Integer> map = new HashMap<Brick, Integer>();
+        map.put(brick1, 8);
+        map.put(brick2, 1);
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, map);
         em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
@@ -126,25 +128,25 @@ public class BuildingKitDaoTest extends TestCase {
         brickDao.create(brick4);
         em.getTransaction().commit();
         
-        List<Brick> list = new ArrayList<Brick>();
-        list.add(brick1);
-        list.add(brick2);
-        List<Brick> newList = new ArrayList<Brick>();
-        newList.add(brick3);
-        newList.add(brick4);
+        Map<Brick, Integer> map = new HashMap<Brick, Integer>();
+        map.put(brick1, 71);
+        map.put(brick2, 6);
+        Map<Brick, Integer> newMap = new HashMap<Brick, Integer>();
+        newMap.put(brick3, 1);
+        newMap.put(brick4, 2);
         
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, map);
         em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
         
-        //BuildingKit newKit = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.TEN, 2010, newList);
+        BuildingKit newKit = TestUtils.createBuildingKit("newName", "newDescription", BigDecimal.TEN, 2010, newMap);
         kit.setName("newName");
         kit.setDescription("newDescription");
         kit.setPrice(BigDecimal.TEN);
         kit.setYearFrom(2004);
-        kit.setBricks(newList);
+        kit.setBricks(newMap);
         
         em.getTransaction().begin();
         buildingKitDao.update(kit);
@@ -160,8 +162,8 @@ public class BuildingKitDaoTest extends TestCase {
         assertEquals(kit.getDescription(), "newDescription");
         assertEquals(kit.getPrice(), BigDecimal.TEN);
         assertEquals(kit.getYearFrom(), 2004);
-        assertTrue(kit.getBricks().contains(brick3));
-        assertTrue(kit.getBricks().contains(brick4));
+        assertTrue(kit.getBricks().containsKey(brick3));
+        assertTrue(kit.getBricks().containsKey(brick4));
         assertEquals(kit.getBricks().size(), 2);
 
     }
@@ -169,10 +171,10 @@ public class BuildingKitDaoTest extends TestCase {
     public void testFindAll() {
         System.out.println("TEST Find All");
         
-        List<Brick>list = storeBricks();
+        Map<Brick, Integer> map = storeBricks();
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, list);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2004, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 2005, map);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2004, map);
 
         em.getTransaction().begin();
         buildingKitDao.create(kit);
@@ -192,10 +194,10 @@ public class BuildingKitDaoTest extends TestCase {
     public void testFindByPrice() {
         System.out.println("TEST Find By Price");
         
-        List<Brick>list = storeBricks();
+        Map<Brick, Integer>map = storeBricks();
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.TEN, 2005, list);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.TEN, 2005, map);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 2006, map);
         em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
@@ -214,10 +216,10 @@ public class BuildingKitDaoTest extends TestCase {
     public void testFindByYearFrom() {
         System.out.println("TEST Find By Year From");
         
-        List<Brick>list = storeBricks();
+        Map<Brick, Integer> map = storeBricks();
 
-        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, list);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, list);
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, map);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, map);
         em.getTransaction().begin();
         buildingKitDao.create(kit);
         em.getTransaction().commit();
@@ -234,7 +236,7 @@ public class BuildingKitDaoTest extends TestCase {
 
     }
     
-    public List<Brick> storeBricks(){
+    public Map<Brick, Integer> storeBricks(){
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
 
@@ -244,9 +246,9 @@ public class BuildingKitDaoTest extends TestCase {
         em.getTransaction().begin();
         brickDao.create(brick2);
         em.getTransaction().commit();
-        List<Brick> list = new ArrayList<Brick>();
-        list.add(brick1);
-        list.add(brick2);
-        return list;
+        Map<Brick, Integer> map = new HashMap<Brick, Integer>();
+        map.put(brick1, 5);
+        map.put(brick2, 1);
+        return map;
     }
 }
