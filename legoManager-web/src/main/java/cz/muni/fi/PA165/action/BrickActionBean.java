@@ -35,6 +35,19 @@ public class BrickActionBean extends BaseActionBean {
         return bricks;
     }
 
+    
+    public BrickDto getBrick() {
+        return brick;
+    }
+
+    /**
+     * without setter, posting brick forms wouldnt work 
+     * @param brick 
+     */
+    public void setBrick(BrickDto brick) {
+        this.brick = brick;
+    }
+
     /**
      * downloads all bricks and redirect to brick/list.jsp
      * list.jsp uses this action bean = uses data and its methods
@@ -51,9 +64,8 @@ public class BrickActionBean extends BaseActionBean {
      * @return resolution Redirects to list
      */
     public Resolution delete() {
-        // get id from form in jsp
-        String id = getContext().getRequest().getParameter("brick.id");
-        brick = brickService.findById(Long.parseLong(id)); // find this brickDto by that and deletes it
+        // id se ziskalo z formulare name=brick.id, a bylo do objektu brick
+        // setnuto pres setBrick
         brickService.delete(brick.getId());
         // getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML(book.getTitle()),escapeHTML(book.getAuthor())));
         
@@ -62,10 +74,19 @@ public class BrickActionBean extends BaseActionBean {
     }
     
     /**
-     * 
+     * creates brick
      * @return 
      */
-    public Resolution brickCreate() {
-        return new ForwardResolution("/brick/brickCreate.jsp");
+    public Resolution createBrick() {
+        brickService.create(brick);
+        return new ForwardResolution(this.getClass(), "list");
+    }
+    
+    /**
+     * redirects to brick edit page
+     * @return 
+     */
+    public Resolution openEditPage() {
+        return new ForwardResolution("/brick/brickEdit.jsp");
     }
 }

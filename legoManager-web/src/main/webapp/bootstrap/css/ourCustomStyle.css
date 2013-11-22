@@ -1,0 +1,9 @@
+#brickCreateForm {
+    margin-bottom: 70px;
+    margin-top: 70px;
+}
+
+/*style for table buttons to display them in one row*/
+.table-buttons {
+    display:inline-block;
+}

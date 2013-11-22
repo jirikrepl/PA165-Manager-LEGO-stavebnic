@@ -8,10 +8,18 @@
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BrickActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="bricks.headline"/></h1>
 
+        <!--form for brick creation-->
+        <!--there is included file with rows in this form-->
+        <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+            <legend>Create Brick</legend>
+            <%@include file="brickForm.jsp"%>
 
-
-        <s:form beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-            <s:submit class="btn" name="brickCreate"><f:message key="table.buttons.create"/></s:submit>
+            <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <s:submit class="btn" name="createBrick"><f:message key="brick.create"/></s:submit>
+                    </div>
+                </div>
         </s:form>
 
         <!--table of bricks-->
@@ -35,10 +43,19 @@
                     <td><c:out value=""/></td>
 
                     <td>
-                        <s:form beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                            <s:hidden name="brick.id" value="${brick.id}"/>
-                            <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
-                        </s:form>
+                        <span>
+                            <!--table buttons-->
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:submit class="btn" name="openEditPage"><f:message key="editToDo"/></s:submit>
+                            </s:form>
+
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
+                            </s:form>
+                        </span>
+
                     </td>
 
                 </tr>
