@@ -115,16 +115,10 @@ public class BuildingKitActionBean extends BaseActionBean {
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 
-    public Resolution deleteBrick() {
+    public Resolution delete() {
         long idBuildingKit = buildingKit.getId();
-        long idBricksKit = Long.parseLong(brickIdDelete);
-        BuildingKitDto buildingKit = service.findById(idBuildingKit);
-        BrickDto brickDto = brickService.findById(idBricksKit);
-        Map<BrickDto, Integer> bricks = buildingKit.getBricks();
-        bricks.remove(brickDto);
-        service.update(buildingKit);
-
-        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+        service.delete(idBuildingKit);
+        return new ForwardResolution("/buildingKit/buildingKitList.jsp");
     }
 
     public Resolution openManageBrickPage() {

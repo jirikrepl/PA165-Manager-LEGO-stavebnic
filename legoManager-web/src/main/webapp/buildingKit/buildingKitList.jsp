@@ -3,14 +3,14 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="category.title">
+<s:layout-render name="/layout.jsp" titlekey="buildingKit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="category.headline"/></h1>
+        <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
 
 
         <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-            <legend>Create Brick</legend>
+            <legend><f:message key="buildingKit.createForm"/></legend>
             <%@include file="buildingKitForm.jsp"%>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
@@ -62,11 +62,11 @@
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="brick.id" value="${buildingKit.id}"/>
-                                <s:submit class="btn" name="openManageBrickPage"><f:message key="buildinKit.bricks.button"/></s:submit>
+                                <s:submit class="btn" name="openManageBrickPage"><f:message key="buildingKit.bricks.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
+                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>
