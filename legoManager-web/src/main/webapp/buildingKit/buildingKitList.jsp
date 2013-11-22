@@ -56,12 +56,12 @@
                         <span>
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
+                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="buildingKit.edit.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
+                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="openManageBrickPage"><f:message key="buildingKit.bricks.button"/></s:submit>
                             </s:form>
 
