@@ -9,7 +9,7 @@
         <h1 class="text-center"><f:message key="category.headline"/></h1>
 
 
-        <s:form class="form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+        <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
             <fieldset><legend><f:message key="category.create"/></legend>
                 <%@include file="form.jsp"%>
                 <div class="form-group">
