@@ -11,7 +11,7 @@
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-            <legend>Create Brick</legend>
+            <legend><f:message key="brick.create.title"/></legend>
             <%@include file="brickForm.jsp"%>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
