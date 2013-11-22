@@ -9,13 +9,13 @@
         <h1 class="text-center"><f:message key="themeset.headline"/></h1>
 
         <s:form class="form-horizontal" id="themesetCreateForm" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
-            <legend><f:message key="create.theme.set"/></legend>
+            <legend><f:message key="themeset.create.title"/></legend>
             <%@include file="form.jsp"%>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="add"><f:message key="themeset.create"/></s:submit>
+                    <s:submit class="btn" name="add"><f:message key="themeset.create.button"/></s:submit>
                 </div>
             </div>
         </s:form>
@@ -46,7 +46,7 @@
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
                                 <s:hidden name="dto.id" value="${dto.id}"/>
-                                <s:submit class="btn" name="delete"><f:message key="themeset.buttons.delete"/></s:submit>
+                                <s:submit class="btn" name="delete"><f:message key="themeset.delete.button"/></s:submit>
                             </s:form>
                         </span>
                     </td>

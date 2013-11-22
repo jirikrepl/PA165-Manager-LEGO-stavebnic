@@ -47,6 +47,8 @@
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
                                 <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:hidden name="brick.name" value="${brick.name}"/>
+                                <s:hidden name="brick.color" value="${brick.color}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
                             </s:form>
 
