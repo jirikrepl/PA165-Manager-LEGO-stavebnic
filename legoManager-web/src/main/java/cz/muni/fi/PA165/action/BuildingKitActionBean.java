@@ -115,6 +115,15 @@ public class BuildingKitActionBean extends BaseActionBean {
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 
+    /**
+     * redirects to kit edit page
+     * @return ForwardResolution
+     */
+    public Resolution openEditPage() {
+        buildingKit = service.findById(buildingKit.getId());
+        return new ForwardResolution("/buildingKit/buildingKitManagerBrick.jsp");
+    }
+
     public Resolution delete() {
         long idBuildingKit = buildingKit.getId();
         service.delete(idBuildingKit);
