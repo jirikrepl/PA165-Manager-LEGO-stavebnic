@@ -46,6 +46,21 @@
                             <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
                         </s:form>
                     </td>
+                    <td>
+                        <span>
+                            <!--table buttons-->
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
+                            </s:form>
+
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
+                            </s:form>
+                        </span>
+
+                    </td>
 
                 </tr>
             </c:forEach>
