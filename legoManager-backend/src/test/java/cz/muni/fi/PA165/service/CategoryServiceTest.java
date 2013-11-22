@@ -141,18 +141,19 @@ public class CategoryServiceTest extends TestCase {
         
         // create list of category entity objects
         Category firstEntity = new Category();
+        firstEntity.setId(firstDto.getId());
         firstEntity.setName("name1");
         firstEntity.setDescription("desc1");
         Category secondEntity = new Category();
+        secondEntity.setId(secondDto.getId());
         secondEntity.setName("name2");
         secondEntity.setDescription("desc2");
         List<Category> entities = new ArrayList<Category>();
         entities.add(firstEntity);
         entities.add(secondEntity);
-        
         when(categoryDao.findAll()).thenReturn(entities);
-        returnedCategoryDtoList = categoryService.findAll();
-        assertEquals(categoryDtoList, returnedCategoryDtoList);
+        List<CategoryDto> categoryDtoList1 = categoryService.findAll();
+        assertEquals(categoryDtoList1, categoryDtoList);
         
     }
 
