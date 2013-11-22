@@ -14,7 +14,7 @@
                 <%@include file="form.jsp"%>
                 <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="createCategory"><f:message key="category.create"/></s:submit>
+                    <s:submit class="btn" name="add"><f:message key="category.create"/></s:submit>
                     </div>
                 </div>
             </fieldset>
