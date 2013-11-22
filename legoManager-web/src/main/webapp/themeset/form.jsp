@@ -1,17 +1,30 @@
-<%-- 
-    Document   : form
-    Created on : Nov 22, 2013, 6:39:41 PM
-    Author     : PALO
---%>
+<%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<s:errors/>
 
-<%@page contentType="text/html" pageEncoding="windows-1250"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<div class="form-group">
+    <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.name"/></s:label>
+    <div class="col-sm-4">
+        <s:text class="form-control" id="b1" name="dto.name"/> <!--this parameter categoryDto.name is connected to actionBean private variable Brick-->
+    </div>
+</div>
+
+<!--    second row -- option box-->
+<div class="form-group">
+    <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.price"/></s:label>
+    <div class="col-sm-4">
+        <s:text class="form-control" id="b1" name="dto.description"/>
+    </div>
+</div>  
+<div class="form-group">
+    <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.description"/></s:label>
+    <div class="col-sm-4">
+        <s:text class="form-control" id="b1" name="dto.description"/>
+    </div>
+</div>
+<div class="form-group">
+    <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.category"/></s:label>
+    <div class="col-sm-4">
+        <s:text class="form-control" id="b1" name="dto.description"/>
+    </div>
+</div>
