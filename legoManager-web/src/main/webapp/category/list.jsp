@@ -40,7 +40,7 @@
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
                                 <s:hidden name="categoryDto.id" value="${category.id}"/>
-                                <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
+                                <s:submit class="btn" name="edit"><f:message key="brick.edit.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">

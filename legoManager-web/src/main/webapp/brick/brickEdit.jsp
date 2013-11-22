@@ -13,7 +13,7 @@
         <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
             <legend><f:message key="brick.edit.legend"/></legend>
             <%@include file="brickForm.jsp"%>
-            
+
             <s:hidden name="brick.id" value="${brick.id}"/>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
@@ -21,14 +21,14 @@
                 <span class="col-sm-offset-2 col-sm-1">
                     <s:submit class="btn" name="updateBrick"><f:message key="brick.edit.button"/></s:submit>
                     </span>
-                    
+
                     <span class="col-sm-offset-1 col-sm-3">
                     <s:submit class="btn" name=""><f:message key="brick.cancel.button"/></s:submit>
-                    </span>
-                </div>
-                    
-                    
-                    
+                </span>
+            </div>
+
+
+
         </s:form>
 
     </s:layout-component>

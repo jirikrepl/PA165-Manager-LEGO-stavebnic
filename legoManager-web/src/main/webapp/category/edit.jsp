@@ -3,50 +3,33 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="category.title">
+<s:layout-render name="/layout.jsp" titlekey="category.edit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.CategoryActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="category.headline"/></h1>
+        <h1 class="text-center"><f:message key="category.edit.h1"/></h1>
+
+        <!--form for brick creation-->
+        <!--there is included file with rows in this form-->
+        <s:form class="form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+            <legend><f:message key="category.edit.legend"/></legend>
+            <%@include file="form.jsp"%>
+
+            <s:hidden name="category.id" value="${category.id}"/>
+
+            <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
+            <div class="form-group">
+                <span class="col-sm-offset-2 col-sm-1">
+                    <s:submit class="btn" name="save"><f:message key="category.edit.button"/></s:submit>
+                    </span>
+
+                    <span class="col-sm-offset-1 col-sm-3">
+                    <s:submit class="btn" name=""><f:message key="category.cancel.button"/></s:submit>
+                </span>
+            </div>
 
 
-        <s:form beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-            <s:hidden name="categoryDto.id"/>
-            <fieldset><legend><f:message key="Novakategorie"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="save">Upravit kategorii</s:submit>
-            </fieldset>
+
         </s:form>
-
-        <table class="table">
-            <tr>
-                <th>id</th>
-                <th><f:message key="table.category.name"/></th>
-                <th><f:message key="table.category.description"/></th>
-                <th><f:message key="table.options"/></th>
-            </tr>
-
-            <!--creates lines of table in loop-->
-            <!--uses bricks from getter from action bean-->
-            <c:forEach items="${actionBean.categories}" var="category">
-                <tr>
-                    <td>${category.id}</td>
-                    <td>${category.name}</td>
-                    <td>${category.description}</td>
-
-                    <td><c:out value=""/></td>
-
-                    <td>
-                        <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean" event="edit"><s:param name="categoryDto.id" value="${category.id}"/>edit</s:link>
-                        <s:form beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-                            <s:errors/>
-                            <s:hidden name="categoryDto.id" value="${category.id}"/>
-                            <s:submit name="delete"><f:message key="table.buttons.delete"/></s:submit>
-                        </s:form>
-                    </td>
-
-                </tr>
-            </c:forEach>
-        </table>
 
     </s:layout-component>
 </s:layout-render>

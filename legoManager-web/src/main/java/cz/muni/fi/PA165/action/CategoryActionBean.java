@@ -55,7 +55,7 @@ public class CategoryActionBean extends BaseActionBean {
 
     public Resolution save() {
         service.update(categoryDto);
-        return new RedirectResolution(this.getClass(), "list");
+        return new ForwardResolution(this.getClass(), "list");
     }
 
     public Resolution delete() {
