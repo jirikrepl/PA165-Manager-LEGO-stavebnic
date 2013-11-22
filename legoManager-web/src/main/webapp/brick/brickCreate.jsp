@@ -13,7 +13,7 @@
                 
                 <%@include file="brickForm.jsp"%>
                 
-                <s:submit name="save"><f:message key="book.edit.save"/></s:submit>
+                <s:submit class="btn" name="save"><f:message key="brick.create"/></s:submit>
                 
         </s:form>
 

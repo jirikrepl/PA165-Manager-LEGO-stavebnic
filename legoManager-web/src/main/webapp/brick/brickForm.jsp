@@ -6,6 +6,6 @@
     </tr>
     <tr>
         <th><s:label for="b4" name="brick.color"/></th>
-        <td><s:select id="b4" name="brick.color"><s:options-enumeration enum="cz.muni.fi.pa165.api.service.Color.Color"/></s:select></td>
+        <td><s:select id="b4" name="brick.color"><s:options-enumeration enum="cz.muni.fi.PA165.api.service.Color"/></s:select></td>
     </tr>
 </table>
