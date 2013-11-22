@@ -54,6 +54,10 @@ public class BuildingKitActionBean extends BaseActionBean {
     }
 
 
+    public Resolution updateBuildingKit() {
+        service.update(buildingKit);
+        return new RedirectResolution(this.getClass(), "list");
+    }
 
 
     public Resolution save() {
@@ -142,7 +146,7 @@ public class BuildingKitActionBean extends BaseActionBean {
      */
     public Resolution openEditPage() {
         buildingKit = service.findById(buildingKit.getId());
-        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+        return new ForwardResolution("/buildingKit/edit.jsp");
     }
 
     public Resolution deleteBrick() {
@@ -164,7 +168,7 @@ public class BuildingKitActionBean extends BaseActionBean {
     }
 
     public Resolution openManageBrickPage() {
-        this.buildingKit = service.findById(brick.getId());
+        this.buildingKit = service.findById(buildingKit.getId());
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 

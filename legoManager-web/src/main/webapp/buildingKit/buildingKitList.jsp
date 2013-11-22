@@ -9,7 +9,7 @@
         <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
 
 
-        <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+        <s:form class="createForm form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <legend><f:message key="buildingKit.createForm"/></legend>
             <%@include file="buildingKitForm.jsp"%>
 
@@ -27,13 +27,10 @@
         <table class="table">
             <tr>
                 <th>id</th>
-                <th><f:message key="table.buildingKit.id"/></th>
                 <th><f:message key="table.buildingKit.name"/></th>
                 <th><f:message key="table.buildingKit.yearfrom"/></th>
                 <th><f:message key="table.buildingKit.price"/></th>
-                <th><f:message key="table.buildingKit.categorySet"/></th>
                 <th><f:message key="table.buildingKit.themeSet"/></th>
-                <th><f:message key="table.buildingKit.description"/></th>
                 <th><f:message key="table.options"/></th>
             </tr>
 
@@ -45,12 +42,8 @@
                     <td>${buildingKit.name}</td>
                     <td>${buildingKit.yearFrom}</td>
                     <td>${buildingKit.price}</td>
-                    <td>TODO kategorie</td>
                     <td>${buildingKit.themeSet}</td>
-                    <td>${buildingKit.description}</td>
-                    <td></td>
 
-                    <td><c:out value=""/></td>
 
                     <td>
                         <span>

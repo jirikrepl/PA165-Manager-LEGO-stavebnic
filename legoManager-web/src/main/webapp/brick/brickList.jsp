@@ -10,7 +10,7 @@
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
-        <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+        <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
             <legend>Create Brick</legend>
             <%@include file="brickForm.jsp"%>
 
