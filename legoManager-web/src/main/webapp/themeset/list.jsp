@@ -24,7 +24,7 @@
                 <th>id</th>
                 <th><f:message key="table.themeset.name"/></th>
                 <th><f:message key="table.themeset.price"/></th>
-                <th><f:message key="table.themeset.description"/></th>
+                <%--<th><f:message key="table.themeset.description"/></th>--%>
                 <th><f:message key="table.themeset.category"/></th>
                 <th><f:message key="table.options"/></th>
             </tr>
@@ -34,7 +34,7 @@
                     <td>${themeSet.id}</td>
                     <td><c:out value="${themeSet.name}"/></td>
                     <td><c:out value="${themeSet.price}"/></td>
-                    <td><c:out value="${themeSet.description}"/></td>
+                    <%--<td><c:out value="${themeSet.description}"/></td>--%>
                     <td></td>
                     <td>
                         <span>
