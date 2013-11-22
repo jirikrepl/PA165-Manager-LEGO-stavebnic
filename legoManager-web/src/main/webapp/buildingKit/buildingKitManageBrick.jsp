@@ -11,6 +11,8 @@
 
 
         <s:form beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+            <s:hidden name="buildingKit.id" value="${buildingKit.id}" />
+
             <div class="col-sm-4">
                 <s:select class="form-control" id="b4" name="brick.id">
                     <s:options-collection collection="${actionBean.bricks}" value="id" label="name"/>
