@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
@@ -42,5 +43,13 @@ public class ThemeSetActionBean extends BaseActionBean{
         themeSets = service.findAll();
         return themeSets;
     }   
+    public Resolution openEditPage(){
+        dto = service.findById(dto.getId());
+        return new ForwardResolution("/themeset/edit.jsp");
+    }
+    public Resolution delete(){
+        service.findById(dto.getId());
+        return new RedirectResolution(this.getClass(), "list");
+    }
     
 }
