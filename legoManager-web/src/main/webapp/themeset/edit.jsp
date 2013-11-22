@@ -12,18 +12,16 @@
             <%@include file="form.jsp"%>
 
             <s:hidden name="themeSetDto.id"/>
-            
+
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
+                <span class="col-sm-offset-2 col-sm-2">
                     <s:submit class="btn" name="updateThemeSet"><f:message key="themeset.button.save"/></s:submit>
-                    </div>
-                </div>
+                    </span>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-4">
+                    <span class="col-sm-4">
                     <s:submit class="btn" name=""><f:message key="themeset.button.cancel"/></s:submit>
-                    </div>
+                    </span>
                 </div>
         </s:form>
 
