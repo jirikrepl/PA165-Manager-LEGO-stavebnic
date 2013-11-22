@@ -21,7 +21,8 @@
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li class="active">
+                            <!--<li class="active">-->
+                            <li>
                                 <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean"><f:message key="navigation.category"/></s:link>
                                 </li>
                                 <li>

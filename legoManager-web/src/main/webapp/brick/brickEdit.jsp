@@ -22,7 +22,7 @@
                     <s:submit class="btn" name="updateBrick"><f:message key="brick.edit.button"/></s:submit>
                     </span>
                     
-                    <span class=" col-sm-3">
+                    <span class="col-sm-offset-1 col-sm-3">
                     <s:submit class="btn" name=""><f:message key="brick.cancel.button"/></s:submit>
                     </span>
                 </div>
