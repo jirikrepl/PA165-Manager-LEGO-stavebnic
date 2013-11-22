@@ -50,7 +50,7 @@ public class BuildingKitActionBean extends BaseActionBean {
 
     public Resolution addBuildingKit() {
         service.create(buildingKit);
-        return new ForwardResolution("/buildingKit/buildingKitCreate.jsp");
+        return new ForwardResolution("/buibuildingldingKit/buildingKitCreate.jsp");
     }
 
 
@@ -87,6 +87,12 @@ public class BuildingKitActionBean extends BaseActionBean {
         return brickService.findAll();
     }
 
+    public Map<BrickDto, Integer> getBricksSaved() {
+        long idBuildingKit = buildingKit.getId();
+        BuildingKitDto buildingKitDto = service.findById(idBuildingKit);
+        return buildingKitDto.getBricks();
+    }
+
     public Resolution addBrick() {
         long idBuildingKit = buildingKit.getId();
         long idBricksKit = brick.getId();
@@ -94,8 +100,20 @@ public class BuildingKitActionBean extends BaseActionBean {
         BrickDto brickDto = brickService.findById(idBricksKit);
         Map<BrickDto, Integer> bricks = buildingKit.getBricks();
         bricks.put(brickDto, 1);
+        service.update(buildingKit);
 
-        return new RedirectResolution("/buildingKit/buildingKitManageBrick.jsp");
+        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+    }
+
+    public Resolution deleteBrick() {
+        long idBuildingKit = buildingKit.getId();
+        long idBricksKit = brick.getId();
+        BuildingKitDto buildingKit = service.findById(idBuildingKit);
+        BrickDto brickDto = brickService.findById(idBricksKit);
+        Map<BrickDto, Integer> bricks = buildingKit.getBricks();
+        bricks.remove(brickDto);
+
+        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 
     public Resolution openManageBrickPage() {

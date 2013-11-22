@@ -35,6 +35,8 @@
                                 <s:link beanclass="cz.muni.fi.PA165.action.BrickActionBean"><f:message key="navigation.brick"/></s:link>
                                 </li>
                             </ul>
+                                
+                            <!-- registration and login form
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <div class="navbar-collapse collapse">
@@ -48,10 +50,11 @@
                                             <button type="submit" class="btn btn-success">Sign in</button>
                                             <button type="submit" class="btn btn-success">Sign up</button>
                                         </form>
-                                    </div><!--/.navbar-collapse -->
+                                    </div>
                                 </li>
-
                             </ul>
+                            -->
+                                
                         </nav>
                     </div>
                 <s:layout-component name="header"/>
