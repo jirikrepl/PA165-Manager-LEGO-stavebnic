@@ -6,21 +6,21 @@
 <div class="form-group">
     <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.name"/></s:label>
         <div class="col-sm-4">
-        <s:text class="form-control" id="b1" name="dto.name"/>
+        <s:text class="form-control" id="b1" name="themeSetDto.name"/>
     </div>
 </div>
 
 <div class="form-group">
     <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.price"/></s:label>
         <div class="col-sm-4">
-        <s:text class="form-control" id="b1" name="dto.description"/>
+        <s:text class="form-control" id="b1" name="themeSetDto.description"/>
     </div>
 </div>
 
 <div class="form-group">
     <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.categories"/></s:label>
         <div class="col-sm-4">
-        <s:select class="form-control" id="b1" name="brick.id">
+        <s:select class="form-control" id="b1" name="categoryId">
             <s:options-collection collection="${actionBean.categories}" value="id" label="name"/>
         </s:select>
     </div>

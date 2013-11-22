@@ -16,7 +16,7 @@ import net.sourceforge.stripes.integration.spring.SpringBean;
  *
  * @author Pavol Bako
  */
-@UrlBinding("/themeset/{$event}")
+@UrlBinding("/themesets/{$event}")
 public class ThemeSetActionBean extends BaseActionBean {
 
     @SpringBean
@@ -29,6 +29,11 @@ public class ThemeSetActionBean extends BaseActionBean {
     private List<CategoryDto> categories;
     
     private ThemeSetDto themeSetDto;
+    private Long categoryId;
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
     
     /**
      * get list of all theme sets
@@ -65,7 +70,9 @@ public class ThemeSetActionBean extends BaseActionBean {
         return new ForwardResolution("/themeset/list.jsp");
     }
 
-    public Resolution add() {
+    public Resolution createThemeSet() {
+        CategoryDto category = categoryService.findById(categoryId);
+        themeSetDto.setCategoryDto(category);
         themeSetService.create(themeSetDto);
         return new RedirectResolution(this.getClass(), "list");
     }

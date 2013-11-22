@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
@@ -15,7 +14,7 @@
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="add"><f:message key="themeset.create.button"/></s:submit>
+                    <s:submit class="btn" name="createThemeSet"><f:message key="themeset.create.button"/></s:submit>
                 </div>
             </div>
         </s:form>
@@ -24,7 +23,6 @@
                 <th>id</th>
                 <th><f:message key="table.themeset.name"/></th>
                 <th><f:message key="table.themeset.price"/></th>
-                <%--<th><f:message key="table.themeset.description"/></th>--%>
                 <th><f:message key="table.themeset.category"/></th>
                 <th><f:message key="table.options"/></th>
             </tr>
