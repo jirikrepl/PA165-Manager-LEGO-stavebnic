@@ -23,8 +23,7 @@ public class ThemeSetActionBean extends BaseActionBean{
     //nainjektovana spring beana do tohoto ActionBeanu
     @SpringBean
     protected ThemeSetService service;
-    
-    protected List<ThemeSetDto> themeSets;
+    private List<ThemeSetDto> themeSets;
     
     private ThemeSetDto dto;
     
