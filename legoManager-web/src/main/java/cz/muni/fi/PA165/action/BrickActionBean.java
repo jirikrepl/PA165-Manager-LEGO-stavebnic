@@ -87,6 +87,17 @@ public class BrickActionBean extends BaseActionBean {
      * @return 
      */
     public Resolution openEditPage() {
+        brick = brickService.findById(brick.getId());
         return new ForwardResolution("/brick/brickEdit.jsp");
+    }
+    
+    /**
+     * updated edited values of brick; after submitting edit form
+     * correct values of brick are setted automatically from form
+     * @return 
+     */
+    public Resolution updateBrick() {
+        brickService.update(brick);
+        return new ForwardResolution(this.getClass(), "list");
     }
 }

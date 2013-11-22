@@ -35,6 +35,7 @@ public class BrickConversion {
             throw new IllegalArgumentException("Dto can not be NULL");
         }
         Brick brick = new Brick();
+        brick.setId(brickDto.getId());
         brick.setColor(brickDto.getColor());
         brick.setDescription(brickDto.getDescription());
         brick.setName(brickDto.getName());

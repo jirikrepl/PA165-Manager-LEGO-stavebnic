@@ -13,6 +13,8 @@
         <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
             <legend><f:message key="brick.edit.legend"/></legend>
             <%@include file="brickForm.jsp"%>
+            
+            <s:hidden name="brick.id" value="${brick.id}"/>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
