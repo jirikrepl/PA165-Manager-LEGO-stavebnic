@@ -9,10 +9,14 @@
         <h1 class="text-center"><f:message key="category.headline"/></h1>
 
 
-        <s:form beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-            <fieldset><legend><f:message key="Novakategorie"/></legend>
+        <s:form class="form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+            <fieldset><legend><f:message key="category.create"/></legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="add">Vytvořit novou kategorii</s:submit>
+                <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <s:submit class="btn" name="createCategory"><f:message key="category.create"/></s:submit>
+                    </div>
+                </div>
             </fieldset>
         </s:form>
 
