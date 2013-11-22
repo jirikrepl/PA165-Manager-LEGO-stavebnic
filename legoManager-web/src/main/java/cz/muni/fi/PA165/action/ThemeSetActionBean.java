@@ -30,6 +30,11 @@ public class ThemeSetActionBean extends BaseActionBean {
     
     private ThemeSetDto themeSetDto;
     private Long categoryId;
+    private Long themeSetId;
+
+    public void setThemeSetId(Long themeSetId) {
+        this.themeSetId = themeSetId;
+    }
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
@@ -67,7 +72,7 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     @DefaultHandler
     public Resolution list() {
-        return new ForwardResolution("/themeset/list.jsp");
+        return new RedirectResolution("/themeset/list.jsp");
     }
 
     public Resolution createThemeSet() {
@@ -77,13 +82,19 @@ public class ThemeSetActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public Resolution openEditPage() {
-        //dto = service.findById(dto.getId());
+    public Resolution openEditPage() {        
         return new ForwardResolution("/themeset/edit.jsp");
     }
 
-    public Resolution delete() {
-        themeSetDto = themeSetService.findById(themeSetDto.getId());
+    public Resolution deleteThemeSet() {
+        themeSetService.delete(themeSetId);
+        return new RedirectResolution(this.getClass(), "list");
+    }
+    
+    public Resolution updateThemeSet() {
+        CategoryDto category = categoryService.findById(categoryId);
+        themeSetDto.setCategoryDto(category);
+        themeSetService.update(themeSetDto);
         return new RedirectResolution(this.getClass(), "list");
     }
 

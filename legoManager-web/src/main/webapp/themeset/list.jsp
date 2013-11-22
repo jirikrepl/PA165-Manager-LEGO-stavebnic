@@ -18,6 +18,7 @@
                 </div>
             </div>
         </s:form>
+            
         <table class="table">
             <tr>
                 <th>id</th>
@@ -32,19 +33,22 @@
                     <td>${themeSet.id}</td>
                     <td><c:out value="${themeSet.name}"/></td>
                     <td><c:out value="${themeSet.price}"/></td>
-                    <%--<td><c:out value="${themeSet.description}"/></td>--%>
-                    <td></td>
+                    <td><c:out value="${themeSet.categoryDto.name}"/></td>
                     <td>
                         <span>
                             <!--table buttons-->
+                            <!--edit-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
-                                <s:hidden name="dto.id" value="${dto.id}"/>
+                                <s:hidden name="themeSetDto.id" value="${themeSet.id}"/>
+                                <s:hidden name="themeSetDto.name" value="${themeSet.name}"/>
+                                <s:hidden name="themeSetDto.price" value="${themeSet.price}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="themeset.edit.button"/></s:submit>
                             </s:form>
 
+                            <!--delete-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
-                                <s:hidden name="dto.id" value="${dto.id}"/>
-                                <s:submit class="btn" name="delete"><f:message key="themeset.delete.button"/></s:submit>
+                                <s:hidden name="themeSetId" value="${themeSet.id}"/>
+                                <s:submit class="btn" name="deleteThemeSet"><f:message key="themeset.delete.button"/></s:submit>
                             </s:form>
                         </span>
                     </td>

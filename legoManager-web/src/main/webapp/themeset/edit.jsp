@@ -1,17 +1,29 @@
-<%-- 
-    Document   : edit
-    Created on : Nov 22, 2013, 6:39:55 PM
-    Author     : PALO
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<%@page contentType="text/html" pageEncoding="windows-1250"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<s:layout-render name="/layout.jsp" titlekey="themeset.title">
+    <s:layout-component name="body">
+        <s:useActionBean beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean" var="actionBean"/>
+        <h1 class="text-center"><f:message key="themeset.headline"/></h1>
+
+        <s:form class="form-horizontal" id="themesetCreateForm" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
+            <legend><f:message key="themeset.create.title"/></legend>
+            <%@include file="form.jsp"%>
+
+            <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <s:submit class="btn" name="updateThemeSet"><f:message key="themeset.button.save"/></s:submit>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                    <s:submit class="btn" name=""><f:message key="themeset.button.cancel"/></s:submit>
+                    </div>
+                </div>
+        </s:form>
+
+    </s:layout-component>
+</s:layout-render>

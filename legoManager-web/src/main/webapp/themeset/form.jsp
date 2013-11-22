@@ -13,7 +13,7 @@
 <div class="form-group">
     <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.create.price"/></s:label>
         <div class="col-sm-4">
-        <s:text class="form-control" id="b1" name="themeSetDto.description"/>
+        <s:text class="form-control" id="b1" name="themeSetDto.price"/>
     </div>
 </div>
 
