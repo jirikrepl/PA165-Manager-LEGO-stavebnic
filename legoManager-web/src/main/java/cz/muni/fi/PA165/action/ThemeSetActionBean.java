@@ -36,7 +36,7 @@ public class ThemeSetActionBean extends BaseActionBean{
     
     public Resolution add(){
         service.create(dto);
-        return new ForwardResolution("/themeset/list.jsp");
+        return new RedirectResolution(this.getClass(), "list");
     }
 
     public List<ThemeSetDto> getThemeSets() {
@@ -44,11 +44,11 @@ public class ThemeSetActionBean extends BaseActionBean{
         return themeSets;
     }   
     public Resolution openEditPage(){
-        dto = service.findById(dto.getId());
+        //dto = service.findById(dto.getId());
         return new ForwardResolution("/themeset/edit.jsp");
     }
     public Resolution delete(){
-        service.findById(dto.getId());
+        dto= service.findById(dto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
     
