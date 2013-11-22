@@ -18,12 +18,12 @@
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
-                <span class="col-sm-offset-2 col-sm-3">
+                <span class="col-sm-offset-2 col-sm-1">
                     <s:submit class="btn" name="updateBrick"><f:message key="brick.edit.button"/></s:submit>
                     </span>
                     
                     <span class=" col-sm-3">
-                    <s:submit class="btn" name=""><f:message key="brick.edit.button"/></s:submit>
+                    <s:submit class="btn" name=""><f:message key="brick.cancel.button"/></s:submit>
                     </span>
                 </div>
                     

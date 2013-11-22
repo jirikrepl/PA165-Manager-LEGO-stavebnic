@@ -6,4 +6,5 @@
 /*style for table buttons to display them in one row*/
 .table-buttons {
     display:inline-block;
+    margin-right: 20px;
 }
