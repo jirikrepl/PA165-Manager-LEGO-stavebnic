@@ -39,15 +39,15 @@
 
             <!--creates lines of table in loop-->
             <!--uses bricks from getter from action bean-->
-            <c:forEach items="${actionBean.buildingKits}" var="buldingKit">
+            <c:forEach items="${actionBean.buildingKits}" var="buildingKit">
                 <tr>
-                    <td>${buldingKit.id}</td>
-                    <td>${buldingKit.name}</td>
-                    <td>${buldingKit.yearFrom}</td>
-                    <td>${buldingKit.price}</td>
+                    <td>${buildingKit.id}</td>
+                    <td>${buildingKit.name}</td>
+                    <td>${buildingKit.yearFrom}</td>
+                    <td>${buildingKit.price}</td>
                     <td>TODO kategorie</td>
-                    <td>${buldingKit.themeSet}</td>
-                    <td>${buldingKit.description}</td>
+                    <td>${buildingKit.themeSet}</td>
+                    <td>${buildingKit.description}</td>
                     <td></td>
 
                     <td><c:out value=""/></td>
@@ -56,17 +56,17 @@
                         <span>
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buldingKit.id}"/>
+                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="buildingKit.edit.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buldingKit.id}"/>
+                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="openManageBrickPage"><f:message key="buildinKit.bricks.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${buldingKit.id}"/>
+                                <s:hidden name="brick.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>

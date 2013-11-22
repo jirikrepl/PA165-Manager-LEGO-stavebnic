@@ -35,20 +35,20 @@
 
             <!--creates lines of table in loop-->
             <!--uses bricks from getter from action bean-->
-            <c:forEach items="${actionBean.bricks}" var="brick">
+            <c:forEach items="${actionBean.bricksSaved}" var="brick">
                 <tr>
-                    <td>${brick.id}</td>
-                    <td><c:out value="${brick.name}"/></td>
-                    <td><f:message key="brick.color.${brick.color}"/></td>
+                    <td>${brick.key.id}</td>
+                    <td>${brick.key.color}</td>
+                    <td>${brick.value}</td>
 
                     <td><c:out value=""/></td>
 
                     <td>
                         <span>
 
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
-                                <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+                                <s:hidden name="brick.id" value="${brick.key.id}"/>
+                                <s:submit class="btn" name="deleteBrick"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>
 

@@ -16,14 +16,7 @@ import java.util.List;
  */
 public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
     implements BuildingKitDao {
-    
 
-
-    public void update(BuildingKit buildingKit)
-    {
-       create(buildingKit);
-    }
-    
     public List<BuildingKit> findAll() {
         Query q = entityManager.createQuery(
                 "SELECT b FROM BuildingKit b", BuildingKit.class);
