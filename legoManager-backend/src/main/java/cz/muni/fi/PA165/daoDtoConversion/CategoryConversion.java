@@ -17,7 +17,7 @@ import java.util.List;
 public class CategoryConversion {
     public static CategoryDto conversionToDto(Category category){
         if (category == null){
-            throw new IllegalArgumentException("Entity cannost be NULL");
+            throw new IllegalArgumentException("Entity cannost be NULL-conversiontoDto");
             
         }
         CategoryDto categoryDto = new CategoryDto();
@@ -30,7 +30,7 @@ public class CategoryConversion {
     
     public static Category convertToEntity(CategoryDto categoryDto){
         if (categoryDto == null){
-            throw new IllegalArgumentException("Entity cannost be NULL");            
+            throw new IllegalArgumentException("DTO cannost be NULL-conversiontoEntity");            
         }
         Category category = new Category();
         category.setId(categoryDto.getId());
