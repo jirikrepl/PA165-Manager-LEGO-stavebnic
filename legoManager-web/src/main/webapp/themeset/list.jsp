@@ -4,9 +4,6 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
 <s:layout-render name="/layout.jsp" titlekey="themeset.title">
-    <s:layout-component name="header">
-        
-    </s:layout-component>
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean" var="actionBean"/>
             <h1 class="text-center"><f:message key="themeset.headline"/></h1>

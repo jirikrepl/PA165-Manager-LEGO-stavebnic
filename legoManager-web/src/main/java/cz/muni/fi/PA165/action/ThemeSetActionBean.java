@@ -11,16 +11,14 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
-import net.sourceforge.stripes.validation.ValidationErrorHandler;
-import net.sourceforge.stripes.validation.ValidationErrors;
-
 /**
  *
  * @author Pavol Bako
  */
 
-@UrlBinding("/themeset/{event}/{themeset.id}")
-public class ThemeSetActionBean extends BaseActionBean implements ValidationErrorHandler{
+//podla odporucania Jiriho
+@UrlBinding("/themeset/{$event}")
+public class ThemeSetActionBean extends BaseActionBean{
     
     //nainjektovana spring beana do tohoto ActionBeanu
     @SpringBean
@@ -30,7 +28,7 @@ public class ThemeSetActionBean extends BaseActionBean implements ValidationErro
     
     @DefaultHandler
     public Resolution list(){
-        themeSets = service.findAll();
+       
         return new ForwardResolution("/themeset/list.jsp");
     }
     
@@ -40,18 +38,8 @@ public class ThemeSetActionBean extends BaseActionBean implements ValidationErro
     }
 
     public List<ThemeSetDto> getThemeSets() {
-        return themeSets;
-    }
-
-    public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
-        //fill up the data for the table if validation errors occured
         themeSets = service.findAll();
-        //return null to let the event handling continue
-        return null;
-    }
-            
-    
-    
-    
+        return themeSets;
+    }   
     
 }
