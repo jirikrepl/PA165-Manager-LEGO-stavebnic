@@ -7,7 +7,7 @@ package cz.muni.fi.PA165.api.service;
  */
 public enum Color {
 
-    WHITE("brick.color.WHITE"),
+    WHITE("brick.color.WHITE %s"),
     BRICKYELLOW("brick.color.BRICKYELLOW"),
     NOUGAT("brick.color.NOUGAT"),
     BRIGHTRED("brick.color.BRIGHTRED"),
@@ -16,8 +16,7 @@ public enum Color {
     BLACK("brick.color.BLACK"),
     DARKGREEN("brick.color.DARKGREEN"),   
     BRIGHTGREEN("brick.color.BRIGHTGREEN"),
-    DARKORANGE("brick.color.DARKORANGE"),
-    
+    DARKORANGE("brick.color.DARKORANGE"),    
     MEDIUMBLUE("brick.color.MEDIUMBLUE"), 
     COOLYELLOW("brick.color.COOLYELLOW"),
     DARKBROWN("brick.color.DARKBROWN"),

@@ -6,6 +6,8 @@
     <s:layout-component name="body">
 
         <h1 class="text-center"><f:message key="index.headline"/></h1>
+        
+        <%--<p><f:message key="index.paragraph"/></p>--%>
 
     </s:layout-component>
 </s:layout-render>
