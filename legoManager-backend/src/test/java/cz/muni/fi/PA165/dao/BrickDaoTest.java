@@ -123,7 +123,7 @@ public class BrickDaoTest extends TestCase {
         Brick[] bricks = new Brick[4];
         bricks[0] =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
         bricks[1] =  TestUtils.createBrick("TestBrick", Color.BRIGHTBLUE, "Some description");
-        bricks[2] =  TestUtils.createBrick("TestBrick", Color.MEDIUMLILAC, "Some description");
+        bricks[2] =  TestUtils.createBrick("TestBrick", Color.BRIGHTGREEN, "Some description");
         bricks[3] =  TestUtils.createBrick("TestBrick", Color.BLACK, "Some description");
 
         Set<Brick> setOfBricks = new HashSet<Brick>();
@@ -152,7 +152,7 @@ public class BrickDaoTest extends TestCase {
         Brick[] bricks = new Brick[4];
         bricks[0] =  TestUtils.createBrick("TestBrick1", Color.BLACK, "Some description");
         bricks[1] =  TestUtils.createBrick("TestBrick2", Color.BRIGHTBLUE, "Some description");
-        bricks[2] =  TestUtils.createBrick("TestBrick3", Color.MEDIUMLILAC, "Some description");
+        bricks[2] =  TestUtils.createBrick("TestBrick3", Color.BRIGHTGREEN, "Some description");
         bricks[3] =  TestUtils.createBrick("TestBrick4", Color.BLACK, "Some description");
         Set<Brick> setOfBricks = new HashSet<Brick>();
         setOfBricks.addAll(Arrays.asList(bricks));
