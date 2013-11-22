@@ -3,9 +3,11 @@ package cz.muni.fi.PA165.action;
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.api.service.CategoryService;
+import cz.muni.fi.PA165.api.service.ThemeSetService;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -26,7 +28,14 @@ public class BuildingKitActionBean extends BaseActionBean {
 
     @SpringBean
     private BuildingKitService service;
-    List<BuildingKitDto> buildingKits;
+
+    @SpringBean
+    private ThemeSetService themeSetService;
+
+    @SpringBean
+    private CategoryService categoryService;
+
+    private List<BuildingKitDto> buildingKits;
 
     @SpringBean
     private BrickService brickService;
@@ -36,6 +45,13 @@ public class BuildingKitActionBean extends BaseActionBean {
         return buildingKits;
     }
 
+    public List<CategoryDto> getCategories() {
+        return categoryService.findAll();
+    }
+
+    public List<ThemeSetDto> getThemeSets() {
+        return themeSetService.findAll();
+    }
 
 
     private BuildingKitDto buildingKit;
@@ -164,7 +180,7 @@ public class BuildingKitActionBean extends BaseActionBean {
     public Resolution delete() {
         long idBuildingKit = buildingKit.getId();
         service.delete(idBuildingKit);
-        return new ForwardResolution("/buildingKit/buildingKitList.jsp");
+        return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution openManageBrickPage() {

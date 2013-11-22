@@ -5,7 +5,7 @@
 
 <s:layout-render name="/layout.jsp" titlekey="category.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.PA165.action.CategoryActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="category.headline"/></h1>
 
         <!--form for brick creation-->
