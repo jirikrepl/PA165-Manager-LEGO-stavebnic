@@ -3,7 +3,7 @@
 <!--first row == name-->
 <!--uses bootstrap classes for setting width col-sm-2 -->
 <div class="form-group">
-    <s:label for="b1" name="brickTitle" class="col-sm-2 control-label"/>
+    <s:label for="b1" name="briiiickTitle" class="col-sm-2 control-label"/>
     <div class="col-sm-4">
         <s:text class="form-control" id="b1" name="brick.name"/> <!--this parameter brick.name is connected to actionBean private variable Brick-->
     </div>
