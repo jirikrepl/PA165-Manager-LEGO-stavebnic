@@ -8,6 +8,8 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 import java.util.List;
 
@@ -27,6 +29,11 @@ public class CategoryActionBean extends BaseActionBean {
         return categories;
     }
 
+    @ValidateNestedProperties(
+            value = {
+                    @Validate(on = {"add","openEditPage","updateCategory"}, field = "name", required = true, maxlength = 50)
+            }
+    )
     private CategoryDto categoryDto;
 
     public CategoryDto getCategoryDto() {
