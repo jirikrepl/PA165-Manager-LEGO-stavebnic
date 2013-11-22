@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.action;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.service.BrickService;
-import cz.muni.fi.PA165.api.service.Color;
 import java.util.List;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -87,8 +86,7 @@ public class BrickActionBean extends BaseActionBean {
      * redirects to brick edit page
      * @return 
      */
-    public Resolution openEditPage() {
-        brick = brickService.findById(brick.getId());
+    public Resolution openEditPage() {        
         return new ForwardResolution("/brick/brickEdit.jsp");
     }
     
@@ -99,6 +97,6 @@ public class BrickActionBean extends BaseActionBean {
      */
     public Resolution updateBrick() {
         brickService.update(brick);
-        return new ForwardResolution(this.getClass(), "list");
+        return new RedirectResolution(this.getClass(), "list");
     }
 }
