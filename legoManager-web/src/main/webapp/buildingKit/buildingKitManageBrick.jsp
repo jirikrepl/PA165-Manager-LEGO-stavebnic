@@ -38,7 +38,7 @@
             <c:forEach items="${actionBean.bricksSaved}" var="brick">
                 <tr>
                     <td>${brick.key.id}</td>
-                    <td>${brick.key.color}</td>
+                    <td>${brick.key.name}</td>
                     <td>${brick.value}</td>
 
                     <td><c:out value=""/></td>
@@ -47,8 +47,9 @@
                         <span>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="brick.id" value="${brick.key.id}"/>
-                                <s:submit class="btn" name="deleteBrick"><f:message key="table.buttons.delete"/></s:submit>
+                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
+                                <s:hidden name="brickIdDelete" value="${brick.key.id}" />
+                                <s:submit class="btn" name="deleteBrick">fsdfgadsgv</s:submit>
                             </s:form>
                         </span>
 
