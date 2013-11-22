@@ -97,7 +97,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>legoManager-web</finalName>
+        <finalName>pa165</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -108,14 +108,10 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
-                    <connectors>
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8080</port>
-                        </connector>
-                    </connectors>
+                    <path>/pa165</path>
                 </configuration>
             </plugin>
         </plugins>
