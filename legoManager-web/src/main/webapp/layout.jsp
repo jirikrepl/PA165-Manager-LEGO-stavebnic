@@ -61,7 +61,7 @@
             </div>
 
             <div class="container">
-                
+                <s:messages/>
                 <s:layout-component name="body"/>
             </div>
         </body>

@@ -39,6 +39,7 @@ public class ThemeSetConversion {
 
         dto.setDescription(themeSet.getDescription());
 
+        /*
         // creates list of building kits dtos from list of building kit entities
         List<BuildingKit> kitsList = themeSet.getBuildingKits();
         if (kitsList != null) {
@@ -49,6 +50,7 @@ public class ThemeSetConversion {
             }
             dto.setBuildingKitsDto(kitsDtoList);
         }
+        */
 
         return dto;
     }
@@ -76,7 +78,7 @@ public class ThemeSetConversion {
         }
 
         themeSet.setPrice(themeSetDto.getPrice());
-
+        /*
         List<BuildingKitDto> kitsDtoList = themeSetDto.getBuildingKitsDto();
 
         if (kitsDtoList != null) {
@@ -87,7 +89,7 @@ public class ThemeSetConversion {
             }
             themeSet.setBuildingKits(kitsList);
         }
-
+                    */
         return themeSet;
     }
 }

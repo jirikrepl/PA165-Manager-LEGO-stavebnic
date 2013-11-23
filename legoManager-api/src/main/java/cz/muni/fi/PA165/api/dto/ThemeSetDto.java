@@ -58,6 +58,7 @@ public class ThemeSetDto {
         this.categoryDto = category;
     }
 
+    /*
     public List<BuildingKitDto> getBuildingKitsDto() {
         return buildingKitsDto;
     }
@@ -65,7 +66,8 @@ public class ThemeSetDto {
     public void setBuildingKitsDto(List<BuildingKitDto> buildingKits) {
         this.buildingKitsDto = buildingKits;
     }
-    
+    */
+
     @Override
     public int hashCode() {
         int hash = 5;
