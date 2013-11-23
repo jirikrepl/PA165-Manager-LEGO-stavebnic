@@ -30,6 +30,7 @@
                 <th><f:message key="table.buildingKit.name"/></th>
                 <th><f:message key="table.buildingKit.yearfrom"/></th>
                 <th><f:message key="table.buildingKit.price"/></th>
+                <th><f:message key="table.buildingKit.category"/></th>
                 <th><f:message key="table.buildingKit.themeSet"/></th>
                 <th><f:message key="table.options"/></th>
             </tr>
@@ -42,7 +43,8 @@
                     <td>${buildingKit.name}</td>
                     <td>${buildingKit.yearFrom}</td>
                     <td>${buildingKit.price}</td>
-                    <td>${buildingKit.themeSet}</td>
+                    <td>${buildingKit.category.name}</td>
+                    <td>${buildingKit.themeSet.name}</td>
 
 
                     <td>

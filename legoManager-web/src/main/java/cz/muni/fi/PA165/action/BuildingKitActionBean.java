@@ -37,8 +37,19 @@ public class BuildingKitActionBean extends BaseActionBean {
 
     private List<BuildingKitDto> buildingKits;
 
+    private Long categoryId;
+    private Long themesetId;
+
     @SpringBean
     private BrickService brickService;
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public void setThemesetId(Long themesetId) {
+        this.themesetId = themesetId;
+    }
 
     public List<BuildingKitDto> getBuildingKits() {
         buildingKits = service.findAll();
@@ -87,11 +98,13 @@ public class BuildingKitActionBean extends BaseActionBean {
     }
 
     public Resolution createBuildingKit() {
+        CategoryDto category = categoryService.findById(categoryId);
+        buildingKit.setCategory(category);
+        ThemeSetDto themeSet = themeSetService.findById(themesetId);
+        buildingKit.setThemeSet(themeSet);
         service.create(buildingKit);
         return new RedirectResolution("/buildingKit/buildingKitList.jsp");
     }
-
-
 
     //sprava kosticek
     private BrickDto brick;
