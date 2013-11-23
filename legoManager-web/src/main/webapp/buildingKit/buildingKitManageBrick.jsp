@@ -29,11 +29,17 @@
                 </div>
             </div>
 
+            
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
+                <div class="col-sm-offset-2 col-sm-1">
                     <s:submit class="btn" name="addBrick"><f:message key="buildingkit.addbrick.add"/></s:submit>
                 </div>
+            
+                <div class="col-sm-offset-1 col-sm-3">
+                    <s:submit class="btn" name=""><f:message key="buildingkit.addbrick.cancel"/></s:submit>
+                </div>
             </div>
+            
         </s:form>
 
 

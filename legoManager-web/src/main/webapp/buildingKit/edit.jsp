@@ -6,13 +6,13 @@
 <s:layout-render name="/layout.jsp" titlekey="category.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="category.headline"/></h1>
+        <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
         
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-            <legend><f:message key="category.create"/></legend>
+            <legend><f:message key="buildingKit.create"/></legend>
             <%@include file="buildingKitForm.jsp"%>
             
             <s:hidden name="buildingKit.id"/>
@@ -20,11 +20,11 @@
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
                 <span class="col-sm-offset-2 col-sm-1">
-                    <s:submit class="btn" name="updateBuildingKit"><f:message key="brick.edit.button"/></s:submit>
+                    <s:submit class="btn" name="updateBuildingKit"><f:message key="buildingKit.edit.button"/></s:submit>
                     </span>
                     
                     <span class="col-sm-offset-1 col-sm-3">
-                    <s:submit class="btn" name=""><f:message key="brick.cancel.button"/></s:submit>
+                    <s:submit class="btn" name=""><f:message key="buildingKit.cancel.button"/></s:submit>
                     </span>
                 </div>
         </s:form>
