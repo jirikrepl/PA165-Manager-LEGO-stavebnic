@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-                <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.title"/></s:label>
+                <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.count"/></s:label>
                 <div class="col-sm-4">
                     <s:text class="form-control" id="b2" name="brickCount" value="1"/>
                 </div>
