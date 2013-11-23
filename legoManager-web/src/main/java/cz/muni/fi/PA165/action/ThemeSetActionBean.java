@@ -11,6 +11,8 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 /**
  *
@@ -21,13 +23,17 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     @SpringBean
     protected ThemeSetService themeSetService;
-    
+
     @SpringBean
     protected CategoryService categoryService;
-    
+
     private List<ThemeSetDto> themeSets;
     private List<CategoryDto> categories;
-    
+
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"createThemeSet", "updateThemeSet"}, field = "name", required = true),
+        @Validate(on = {"createThemeSet", "updateThemeSet"}, field = "price", required = true),
+    })
     private ThemeSetDto themeSetDto;
     private Long categoryId;
     private Long themeSetId;
@@ -39,10 +45,11 @@ public class ThemeSetActionBean extends BaseActionBean {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
-    
+
     /**
      * get list of all theme sets
-     * @return 
+     *
+     * @return
      */
     public List<ThemeSetDto> getThemeSets() {
         themeSets = themeSetService.findAll();
@@ -53,10 +60,11 @@ public class ThemeSetActionBean extends BaseActionBean {
         categories = categoryService.findAll();
         return categories;
     }
-    
+
     /**
      * gets one theme set
-     * @return 
+     *
+     * @return
      */
     public ThemeSetDto getThemeSetDto() {
         return themeSetDto;
@@ -64,7 +72,8 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     /**
      * sets one theme set
-     * @param themeSetDto 
+     *
+     * @param themeSetDto
      */
     public void setThemeSetDto(ThemeSetDto themeSetDto) {
         this.themeSetDto = themeSetDto;
@@ -82,7 +91,7 @@ public class ThemeSetActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public Resolution openEditPage() {        
+    public Resolution openEditPage() {
         return new ForwardResolution("/themeset/edit.jsp");
     }
 
@@ -90,7 +99,7 @@ public class ThemeSetActionBean extends BaseActionBean {
         themeSetService.delete(themeSetId);
         return new RedirectResolution(this.getClass(), "list");
     }
-    
+
     public Resolution updateThemeSet() {
         CategoryDto category = categoryService.findById(categoryId);
         themeSetDto.setCategoryDto(category);

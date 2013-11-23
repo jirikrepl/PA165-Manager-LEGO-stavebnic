@@ -1,7 +1,9 @@
 package cz.muni.fi.PA165.action;
 
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.CategoryService;
+import cz.muni.fi.PA165.api.service.ThemeSetService;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
@@ -12,16 +14,23 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 import java.util.List;
+import net.sourceforge.stripes.action.LocalizableMessage;
+import net.sourceforge.stripes.validation.ValidationErrorHandler;
+import net.sourceforge.stripes.validation.ValidationErrors;
 
 /**
  * @author: Martin Rumanek
  * @version: 11/21/13
  */
 @UrlBinding("/categories/{$event}")
-public class CategoryActionBean extends BaseActionBean {
+public class CategoryActionBean extends BaseActionBean implements ValidationErrorHandler{
 
     @SpringBean
     private CategoryService service;
+
+    @SpringBean
+    private ThemeSetService themeSetService;
+
     List<CategoryDto> categories;
 
     public List<CategoryDto> getCategories() {
@@ -31,14 +40,9 @@ public class CategoryActionBean extends BaseActionBean {
 
     @ValidateNestedProperties(
             value = {
-                    @Validate(on = {"add","openEditPage","updateCategory"}, field = "name", required = true, maxlength = 50)
+                @Validate(on = {"add", "updateCategory"}, field = "name", required = true, maxlength = 50),
+                @Validate(on = {"add", "updateCategory"}, field = "description", required = true, maxlength = 50)
             }
-            
-//            @ValidateNestedProperties(value = {
-//            @Validate(on = {"add", "save"}, field = "author", required = true),
-//            @Validate(on = {"add", "save"}, field = "title", required = true),
-//            @Validate(on = {"add", "save"}, field = "year", required = true, minvalue = 800)
-//    })
     )
     private CategoryDto categoryDto;
 
@@ -60,7 +64,7 @@ public class CategoryActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public Resolution openEditPage() {        
+    public Resolution openEditPage() {
         return new ForwardResolution("/category/edit.jsp");
     }
 
@@ -70,8 +74,23 @@ public class CategoryActionBean extends BaseActionBean {
     }
 
     public Resolution delete() {
-        service.delete(categoryDto.getId());
+        List<ThemeSetDto> themeSetList = themeSetService.findAll();
+
+        // if category doesnt contains any theme sets
+        // --> allow to delete it
+        if (themeSetList.isEmpty()) {
+            service.delete(categoryDto.getId());
+        } else {
+            getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML("ahoj"),escapeHTML("ahoj")));
+        }
         return new RedirectResolution(this.getClass(), "list");
+    }
+
+    public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
+        //fill up the data for the table if validation errors occured
+        categories = service.findAll();
+        //return null to let the event handling continue
+        return null;
     }
 
 }
