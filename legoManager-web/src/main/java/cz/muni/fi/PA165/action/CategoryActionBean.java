@@ -33,6 +33,12 @@ public class CategoryActionBean extends BaseActionBean {
             value = {
                     @Validate(on = {"add","openEditPage","updateCategory"}, field = "name", required = true, maxlength = 50)
             }
+            
+//            @ValidateNestedProperties(value = {
+//            @Validate(on = {"add", "save"}, field = "author", required = true),
+//            @Validate(on = {"add", "save"}, field = "title", required = true),
+//            @Validate(on = {"add", "save"}, field = "year", required = true, minvalue = 800)
+//    })
     )
     private CategoryDto categoryDto;
 
