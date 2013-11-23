@@ -35,15 +35,6 @@ public class ThemeSetActionBean extends BaseActionBean {
             @Validate(on={"createThemeSet", "updateThemeSet"}, field="price", required = true, minvalue = 0)})
     private ThemeSetDto themeSetDto;
     private Long categoryId;
-    private Long themeSetId;
-
-    public void setThemeSetId(Long themeSetId) {
-        this.themeSetId = themeSetId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
 
     /**
      * get list of all theme sets
@@ -84,8 +75,6 @@ public class ThemeSetActionBean extends BaseActionBean {
     }
 
     public Resolution createThemeSet() {
-        CategoryDto category = categoryService.findById(categoryId);
-        themeSetDto.setCategoryDto(category);
         themeSetService.create(themeSetDto);
         return new RedirectResolution(this.getClass(), "list");
     }
@@ -96,7 +85,7 @@ public class ThemeSetActionBean extends BaseActionBean {
     }
 
     public Resolution deleteThemeSet() {
-        themeSetService.delete(themeSetId);
+        themeSetService.delete(themeSetDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 

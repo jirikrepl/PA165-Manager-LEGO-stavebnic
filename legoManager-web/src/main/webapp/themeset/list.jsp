@@ -47,7 +47,7 @@
 
                             <!--delete-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
-                                <s:hidden name="themeSetId" value="${themeSet.id}"/>
+                                <s:hidden name="themeSetDto.id" value="${themeSet.id}"/>
                                 <s:submit class="btn" name="deleteThemeSet"><f:message key="themeset.delete.button"/></s:submit>
                             </s:form>
                         </span>
