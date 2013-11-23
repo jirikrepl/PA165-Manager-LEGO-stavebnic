@@ -15,6 +15,8 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,13 @@ public class BuildingKitActionBean extends BaseActionBean {
         return themeSetService.findAll();
     }
 
-
+    @ValidateNestedProperties(
+            value = {
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", minvalue = 0, maxvalue = 100),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", minvalue = 0)
+            }
+    )
     private BuildingKitDto buildingKit;
 
     public BuildingKitDto getBuildingKit() {
@@ -73,11 +81,6 @@ public class BuildingKitActionBean extends BaseActionBean {
 
     public void setBuildingKit(BuildingKitDto buildingKitDto) {
         this.buildingKit = buildingKitDto;
-    }
-
-    public Resolution addBuildingKit() {
-        service.create(buildingKit);
-        return new ForwardResolution("/buibuildingldingKit/buildingKitCreate.jsp");
     }
 
 
@@ -90,11 +93,12 @@ public class BuildingKitActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-
+                  /*
     public Resolution save() {
         service.update(buildingKit);
         return new RedirectResolution(this.getClass(), "list");
     }
+    */
 
     @DefaultHandler
     public Resolution list() {
