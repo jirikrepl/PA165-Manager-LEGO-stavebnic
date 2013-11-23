@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.action;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.service.BrickService;
 import java.util.List;
 import net.sourceforge.stripes.action.DefaultHandler;

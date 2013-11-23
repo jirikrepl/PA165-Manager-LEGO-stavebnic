@@ -52,6 +52,12 @@
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
+                                <s:hidden name="buildingKit.name" value="${buildingKit.name}"/>
+                                <s:hidden name="buildingKit.yearFrom" value="${buildingKit.yearFrom}"/>
+                                <s:hidden name="buildingKit.price" value="${buildingKit.price}"/>
+                                <s:hidden name="buildingKit.description" value="${buildingKit.description}"/>
+                                <s:hidden name="buildingKit.category" value="${buildingKit.category}"/>
+                                <s:hidden name="buildingKit.themeSet" value="${buildingKit.themeSet}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="buildingKit.edit.button"/></s:submit>
                             </s:form>
 

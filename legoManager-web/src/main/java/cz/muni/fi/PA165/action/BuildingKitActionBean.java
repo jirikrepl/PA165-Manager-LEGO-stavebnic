@@ -82,6 +82,10 @@ public class BuildingKitActionBean extends BaseActionBean {
 
 
     public Resolution updateBuildingKit() {
+        CategoryDto category = categoryService.findById(categoryId);
+        buildingKit.setCategory(category);
+        ThemeSetDto themeset = themeSetService.findById(themesetId);
+        buildingKit.setThemeSet(themeset);
         service.update(buildingKit);
         return new RedirectResolution(this.getClass(), "list");
     }
