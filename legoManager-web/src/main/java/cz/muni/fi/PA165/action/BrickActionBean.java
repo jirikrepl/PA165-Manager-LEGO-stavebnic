@@ -9,6 +9,8 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 /**
  * brick actionbean
@@ -25,6 +27,9 @@ public class BrickActionBean extends BaseActionBean {
     @SpringBean
     private BrickService brickService;
     private List<BrickDto> bricks;
+    
+    @ValidateNestedProperties(
+    value= {@Validate(on={"createBrick", "updateBrick"}, field="name", required = true, maxlength = 50)})
     private BrickDto brick; //one brick used for some operations (deletition, edit)
     
     /**
