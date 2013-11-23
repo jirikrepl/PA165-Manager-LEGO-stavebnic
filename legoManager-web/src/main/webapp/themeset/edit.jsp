@@ -11,8 +11,6 @@
             <legend><f:message key="themeset.create.title"/></legend>
             <%@include file="form.jsp"%>
 
-            <s:hidden name="themeSetDto.id"/>
-
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
                 <span class="col-sm-offset-2 col-sm-2">

@@ -91,6 +91,7 @@ public class ThemeSetActionBean extends BaseActionBean {
     }
 
     public Resolution openEditPage() {
+        themeSetDto = themeSetService.findById(themeSetDto.getId());
         return new ForwardResolution("/themeset/edit.jsp");
     }
 
@@ -99,9 +100,17 @@ public class ThemeSetActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
+    private CategoryDto category;
+
+    public CategoryDto getCategoryDto() {
+        return category;
+    }
+
+    public void setCategoryDto(CategoryDto category) {
+        this.category = category;
+    }
+
     public Resolution updateThemeSet() {
-        CategoryDto category = categoryService.findById(categoryId);
-        themeSetDto.setCategoryDto(category);
         themeSetService.update(themeSetDto);
         return new RedirectResolution(this.getClass(), "list");
     }

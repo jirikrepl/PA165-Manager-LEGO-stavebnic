@@ -20,7 +20,7 @@
 <div class="form-group">
     <s:label for="b1" class="col-sm-2 control-label"><f:message key="themeset.categories"/></s:label>
         <div class="col-sm-4">
-        <s:select class="form-control" id="b1" name="categoryId">
+        <s:select class="form-control" id="b1" name="themeSetDto.categoryDto.id">
             <s:options-collection collection="${actionBean.categories}" value="id" label="name"/>
         </s:select>
     </div>
