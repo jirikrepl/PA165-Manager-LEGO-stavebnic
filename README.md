@@ -21,7 +21,7 @@ Existují různé tématické kategorie pod které se stavebnice budou řadit. J
 - Set i samotná stavebnice musí evidovat do které kategorie je přiřazena
 - Kategorie také nese stručný popis
 
-Aplikácia je spustiteľná z adresára /PA165-Manager-LEGO-stavebnic pomocou príkazu mvn tomcat:run. 
-Vstupné URL v prehliadači je na adrese http://localhost:8080/legoManager-web/.
+Aplikace je spustitelná pomocí příkazu mvn tomcat7:run (v adresáři legoManager-web). 
+url: http://localhost:8080/pa165/.
 
-Aplikácia je lokalizovaná pre angličtinu a češtinu.
+Aplikace je lokalizovaná do angličtiny a češtiny.
