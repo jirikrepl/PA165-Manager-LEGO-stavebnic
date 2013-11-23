@@ -12,9 +12,8 @@ import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
-
 import java.util.List;
-import net.sourceforge.stripes.action.LocalizableMessage;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
 
@@ -81,7 +80,7 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
         if (themeSetList.isEmpty()) {
             service.delete(categoryDto.getId());
         } else {
-            getContext().getMessages().add(new LocalizableMessage("book.delete.message",escapeHTML("ahoj"),escapeHTML("ahoj")));
+            getContext().getMessages().add(new LocalizableError("category.delete.contains"));
         }
         return new RedirectResolution(this.getClass(), "list");
     }
