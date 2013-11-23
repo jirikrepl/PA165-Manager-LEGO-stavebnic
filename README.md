@@ -20,3 +20,8 @@ Existují různé tématické kategorie pod které se stavebnice budou řadit. J
 - Za jakou cenu se každý set prodává (nemusí nezbytně odpovídat součtu cen stavebnic)
 - Set i samotná stavebnice musí evidovat do které kategorie je přiřazena
 - Kategorie také nese stručný popis
+
+Aplikácia je spustiteľná z adresára /PA165-Manager-LEGO-stavebnic pomocou príkazu mvn tomcat:run. 
+Vstupné URL v prehliadači je na adrese http://localhost:8080/legoManager-web/.
+
+Aplikácia je lokalizovaná pre angličtinu a češtinu.
