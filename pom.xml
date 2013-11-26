@@ -10,6 +10,7 @@
         <module>legoManager-backend</module>
         <module>legoManager-api</module>
         <module>legoManager-web</module>
+        <module>legoManager-rest</module>
     </modules>
 
     <repositories>
