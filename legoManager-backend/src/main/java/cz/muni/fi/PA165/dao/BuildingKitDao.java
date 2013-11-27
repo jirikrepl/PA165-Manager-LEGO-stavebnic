@@ -4,7 +4,10 @@
  */
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.ThemeSet;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -72,4 +75,24 @@ public interface BuildingKitDao {
      */
     public BuildingKit findById(Long id);
 
+    /**
+     * retrieves building kit with relation to given brick from the database
+     *
+     * @param brick the given brick
+     */
+    public List<BuildingKit> findByBrick(Brick brick);
+
+    /**
+     * retrieves building kit with relation to given category from the database
+     *
+     * @param category the given category
+     */
+    public List<BuildingKit> findByCategory(Category category);
+
+    /**
+     * retrieves building kit with relation to given theme set from the database
+     *
+     * @param themeSet the given theme set
+     */
+    public List<BuildingKit> findByThemeSet(ThemeSet themeSet);
 }

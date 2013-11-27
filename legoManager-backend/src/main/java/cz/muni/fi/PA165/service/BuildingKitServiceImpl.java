@@ -1,14 +1,20 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
+import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -88,5 +94,30 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         BuildingKit entity = buildingKitDao.findById(id);
         return BuildingKitConversion.convertToDto(entity);
     }
-    
+
+    public List<BuildingKitDto> findByCategory(CategoryDto categoryDto) {
+        if (categoryDto == null) {
+            throw new DataAccessExceptionService("Category cannot be null.");
+        }
+        Category category = CategoryConversion.convertToEntity(categoryDto);
+        List<BuildingKit> kits = buildingKitDao.findByCategory(category);
+        List<BuildingKitDto> results = new ArrayList<BuildingKitDto>();
+        for (BuildingKit kit : kits) {
+            results.add(BuildingKitConversion.convertToDto(kit));
+        }
+        return results;
+    }
+
+    public List<BuildingKitDto> findByThemeSet(ThemeSetDto themeSetDto) {
+        if (themeSetDto == null) {
+            throw new DataAccessExceptionService("Theme set cannot be null.");
+        }
+        ThemeSet themeSet = ThemeSetConversion.convertToEntity(themeSetDto);
+        List<BuildingKit> kits = buildingKitDao.findByThemeSet(themeSet);
+        List<BuildingKitDto> results = new ArrayList<BuildingKitDto>();
+        for (BuildingKit kit : kits) {
+            results.add(BuildingKitConversion.convertToDto(kit));
+        }
+        return results;
+    }
 }

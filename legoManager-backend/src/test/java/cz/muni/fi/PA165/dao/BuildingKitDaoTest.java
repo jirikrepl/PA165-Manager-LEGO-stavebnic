@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.api.service.Color;
+import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +23,7 @@ public class BuildingKitDaoTest extends TestCase {
 
     private BuildingKitDao buildingKitDao;
     private BrickDao brickDao;
+    private CategoryDao categoryDao;
     private EntityManager em;
 
     @Override
@@ -34,6 +36,9 @@ public class BuildingKitDaoTest extends TestCase {
         
         brickDao = new BrickDaoImpl();
         brickDao.setEntityManager(em);
+
+        categoryDao = new CategoryDaoImpl();
+        categoryDao.setEntityManager(em);
     }
 
     public void tearDow() throws Exception {
@@ -235,7 +240,101 @@ public class BuildingKitDaoTest extends TestCase {
         assertEquals(kitList.size(), 1);
 
     }
-    
+
+    public void testFindByCategory() {
+        System.out.println("TEST Find By Category");
+
+        try {
+            buildingKitDao.findByCategory(null);
+            fail("finding building kits for null category");
+        } catch (IllegalArgumentException ex) {
+        }
+
+        Map<Brick, Integer> map = storeBricks();
+
+        em.getTransaction().begin();
+        Category usedCategory = TestUtils.createCategory("k1", "k1");
+        categoryDao.create(usedCategory);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        Category nonUsedCategory = TestUtils.createCategory("k2", "k2");
+        categoryDao.create(nonUsedCategory);
+        em.getTransaction().commit();
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, map);
+        kit.setCategory(usedCategory);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, map);
+        kit2.setCategory(usedCategory);
+        BuildingKit kit3 = TestUtils.createBuildingKit("name3", "description", BigDecimal.ZERO, 3, map);
+        em.getTransaction().begin();
+        buildingKitDao.create(kit);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        buildingKitDao.create(kit2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        buildingKitDao.create(kit3);
+        em.getTransaction().commit();
+
+        List<BuildingKit> kitList = buildingKitDao.findByCategory(usedCategory);
+
+        assertNotNull(kitList);
+        assertTrue(kitList.contains(kit));
+        assertTrue(kitList.contains(kit2));
+        assertFalse(kitList.contains(kit3));
+        assertEquals(kitList.size(), 2);
+
+        List<BuildingKit> emptyKitList = buildingKitDao.findByCategory(nonUsedCategory);
+
+        assertNotNull(emptyKitList);
+        assertEquals(emptyKitList.size(), 0);
+    }
+
+    public void testFindByBrick() {
+        System.out.println("TEST Find By Brick");
+
+        try {
+            buildingKitDao.findByBrick(null);
+            fail("finding bricks for null category");
+        } catch (IllegalArgumentException ex) {
+        }
+
+        Map<Brick, Integer> map = storeBricks();
+        Brick usedBrick = (Brick)map.keySet().toArray()[0];
+        em.getTransaction().begin();
+        Brick nonUsedBrick = TestUtils.createBrick("nonUsedBrick", Color.BLACK, "desc");
+        brickDao.create(nonUsedBrick);
+        em.getTransaction().commit();
+
+        BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, map);
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, map);
+        BuildingKit kit3 =
+                TestUtils.createBuildingKit("name3", "description", BigDecimal.ZERO, 3, new HashMap<Brick, Integer>());
+        em.getTransaction().begin();
+        buildingKitDao.create(kit);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        buildingKitDao.create(kit2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        buildingKitDao.create(kit3);
+        em.getTransaction().commit();
+
+        List<BuildingKit> kitList = buildingKitDao.findByBrick(usedBrick);
+
+        assertNotNull(kitList);
+        assertTrue(kitList.contains(kit));
+        assertTrue(kitList.contains(kit2));
+        assertFalse(kitList.contains(kit3));
+        assertEquals(kitList.size(), 2);
+
+        List<BuildingKit> emptyKitList = buildingKitDao.findByBrick(nonUsedBrick);
+
+        assertNotNull(emptyKitList);
+        assertEquals(emptyKitList.size(), 0);
+
+    }
+
     public Map<Brick, Integer> storeBricks(){
         Brick brick1 = TestUtils.createBrick("TestBrickA", Color.BLACK, "Test");
         Brick brick2 = TestUtils.createBrick("TestBrickB", Color.BLACK, "Test");
