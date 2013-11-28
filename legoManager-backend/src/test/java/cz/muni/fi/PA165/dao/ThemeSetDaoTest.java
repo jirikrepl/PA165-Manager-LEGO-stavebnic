@@ -5,6 +5,7 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
@@ -16,6 +17,7 @@ import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tomas Kopecky
@@ -205,6 +207,55 @@ public class ThemeSetDaoTest extends TestCase {
         assertNotNull(setList);
         assertFalse(setList.contains(ts1));
         assertTrue(setList.contains(ts2));
+    }
+
+    public void testFindByCategory() {
+        System.out.println("TEST Find By Category");
+
+        try {
+            dao.findByCategory(null);
+            fail("finding theme sets for null category");
+        } catch (IllegalArgumentException ex) {
+        }
+
+        em.getTransaction().begin();
+        Category usedCategory = TestUtils.createCategory("k1", "k1");
+        categoryDao.create(usedCategory);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        Category usedCategory2 = TestUtils.createCategory("k11", "k11");
+        categoryDao.create(usedCategory2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        Category nonUsedCategory = TestUtils.createCategory("k2", "k2");
+        categoryDao.create(nonUsedCategory);
+        em.getTransaction().commit();
+
+        ThemeSet set = TestUtils.createThemeSet("name", "description", BigDecimal.ONE, null, usedCategory);
+        ThemeSet set2 = TestUtils.createThemeSet("name2", "description", BigDecimal.ZERO, null, usedCategory);
+        ThemeSet set3 = TestUtils.createThemeSet("name3", "description", BigDecimal.ZERO, null, usedCategory2);
+        em.getTransaction().begin();
+        dao.create(set);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        dao.create(set2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        dao.create(set3);
+        em.getTransaction().commit();
+
+        List<ThemeSet> setList = dao.findByCategory(usedCategory);
+
+        assertNotNull(setList);
+        assertTrue(setList.contains(set));
+        assertTrue(setList.contains(set2));
+        assertFalse(setList.contains(set3));
+        assertEquals(setList.size(), 2);
+
+        List<ThemeSet> emptySetList = dao.findByCategory(nonUsedCategory);
+
+        assertNotNull(emptySetList);
+        assertEquals(emptySetList.size(), 0);
     }
 
 }
