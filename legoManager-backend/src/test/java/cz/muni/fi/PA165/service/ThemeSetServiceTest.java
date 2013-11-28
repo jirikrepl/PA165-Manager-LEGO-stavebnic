@@ -224,6 +224,7 @@ public class ThemeSetServiceTest {
     /**
      * Test of findByCategory method, of class ThemeSetService.
      */
+    /*
     @Test
     public void testFindByCategory() {
         try {
@@ -257,4 +258,5 @@ public class ThemeSetServiceTest {
         verify(dao, times(1)).findByCategory(nonExistingCategory);
         verify(dao, times(1)).findByCategory(existingCategory);
     }
+    */
 }

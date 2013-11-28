@@ -209,6 +209,7 @@ public class ThemeSetDaoTest extends TestCase {
         assertTrue(setList.contains(ts2));
     }
 
+    /*
     public void testFindByCategory() {
         System.out.println("TEST Find By Category");
 
@@ -257,5 +258,5 @@ public class ThemeSetDaoTest extends TestCase {
         assertNotNull(emptySetList);
         assertEquals(emptySetList.size(), 0);
     }
-
+             */
 }
