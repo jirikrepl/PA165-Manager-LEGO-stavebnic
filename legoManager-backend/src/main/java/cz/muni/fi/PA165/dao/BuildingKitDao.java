@@ -80,7 +80,7 @@ public interface BuildingKitDao {
      *
      * @param brick the given brick
      */
-    public List<BuildingKit> findByBrick(Brick brick);
+    //public List<BuildingKit> findByBrick(Brick brick);
 
     /**
      * retrieves building kit with relation to given category from the database
