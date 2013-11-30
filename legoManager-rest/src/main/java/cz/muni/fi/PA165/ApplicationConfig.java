@@ -1,7 +1,10 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.rest.ServiceResource;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Application;
 import java.util.Set;
 
@@ -11,6 +14,7 @@ import java.util.Set;
  */
 @javax.ws.rs.ApplicationPath("/rest")
 public class ApplicationConfig extends Application {
+
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
