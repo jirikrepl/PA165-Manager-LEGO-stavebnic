@@ -38,8 +38,7 @@
                 <tr>
                     <td>${brick.id}</td>
                     <td><c:out value="${brick.name}"/></td>
-                    <td><f:message key="brick.color.${brick.color}"/></td>
-
+                    <td><f:message key="Color.${brick.color}"/></td>
                     <%--<td><c:out value=""/></td>--%>
 
                     <td>

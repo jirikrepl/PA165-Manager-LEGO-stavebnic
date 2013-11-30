@@ -7,23 +7,23 @@ package cz.muni.fi.PA165.api.service;
  */
 public enum Color {
 
-    WHITE("brick.color.WHITE %s"),
-    BRICKYELLOW("brick.color.BRICKYELLOW"),
-    NOUGAT("brick.color.NOUGAT"),
-    BRIGHTRED("brick.color.BRIGHTRED"),
-    BRIGHTBLUE("brick.color.BRIGHTBLUE"),
-    BRIGHTYELLOW("brick.color.BRIGHTYELLOW"),
-    BLACK("brick.color.BLACK"),
-    DARKGREEN("brick.color.DARKGREEN"),   
-    BRIGHTGREEN("brick.color.BRIGHTGREEN"),
-    DARKORANGE("brick.color.DARKORANGE"),    
-    MEDIUMBLUE("brick.color.MEDIUMBLUE"), 
-    COOLYELLOW("brick.color.COOLYELLOW"),
-    DARKBROWN("brick.color.DARKBROWN"),
-    OLIVEGREEN("brick.color.OLIVEGREEN"),
-    LIGHTPURPLE("brick.color.LIGHTPURPLE"),
-    BRIGHTPURPLE("brick.color.BRIGHTPURPLE"),
-    MEDIUMLILAC("brick.color.MEDIUMLILAC");
+    WHITE("Color.WHITE %s"),
+    BRICKYELLOW("Color.BRICKYELLOW"),
+    NOUGAT("Color.NOUGAT"),
+    BRIGHTRED("Color.BRIGHTRED"),
+    BRIGHTBLUE("Color.BRIGHTBLUE"),
+    BRIGHTYELLOW("Color.BRIGHTYELLOW"),
+    BLACK("Color.BLACK"),
+    DARKGREEN("Color.DARKGREEN"),   
+    BRIGHTGREEN("Color.BRIGHTGREEN"),
+    DARKORANGE("Color.DARKORANGE"),    
+    MEDIUMBLUE("Color.MEDIUMBLUE"), 
+    COOLYELLOW("Color.COOLYELLOW"),
+    DARKBROWN("Color.DARKBROWN"),
+    OLIVEGREEN("Color.OLIVEGREEN"),
+    LIGHTPURPLE("Color.LIGHTPURPLE"),
+    BRIGHTPURPLE("Color.BRIGHTPURPLE"),
+    MEDIUMLILAC("Color.MEDIUMLILAC");
     
     private final String text;
 
