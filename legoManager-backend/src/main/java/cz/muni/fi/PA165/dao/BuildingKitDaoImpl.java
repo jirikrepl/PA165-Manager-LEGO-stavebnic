@@ -48,9 +48,9 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
         }
         Query q = entityManager.createQuery("SELECT DISTINCT b FROM BuildingKit b " +
                 "JOIN b.bricks br "+
-                "WHERE :brick MEMBER OF br",
+                "WHERE :brick = KEY(br)",
                 BuildingKit.class);
-        q.setParameter("brick", brick.getId());
+        q.setParameter("brick", brick);
         return (List<BuildingKit>) q.getResultList();
     }
 
