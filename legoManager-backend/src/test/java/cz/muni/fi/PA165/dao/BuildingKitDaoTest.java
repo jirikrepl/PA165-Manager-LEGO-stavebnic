@@ -301,7 +301,7 @@ public class BuildingKitDaoTest extends TestCase {
         em.getTransaction().commit();
 
         BuildingKit kit = TestUtils.createBuildingKit("name", "description", BigDecimal.ZERO, 20, map);
-        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, new HashMap<Brick, Integer>());
+        BuildingKit kit2 = TestUtils.createBuildingKit("name2", "description", BigDecimal.ZERO, 14, map);
         BuildingKit kit3 = TestUtils.createBuildingKit("name3", "description", BigDecimal.ZERO, 3, new HashMap<Brick, Integer>());
         em.getTransaction().begin();
         buildingKitDao.create(kit);
