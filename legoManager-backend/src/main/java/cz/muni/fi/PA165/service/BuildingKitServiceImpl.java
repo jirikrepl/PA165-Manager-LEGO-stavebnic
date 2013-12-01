@@ -1,13 +1,18 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.dao.BrickDao;
+import cz.muni.fi.PA165.dao.BrickDaoImpl;
+import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -119,5 +124,19 @@ public class BuildingKitServiceImpl implements BuildingKitService {
             results.add(BuildingKitConversion.convertToDto(kit));
         }
         return results;
+    }
+
+    public List<BuildingKitDto> findByBrick(BrickDto brickDto) {
+        if (brickDto == null) {
+            throw new DataAccessExceptionService("Theme set cannot be null.");
+        }
+        
+        Brick brick = BrickConversion.convertToEntity(brickDto);
+        List<BuildingKit> kits = buildingKitDao.findByBrick(brick);
+        List<BuildingKitDto> result = new ArrayList<BuildingKitDto>();
+        for(BuildingKit kit : kits) {
+            result.add(BuildingKitConversion.convertToDto(kit));
+        }
+        return result;
     }
 }

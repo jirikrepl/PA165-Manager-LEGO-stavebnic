@@ -42,17 +42,17 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
         return (List<BuildingKit>) q.getResultList();
     }
 
-//    public List<BuildingKit> findByBrick(Brick brick) {
-//        if (brick == null) {
-//            throw new IllegalArgumentException("Brick cannot be null.");
-//        }
-//        Query q = entityManager.createQuery("SELECT DISTINCT b FROM BuildingKit b " +
-//                "JOIN b.bricks br "+
-//                "WHERE :brick IN br",
-//                BuildingKit.class);
-//        q.setParameter("brick", brick.getId());
-//        return (List<BuildingKit>) q.getResultList();
-//    }
+    public List<BuildingKit> findByBrick(Brick brick) {
+        if (brick == null) {
+            throw new IllegalArgumentException("Brick cannot be null.");
+        }
+        Query q = entityManager.createQuery("SELECT DISTINCT b FROM BuildingKit b " +
+                "JOIN b.bricks br "+
+                "WHERE :brick MEMBER OF br",
+                BuildingKit.class);
+        q.setParameter("brick", brick.getId());
+        return (List<BuildingKit>) q.getResultList();
+    }
 
     public List<BuildingKit> findByCategory(Category category) {
         if (category == null) {

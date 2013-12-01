@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.api.service;
 
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
@@ -75,5 +76,12 @@ public interface BuildingKitService {
      * @param themeSetDto the given theme set
      */
     public List<BuildingKitDto> findByThemeSet(ThemeSetDto themeSetDto);
+    
+    /**
+     * find buildingKits by brick
+     * @param brickDto give brick dto
+     * @return List of buildinkKits dto
+     */
+    public List<BuildingKitDto> findByBrick(BrickDto brickDto);
 
 }
