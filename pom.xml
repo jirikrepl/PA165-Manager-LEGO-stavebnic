@@ -11,6 +11,7 @@
         <module>legoManager-api</module>
         <module>legoManager-rest</module>
         <module>legoManager-web</module>
+        <module>legoManager-rest-client</module>
     </modules>
 
     <repositories>
