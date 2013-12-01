@@ -46,10 +46,8 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
         if (brick == null) {
             throw new IllegalArgumentException("Brick cannot be null.");
         }
-        Query q = entityManager.createQuery("SELECT DISTINCT b FROM BuildingKit b " +
-                "JOIN b.bricks br "+
-                "WHERE :brick = KEY(br)",
-                BuildingKit.class);
+        Query q = entityManager.createQuery("SELECT b FROM BuildingKit b " +
+                "WHERE KEY(b.bricks) = :brick", BuildingKit.class);
         q.setParameter("brick", brick);
         return (List<BuildingKit>) q.getResultList();
     }
