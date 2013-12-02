@@ -14,7 +14,7 @@
             <legend><f:message key="buildingkit.addbrick.legend"/></legend>
             <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
             <div class="form-group">
-                <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.title"/></s:label>
+                <s:label for="b1" class="col-sm-2 control-label"><f:message key="form.create.title"/></s:label>
                 <div class="col-sm-4">
                     <s:select class="form-control" id="b1" name="brick.id">
                         <s:options-collection collection="${actionBean.bricks}" value="id" label="name"/>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-                <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.title"/></s:label>
+                <s:label for="b2" class="col-sm-2 control-label"><f:message key="form.create.count"/></s:label>
                 <div class="col-sm-4">
                     <s:text class="form-control" id="b2" name="brickCount" value="1"/>
                 </div>
