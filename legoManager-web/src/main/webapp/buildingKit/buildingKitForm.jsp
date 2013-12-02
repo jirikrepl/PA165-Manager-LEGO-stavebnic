@@ -24,13 +24,6 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <s:label for="b4" name="buildingKitDescription" class="col-sm-2 control-label"><f:message key="buildingkit.form.create.description"/></s:label>
-        <div class="col-sm-4">
-            <s:text class="form-control" id="b4" name="buildingKit.description"/>
-        </div>
-    </div>
-
 <div class="form-group">
     <s:label for="b5" class="col-sm-2 control-label"><f:message key="buildingkit.categories"/></s:label>
     <div class="col-sm-4">

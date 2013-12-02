@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.api.service;
 
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
 import java.math.BigDecimal;
@@ -53,4 +55,11 @@ public interface ThemeSetService {
      * @return ThemeSet
      */
     public ThemeSetDto findById(Long id);
+
+    /**
+     * retrieves theme sets with relation to given category
+     *
+     * @param categoryDto the given category
+     */
+    //public List<ThemeSetDto> findByCategory(CategoryDto categoryDto);
 }

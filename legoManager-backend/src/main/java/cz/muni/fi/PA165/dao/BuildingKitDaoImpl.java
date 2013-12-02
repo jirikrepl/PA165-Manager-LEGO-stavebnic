@@ -4,7 +4,10 @@
  */
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.ThemeSet;
 
 import javax.persistence.Query;
 import java.math.BigDecimal;
@@ -38,4 +41,37 @@ public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>
         q.setParameter("yearFrom", yearFrom);
         return (List<BuildingKit>) q.getResultList();
     }
+
+    public List<BuildingKit> findByBrick(Brick brick) {
+        if (brick == null) {
+            throw new IllegalArgumentException("Brick cannot be null.");
+        }
+        Query q = entityManager.createQuery("SELECT b FROM BuildingKit b " +
+                "WHERE KEY(b.bricks) = :brick", BuildingKit.class);
+        q.setParameter("brick", brick);
+        return (List<BuildingKit>) q.getResultList();
+    }
+
+    public List<BuildingKit> findByCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null.");
+        }
+        Query q = entityManager.createQuery("SELECT b FROM " +
+                "BuildingKit b WHERE category = :category",
+                BuildingKit.class);
+        q.setParameter("category", category);
+        return (List<BuildingKit>) q.getResultList();
+    }
+
+    public List<BuildingKit> findByThemeSet(ThemeSet themeSet) {
+        if (themeSet == null) {
+            throw new IllegalArgumentException("Theme set cannot be null.");
+        }
+        Query q = entityManager.createQuery("SELECT b FROM " +
+                "BuildingKit b WHERE themeSet = :themeSet",
+                BuildingKit.class);
+        q.setParameter("themeSet", themeSet);
+        return (List<BuildingKit>) q.getResultList();
+    }
+
 }

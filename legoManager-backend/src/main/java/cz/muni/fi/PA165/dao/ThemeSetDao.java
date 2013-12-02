@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
 import javax.persistence.EntityManager;
@@ -62,4 +63,12 @@ public interface ThemeSetDao {
      * @return ThemeSet
      */
     public ThemeSet findById(Long id);
+
+    /**
+     * finds ThemeSet entities which are connected to the specified category
+     *
+     * @param category
+     * @return List<ThemeSet>
+     */
+    //public List<ThemeSet> findByCategory(Category category);
 }

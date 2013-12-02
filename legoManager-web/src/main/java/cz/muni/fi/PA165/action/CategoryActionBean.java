@@ -74,14 +74,15 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
 
     public Resolution delete() {
         List<ThemeSetDto> themeSetList = themeSetService.findAll();
+        for (ThemeSetDto themeSetDto : themeSetList) {
 
-        // if category doesnt contains any theme sets
-        // --> allow to delete it
-        if (themeSetList.isEmpty()) {
-            service.delete(categoryDto.getId());
-        } else {
-            getContext().getMessages().add(new LocalizableError("category.delete.contains"));
+            if (themeSetDto.getCategoryDto().getId().equals(categoryDto.getId())) {
+                getContext().getMessages().add(new LocalizableError("category.delete.contains"));
+                return new RedirectResolution(this.getClass(), "list");
+            }
         }
+
+        service.delete(categoryDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 

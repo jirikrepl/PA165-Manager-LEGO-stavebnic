@@ -1,6 +1,9 @@
 package cz.muni.fi.PA165.api.service;
 
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -60,7 +63,25 @@ public interface BuildingKitService {
      */
     public BuildingKitDto findById(Long id);
 
+    /**
+     * retrieves building kits with relation to given category
+     *
+     * @param categoryDto the given category
+     */
+    public List<BuildingKitDto> findByCategory(CategoryDto categoryDto);
 
-    //public void setBuildingKitDao(BuildingKitDao kitDao);
+    /**
+     * retrieves building kits with relation to given theme set
+     *
+     * @param themeSetDto the given theme set
+     */
+    public List<BuildingKitDto> findByThemeSet(ThemeSetDto themeSetDto);
+    
+    /**
+     * find buildingKits by brick
+     * @param brickDto give brick dto
+     * @return List of buildinkKits dto
+     */
+    public List<BuildingKitDto> findByBrick(BrickDto brickDto);
 
 }

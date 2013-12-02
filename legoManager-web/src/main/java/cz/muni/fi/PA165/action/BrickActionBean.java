@@ -5,9 +5,9 @@ import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import java.util.List;
-import java.util.Map;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
@@ -27,7 +27,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 // predtim tam bylo "/brick/{event}" -- nefungovalo volani jine metody nez list s @defaultHandlerem
 // ted je tu: "brick/{event}" -- funguje i pro delete ^_^
 @UrlBinding("/bricks/{$event}")
-public class BrickActionBean extends BaseActionBean implements ValidationErrorHandler{
+public class BrickActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean
     private BrickService brickService;
@@ -83,21 +83,25 @@ public class BrickActionBean extends BaseActionBean implements ValidationErrorHa
      */
     public Resolution delete() {
         brick = brickService.findById(brick.getId());
-        boolean canDelete = true;
-        
-        List<BuildingKitDto> buildingKitDtoList = buildingKitService.findAll();
-        
-        for(BuildingKitDto b : buildingKitDtoList) {
-            Map<BrickDto, Integer> map = b.getBricks();
-            if(map.containsKey(brick)) {
-                canDelete = false;
-            }
-        }
-        
-        if(canDelete) {
+//        boolean canDelete = true;
+
+        List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByBrick(brick);
+
+        // list is empty, brick is not contained in any building kit => delete brick
+        if (buildingKitDtoList.isEmpty()) {
             brickService.delete(brick.getId());
-        } else {
-            getContext().getMessages().add(new LocalizableError("brick.delete.contains"));
+
+        } else { // list is not empty == brick is used by some building kit
+            StringBuilder sb = new StringBuilder();
+            sb.append("<ul>");
+            for (BuildingKitDto kit : buildingKitDtoList) {
+                sb.append("<li>");
+                sb.append(kit.getName());
+                sb.append("</li>");                
+            }
+            sb.append("</ul>");
+            
+            getContext().getMessages().add(new LocalizableMessage("brick.delete.contains", sb.toString()));
         }
 
         // returns back to list (in fact call lis() method from this class)

@@ -8,7 +8,6 @@ import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.api.service.CategoryService;
 import cz.muni.fi.PA165.api.service.ThemeSetService;
-import cz.muni.fi.PA165.entity.BuildingKit;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
@@ -69,8 +68,8 @@ public class BuildingKitActionBean extends BaseActionBean {
     @ValidateNestedProperties(
             value = {
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", minvalue = 0, maxvalue = 100),
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", minvalue = 0)
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", required = true, minvalue = 0, maxvalue = 100),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0)
             }
     )
     private BuildingKitDto buildingKit;

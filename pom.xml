@@ -9,7 +9,9 @@
     <modules>
         <module>legoManager-backend</module>
         <module>legoManager-api</module>
+        <module>legoManager-rest</module>
         <module>legoManager-web</module>
+        <module>legoManager-rest-client</module>
     </modules>
 
     <repositories>
@@ -30,6 +32,11 @@
             <id>maven-oss-insula</id>
             <name>Insula Maven OSS Releases Repository</name>
             <url>http://maven-oss.insula.com.br/releases</url>
+        </repository>
+        <repository>
+            <id>JBoss</id>
+            <name>JBoss</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
         </repository>
 
     </repositories>
