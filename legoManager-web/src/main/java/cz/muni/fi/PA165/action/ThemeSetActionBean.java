@@ -1,18 +1,17 @@
 package cz.muni.fi.PA165.action;
 
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.api.service.CategoryService;
 import cz.muni.fi.PA165.api.service.ThemeSetService;
-import java.util.List;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
+
+import java.util.List;
 
 /**
  *
@@ -26,6 +25,9 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     @SpringBean
     protected CategoryService categoryService;
+
+    @SpringBean
+    protected BuildingKitService buildingKitService;
 
     private List<ThemeSetDto> themeSets;
     private List<CategoryDto> categories;
@@ -85,7 +87,25 @@ public class ThemeSetActionBean extends BaseActionBean {
     }
 
     public Resolution deleteThemeSet() {
-        themeSetService.delete(themeSetDto.getId());
+        // prevent removal of themeset, which includes some building kits
+        List<BuildingKitDto> kitList = buildingKitService.findByThemeSet(themeSetDto);
+
+        // list is empty => delete themeSet
+        if (kitList.isEmpty()) {
+            themeSetService.delete(themeSetDto.getId());
+
+        } else { // list is not empty == theme set is used by some building kit
+            StringBuilder sb = new StringBuilder();
+            sb.append("<ul>");
+            for (BuildingKitDto kit : kitList) {
+                sb.append("<li>");
+                sb.append(kit.getName());
+                sb.append("</li>");
+            }
+            sb.append("</ul>");
+
+            getContext().getMessages().add(new LocalizableMessage("brick.delete.contains", sb.toString()));
+        }
         return new RedirectResolution(this.getClass(), "list");
     }
 

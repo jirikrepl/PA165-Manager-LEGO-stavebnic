@@ -12,7 +12,6 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -56,7 +55,7 @@ public class BrickActionBean extends BaseActionBean implements ValidationErrorHa
     }
 
     /**
-     * without setter, posting brick forms wouldnt work
+     * without setter, posting brick forms would not work
      *
      * @param brick
      */
