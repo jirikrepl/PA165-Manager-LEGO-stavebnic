@@ -1,9 +1,12 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.service.ThemeSetService;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
+import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +85,17 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         ThemeSet entity = themeSetDao.findById(id);
         
         return ThemeSetConversion.convertToDto(entity);
+    }
+    public List<ThemeSetDto> findByCategory(CategoryDto categoryDto){
+        if (categoryDto == null){
+            throw new DataAccessExceptionService("Category cannost be NULL");
+        }
+        Category entity = CategoryConversion.convertToEntity(categoryDto);
+        List<ThemeSet> entities = themeSetDao.findByCategory(entity);
+        List<ThemeSetDto> dtos = new ArrayList<ThemeSetDto>();
+        for(ThemeSet themeSet: entities){
+            dtos.add(ThemeSetConversion.convertToDto(themeSet));
+        }
+        return dtos;
     }
 }

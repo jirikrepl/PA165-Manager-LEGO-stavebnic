@@ -70,5 +70,5 @@ public interface ThemeSetDao {
      * @param category
      * @return List<ThemeSet>
      */
-    //public List<ThemeSet> findByCategory(Category category);
+    public List<ThemeSet> findByCategory(Category category);
 }

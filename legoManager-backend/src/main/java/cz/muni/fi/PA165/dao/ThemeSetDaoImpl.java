@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.dao;
 
+import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.stereotype.Repository;
 
@@ -45,4 +46,14 @@ public class ThemeSetDaoImpl extends AbstractDao<ThemeSet> implements ThemeSetDa
         return (List<ThemeSet>) q.getResultList();
     }
     
+    public List<ThemeSet> findByCategory(Category category){
+        if (category == null){
+            throw new IllegalArgumentException("Category cannot be null.");
+        }
+        Query q = entityManager.createQuery("SELECT t FROM THEMESET t" + 
+                "WHERE category = :category");
+        q.setParameter("category", category);
+        return (List<ThemeSet>)q.getResultList();
+    }
 }
+
