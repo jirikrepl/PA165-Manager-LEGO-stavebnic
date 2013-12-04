@@ -10,5 +10,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ApplicationConfig extends ResourceConfig {
     public ApplicationConfig() {
         register(ServiceResource.class);
+        // pridat dalsi "service" v baliku rest (podle vzoru ServiceResource)
     }
 }
