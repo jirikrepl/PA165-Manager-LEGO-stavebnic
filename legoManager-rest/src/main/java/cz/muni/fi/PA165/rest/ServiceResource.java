@@ -29,7 +29,7 @@ public class ServiceResource {
     @Produces("text/plain")
     public String getText() {
         if (brickService != null) {
-            return "injekce se povedla";
+            return "injekce se trol povedla";
         } else {
             return "injekce nefunguji";
         }
