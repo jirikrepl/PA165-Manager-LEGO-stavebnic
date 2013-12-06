@@ -42,6 +42,9 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+
+                            <finalName>rest-client</finalName>
+
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>cz.muni.fi.PA165.App</mainClass>
