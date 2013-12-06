@@ -244,4 +244,15 @@ public class BuildingKitServiceTest extends TestCase {
         verify(kitDao, times(1)).findByYearFrom(nonExistingYear);
         verify(kitDao, times(1)).findByYearFrom(existingYear);
     }
+    
+    public void testFindByCategory(){
+        
+    }
+    public void testFindByThemeSet(){
+        
+    }
+    public void testFindBrick(){    
+        
+    }
+    
 }
