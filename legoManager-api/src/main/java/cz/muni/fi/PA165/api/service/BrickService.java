@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Jiri Krepl
  */
-public interface    BrickService {
+public interface BrickService {
     /**
      * persist given brick entity
      *
@@ -28,7 +28,7 @@ public interface    BrickService {
     /**
      * remove brick entity from table
      *
-     * @param brick id of brick entity class, which has to be removed
+     * @param id id of brick entity class, which has to be removed
      */
     public void delete(Long id);
 
