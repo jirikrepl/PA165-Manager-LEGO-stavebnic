@@ -23,30 +23,22 @@
             </div>
 
             <div class="form-group">
-                
-
                 <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.count"/></s:label>
-
                 <div class="col-sm-4">
                     <s:text class="form-control" id="b2" name="brickCount" value="1"/>
                 </div>
             </div>
 
-            
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-1">
                     <s:submit class="btn" name="addBrick"><f:message key="buildingkit.addbrick.add"/></s:submit>
                 </div>
-            
+
                 <div class="col-sm-offset-1 col-sm-3">
                     <s:submit class="btn" name=""><f:message key="buildingkit.addbrick.cancel"/></s:submit>
                 </div>
             </div>
-            
         </s:form>
-
-
-
 
         <table class="table">
             <tr>
@@ -66,6 +58,10 @@
 
                     <td>
                         <span>
+                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
+                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:submit class="btn" name="delete"><f:message key="brick.edit.button"/></s:submit>
+                            </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
@@ -73,13 +69,10 @@
                                 <s:submit class="btn" name="deleteBrick"><f:message key="buildingkit.addbrick.delete"/></s:submit>
                             </s:form>
                         </span>
-
                     </td>
-
                 </tr>
             </c:forEach>
         </table>
-
 
     </s:layout-component>
 </s:layout-render>

@@ -14,22 +14,26 @@ public class Messages {
                 "objects are: brick, category\n\n" +
 
                 "commands for <brick> are: \n" +
-                "\tlist                               prints out all bricks\n" +
-                "\tcreate <color> <name>              creates new brick\n" +
-                "\tupdate <id> <newName> <newColor>   updates brick by given id\n" +
-                "\tdelete <id>                        deletes brick by given id\n" +
-                "\tfind <id | color | name>           finds brick by id, color or name\n\n" +
+                "\tlist                               print out all bricks\n" +
+                "\tcreate <name> <color>              create new brick\n" +
+                "\tupdate <id> <newName> <newColor>   update brick by given id\n" +
+                "\tdelete <id>                        delete brick by given id\n" +
+                "\tfindbyid <id>                      find brick by id\n" +
+                "\tfindbyname <name>                  find brick by name \n" +
+                "\tfindbycolor <color>                find brick by color \n\n" +
 
                 "commands for <category> are: \n" +
-                "\tlist                               prints out all categories\n" +
-                "\tcreate <name> <description>        creates new category\n" +
-                "\tupdate <id> <name> <description>   updates category by given id\n" +
-                "\tdelete <id>                        deletes category by given id\n" +
-                "\tfind <id | name>                   finds category by id or name\n");
+                "\tlist                               print out all categories\n" +
+                "\tcreate <name> <description>        create new category\n" +
+                "\tupdate <id> <name> <description>   update category by given id\n" +
+                "\tdelete <id>                        delete category by given id\n" +
+                "\tfindbyid <id>                      find category by id\n" +
+                "\tfindbyname <name>                  find category by name\n");
     }
 
     /**
      * prints error message if case of some unknown operation
+     *
      * @param operation string of operation
      */
     public static void unknownOperationMessage(String operation) {
@@ -37,9 +41,15 @@ public class Messages {
         printHelp();
     }
 
-    public static void badNumberOfArgsMessage(int argsCount) {
-        System.out.println("Bad number of arguments.");
-        System.out.println("You entered: " + argsCount + " argument(s).");
+    public static void badNumberOfArgsMessage(int inputedArgs, String operation, String requiredArgs) {
+        inputedArgs -=2;
+        System.out.println("\nBad number of arguments. You entered only: " + inputedArgs + " argument(s)\n" +
+                "Operation " + operation + " requires arguments: " + requiredArgs + "\n");
+    }
+
+    public static void badNumberOfArgsMessage(int inputedArgs) {
+        System.out.println("Bad number of arguments. You entered " + inputedArgs + "\n");
+        printHelp();
     }
 
     public static void badFirstArgumentMessage() {
