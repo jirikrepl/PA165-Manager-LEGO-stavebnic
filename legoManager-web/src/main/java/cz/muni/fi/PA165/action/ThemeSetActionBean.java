@@ -94,7 +94,8 @@ public class ThemeSetActionBean extends BaseActionBean {
         if (kitList.isEmpty()) {
             themeSetService.delete(themeSetDto.getId());
 
-        } else { // list is not empty == theme set is used by some building kit
+        } else {
+         // list is not empty == theme set is used by some building kit
             StringBuilder sb = new StringBuilder();
             sb.append("<ul>");
             for (BuildingKitDto kit : kitList) {

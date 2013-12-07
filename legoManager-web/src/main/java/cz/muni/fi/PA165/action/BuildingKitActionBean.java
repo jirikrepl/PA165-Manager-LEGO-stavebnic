@@ -92,13 +92,6 @@ public class BuildingKitActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-                  /*
-    public Resolution save() {
-        service.update(buildingKit);
-        return new RedirectResolution(this.getClass(), "list");
-    }
-    */
-
     @DefaultHandler
     public Resolution list() {
         return new ForwardResolution("/buildingKit/buildingKitList.jsp");
