@@ -1,14 +1,11 @@
 package cz.muni.fi.PA165.action;
 
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.CategoryService;
 import cz.muni.fi.PA165.api.service.ThemeSetService;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
@@ -73,6 +70,33 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
     }
 
     public Resolution delete() {
+        /*
+        themeSet = themeSetService.findById(themeSet)ById(brick.getId());
+//        boolean canDelete = true;
+
+        List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByBrick(brick);
+
+        // list is empty, brick is not contained in any building kit => delete brick
+        if (buildingKitDtoList.isEmpty()) {
+            brickService.delete(brick.getId());
+
+        } else { // list is not empty == brick is used by some building kit
+            StringBuilder sb = new StringBuilder();
+            sb.append("<ul>");
+            for (BuildingKitDto kit : buildingKitDtoList) {
+                sb.append("<li>");
+                sb.append(kit.getName());
+                sb.append("</li>");
+            }
+            sb.append("</ul>");
+
+            getContext().getMessages().add(new LocalizableMessage("brick.delete.contains", sb.toString()));
+        }
+
+        // returns back to list (in fact call lis() method from this class)
+        return new RedirectResolution(this.getClass(), "list");
+                                                    */
+
         List<ThemeSetDto> themeSetList = themeSetService.findAll();
         for (ThemeSetDto themeSetDto : themeSetList) {
 

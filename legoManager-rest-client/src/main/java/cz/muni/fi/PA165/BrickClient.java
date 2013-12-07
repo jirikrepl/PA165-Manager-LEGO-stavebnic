@@ -1,5 +1,17 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.dto.BrickDto;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+
 /**
  * Created by Jiri Krepl on 12/5/13.
  * this class is responsible for handling brick operations
@@ -13,6 +25,7 @@ public class BrickClient {
     private final String findByColorOperation = "findbycolor";
     private final String findByNameOperation = "findbyname";
 
+
     /**
      * handles various operations of brick
      *
@@ -21,6 +34,11 @@ public class BrickClient {
      *             <brick>  <op>      <arg1>    <arg2>    <arg3>
      *             brick    update    id        name      color
      */
+    //TODO nehlida se jestli neni nahodou zadano vice argumentu
+    //TODO url restu by mohlo byt konfigurovatelne
+    //TODO osetreni chybovych stavu restu
+    //TODO chyby na err vystup (system.err.println)
+    //TODO validace cisel
     public BrickClient(String[] args) {
 
         // test bad number of arguments
@@ -40,6 +58,7 @@ public class BrickClient {
 
             case createOperation:
                 // create <color> <name>
+
                 handleCreateOperation(args);
                 break;
 
@@ -77,7 +96,20 @@ public class BrickClient {
      * handles 'list' console command
      */
     private void handleListOperation() {
-        System.out.println("listing all bricks");
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/");
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Response.Status.ACCEPTED.getStatusCode()) {
+            List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {
+            });
+
+            System.out.println(brickDtoList);
+        } else {
+            System.err.println(response.getStatus());
+        }
     }
 
     /**
@@ -88,15 +120,24 @@ public class BrickClient {
      *             args[0]  args[1]   args[2]   args[3]
      *             brick    create    name      color
      */
+    //TODO arguments description?
     private void handleCreateOperation(String args[]) {
         if (args.length < 4) {
             String requiredArgs = "<name> <color>";
             Messages.badNumberOfArgsMessage(args.length, createOperation, requiredArgs);
             System.exit(1);
         }
-        System.out.println("creating brick" +
-                "\nname: " + args[2] +
-                "\ncolor: " + args[3]);
+
+        String name = args[2];
+        //TODO string->enum (from args[3]
+        Color color = Color.BLACK;
+        BrickDto brickDto = new BrickDto(name, color, "");
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/");
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(brickDto, MediaType.APPLICATION_JSON_TYPE));
+        System.out.println(response.getStatus());
+
     }
 
     /**
@@ -138,7 +179,7 @@ public class BrickClient {
     /**
      * find brick by its id
      *
-     * @param id id of brick
+     * @param args brick
      */
     private void handleFindById(String[] args) {
         if (args.length < 3) {
@@ -147,13 +188,26 @@ public class BrickClient {
             System.exit(1);
         }
 
-        System.out.println("find brick by its id: " + args[2]);
+        Long id = Long.parseLong(args[2]);
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            BrickDto brickDto = response.readEntity(BrickDto.class);
+            System.out.println(brickDto);
+        } else {
+            System.err.println("Error on server, server returned " + response.getStatus());
+        }
     }
 
     /**
      * find brick by its name
      *
-     * @param name name of brick
+     * @param args name of brick
      */
     private void handleFindByName(String[] args) {
         if (args.length < 3) {
@@ -168,7 +222,7 @@ public class BrickClient {
     /**
      * find brick by its color
      *
-     * @param color color of brick
+     * @param args color of brick
      */
     private void handleFindByColor(String[] args) {
         if (args.length < 3) {
@@ -179,24 +233,5 @@ public class BrickClient {
 
         System.out.println("find brick by its color: " + args[2]);
     }
+
 }
-
-
-//        //  prompt the user to enter their name
-//        System.out.print("Enter your name: ");
-//
-//        //  open up standard input
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//
-//        String userName = null;
-//
-//        //  read the username from the command-line; need to use try/catch with the
-//        //  readLine() method
-//        try {
-//            userName = br.readLine();
-//        } catch (IOException ioe) {
-//            System.out.println("IO error trying to read your name!");
-//            System.exit(1);
-//        }
-//
-//        System.out.println("Thanks for the name, " + userName);
