@@ -2,9 +2,15 @@ package cz.muni.fi.PA165.rest;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.service.BrickService;
+import cz.muni.fi.PA165.api.service.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -30,20 +36,9 @@ public class BrickResource {
      * @return all bricks
      */
     @GET
-    @Produces(MediaType.TEXT_HTML) // testovani v prohlizeci
-    // @Produces(MediaType.APPLICATION_JSON)
-    public String getPlain() {
-
-        List<BrickDto> bricks = brickService.findAll();
-
-        StringBuilder sb = new StringBuilder();
-
-        for (BrickDto brick : bricks) {
-            sb.append(brick.toString());
-            sb.append("<BR/>"); // testovani v html
-        }
-
-        return sb.toString();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<BrickDto> getPlain() {
+        return brickService.findAll();
     }
 
     /**
@@ -52,7 +47,7 @@ public class BrickResource {
      */
     @GET
     @Path("{id}")
-    // @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public BrickDto getBrick(@PathParam("id") Long id) {
         return brickService.findById(id);
     }

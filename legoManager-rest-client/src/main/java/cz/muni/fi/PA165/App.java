@@ -1,41 +1,38 @@
 package cz.muni.fi.PA165;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class App {
     private static String entityArg = "";
     private static String operationArg = "";
 
     public static void main(String[] args) {
 
-//        Client client = ClientBuilder.newClient();
-//        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/hello");
-//
-//        Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN);
-//        invocationBuilder.header("accept", "text/plain");
-//
-//        Response response = invocationBuilder.get();
-//        System.out.println(response.readEntity(String.class));
+        List<String> arguments = new ArrayList<String>(Arrays.asList(args));
 
-
-        if (args.length == 0) {
+        if (arguments.size() == 0) {
             // show help table when called with no args
             Messages.printHelp();
             System.exit(1);
 
-        } else if (args.length < 2 || args.length > 5) {
+        } else if (arguments.size() < 2 || arguments.size() > 5) {
             // app called with bad number of arguments
-            Messages.badNumberOfArgsMessage(args.length);
+            Messages.badNumberOfArgsMessage(arguments.size());
             System.exit(1);
 
         } else {
             // save first argument == entity name
-            entityArg = args[0];
-            operationArg = args[1];
+            entityArg = arguments.get(0);
+            operationArg = arguments.get(1);
         }
 
 
         if (entityArg.equals("brick")) {
-            // test if first entity argument is correct
-            new BrickClient(operationArg, args);
+            arguments.remove(0);
+            arguments.remove(0);
+            new BrickClient(operationArg, arguments);
 
         } else if (entityArg.equals("category")) {
             System.out.println("menu for category");

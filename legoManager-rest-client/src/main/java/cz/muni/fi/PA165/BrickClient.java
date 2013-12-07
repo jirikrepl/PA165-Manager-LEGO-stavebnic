@@ -1,5 +1,15 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.dto.BrickDto;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+
 /**
  * Created by Jiri Krepl on 12/5/13.
  * this class is responsible for handling brick operations
@@ -11,7 +21,10 @@ public class BrickClient {
     private String deleteOperation = "delete";
     private String findOperation = "find";
 
-    public BrickClient(String operation, String args[]) {
+    final Client client = ClientBuilder.newBuilder().build();
+
+    public BrickClient(String operation, List<String> arguments) {
+
 
         if (operation.equals(listOperation)) {
 
@@ -22,7 +35,15 @@ public class BrickClient {
         } else if (operation.equals(deleteOperation)) {
 
         } else if (operation.equals(findOperation)) {
+            int id = Integer.parseInt(arguments.get(0));
+            StringBuilder stringBuilder = new StringBuilder("http://localhost:8080/pa165/rest/bricks/").append(id);
+            WebTarget webTarget = client.target(stringBuilder.toString());
 
+            Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+            invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+            Response response = invocationBuilder.get();
+            System.out.println(response.readEntity(BrickDto.class));
         } else {
             Messages.unknownOperationMessage(operation);
             System.exit(1);
@@ -30,22 +51,3 @@ public class BrickClient {
     }
 }
 
-
-//        //  prompt the user to enter their name
-//        System.out.print("Enter your name: ");
-//
-//        //  open up standard input
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//
-//        String userName = null;
-//
-//        //  read the username from the command-line; need to use try/catch with the
-//        //  readLine() method
-//        try {
-//            userName = br.readLine();
-//        } catch (IOException ioe) {
-//            System.out.println("IO error trying to read your name!");
-//            System.exit(1);
-//        }
-//
-//        System.out.println("Thanks for the name, " + userName);
