@@ -26,15 +26,19 @@
             <artifactId>jersey-client</artifactId>
             <version>2.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+            <version>2.4.1</version>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.7</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -55,7 +59,6 @@
                 </executions>
             </plugin>
 
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -72,7 +75,6 @@
                     <mainClass>cz.muni.fi.PA165.App</mainClass>
                 </configuration>
             </plugin>
-
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

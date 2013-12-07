@@ -61,10 +61,5 @@ public interface BrickService {
      * @return List<Brick> list of brick with desired color
      */
     public List<BrickDto> findByName(String name);
-    
-    /**
-     * set brick dao object
-     * @param brickDao dao object for brick entity
-     */
-    //public void setBrickDao(BrickDao brickDao);
+
 }
