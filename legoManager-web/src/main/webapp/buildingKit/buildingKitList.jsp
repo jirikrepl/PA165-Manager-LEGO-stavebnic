@@ -60,10 +60,17 @@
                                 <s:submit class="btn" name="openEditPage"><f:message key="buildingKit.edit.button"/></s:submit>
                             </s:form>
 
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
-                                <s:submit class="btn" name="openManageBrickPage"><f:message key="buildingKit.bricks.button"/></s:submit>
-                            </s:form>
+                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
+                                <s:param name="buildingKit.id" value="${buildingKit.id}"/>
+                                <f:message key="buildingKit.bricks.button"/>
+                            </s:link>
+
+                            <%--stary formular pro spravu dilu--%>
+
+                            <%--<s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">--%>
+                                <%--<s:hidden name="buildingKit.id" value="${buildingKit.id}"/>--%>
+                                <%--<s:submit class="btn" name="openManageBrickPage"><f:message key="buildingKit.bricks.button"/></s:submit>--%>
+                            <%--</s:form>--%>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>

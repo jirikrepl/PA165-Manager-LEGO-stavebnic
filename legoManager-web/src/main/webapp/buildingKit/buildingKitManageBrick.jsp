@@ -58,10 +58,13 @@
 
                     <td>
                         <span>
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
-                                <s:submit class="btn" name="delete"><f:message key="brick.edit.button"/></s:submit>
-                            </s:form>
+                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openBrickCountEdit">
+                                <s:param name="brickIdDelete" value="${brickItem.key.id}"/>
+                                <s:param name="brickCount" value="${brickItem.key.value}"/>
+                                <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
+                                <f:message key="brick.edit.button"/>
+                            </s:link>
+
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>

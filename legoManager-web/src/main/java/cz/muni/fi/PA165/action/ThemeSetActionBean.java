@@ -14,7 +14,6 @@ import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import java.util.List;
 
 /**
- *
  * @author Pavol Bako
  */
 @UrlBinding("/themesets/{$event}")
@@ -33,8 +32,8 @@ public class ThemeSetActionBean extends BaseActionBean {
     private List<CategoryDto> categories;
 
     @ValidateNestedProperties(
-    value= {@Validate(on={"createThemeSet", "updateThemeSet"}, field="name", required = true),
-            @Validate(on={"createThemeSet", "updateThemeSet"}, field="price", required = true, minvalue = 0)})
+            value = {@Validate(on = {"createThemeSet", "updateThemeSet"}, field = "name", required = true),
+                    @Validate(on = {"createThemeSet", "updateThemeSet"}, field = "price", required = true, minvalue = 0)})
     private ThemeSetDto themeSetDto;
     private Long categoryId;
 

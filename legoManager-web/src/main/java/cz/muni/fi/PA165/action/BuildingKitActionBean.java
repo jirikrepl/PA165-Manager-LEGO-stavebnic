@@ -26,23 +26,29 @@ import java.util.Map;
  */
 @UrlBinding("/buildingKits/{$event}")
 public class BuildingKitActionBean extends BaseActionBean {
-
     @SpringBean
     private BuildingKitService service;
-
     @SpringBean
     private ThemeSetService themeSetService;
-
     @SpringBean
     private CategoryService categoryService;
-
-    private List<BuildingKitDto> buildingKits;
-
-    private Long categoryId;
-    private Long themesetId;
-
     @SpringBean
     private BrickService brickService;
+    private List<BuildingKitDto> buildingKits;
+    private Long categoryId;
+    private Long themesetId;
+    private BrickDto brick;
+    private Integer brickIdDelete;
+    private Integer brickCount;
+
+    @ValidateNestedProperties(
+            value = {
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", required = true, minvalue = 0, maxvalue = 100),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0)
+            }
+    )
+    private BuildingKitDto buildingKit;
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
@@ -65,14 +71,6 @@ public class BuildingKitActionBean extends BaseActionBean {
         return themeSetService.findAll();
     }
 
-    @ValidateNestedProperties(
-            value = {
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", required = true, minvalue = 0, maxvalue = 100),
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0)
-            }
-    )
-    private BuildingKitDto buildingKit;
 
     public BuildingKitDto getBuildingKit() {
         return buildingKit;
@@ -81,40 +79,6 @@ public class BuildingKitActionBean extends BaseActionBean {
     public void setBuildingKit(BuildingKitDto buildingKitDto) {
         this.buildingKit = buildingKitDto;
     }
-
-
-    public Resolution updateBuildingKit() {
-        CategoryDto category = categoryService.findById(categoryId);
-        buildingKit.setCategory(category);
-        ThemeSetDto themeset = themeSetService.findById(themesetId);
-        buildingKit.setThemeSet(themeset);
-        service.update(buildingKit);
-        return new RedirectResolution(this.getClass(), "list");
-    }
-
-                  /*
-    public Resolution save() {
-        service.update(buildingKit);
-        return new RedirectResolution(this.getClass(), "list");
-    }
-    */
-
-    @DefaultHandler
-    public Resolution list() {
-        return new ForwardResolution("/buildingKit/buildingKitList.jsp");
-    }
-
-    public Resolution createBuildingKit() {
-        CategoryDto category = categoryService.findById(categoryId);
-        buildingKit.setCategory(category);
-        ThemeSetDto themeSet = themeSetService.findById(themesetId);
-        buildingKit.setThemeSet(themeSet);
-        service.create(buildingKit);
-        return new RedirectResolution("/buildingKit/buildingKitList.jsp");
-    }
-
-    //sprava kosticek
-    private BrickDto brick;
 
     public BrickDto getBrick() {
         return brick;
@@ -128,24 +92,9 @@ public class BuildingKitActionBean extends BaseActionBean {
         return brickIdDelete;
     }
 
-    public List<BrickDto> getBricks() {
-        return brickService.findAll();
-    }
-
-    public Map<BrickDto, Integer> getBricksSaved() {
-        long idBuildingKit = buildingKit.getId();
-        BuildingKitDto buildingKitDto = service.findById(idBuildingKit);
-        return buildingKitDto.getBricks();
-    }
-
-    private Integer brickIdDelete;
-    
-
     public void setBrickIdDelete(Integer brickIdDelete) {
         this.brickIdDelete = brickIdDelete;
     }
-
-    private Integer brickCount;
 
     public Integer getBrickCount() {
         return brickCount;
@@ -155,6 +104,53 @@ public class BuildingKitActionBean extends BaseActionBean {
         this.brickCount = brickCount;
     }
 
+    @DefaultHandler
+    public Resolution list() {
+        return new ForwardResolution("/buildingKit/buildingKitList.jsp");
+    }
+
+    public Resolution updateBuildingKit() {
+        CategoryDto category = categoryService.findById(categoryId);
+        buildingKit.setCategory(category);
+        ThemeSetDto themeSet = themeSetService.findById(themesetId);
+        buildingKit.setThemeSet(themeSet);
+        service.update(buildingKit);
+        return new RedirectResolution(this.getClass(), "list");
+    }
+
+    public Resolution createBuildingKit() {
+        CategoryDto category = categoryService.findById(categoryId);
+        buildingKit.setCategory(category);
+        ThemeSetDto themeSet = themeSetService.findById(themesetId);
+        buildingKit.setThemeSet(themeSet);
+        service.create(buildingKit);
+        return new RedirectResolution("/buildingKit/buildingKitList.jsp");
+    }
+
+    /**
+     * get all brick from db
+     * @return List<BrickDto>
+     */
+    public List<BrickDto> getBricks() {
+        return brickService.findAll();
+    }
+
+    /**
+     * get all bricks from building kit
+     *
+     * @return Map<BrickDto, Integer>
+     */
+    public Map<BrickDto, Integer> getBricksSaved() {
+        long idBuildingKit = buildingKit.getId();
+        BuildingKitDto buildingKitDto = service.findById(idBuildingKit);
+        return buildingKitDto.getBricks();
+    }
+
+    /**
+     * add brick to building kit
+     *
+     * @return buildingKitManageBrick.jsp
+     */
     public Resolution addBrick() {
         long idBuildingKit = buildingKit.getId();
         long idBricksKit = brick.getId();
@@ -172,19 +168,24 @@ public class BuildingKitActionBean extends BaseActionBean {
         bricks.put(brickDto, count + brickCount);
         service.update(buildingKit);
         brickIdDelete = null;
-
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 
     /**
-     * redirects to kit edit page
-     * @return ForwardResolution
+     * opens building kit edit page
+     *
+     * @return ForwardResolution to edit.jsp
      */
     public Resolution openEditPage() {
         buildingKit = service.findById(buildingKit.getId());
         return new ForwardResolution("/buildingKit/edit.jsp");
     }
 
+    /**
+     * removes brick from building kit
+     *
+     * @return to buildingKitManageBrick.jsp
+     */
     public Resolution deleteBrick() {
         long idBuildingKit = buildingKit.getId();
         long idBricksKit = new Long(brickIdDelete);
@@ -197,15 +198,35 @@ public class BuildingKitActionBean extends BaseActionBean {
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
     }
 
+    /**
+     * deletes building kit
+     *
+     * @return return to list of buildink kits
+     */
     public Resolution delete() {
         long idBuildingKit = buildingKit.getId();
         service.delete(idBuildingKit);
         return new RedirectResolution(this.getClass(), "list");
     }
 
+    /**
+     * opens brick management page
+     *
+     * @return buildingKitManageBrick.jsp
+     */
     public Resolution openManageBrickPage() {
         this.buildingKit = service.findById(buildingKit.getId());
         return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+    }
+
+
+    /**
+     * opens brick edit page
+     *
+     * @return buildingKitBrickCountEdit.jsp
+     */
+    public Resolution openBrickCountEdit() {
+        return new ForwardResolution("/buildingKit/buildingKitBrickCountEdit.jsp");
     }
 
 
