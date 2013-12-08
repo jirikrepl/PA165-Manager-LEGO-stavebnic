@@ -10,7 +10,10 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jiri Krepl on 12/5/13.
@@ -102,19 +105,21 @@ public class BrickClient {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
 
-        if (response.getStatus() == Response.Status.ACCEPTED.getStatusCode()) {
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {
             });
 
-            System.out.println(brickDtoList);
+            for(BrickDto b : brickDtoList) {
+                System.out.println(b);
+            }
         } else {
-            System.err.println(response.getStatus());
+            System.out.println("Error code:" + response.getStatus());
         }
     }
 
     /**
      * handles create brick operation
-     * console command is <entity> create <color> <name>
+     * console command is: brick create <name> <color>
      *
      * @param args command line arguments
      *             args[0]  args[1]   args[2]   args[3]
@@ -128,16 +133,39 @@ public class BrickClient {
             System.exit(1);
         }
 
+        // set arguments from command line to variables
         String name = args[2];
-        //TODO string->enum (from args[3]
-        Color color = Color.BLACK;
-        BrickDto brickDto = new BrickDto(name, color, "");
+        String colorString = args[3];
+
+        // find out if string of color has its Enum
+        Color colorEnum = null;
+        for (Color c : Color.values()) {
+            if(c.equalsName(colorString)) {
+                colorEnum = c;
+                break;
+            }
+        }
+
+        // bad color argument, print list of colors and exit
+        if(colorEnum == null) {
+            Messages.printAllColors();
+            System.exit(1);
+        }
+
+        // everything is ok, create new brick
+        BrickDto brickDto = new BrickDto(name, colorEnum, "");
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/");
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(brickDto, MediaType.APPLICATION_JSON_TYPE));
-        System.out.println(response.getStatus());
 
+        // print out some response
+        // successful response code is 201 == CREATED
+        if (response.getStatus() == Response.Status.CREATED.getStatusCode()) {
+            System.out.println("Brick with name '" + name + "' and color '" + colorString + "' was created");
+        } else {
+            System.out.println("Error code:" + response.getStatus());
+        }
     }
 
     /**

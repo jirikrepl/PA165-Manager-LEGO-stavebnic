@@ -42,7 +42,7 @@ public class Messages {
     }
 
     public static void badNumberOfArgsMessage(int inputedArgs, String operation, String requiredArgs) {
-        inputedArgs -=2;
+        inputedArgs -= 2;
         System.out.println("\nBad number of arguments. You entered only: " + inputedArgs + " argument(s)\n" +
                 "Operation " + operation + " requires arguments: " + requiredArgs + "\n");
     }
@@ -54,5 +54,19 @@ public class Messages {
 
     public static void badFirstArgumentMessage() {
         System.out.println("first argument has to be <brick> or <category>");
+    }
+
+    /**
+     * prints message of all possible colors
+     */
+    public static void printAllColors() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Error: unknown color \nPossible colors are: \n\n");
+
+        for (Color color : Color.values()) {
+            sb.append(color);
+            sb.append("\n");
+        }
+        System.out.println(sb);
     }
 }

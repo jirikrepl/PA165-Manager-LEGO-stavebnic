@@ -7,31 +7,35 @@ package cz.muni.fi.PA165;
  */
 public enum Color {
 
-    WHITE("Color.WHITE %s"),
-    BRICKYELLOW("Color.BRICKYELLOW"),
-    NOUGAT("Color.NOUGAT"),
-    BRIGHTRED("Color.BRIGHTRED"),
-    BRIGHTBLUE("Color.BRIGHTBLUE"),
-    BRIGHTYELLOW("Color.BRIGHTYELLOW"),
-    BLACK("Color.BLACK"),
-    DARKGREEN("Color.DARKGREEN"),   
-    BRIGHTGREEN("Color.BRIGHTGREEN"),
-    DARKORANGE("Color.DARKORANGE"),    
-    MEDIUMBLUE("Color.MEDIUMBLUE"), 
-    COOLYELLOW("Color.COOLYELLOW"),
-    DARKBROWN("Color.DARKBROWN"),
-    OLIVEGREEN("Color.OLIVEGREEN"),
-    LIGHTPURPLE("Color.LIGHTPURPLE"),
-    BRIGHTPURPLE("Color.BRIGHTPURPLE"),
-    MEDIUMLILAC("Color.MEDIUMLILAC");
-    
+    WHITE("white"),
+    BRICKYELLOW("brick-yellow"),
+    NOUGAT("nougat"),
+    BRIGHTRED("bright-red"),
+    BRIGHTBLUE("bright-blue"),
+    BRIGHTYELLOW("bright-yellow"),
+    BLACK("black"),
+    DARKGREEN("dark-green"),
+    BRIGHTGREEN("bright-green"),
+    DARKORANGE("dark-orange"),
+    MEDIUMBLUE("medium-blue"),
+    COOLYELLOW("cool-yellow"),
+    DARKBROWN("dark-brown"),
+    OLIVEGREEN("olive-green"),
+    LIGHTPURPLE("light-purple"),
+    BRIGHTPURPLE("bright-purple"),
+    MEDIUMLILAC("medium-lilac");
+
     private final String text;
 
     Color(String text) {
         this.text = text;
     }
-    
-    public String toString(Object... o) {
-        return String.format(text, o);
+
+    public boolean equalsName(String otherName) {
+        return (otherName == null) ? false : text.equals(otherName);
+    }
+
+    public String toString() {
+        return text;
     }
 }
