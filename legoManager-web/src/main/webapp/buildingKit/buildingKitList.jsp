@@ -9,9 +9,10 @@
         <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
 
 
-        <s:form class="createForm form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+        <s:form class="createForm form-horizontal" id="brickCreateForm"
+                beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <legend><f:message key="buildingKit.createForm"/></legend>
-            <%@include file="buildingKitForm.jsp"%>
+            <%@include file="buildingKitForm.jsp" %>
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
@@ -20,8 +21,6 @@
                 </div>
             </div>
         </s:form>
-
-
 
 
         <table class="table">
@@ -46,10 +45,10 @@
                     <td>${buildingKit.category.name}</td>
                     <td>${buildingKit.themeSet.name}</td>
 
-
+                    <!--table buttons-->
                     <td>
                         <span>
-                            <!--table buttons-->
+                            <%--building kit edit button--%>
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:hidden name="buildingKit.name" value="${buildingKit.name}"/>
@@ -57,21 +56,18 @@
                                 <s:hidden name="buildingKit.price" value="${buildingKit.price}"/>
                                 <s:hidden name="buildingKit.category" value="${buildingKit.category}"/>
                                 <s:hidden name="buildingKit.themeSet" value="${buildingKit.themeSet}"/>
-                                <s:submit class="btn" name="openEditPage"><f:message key="buildingKit.edit.button"/></s:submit>
+                                <s:submit class="btn" name="openEditPage"><f:message
+                                        key="buildingKit.edit.button"/></s:submit>
                             </s:form>
 
-                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
+                            <%--brick manager button--%>
+                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
+                                    event="openManageBrickPage">
                                 <s:param name="buildingKit.id" value="${buildingKit.id}"/>
                                 <f:message key="buildingKit.bricks.button"/>
                             </s:link>
 
-                            <%--stary formular pro spravu dilu--%>
-
-                            <%--<s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">--%>
-                                <%--<s:hidden name="buildingKit.id" value="${buildingKit.id}"/>--%>
-                                <%--<s:submit class="btn" name="openManageBrickPage"><f:message key="buildingKit.bricks.button"/></s:submit>--%>
-                            <%--</s:form>--%>
-
+                            <%--delete building kit button--%>
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>

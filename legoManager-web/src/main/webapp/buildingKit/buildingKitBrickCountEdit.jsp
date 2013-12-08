@@ -12,23 +12,33 @@
 
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <legend><f:message key="buildingkit.addbrick.editCount"/></legend>
-            <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
 
+            <%--input element for setting brick count--%>
             <div class="form-group">
                 <s:label for="b1" class="col-sm-2 control-label"><f:message key="bricks.form.create.count"/></s:label>
                 <div class="col-sm-4">
-                    <s:text class="form-control" id="b2" name="brickCount" value="${brickItem.key.value}"/>
+                    <s:text class="form-control" id="b2" name="brickCount" value="${actionBean.brickCount}"/>
                 </div>
             </div>
 
-            <%--save and cancel buttons--%>
+            <%--form buttons--%>
             <div class="form-group">
+
+                    <%--save button--%>
                 <div class="col-sm-offset-2 col-sm-1">
-                    <s:submit class="btn" name="saveEditedBrickCount"><f:message key="themeset.button.save"/></s:submit>
+                    <s:hidden name="buildingKit.brickCount" value="${actionBean.brickCount}"/>
+                    <s:param name="brick.id" value="${actionBean.brick.id}"/>
+                    <s:hidden name="brickCount" value="${actionBean.brickCount}"/>
+                    <s:hidden name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
+
+                    <s:submit class="btn" name="saveBrickCount"><f:message key="themeset.button.save"/></s:submit>
                 </div>
 
+                    <%--cancel button--%>
                 <div class="col-sm-offset-1 col-sm-3">
-                    <s:submit class="btn" name="openManageBrickPage"><f:message key="buildingkit.addbrick.cancel"/></s:submit>
+                    <s:submit class="btn" name="openManageBrickPage">
+                        <f:message key="buildingkit.addbrick.cancel"/>
+                    </s:submit>
                 </div>
             </div>
         </s:form>

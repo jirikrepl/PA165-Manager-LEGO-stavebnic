@@ -36,11 +36,9 @@
 <div class="form-group">
     <s:label for="b6" class="col-sm-2 control-label"><f:message key="buildingkit.themesets"/></s:label>
     <div class="col-sm-4">
-        <s:select class="form-control" id="b6" name="themesetId">
+        <s:select class="form-control" id="b6" name="themeSetId">
             <s:options-collection collection="${actionBean.themeSets}" value="id" label="name"/>
         </s:select>
     </div>
 </div>
-
-</ul>
 
