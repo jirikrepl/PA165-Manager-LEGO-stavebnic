@@ -55,14 +55,8 @@ public class CategoryResource {
             categoryDtoList = categoryService.findAll();
         }
 
-        if (categoryDtoList != null) {
-            GenericEntity<List<CategoryDto>> categoryEntity = new GenericEntity<List<CategoryDto>>(categoryDtoList) {
-            };
-
-            return Response.status(Response.Status.OK).entity(categoryEntity).build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
+        GenericEntity<List<CategoryDto>> categoryEntity = new GenericEntity<List<CategoryDto>>(categoryDtoList) {};
+        return Response.status(Response.Status.OK).entity(categoryEntity).build();
     }
 
 

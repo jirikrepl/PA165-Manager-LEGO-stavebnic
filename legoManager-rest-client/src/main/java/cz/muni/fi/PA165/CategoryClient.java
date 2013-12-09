@@ -32,7 +32,7 @@ public class CategoryClient {
 
             case listOperation:
                 // list ... no arguments
-                //handleListOperation();
+                handleListOperation();
                 break;
 
             case createOperation:
@@ -76,11 +76,13 @@ public class CategoryClient {
         Response response = invocationBuilder.get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            List<CategoryDto> categoryDtoList = response.readEntity(new GenericType<List<CategoryDto>>() {
-            });
+            List<CategoryDto> categoryDtoList = response.readEntity(new GenericType<List<CategoryDto>>(){});
 
             for (CategoryDto c : categoryDtoList) {
                 System.out.println(c);
+            }
+            if (categoryDtoList.isEmpty()) {
+                System.out.println("No category exists.");
             }
         } else {
             System.out.println("Error code:" + response.getStatus());
