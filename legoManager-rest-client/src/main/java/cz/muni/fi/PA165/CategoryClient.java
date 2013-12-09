@@ -32,31 +32,31 @@ public class CategoryClient {
 
             case listOperation:
                 // list ... no arguments
-                handleListOperation();
+                //handleListOperation();
                 break;
 
             case createOperation:
-                // create <color> <name>
-                handleCreateOperation(args);
+                // create <name> <description>
+                //handleCreateOperation(args);
                 break;
 
             case updateOperation:
                 // update <id> <newName> <newColor>
-                handleUpdateOperation(args);
+                //handleUpdateOperation(args);
                 break;
 
             case deleteOperation:
-                handleDeleteOperation(args);
+                //handleDeleteOperation(args);
                 break;
 
             // find <id>
             case findByIdOperation:
-                handleFindById(args);
+                //handleFindById(args);
                 break;
 
             // find <name>
             case findByNameOperation:
-                handleFindByName(args);
+                //handleFindByName(args);
                 break;
 
             default:

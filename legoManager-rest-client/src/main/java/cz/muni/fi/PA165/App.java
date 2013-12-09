@@ -22,7 +22,7 @@ public class App {
             new BrickClient(args);
 
         } else if (entityArg.equals("category")) {
-            System.out.println("menu for category");
+            new CategoryClient(args);
 
         } else {
             Messages.badFirstArgumentMessage();
