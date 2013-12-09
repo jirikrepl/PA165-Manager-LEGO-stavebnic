@@ -41,12 +41,12 @@ public class CategoryClient {
                 break;
 
             case updateOperation:
-                // update <id> <newName> <newColor>
-                //handleUpdateOperation(args);
+                // update <id> <newName> <newDescription>
+                handleUpdateOperation(args);
                 break;
 
             case deleteOperation:
-                //handleDeleteOperation(args);
+                handleDeleteOperation(args);
                 break;
 
             // find <id>
@@ -139,7 +139,14 @@ public class CategoryClient {
             System.exit(1);
         }
 
-        Long id = Long.parseLong(args[2]);
+        Long id = null;
+        try {
+            id = Long.parseLong(args[2]);
+        } catch (NumberFormatException ex) {
+            System.out.println("Id is not valid.");
+            System.exit(1);
+        }
+
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -184,9 +191,32 @@ public class CategoryClient {
             System.exit(1);
         }
 
-        System.out.println("updated category with id: " + args[2] +
-                "\nsetting new name to: " + args[3] +
-                "\nand new description to: " + args[4]);
+        Long id = null;
+        try {
+            id = Long.parseLong(args[2]);
+        } catch (NumberFormatException ex) {
+            System.out.println("Id is not valid.");
+            System.exit(1);
+        }
+        String name = args[3];
+        String description = args[4];
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setName(name);
+        categoryDto.setDescription(description);
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
+
+        //successful update
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            System.out.println("updated category with id: " + args[2] +
+                    "\nsetting new name to: " + args[3] +
+                    "\nand new description to: " + args[4]);
+        } else {
+            System.out.println("Error code:" + response.getStatus());
+        }
     }
 
     /**
@@ -203,7 +233,13 @@ public class CategoryClient {
             System.exit(1);
         }
 
-        Long id = Long.parseLong(args[2]);
+        Long id = null;
+        try {
+            id = Long.parseLong(args[2]);
+        } catch (NumberFormatException ex) {
+            System.out.println("Id is not valid.");
+            System.exit(1);
+        }
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

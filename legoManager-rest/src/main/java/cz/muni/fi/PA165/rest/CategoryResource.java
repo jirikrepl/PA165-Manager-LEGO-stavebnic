@@ -36,6 +36,7 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id, CategoryDto category) {
+        //TODO CO KDYZ ID NEEXISTUJE?
         category.setId(id);
         categoryService.update(category);
         return Response.status(Response.Status.OK).build();
