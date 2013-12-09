@@ -82,8 +82,6 @@ public class BrickActionBean extends BaseActionBean implements ValidationErrorHa
      */
     public Resolution delete() {
         brick = brickService.findById(brick.getId());
-//        boolean canDelete = true;
-
         List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByBrick(brick);
 
         // list is empty, brick is not contained in any building kit => delete brick

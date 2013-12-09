@@ -1,19 +1,13 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dto.BrickDto;
+import cz.muni.fi.PA165.dto.BuildingKitDto;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Jiri Krepl on 12/5/13.
@@ -109,7 +103,7 @@ public class BrickClient {
             List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {
             });
 
-            for(BrickDto b : brickDtoList) {
+            for (BrickDto b : brickDtoList) {
                 System.out.println(b);
             }
         } else {
@@ -140,14 +134,14 @@ public class BrickClient {
         // find out if string of color has its Enum
         Color colorEnum = null;
         for (Color c : Color.values()) {
-            if(c.equalsName(colorString)) {
+            if (c.equalsName(colorString)) {
                 colorEnum = c;
                 break;
             }
         }
 
         // bad color argument, print list of colors and exit
-        if(colorEnum == null) {
+        if (colorEnum == null) {
             Messages.printAllColors();
             System.exit(1);
         }
@@ -168,41 +162,6 @@ public class BrickClient {
         }
     }
 
-    /**
-     * handle update operation of brick
-     *
-     * @param args command line arguments
-     *             args[0]  args[1]   args[2]   args[3]   args[4]
-     *             brick    update    id        newName   newColor
-     */
-    private void handleUpdateOperation(String[] args) {
-        if (args.length < 5) {
-            String requiredArgs = "<id> <newName> <newColor>";
-            Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
-            System.exit(1);
-        }
-
-        System.out.println("updated brick with id: " + args[2] +
-                "\nsetting new name to: " + args[3] +
-                "\nand new color to: " + args[4]);
-    }
-
-    /**
-     * handles removal of brick entity, command name 'delete'
-     *
-     * @param args command line arguments
-     *             args[0]  args[1]   args[2]
-     *             brick    delete    id
-     */
-    private void handleDeleteOperation(String[] args) {
-        if (args.length < 3) {
-            String requiredArgs = "<id>";
-            Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
-            System.exit(1);
-        }
-
-        System.out.println("deleted brick with id: " + args[2]);
-    }
 
     /**
      * find brick by its id
@@ -260,6 +219,67 @@ public class BrickClient {
         }
 
         System.out.println("find brick by its color: " + args[2]);
+    }
+
+    /**
+     * handle update operation of brick
+     *
+     * @param args command line arguments
+     *             args[0]  args[1]   args[2]   args[3]   args[4]
+     *             brick    update    id        newName   newColor
+     */
+    private void handleUpdateOperation(String[] args) {
+        if (args.length < 5) {
+            String requiredArgs = "<id> <newName> <newColor>";
+            Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
+            System.exit(1);
+        }
+
+        System.out.println("updated brick with id: " + args[2] +
+                "\nsetting new name to: " + args[3] +
+                "\nand new color to: " + args[4]);
+    }
+
+    /**
+     * handles removal of brick entity, command name 'delete'
+     *
+     * @param args command line arguments
+     *             args[0]  args[1]   args[2]
+     *             brick    delete    id
+     */
+    private void handleDeleteOperation(String[] args) {
+        if (args.length < 3) {
+            String requiredArgs = "<id>";
+            Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
+            System.exit(1);
+        }
+
+        Long id = Long.parseLong(args[2]);
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.delete();
+
+        // in case of successful removal of brick
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            System.out.println("Brick successfully deleted");
+
+        } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
+            // in case of building kit conflict
+            // list building kits that contain this brick
+            List<BuildingKitDto> brickDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
+            });
+
+            System.out.println("Cannot delete this brick, because it is contained in this building kits:");
+            for (BuildingKitDto b : brickDtoList) {
+                System.out.println(b.getName());
+            }
+
+        } else {
+            //TODO in case that id does not exist
+        }
     }
 
 }

@@ -1,20 +1,21 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.service.BrickService;
+import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
-import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.entity.Brick;
-import cz.muni.fi.PA165.api.service.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * this class contains operation with Brick Dto object on service layer
- * 
+ *
  * @author Jiri Krepl
  */
 @Service
@@ -30,10 +31,11 @@ public class BrickServiceImpl implements BrickService {
 
     /**
      * creates a new brick
+     *
      * @param brickDto Dto object of Brick
      */
     public void create(BrickDto brickDto) {
-        if(brickDto == null) {
+        if (brickDto == null) {
             throw new DataAccessExceptionService("created brick cannot be null");
         }
         Brick brickEntity = BrickConversion.convertToEntity(brickDto);
@@ -42,22 +44,24 @@ public class BrickServiceImpl implements BrickService {
 
     /**
      * updates a brick
+     *
      * @param brickDto Dto object of Brick
      */
     public void update(BrickDto brickDto) {
-        if(brickDto == null) {
+        if (brickDto == null) {
             throw new DataAccessExceptionService("updated brick cannot be null");
         }
         Brick brickEntity = BrickConversion.convertToEntity(brickDto);
         brickDao.update(brickEntity);
     }
-    
+
     /**
      * updates a brick by its id
+     *
      * @param id id of brick
      */
     public void delete(Long id) {
-        if(id == null) {
+        if (id == null) {
             throw new DataAccessExceptionService("cannot delete brick with null id");
         }
         brickDao.delete(id);
@@ -65,6 +69,7 @@ public class BrickServiceImpl implements BrickService {
 
     /**
      * find all brick in system
+     *
      * @return list of bricks
      */
     public List<BrickDto> findAll() {
@@ -78,24 +83,28 @@ public class BrickServiceImpl implements BrickService {
 
     /**
      * find one brick by its id
+     *
      * @param id id of the brick
      * @return brick with desired id
      */
     public BrickDto findById(Long id) {
-        if(id == null) {
+        if (id == null) {
             throw new DataAccessExceptionService("cannot find brick with null id");
         }
+
         Brick entity = brickDao.findById(id);
+
         return BrickConversion.convertToDto(entity);
     }
 
     /**
      * finds brick by its color
+     *
      * @param color color of the brick
      * @return brick with desired color
      */
     public List<BrickDto> findByColor(Color color) {
-        if(color == null) {
+        if (color == null) {
             throw new DataAccessExceptionService("cannot find brick with null color");
         }
         List<Brick> brickEntitites = brickDao.findByColor(color);
@@ -108,11 +117,12 @@ public class BrickServiceImpl implements BrickService {
 
     /**
      * finds a brick with some name
+     *
      * @param name name of brick
      * @return brick with desired name
      */
     public List<BrickDto> findByName(String name) {
-        if(name == null) {
+        if (name == null) {
             throw new DataAccessExceptionService("cannot brick with null name");
         }
         List<Brick> brickEntitites = brickDao.findByName(name);
