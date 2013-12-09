@@ -37,7 +37,7 @@ public class CategoryClient {
 
             case createOperation:
                 // create <name> <description>
-                //handleCreateOperation(args);
+                handleCreateOperation(args);
                 break;
 
             case updateOperation:
