@@ -1,9 +1,11 @@
 package cz.muni.fi.PA165.dao;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
-import org.springframework.stereotype.Repository;
+
 /**
  * general class for AbstractDao, specific entity AbstractDao classes subclass this class
  * this class contains basic CRUD operations
@@ -48,18 +50,19 @@ public abstract class AbstractDao<E> {
 
     /**
      * generic method for updating entity in db
+     *
      * @param entity generic entity instance, which has to be updated
      */
     public void update(E entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be NULL");
         }
-       entityManager.merge(entity);
-
+        entityManager.merge(entity);
     }
 
     /**
      * generic method of deleting entity from db
+     *
      * @param id id of entity which has to deleted
      */
     public void delete(Long id) {
@@ -82,7 +85,7 @@ public abstract class AbstractDao<E> {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
-        E entity =  entityManager.find(entityClass, id);
+        E entity = entityManager.find(entityClass, id);
         if (entity == null) {
             throw new IllegalArgumentException("Object not found");
         }

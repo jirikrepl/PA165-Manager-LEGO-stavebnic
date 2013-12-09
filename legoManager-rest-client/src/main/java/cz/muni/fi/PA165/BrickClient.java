@@ -130,21 +130,8 @@ public class BrickClient {
         // set arguments from command line to variables
         String name = args[2];
         String colorString = args[3];
-
-        // find out if string of color has its Enum
-        Color colorEnum = null;
-        for (Color c : Color.values()) {
-            if (c.equalsName(colorString)) {
-                colorEnum = c;
-                break;
-            }
-        }
-
-        // bad color argument, print list of colors and exit
-        if (colorEnum == null) {
-            Messages.printAllColors();
-            System.exit(1);
-        }
+        // convert string to color
+        Color colorEnum = parseColor(colorString);
 
         // everything is ok, create new brick
         BrickDto brickDto = new BrickDto(name, colorEnum, "");
@@ -160,6 +147,30 @@ public class BrickClient {
         } else {
             System.out.println("Error code:" + response.getStatus());
         }
+    }
+
+    /**
+     * convert string to enum of color
+     *
+     * @param colorString string from command line arg
+     * @return Color, or exit if color does not exist
+     */
+    private Color parseColor(String colorString) {
+        // find out if string of color has its Enum
+        Color colorEnum = null;
+        for (Color c : Color.values()) {
+            if (c.equalsName(colorString)) {
+                colorEnum = c;
+                break;
+            }
+        }
+
+        // bad color argument, print list of colors and exit
+        if (colorEnum == null) {
+            Messages.printAllColors();
+            System.exit(1);
+        }
+        return colorEnum;
     }
 
 
@@ -192,16 +203,33 @@ public class BrickClient {
     }
 
     /**
-     * find brick by its name
+     * handle findByName operation on brick
      *
-     * @param args name of brick
+     * @param args command line arguments
+     *             args[0]  args[1]   args[2]
+     *             brick    update    name
      */
     private void handleFindByName(String[] args) {
         if (args.length < 3) {
-            String requiredArgs = "<id>";
+            String requiredArgs = "<name>";
             Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
             System.exit(1);
         }
+        String name = args[2];
+
+//        Client client = ClientBuilder.newBuilder().build();
+//        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+//        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+//        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+//
+//        Response response = invocationBuilder.get();
+//
+//        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+//            BrickDto brickDto = response.readEntity(BrickDto.class);
+//            System.out.println(brickDto);
+//        } else {
+//            System.err.println("Error on server, server returned " + response.getStatus());
+//        }
 
         System.out.println("find brick by its name: " + args[2]);
     }
@@ -233,6 +261,49 @@ public class BrickClient {
             String requiredArgs = "<id> <newName> <newColor>";
             Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
             System.exit(1);
+        }
+        String name = args[3];
+        String colorString = args[4];
+
+        // try to parse id argument
+        Long id = null;
+        try {
+            id = Long.parseLong(args[2]);
+        } catch (NumberFormatException e) {
+            System.err.println("Argument (id): " + args[2] + " must be a number");
+            System.exit(1);
+        }
+
+        // convert string to color enum, if this fails --> exit
+        Color colorEnum = parseColor(colorString);
+
+        // everything is ok, create new brick
+        BrickDto brickDto = new BrickDto(name, colorEnum, "");
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).put(Entity.entity(brickDto, MediaType.APPLICATION_JSON_TYPE));
+
+        // in case of successful removal of brick
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            System.out.println("Brick successfully deleted");
+
+        } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
+            // in case of building kit conflict
+            // list building kits that contain this brick
+            List<BuildingKitDto> brickDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
+            });
+
+            System.out.println("Cannot delete this brick, because it is contained in this building kits:");
+            for (BuildingKitDto b : brickDtoList) {
+                System.out.println(b.getName());
+            }
+
+        } else {
+            //TODO in case that id does not exist
         }
 
         System.out.println("updated brick with id: " + args[2] +
