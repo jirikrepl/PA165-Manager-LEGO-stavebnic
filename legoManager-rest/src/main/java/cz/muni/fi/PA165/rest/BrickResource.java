@@ -45,24 +45,29 @@ public class BrickResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response findAll(@QueryParam("color") Color color, @QueryParam("name") String name) {
-        List<BrickDto> brickDtoList = null;
+        List<BrickDto> brickDtoList;
+
         if (color != null) {
+            // find by color
             brickDtoList = brickService.findByColor(color);
 
         } else if (name != null) {
+            //find by name
             brickDtoList = brickService.findByName(name);
-        } else if (color == null && name == null) {
+
+        } else {
+            // return all bricks (clean url: rest/bricks)
             brickDtoList = brickService.findAll();
         }
 
         if (brickDtoList != null) {
             GenericEntity<List<BrickDto>> brickEntity = new GenericEntity<List<BrickDto>>(brickDtoList) {
             };
-
             return Response.status(Response.Status.OK).entity(brickEntity).build();
         } else {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 

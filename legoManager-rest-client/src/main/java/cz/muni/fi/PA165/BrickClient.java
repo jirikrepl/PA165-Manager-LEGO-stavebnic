@@ -206,8 +206,8 @@ public class BrickClient {
      * handle findByName operation on brick
      *
      * @param args command line arguments
-     *             args[0]  args[1]   args[2]
-     *             brick    update    name
+     *             args[0]  args[1]      args[2]
+     *             brick    findbyname   name
      */
     private void handleFindByName(String[] args) {
         if (args.length < 3) {
@@ -217,36 +217,60 @@ public class BrickClient {
         }
         String name = args[2];
 
-//        Client client = ClientBuilder.newBuilder().build();
-//        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
-//        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-//        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
-//
-//        Response response = invocationBuilder.get();
-//
-//        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-//            BrickDto brickDto = response.readEntity(BrickDto.class);
-//            System.out.println(brickDto);
-//        } else {
-//            System.err.println("Error on server, server returned " + response.getStatus());
-//        }
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("name", name);
+        Invocation.Builder invocationBuilder = webTarget.request();
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
-        System.out.println("find brick by its name: " + args[2]);
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {
+            });
+
+            for (BrickDto b : brickDtoList) {
+                System.out.println(b);
+            }
+        } else {
+            System.out.println("Error code:" + response.getStatus());
+        }
     }
 
     /**
-     * find brick by its color
+     * handle findByColor operation on brick
      *
-     * @param args color of brick
+     * @param args command line arguments
+     *             args[0]  args[1]        args[2]
+     *             brick    findbycolor    color
      */
     private void handleFindByColor(String[] args) {
         if (args.length < 3) {
-            String requiredArgs = "<id>";
+            String requiredArgs = "<color>";
             Messages.badNumberOfArgsMessage(args.length, findByColorOperation, requiredArgs);
             System.exit(1);
         }
 
-        System.out.println("find brick by its color: " + args[2]);
+
+        //TODO vyresit zavislost na Color! tato metoda zatim nefunguje
+        String color = args[2];
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("color", color);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {
+            });
+
+            for (BrickDto b : brickDtoList) {
+                System.out.println(b);
+            }
+        } else {
+            System.out.println("Error code:" + response.getStatus());
+        }
     }
 
     /**

@@ -7,7 +7,7 @@ package cz.muni.fi.PA165.api.service;
  */
 public enum Color {
 
-    WHITE("Color.WHITE %s"),
+    WHITE("Color.WHITE"),
     BRICKYELLOW("Color.BRICKYELLOW"),
     NOUGAT("Color.NOUGAT"),
     BRIGHTRED("Color.BRIGHTRED"),
@@ -30,8 +30,30 @@ public enum Color {
     Color(String text) {
         this.text = text;
     }
-    
-    public String toString(Object... o) {
-        return String.format(text, o);
+
+//    public boolean equalsName(String otherName) {
+//        return (otherName != null) && text.equals(otherName);
+//    }
+
+    public String toString() {
+        return text;
     }
+
+//    /**
+//     * convert string to enum of color
+//     *
+//     * @param colorString string from command line arg
+//     * @return Color, or exit if color does not exist
+//     */
+//    public static Color parseColor(String colorString) {
+//        // find out if string of color has its Enum
+//        Color colorEnum = null;
+//        for (Color c : Color.values()) {
+//            if (c.equalsName(colorString)) {
+//                colorEnum = c;
+//                break;
+//            }
+//        }
+//        return colorEnum;
+//    }
 }
