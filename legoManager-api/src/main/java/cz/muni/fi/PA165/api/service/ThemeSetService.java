@@ -61,5 +61,5 @@ public interface ThemeSetService {
      *
      * @param categoryDto the given category
      */
-    //public List<ThemeSetDto> findByCategory(CategoryDto categoryDto);
+    public List<ThemeSetDto> findByCategory(CategoryDto categoryDto);
 }

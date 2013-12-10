@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.rest;
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,7 +37,11 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id, CategoryDto category) {
-        //TODO CO KDYZ ID NEEXISTUJE?
+        CategoryDto foundCategory = categoryService.findById(id);
+
+        if(foundCategory == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         category.setId(id);
         categoryService.update(category);
         return Response.status(Response.Status.OK).build();
@@ -77,7 +82,6 @@ public class CategoryResource {
 
         CategoryDto category = categoryService.findById(id);
 
-        //TODO problem na servisni vrstve
         if(category == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
@@ -85,9 +89,11 @@ public class CategoryResource {
         // find out if category is used by some building kit first
         // otherwise removal of used category would violate the constraint
         List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByCategory(category);
+        //the same for theme sets
+        List<ThemeSetDto> themeSetDtoList = themeSetService.findByCategory(category);
 
-        // list is empty, category is not contained in any building kit => delete category
-        if (buildingKitDtoList.isEmpty()) {
+        // lists are empty, category is not contained in any building kit or theme set => delete category
+        if (buildingKitDtoList.isEmpty() && themeSetDtoList.isEmpty()) {
             categoryService.delete(id);
             return Response.status(Response.Status.OK).build();
         }
@@ -105,6 +111,10 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
         CategoryDto categoryDto = categoryService.findById(id);
-        return Response.status(Response.Status.OK).entity(categoryDto).build();
+        if (categoryDto == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            return Response.status(Response.Status.OK).entity(categoryDto).build();
+        }
     }
 }

@@ -132,7 +132,7 @@ public class CategoryClient {
      *
      * @param args category id
      */
-    private void handleFindById(String[] args) {            //NOK
+    private void handleFindById(String[] args) {            //OK
         if (args.length < 3) {
             String requiredArgs = "<id>";
             Messages.badNumberOfArgsMessage(args.length, findByIdOperation, requiredArgs);
@@ -154,12 +154,13 @@ public class CategoryClient {
 
         Response response = invocationBuilder.get();
 
-        //jeste vyresit, kdyz id neexistuje
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             CategoryDto categoryDto = response.readEntity(CategoryDto.class);
             System.out.println(categoryDto);
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Category with this id was not found.");
         } else {
-            System.err.println("Error on server, server returned " + response.getStatus());
+            System.out.println("Error on server, server returned " + response.getStatus());
         }
     }
 
@@ -168,7 +169,7 @@ public class CategoryClient {
      *
      * @param args name of category
      */
-    private void handleFindByName(String[] args) { //OPRAVIT SERVISNI VRSTVU
+    private void handleFindByName(String[] args) {  //OK
         if (args.length < 3) {
             String requiredArgs = "<name>";
             Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
@@ -208,7 +209,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]   args[3]   args[4]
      *             category    update    id        newName   newDescription
      */
-    private void handleUpdateOperation(String[] args) {
+    private void handleUpdateOperation(String[] args) {           //OK
         if (args.length < 5) {
             String requiredArgs = "<id> <newName> <newDescription>";
             Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
@@ -230,15 +231,22 @@ public class CategoryClient {
         categoryDto.setDescription(description);
 
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
-        Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).put(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
 
         //successful update
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             System.out.println("updated category with id: " + args[2] +
                     "\nsetting new name to: " + args[3] +
                     "\nand new description to: " + args[4]);
-        } else {
+        }
+        else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Category with this id doesn't exist.");
+        }
+        else
+        {
             System.out.println("Error code:" + response.getStatus());
         }
     }
