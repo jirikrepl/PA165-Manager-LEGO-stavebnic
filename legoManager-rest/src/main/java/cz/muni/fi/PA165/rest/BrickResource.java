@@ -116,7 +116,11 @@ public class BrickResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
         BrickDto brickDto = brickService.findById(id);
+        if (brickDto == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
         return Response.status(Response.Status.OK).entity(brickDto).build();
+        }
     }
 
 }

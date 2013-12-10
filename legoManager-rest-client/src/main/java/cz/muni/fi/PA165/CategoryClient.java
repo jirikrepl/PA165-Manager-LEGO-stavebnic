@@ -51,12 +51,12 @@ public class CategoryClient {
 
             // find <id>
             case findByIdOperation:
-                //handleFindById(args);
+                handleFindById(args);
                 break;
 
             // find <name>
             case findByNameOperation:
-                //handleFindByName(args);
+                handleFindByName(args);
                 break;
 
             default:
@@ -68,7 +68,7 @@ public class CategoryClient {
     /**
      * handles 'list' console command
      */
-    private void handleListOperation() {
+    private void handleListOperation() {       //OK
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
@@ -97,7 +97,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]   args[3]
      *             category    create    name      description
      */
-    private void handleCreateOperation(String args[]) {
+    private void handleCreateOperation(String args[]) {     //OK
         if (args.length < 4) {
             String requiredArgs = "<name> <description>";
             Messages.badNumberOfArgsMessage(args.length, createOperation, requiredArgs);
@@ -132,7 +132,7 @@ public class CategoryClient {
      *
      * @param args category id
      */
-    private void handleFindById(String[] args) {
+    private void handleFindById(String[] args) {            //NOK
         if (args.length < 3) {
             String requiredArgs = "<id>";
             Messages.badNumberOfArgsMessage(args.length, findByIdOperation, requiredArgs);
@@ -154,6 +154,7 @@ public class CategoryClient {
 
         Response response = invocationBuilder.get();
 
+        //jeste vyresit, kdyz id neexistuje
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             CategoryDto categoryDto = response.readEntity(CategoryDto.class);
             System.out.println(categoryDto);
@@ -167,14 +168,37 @@ public class CategoryClient {
      *
      * @param args name of category
      */
-    private void handleFindByName(String[] args) {
+    private void handleFindByName(String[] args) { //OPRAVIT SERVISNI VRSTVU
         if (args.length < 3) {
             String requiredArgs = "<name>";
             Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
             System.exit(1);
         }
 
-        System.out.println("find category by its name: " + args[2]);
+        String name = args[2];
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories").queryParam("name", name);
+        Invocation.Builder invocationBuilder = webTarget.request();
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            List<CategoryDto> categoryDtoList = response.readEntity(new GenericType<List<CategoryDto>>() {
+            });
+
+            for (CategoryDto c : categoryDtoList) {
+                System.out.println(c);
+            }
+        } else {
+            if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+                System.out.println("No category with this name exists");
+            }
+            else {
+                System.out.println("Error code:" + response.getStatus());
+            }
+        }
     }
 
     /**
@@ -226,7 +250,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]
      *             category    delete    id
      */
-    private void handleDeleteOperation(String[] args) {
+    private void handleDeleteOperation(String[] args) {     //zakladni delete je ok
         if (args.length < 3) {
             String requiredArgs = "<id>";
             Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
@@ -262,8 +286,8 @@ public class CategoryClient {
                 System.out.println(b.getName());
             }
 
-        } else {
-            //TODO in case that id does not exist
+        } else if (response.getStatus() == Response.Status.NO_CONTENT.getStatusCode()){
+            System.out.println("Category with this id doesn't exist.");
         }
     }
 

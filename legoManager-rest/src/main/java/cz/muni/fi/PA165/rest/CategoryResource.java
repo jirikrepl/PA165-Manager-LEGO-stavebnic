@@ -48,9 +48,10 @@ public class CategoryResource {
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
         if (name != null) {
             CategoryDto category = categoryService.findByName(name);
-            if (category != null)
-            {
+            if (category != null) {
                 categoryDtoList.add(category);
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
             }
         } else {
             categoryDtoList = categoryService.findAll();
