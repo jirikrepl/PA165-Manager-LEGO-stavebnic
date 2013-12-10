@@ -1,7 +1,8 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.dto.BrickDto;
-import cz.muni.fi.PA165.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.service.Color;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
@@ -131,7 +132,13 @@ public class BrickClient {
         String name = args[2];
         String colorString = args[3];
         // convert string to color
-        Color colorEnum = parseColor(colorString);
+        Color colorEnum;
+        try {
+            colorEnum = Color.parseColor(colorString);
+        } catch (IllegalArgumentException e) {
+            System.out.println("vypis barvy");
+            return;
+        }
 
         // everything is ok, create new brick
         BrickDto brickDto = new BrickDto(name, colorEnum, "");
@@ -155,23 +162,23 @@ public class BrickClient {
      * @param colorString string from command line arg
      * @return Color, or exit if color does not exist
      */
-    private Color parseColor(String colorString) {
-        // find out if string of color has its Enum
-        Color colorEnum = null;
-        for (Color c : Color.values()) {
-            if (c.equalsName(colorString)) {
-                colorEnum = c;
-                break;
-            }
-        }
-
-        // bad color argument, print list of colors and exit
-        if (colorEnum == null) {
-            Messages.printAllColors();
-            System.exit(1);
-        }
-        return colorEnum;
-    }
+//    private Color parseColor(String colorString) {
+//        // find out if string of color has its Enum
+//        Color colorEnum = null;
+//        for (Color c : Color.values()) {
+//            if (c.equalsName(colorString)) {
+//                colorEnum = c;
+//                break;
+//            }
+//        }
+//
+//        // bad color argument, print list of colors and exit
+//        if (colorEnum == null) {
+//            Messages.printAllColors();
+//            System.exit(1);
+//        }
+//        return colorEnum;
+//    }
 
 
     /**
@@ -299,10 +306,10 @@ public class BrickClient {
         }
 
         // convert string to color enum, if this fails --> exit
-        Color colorEnum = parseColor(colorString);
+        //Color colorEnum = parseColor(colorString);
 
         // everything is ok, create new brick
-        BrickDto brickDto = new BrickDto(name, colorEnum, "");
+        BrickDto brickDto = new BrickDto(name, null, "");
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());

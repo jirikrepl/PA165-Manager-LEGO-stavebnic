@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.api.service.Color;
+
 /**
  * Created by Jiri Krepl on 12/6/13.
  * this class includes messages of rest-client

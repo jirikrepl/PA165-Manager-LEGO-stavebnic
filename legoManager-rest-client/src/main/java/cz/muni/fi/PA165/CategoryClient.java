@@ -1,8 +1,8 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.dto.BrickDto;
-import cz.muni.fi.PA165.dto.BuildingKitDto;
-import cz.muni.fi.PA165.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.BrickDto;
+import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
