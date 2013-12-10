@@ -286,8 +286,8 @@ public class CategoryClient {
                 System.out.println(b.getName());
             }
 
-        } else {
-            //TODO in case that id does not exist
+        } else if (response.getStatus() == Response.Status.NO_CONTENT.getStatusCode()){
+            System.out.println("Category with this id doesn't exist.");
         }
     }
 
