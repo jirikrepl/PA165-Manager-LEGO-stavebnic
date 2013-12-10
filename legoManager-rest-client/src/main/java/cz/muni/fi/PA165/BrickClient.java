@@ -132,12 +132,12 @@ public class BrickClient {
         String name = args[2];
         String colorString = args[3];
         // convert string to color
-        Color colorEnum;
+        Color colorEnum = null;
         try {
             colorEnum = Color.parseColor(colorString);
         } catch (IllegalArgumentException e) {
             System.out.println("vypis barvy");
-            return;
+            System.exit(1);
         }
 
         // everything is ok, create new brick
@@ -306,10 +306,17 @@ public class BrickClient {
         }
 
         // convert string to color enum, if this fails --> exit
-        //Color colorEnum = parseColor(colorString);
+        Color colorEnum = null;
+        try {
+            colorEnum = Color.parseColor(colorString);
+        } catch (IllegalArgumentException e) {
+            System.out.println("TODO vypis barvy");
+            System.exit(1);
+        }
+
 
         // everything is ok, create new brick
-        BrickDto brickDto = new BrickDto(name, null, "");
+        BrickDto brickDto = new BrickDto(name, colorEnum, "");
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
