@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.entity.Brick;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +53,8 @@ public class BrickServiceImpl implements BrickService {
             throw new DataAccessExceptionService("updated brick cannot be null");
         }
         Brick brickEntity = BrickConversion.convertToEntity(brickDto);
+
+
         brickDao.update(brickEntity);
     }
 
@@ -64,7 +67,12 @@ public class BrickServiceImpl implements BrickService {
         if (id == null) {
             throw new DataAccessExceptionService("cannot delete brick with null id");
         }
-        brickDao.delete(id);
+        try {
+            brickDao.delete(id);
+        } catch (DataAccessException e) {
+            //TODO return false?
+        }
+
     }
 
     /**
@@ -91,10 +99,12 @@ public class BrickServiceImpl implements BrickService {
         if (id == null) {
             throw new DataAccessExceptionService("cannot find brick with null id");
         }
-
-        Brick entity = brickDao.findById(id);
-
-        return BrickConversion.convertToDto(entity);
+        try {
+            Brick entity = brickDao.findById(id);
+            return BrickConversion.convertToDto(entity);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 
     /**
