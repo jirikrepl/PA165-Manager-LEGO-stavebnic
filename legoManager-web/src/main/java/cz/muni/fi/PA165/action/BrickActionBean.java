@@ -39,7 +39,8 @@ public class BrickActionBean extends BaseActionBean implements ValidationErrorHa
                 @Validate(on = {"createBrick"}, field = "name", required = true, maxlength = 50)
             }
     )
-    private BrickDto brick; //one brick used for some operations (deletition, edit)
+    //one brick used for some operations (deletition, edit)
+    private BrickDto brick;
 
     /**
      * return all books for table in some jsp
@@ -132,6 +133,7 @@ public class BrickActionBean extends BaseActionBean implements ValidationErrorHa
      */
     public Resolution updateBrick() {
         brickService.update(brick);
+        brick = null;
         return new RedirectResolution(this.getClass(), "list");
     }
 
