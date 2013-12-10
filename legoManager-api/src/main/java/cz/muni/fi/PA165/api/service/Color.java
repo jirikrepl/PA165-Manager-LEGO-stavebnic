@@ -34,12 +34,13 @@ public enum Color {
         this.value =  value;
     }
 
-
-
     public String toString() {
         return localisation;
     }
 
+    public String getColorString() {
+        return value;
+    }
 
     public static Color parseColor(String colorString) {
         for (Color color : Color.values()) {

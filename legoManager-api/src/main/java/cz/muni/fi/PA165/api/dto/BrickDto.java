@@ -90,6 +90,7 @@ public class BrickDto {
 
     @Override
     public String toString() {
-        return "Brick{" + "id=" + id + ", color=" + color + ", name=" + name + ", description=" + description + '}';
+        String colorString = color.getColorString();
+        return "id: " + id + ", color: " + colorString + ", name: " + name;
     }
 }

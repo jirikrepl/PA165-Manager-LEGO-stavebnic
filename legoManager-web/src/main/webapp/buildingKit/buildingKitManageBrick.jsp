@@ -13,6 +13,10 @@
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <legend><f:message key="buildingkit.addbrick.legend"/></legend>
             <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
+
+            <s:errors/>
+
+            <%--select box for brick--%>
             <div class="form-group">
                 <s:label for="b1" class="col-sm-2 control-label"><f:message key="form.create.title"/></s:label>
                 <div class="col-sm-4">

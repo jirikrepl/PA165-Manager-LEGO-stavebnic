@@ -66,7 +66,7 @@ public class Messages {
         sb.append("Error: unknown color \nPossible colors are: \n\n");
 
         for (Color color : Color.values()) {
-            sb.append(color);
+            sb.append(color.getColorString());
             sb.append("\n");
         }
         System.out.println(sb);

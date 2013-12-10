@@ -61,14 +61,9 @@ public class BrickResource {
             // return all bricks (clean url: rest/bricks)
             brickDtoList = brickService.findAll();
         }
-
-        if (brickDtoList != null) {
-            GenericEntity<List<BrickDto>> brickEntity = new GenericEntity<List<BrickDto>>(brickDtoList) {
-            };
-            return Response.status(Response.Status.OK).entity(brickEntity).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        GenericEntity<List<BrickDto>> brickEntity = new GenericEntity<List<BrickDto>>(brickDtoList) {
+        };
+        return Response.status(Response.Status.OK).entity(brickEntity).build();
     }
 
 
@@ -89,7 +84,7 @@ public class BrickResource {
 
         // if brick with this id does not exit, return s
         //TODO problem na servisni vrstve
-        if(brick == null) {
+        if (brick == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
 
@@ -119,7 +114,7 @@ public class BrickResource {
         if (brickDto == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
-        return Response.status(Response.Status.OK).entity(brickDto).build();
+            return Response.status(Response.Status.OK).entity(brickDto).build();
         }
     }
 
