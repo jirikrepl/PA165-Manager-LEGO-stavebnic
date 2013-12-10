@@ -3,7 +3,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="category.title">
+<s:layout-render name="/layout.jsp" titlekey="buildingKit.edit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
