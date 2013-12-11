@@ -89,21 +89,23 @@ public class CategoryResource {
         // find out if category is used by some building kit first
         // otherwise removal of used category would violate the constraint
         List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByCategory(category);
+        if (!buildingKitDtoList.isEmpty()) {
+            List<BuildingKitDto> dependentObjects = new ArrayList<BuildingKitDto>();
+            dependentObjects.addAll(buildingKitDtoList);
+            GenericEntity<List<BuildingKitDto>> genericEntityList = new GenericEntity<List<BuildingKitDto>>(dependentObjects){};
+            return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
+        }
         //the same for theme sets
         List<ThemeSetDto> themeSetDtoList = themeSetService.findByCategory(category);
-
-        // lists are empty, category is not contained in any building kit or theme set => delete category
-        if (buildingKitDtoList.isEmpty() && themeSetDtoList.isEmpty()) {
-            categoryService.delete(id);
-            return Response.status(Response.Status.OK).build();
+        if (!themeSetDtoList.isEmpty()) {
+            List<ThemeSetDto> dependentObjects = new ArrayList<ThemeSetDto>();
+            dependentObjects.addAll(themeSetDtoList);
+            GenericEntity<List<ThemeSetDto>> genericEntityList = new GenericEntity<List<ThemeSetDto>>(dependentObjects){};
+            return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
         }
-
-        // list is not empty == category is used by some building kit
-        // list that building kits
-        GenericEntity<List<BuildingKitDto>> genericEntityList = new GenericEntity<List<BuildingKitDto>>(buildingKitDtoList) {
-        };
-        return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
-
+        // lists are empty, category is not contained in any building kit or theme set => delete category
+        categoryService.delete(id);
+        return Response.status(Response.Status.OK).build();
     }
 
     @GET

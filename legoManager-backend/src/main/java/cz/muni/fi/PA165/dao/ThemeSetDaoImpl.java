@@ -50,8 +50,8 @@ public class ThemeSetDaoImpl extends AbstractDao<ThemeSet> implements ThemeSetDa
         if (category == null){
             throw new IllegalArgumentException("Category cannot be null.");
         }
-        Query q = entityManager.createQuery("SELECT t FROM THEMESET t" + 
-                "WHERE category = :category");
+        Query q = entityManager.createQuery("SELECT t FROM ThemeSet t " +
+                "WHERE category = :category", ThemeSet.class);
         q.setParameter("category", category);
         return (List<ThemeSet>)q.getResultList();
     }

@@ -104,8 +104,14 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         if (categoryDto == null) {
             throw new DataAccessExceptionService("Category cannot be null.");
         }
-        Category category = CategoryConversion.convertToEntity(categoryDto);
-        List<BuildingKit> kits = buildingKitDao.findByCategory(category);
+        List<BuildingKit> kits;
+        try {
+            Category category = CategoryConversion.convertToEntity(categoryDto);
+            kits = buildingKitDao.findByCategory(category);
+        }
+        catch (DataAccessException e) {
+            return new ArrayList<BuildingKitDto>();
+        }
         List<BuildingKitDto> results = new ArrayList<BuildingKitDto>();
         for (BuildingKit kit : kits) {
             results.add(BuildingKitConversion.convertToDto(kit));

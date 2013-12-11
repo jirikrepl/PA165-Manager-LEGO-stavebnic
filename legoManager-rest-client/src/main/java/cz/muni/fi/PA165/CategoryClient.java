@@ -3,6 +3,7 @@ package cz.muni.fi.PA165;
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
@@ -284,14 +285,23 @@ public class CategoryClient {
             System.out.println("Category successfully deleted");
 
         } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
-            // in case of building kit conflict
-            // list building kits that contain this category
-            List<BuildingKitDto> buildingKitDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
-            });
-
-            System.out.println("Cannot delete this category, because it is contained in this building kits:");
-            for (BuildingKitDto b : buildingKitDtoList) {
-                System.out.println(b.getName());
+            // in case of building kit or theme set conflict
+            // list building kits or theme sets that contain this category
+            try {
+                List<BuildingKitDto> buildingKitDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
+                });
+                System.out.println("Cannot delete this category, because it is contained in these building kits:");
+                for (BuildingKitDto b : buildingKitDtoList) {
+                    System.out.println(b.toString());
+                }
+            }
+            catch (Exception e) {
+                List<ThemeSetDto> themeSetDtoList = response.readEntity(new GenericType<List<ThemeSetDto>>() {
+                });
+                System.out.println("Cannot delete this category, because it is contained in these theme sets:");
+                for (ThemeSetDto t : themeSetDtoList) {
+                    System.out.println(t.toString());
+                }
             }
 
         } else if (response.getStatus() == Response.Status.NO_CONTENT.getStatusCode()){

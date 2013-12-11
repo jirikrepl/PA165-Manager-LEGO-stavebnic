@@ -9,6 +9,7 @@ import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,8 +91,14 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         if (categoryDto == null){
             throw new DataAccessExceptionService("Category cannost be NULL");
         }
-        Category entity = CategoryConversion.convertToEntity(categoryDto);
-        List<ThemeSet> entities = themeSetDao.findByCategory(entity);
+        List<ThemeSet> entities;
+        try {
+            Category entity = CategoryConversion.convertToEntity(categoryDto);
+            entities = themeSetDao.findByCategory(entity);
+        }
+        catch (DataAccessException e) {
+            return new ArrayList<ThemeSetDto>();
+        }
         List<ThemeSetDto> dtos = new ArrayList<ThemeSetDto>();
         for(ThemeSet themeSet: entities){
             dtos.add(ThemeSetConversion.convertToDto(themeSet));
