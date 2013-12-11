@@ -257,7 +257,7 @@ public class BrickClient {
 
 
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("color", color);
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("color", color.getColorString());
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 

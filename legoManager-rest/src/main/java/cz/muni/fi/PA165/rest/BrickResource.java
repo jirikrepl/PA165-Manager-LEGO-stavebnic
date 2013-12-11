@@ -50,12 +50,13 @@ public class BrickResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response findAll(@QueryParam("color") Color color, @QueryParam("name") String name) {
+    public Response findAll(@QueryParam("color") String color, @QueryParam("name") String name) {
         List<BrickDto> brickDtoList;
 
         if (color != null) {
             // find by color
-            brickDtoList = brickService.findByColor(color);
+            Color colorEnum = Color.parseColor(color);
+            brickDtoList = brickService.findByColor(colorEnum);
 
         } else if (name != null) {
             //find by name
