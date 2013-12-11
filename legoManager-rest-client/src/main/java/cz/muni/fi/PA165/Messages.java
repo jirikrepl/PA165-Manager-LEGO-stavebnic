@@ -63,7 +63,7 @@ public class Messages {
      */
     public static void printAllColors() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Error: unknown color \nPossible colors are: \n\n");
+        sb.append("Error: Unsupported color \nPossible colors are: \n\n");
 
         for (Color color : Color.values()) {
             sb.append(color.getColorString());

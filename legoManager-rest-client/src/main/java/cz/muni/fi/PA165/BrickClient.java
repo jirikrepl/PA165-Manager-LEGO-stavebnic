@@ -245,7 +245,16 @@ public class BrickClient {
             System.exit(1);
         }
 
-        String color = args[2];
+        Color color = null;
+        String stringColor = args[2];
+        try {
+            color = Color.parseColor(stringColor);
+        } catch (IllegalArgumentException e) {
+            // in case of unsupported color, print all supported colors and end here
+            Messages.printAllColors();
+            System.exit(1);
+        }
+
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("color", color);
@@ -263,7 +272,7 @@ public class BrickClient {
                 System.out.println(b);
             }
         } else {
-            System.out.println("Server error - Error code:" + response.getStatus());
+            System.out.println("Server error - Error code: " + response.getStatus());
         }
     }
 
@@ -303,6 +312,7 @@ public class BrickClient {
 
         // everything is ok, create new brick
         BrickDto brickDto = new BrickDto(name, colorEnum, "");
+        brickDto.setId(id);
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
@@ -314,8 +324,10 @@ public class BrickClient {
         // in case of successful removal of brick
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             System.out.println("Brick successfully updated");
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Error - brick was not found, wrong id: " + id + " Server returned: " + response.getStatus());
         } else {
-            //TODO in case that id does not exist
+            System.out.println("Error on server, server returned " + response.getStatus());
         }
     }
 
@@ -356,8 +368,10 @@ public class BrickClient {
                 System.out.println(b.getName());
             }
 
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Error - brick was not found, wrong id: " + id + " Server returned: " + response.getStatus());
         } else {
-            //TODO in case that id does not exist
+            System.out.println("Error on server, server returned " + response.getStatus());
         }
     }
 

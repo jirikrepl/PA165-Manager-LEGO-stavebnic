@@ -38,9 +38,13 @@ public class BrickResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id, BrickDto brick) {
-        brick.setId(id);
-        brickService.update(brick);
-        return Response.status(Response.Status.OK).build();
+        if (brickService.findById(id) == null) {
+            // brick with this id was not found
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            brickService.update(brick);
+            return Response.status(Response.Status.OK).build();
+        }
     }
 
     @GET
@@ -79,13 +83,11 @@ public class BrickResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
-
         BrickDto brick = brickService.findById(id);
 
-        // if brick with this id does not exit, return s
-        //TODO problem na servisni vrstve
-        if (brick == null) {
-            return Response.status(Response.Status.NO_CONTENT).build();
+        if (brick== null) {
+            // brick with this id was not found
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         // find out if brick is used by some building kit first
