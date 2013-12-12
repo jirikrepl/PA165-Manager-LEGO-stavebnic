@@ -6,16 +6,25 @@ import cz.muni.fi.PA165.api.service.BrickService;
 import cz.muni.fi.PA165.api.service.BuildingKitService;
 import cz.muni.fi.PA165.api.service.Color;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @author: Martin Rumanek
  * @author Jiri Krepl
+ * @author: Martin Rumanek
  * @version: 11/26/13
  */
 @Path("bricks")
@@ -39,12 +48,12 @@ public class BrickResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id, BrickDto brick) {
-        if (brickService.findById(id) == null) {
-            // brick with this id was not found
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
+        try {
+            brickService.findById(id);
             brickService.update(brick);
             return Response.status(Response.Status.OK).build();
+        } catch (DataAccessException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 
@@ -56,8 +65,7 @@ public class BrickResource {
 
         if (color != null & name != null) {
             return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-        else if (color != null) {
+        } else if (color != null) {
             // find by color
             Color colorEnum = Color.parseColor(color);
             brickDtoList = brickService.findByColor(colorEnum);
@@ -88,28 +96,26 @@ public class BrickResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
-        BrickDto brick = brickService.findById(id);
+        try {
+            BrickDto brick = brickService.findById(id);
+            List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByBrick(brick);
+            // find out if brick is used by some building kit first
+            // otherwise removal of used brick would violate the constraint
 
-        if (brick== null) {
-            // brick with this id was not found
+            // list is empty, brick is not contained in any building kit => delete brick
+            if (buildingKitDtoList.isEmpty()) {
+                brickService.delete(id);
+                return Response.status(Response.Status.OK).build();
+            }
+
+            // list is not empty == brick is used by some building kit
+            // list that building kits
+            GenericEntity<List<BuildingKitDto>> genericEntityList = new GenericEntity<List<BuildingKitDto>>(buildingKitDtoList) {
+            };
+            return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
+        } catch (DataAccessException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
-        // find out if brick is used by some building kit first
-        // otherwise removal of used brick would violate the constraint
-        List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByBrick(brick);
-
-        // list is empty, brick is not contained in any building kit => delete brick
-        if (buildingKitDtoList.isEmpty()) {
-            brickService.delete(id);
-            return Response.status(Response.Status.OK).build();
-        }
-
-        // list is not empty == brick is used by some building kit
-        // list that building kits
-        GenericEntity<List<BuildingKitDto>> genericEntityList = new GenericEntity<List<BuildingKitDto>>(buildingKitDtoList) {
-        };
-        return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
 
     }
 
@@ -117,11 +123,11 @@ public class BrickResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
-        BrickDto brickDto = brickService.findById(id);
-        if (brickDto == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
+        try {
+            BrickDto brickDto = brickService.findById(id);
             return Response.status(Response.Status.OK).entity(brickDto).build();
+        } catch (DataAccessException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 

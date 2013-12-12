@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.*;
 import cz.muni.fi.PA165.rest.conflictDto.CategoryConflictDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -36,14 +37,13 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id, CategoryDto category) {
-        CategoryDto foundCategory = categoryService.findById(id);
-
-        if(foundCategory == null) {
+        try {
+            category.setId(id);
+            categoryService.update(category);
+            return Response.status(Response.Status.OK).build();
+        } catch (DataAccessException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        category.setId(id);
-        categoryService.update(category);
-        return Response.status(Response.Status.OK).build();
     }
 
     @GET
@@ -78,12 +78,8 @@ public class CategoryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
-
+        try {
         CategoryDto category = categoryService.findById(id);
-
-        if(category == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
 
         // find out if category is used by some building kit first
         // otherwise removal of used category would violate the constraint
@@ -100,17 +96,21 @@ public class CategoryResource {
 
         categoryService.delete(id);
         return Response.status(Response.Status.OK).build();
+        } catch (DataAccessException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
+        try {
         CategoryDto categoryDto = categoryService.findById(id);
-        if (categoryDto == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
+
             return Response.status(Response.Status.OK).entity(categoryDto).build();
+        } catch (DataAccessException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 }

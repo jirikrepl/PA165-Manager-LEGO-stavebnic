@@ -3,10 +3,7 @@ package cz.muni.fi.PA165;
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
-import cz.muni.fi.PA165.api.dto.ThemeSetDto;
-import cz.muni.fi.PA165.conflictDto.CategoryConflictDto;
 
-import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -31,50 +28,47 @@ public class CategoryClient {
 
         String operation = args[1];
 
-        try {
-            switch (operation) {
-                case listOperation:
-                    // list ... no arguments
-                    handleListOperation();
-                    break;
+        switch (operation) {
 
-                case createOperation:
-                    // create <name> <description>
-                    handleCreateOperation(args);
-                    break;
+            case listOperation:
+                // list ... no arguments
+                handleListOperation();
+                break;
 
-                case updateOperation:
-                    // update <id> <newName> <newDescription>
-                    handleUpdateOperation(args);
-                    break;
+            case createOperation:
+                // create <name> <description>
+                handleCreateOperation(args);
+                break;
 
-                case deleteOperation:
-                    handleDeleteOperation(args);
-                    break;
+            case updateOperation:
+                // update <id> <newName> <newDescription>
+                handleUpdateOperation(args);
+                break;
 
-                // find <id>
-                case findByIdOperation:
-                    handleFindById(args);
-                    break;
+            case deleteOperation:
+                handleDeleteOperation(args);
+                break;
 
-                // find <name>
-                case findByNameOperation:
-                    handleFindByName(args);
-                    break;
+            // find <id>
+            case findByIdOperation:
+                //handleFindById(args);
+                break;
 
-                default:
-                    Messages.unknownOperationMessage(operation);
-                    System.exit(1);
-            }
-        } catch (ProcessingException e) {
-            System.out.println("Error on server, server is not available");
+            // find <name>
+            case findByNameOperation:
+                //handleFindByName(args);
+                break;
+
+            default:
+                Messages.unknownOperationMessage(operation);
+                System.exit(1);
         }
     }
 
     /**
      * handles 'list' console command
      */
-    private void handleListOperation() {       //OK
+    private void handleListOperation() {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
@@ -103,7 +97,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]   args[3]
      *             category    create    name      description
      */
-    private void handleCreateOperation(String args[]) {     //OK
+    private void handleCreateOperation(String args[]) {
         if (args.length < 4) {
             String requiredArgs = "<name> <description>";
             Messages.badNumberOfArgsMessage(args.length, createOperation, requiredArgs);
@@ -138,7 +132,7 @@ public class CategoryClient {
      *
      * @param args category id
      */
-    private void handleFindById(String[] args) {            //OK
+    private void handleFindById(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
             Messages.badNumberOfArgsMessage(args.length, findByIdOperation, requiredArgs);
@@ -163,10 +157,8 @@ public class CategoryClient {
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             CategoryDto categoryDto = response.readEntity(CategoryDto.class);
             System.out.println(categoryDto);
-        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
-            System.out.println("Category with this id was not found.");
         } else {
-            System.out.println("Error on server, server returned " + response.getStatus());
+            System.err.println("Error on server, server returned " + response.getStatus());
         }
     }
 
@@ -175,37 +167,14 @@ public class CategoryClient {
      *
      * @param args name of category
      */
-    private void handleFindByName(String[] args) {  //OK
+    private void handleFindByName(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<name>";
             Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
             System.exit(1);
         }
 
-        String name = args[2];
-
-        Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories").queryParam("name", name);
-        Invocation.Builder invocationBuilder = webTarget.request();
-        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
-
-        Response response = invocationBuilder.get();
-
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            List<CategoryDto> categoryDtoList = response.readEntity(new GenericType<List<CategoryDto>>() {
-            });
-
-            for (CategoryDto c : categoryDtoList) {
-                System.out.println(c);
-            }
-        } else {
-            if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
-                System.out.println("No category with this name exists");
-            }
-            else {
-                System.out.println("Error code:" + response.getStatus());
-            }
-        }
+        System.out.println("find category by its name: " + args[2]);
     }
 
     /**
@@ -215,7 +184,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]   args[3]   args[4]
      *             category    update    id        newName   newDescription
      */
-    private void handleUpdateOperation(String[] args) {           //OK
+    private void handleUpdateOperation(String[] args) {
         if (args.length < 5) {
             String requiredArgs = "<id> <newName> <newDescription>";
             Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
@@ -237,22 +206,15 @@ public class CategoryClient {
         categoryDto.setDescription(description);
 
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
-        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
-        Response response = webTarget.request(MediaType.APPLICATION_JSON).put(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
 
         //successful update
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             System.out.println("updated category with id: " + args[2] +
                     "\nsetting new name to: " + args[3] +
                     "\nand new description to: " + args[4]);
-        }
-        else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
-            System.out.println("Category with this id doesn't exist.");
-        }
-        else
-        {
+        } else {
             System.out.println("Error code:" + response.getStatus());
         }
     }
@@ -290,23 +252,18 @@ public class CategoryClient {
             System.out.println("Category successfully deleted");
 
         } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
+            // in case of building kit conflict
+            // list building kits that contain this category
+            List<BuildingKitDto> buildingKitDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
+            });
 
-            System.out.println("Cannot delete this category");
-
-            CategoryConflictDto categoryConflictDto = response.readEntity(CategoryConflictDto.class);
-
-            if (!categoryConflictDto.getBuildingKitDtoList().isEmpty()) {
-                System.out.println("Because is referenced from TODO");
-                //TODO Tomas
+            System.out.println("Cannot delete this category, because it is contained in this building kits:");
+            for (BuildingKitDto b : buildingKitDtoList) {
+                System.out.println(b.getName());
             }
 
-            if (!categoryConflictDto.getBuildingKitDtoList().isEmpty()) {
-                System.out.println("Because is referenced from TODO");
-                //Todo Tomas
-            }
-
-        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
-            System.out.println("Category with this id doesn't exist.");
+        } else {
+            //TODO in case that id does not exist
         }
     }
 

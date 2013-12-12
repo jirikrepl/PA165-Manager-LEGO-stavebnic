@@ -47,13 +47,15 @@ public class CategoryServiceImpl implements CategoryService {
         if(name == null) {
             throw new DataAccessExceptionService("parameter name cannot be NULL");
         }
+        Category category = categoryDao.findByName(name);
 
+        CategoryDto dto = null;
         try {
-            Category category = categoryDao.findByName(name);
-            return CategoryConversion.conversionToDto(category);
+            dto = CategoryConversion.conversionToDto(category);
         } catch (Exception e) {
-            return null;
+            return dto;
         }
+        return dto;
     }
 
     @Override
@@ -70,9 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(id == null) {
             throw new DataAccessExceptionService("ID cannot be NULL");
         }
-        try {
-            categoryDao.delete(id);
-        } catch (DataAccessException e) {}
+        categoryDao.delete(id);
     }
 
     @Override
@@ -89,11 +89,14 @@ public class CategoryServiceImpl implements CategoryService {
         if(id == null) {
             throw new DataAccessExceptionService("ID cannot be NULL");
         }
+        Category entity = categoryDao.findById(id);
+        
+        CategoryDto dto = null;
         try {
-            Category entity = categoryDao.findById(id);
-            return CategoryConversion.conversionToDto(entity);
-        } catch (DataAccessException e) {
-            return null;
+            dto = CategoryConversion.conversionToDto(entity);
+        } catch (Exception e) {
+            return dto;
         }
+        return dto;
     }
 }
