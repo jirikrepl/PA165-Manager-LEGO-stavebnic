@@ -6,8 +6,10 @@ import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.entity.Brick;
+import cz.muni.fi.PA165.entity.Category;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
@@ -56,7 +58,9 @@ public class BrickServiceTest {
 
 
         brickService.create(brickDto);
-        verify(brickDao).create(BrickConversion.convertToEntity(brickDto));
+        ArgumentCaptor<Brick> captor = ArgumentCaptor.forClass(Brick.class);
+        verify(brickDao).create(captor.capture());
+        assertEquals(captor.getValue().getName(), brickDto.getName());
         verify(brickDao, never()).update(any(Brick.class));
         verify(brickDao, never()).delete(anyLong());
     }
@@ -74,7 +78,10 @@ public class BrickServiceTest {
 
         brickService.update(brickDto);
 
-        verify(brickDao).update(BrickConversion.convertToEntity(brickDto));
+        ArgumentCaptor<Brick> captor = ArgumentCaptor.forClass(Brick.class);
+        verify(brickDao).update(captor.capture());
+        assertEquals(captor.getValue().getName(), brickDto.getName());
+
         verify(brickDao, never()).delete(anyLong());
         verify(brickDao, never()).create(any(Brick.class));
     }

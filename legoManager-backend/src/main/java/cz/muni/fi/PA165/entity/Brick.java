@@ -55,35 +55,14 @@ public class Brick implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Brick brick = (Brick) o;
-
-        if (color != brick.color) return false;
-        if (description != null ? !description.equals(brick.description) : brick.description != null) return false;
-        if (id != null ? !id.equals(brick.id) : brick.id != null) return false;
-        if (name != null ? !name.equals(brick.name) : brick.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (color != null ? color.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
-    }
 
     @Override
     public String toString() {
-        return "Brick{" + "id=" + id + ", color=" + color + ", name=" + name + ", description=" + description + '}';
+        return "Brick{" +
+                "id=" + id +
+                ", color=" + color +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

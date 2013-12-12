@@ -58,6 +58,8 @@ public class ThemeSetDto {
         this.categoryDto = category;
     }
 
+
+    //TODO proc to teda zustalo v DAO
     /*
     public List<BuildingKitDto> getBuildingKitsDto() {
         return buildingKitsDto;
@@ -69,29 +71,34 @@ public class ThemeSetDto {
     */
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ThemeSetDto)) return false;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ThemeSetDto other = (ThemeSetDto) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
+        ThemeSetDto that = (ThemeSetDto) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
         return true;
     }
 
     @Override
-    public String toString() {
-        return "ThemeSetDto{" + "id=" + id + ", price=" + price + ", description=" + description + ", name=" + name + '}';
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
-    
+
+    @Override
+    public String toString() {
+        return "ThemeSetDto{" +
+                "id=" + id +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", categoryDto=" + categoryDto +
+                ", buildingKitsDto=" + buildingKitsDto +
+                '}';
+    }
 }

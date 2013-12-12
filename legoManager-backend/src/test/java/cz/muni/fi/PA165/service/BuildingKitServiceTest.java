@@ -1,10 +1,12 @@
 package cz.muni.fi.PA165.service;
 
+import com.sun.org.apache.xpath.internal.Arg;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import junit.framework.TestCase;
+import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
@@ -51,9 +53,10 @@ public class BuildingKitServiceTest extends TestCase {
  
         BuildingKitDto kitDto = createBuildingKitDto("name", "desc");
         kitService.create(kitDto);
- 
-        BuildingKit kit = BuildingKitConversion.convertToEntity(kitDto);
-        verify(kitDao).create(kit);
+
+        ArgumentCaptor<BuildingKit> captor = ArgumentCaptor.forClass(BuildingKit.class);
+        verify(kitDao).create(captor.capture());
+        assertEquals(captor.getValue().getName(), kitDto.getName());
     }
  
     /*
@@ -78,15 +81,19 @@ public class BuildingKitServiceTest extends TestCase {
         }
         BuildingKitDto dto = createBuildingKitDto("name", "desc");
         kitService.create(dto);
- 
-        verify(kitDao).create(BuildingKitConversion.convertToEntity(dto));
- 
+
+        ArgumentCaptor<BuildingKit> captor1 = ArgumentCaptor.forClass(BuildingKit.class);
+        verify(kitDao).create(captor1.capture());
+        assertEquals(captor1.getValue().getName(), dto.getName());
+
         //update
         dto.setName("name2");
         kitService.update(dto);
- 
-        verify(kitDao).update(BuildingKitConversion.convertToEntity(dto));
- 
+
+        ArgumentCaptor<BuildingKit> captor2 = ArgumentCaptor.forClass(BuildingKit.class);
+        verify(kitDao).update(captor2.capture());
+        assertEquals(captor2.getValue().getName(), dto.getName());
+
         //if the service.findById is called, it is expected, that it will be
         // called the dao.getId in the dao layer
         Long id = dto.getId();

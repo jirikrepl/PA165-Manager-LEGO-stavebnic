@@ -82,53 +82,36 @@ public class BuildingKitDto {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 29 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 29 * hash + this.yearFrom;
-        hash = 29 * hash + (this.price != null ? this.price.hashCode() : 0);
-        hash = 29 * hash + (this.description != null ? this.description.hashCode() : 0);
-        hash = 29 * hash + (this.bricks != null ? this.bricks.hashCode() : 0);
-        hash = 29 * hash + (this.themeSet != null ? this.themeSet.hashCode() : 0);
-        return hash;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BuildingKitDto)) return false;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final BuildingKitDto other = (BuildingKitDto) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-            return false;
-        }
-        if (this.yearFrom != other.yearFrom) {
-            return false;
-        }
-        if (this.price != other.price && (this.price == null || !this.price.equals(other.price))) {
-            return false;
-        }
-        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-            return false;
-        }
-        if (this.bricks != other.bricks && (this.bricks == null || !this.bricks.equals(other.bricks))) {
-            return false;
-        }
-        if (this.themeSet != other.themeSet && (this.themeSet == null || !this.themeSet.equals(other.themeSet))) {
-            return false;
-        }
+        BuildingKitDto that = (BuildingKitDto) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
         return true;
     }
 
     @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "BuildingKitDto{" + "id=" + id + ", name=" + name + ", yearFrom=" + yearFrom + ", price=" + price + ", description=" + description + ", bricks=" + bricks + ", themeSet=" + themeSet + '}';
+        return "BuildingKitDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", yearFrom=" + yearFrom +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", bricks=" + bricks +
+                ", themeSet=" + themeSet +
+                ", category=" + category +
+                '}';
     }
 }

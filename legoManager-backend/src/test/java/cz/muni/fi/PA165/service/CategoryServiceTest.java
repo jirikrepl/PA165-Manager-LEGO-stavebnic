@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
+import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +51,12 @@ public class CategoryServiceTest extends TestCase {
         
         // test creation with ServiceDto object
         CategoryDto categoryDto = createCategoryDto("name", "desc");
+        ArgumentCaptor<Category> captor = ArgumentCaptor.forClass(Category.class);
         categoryService.create(categoryDto);
         Category category = CategoryConversion.convertToEntity(categoryDto);
-        // veryfy that create method was called on mock categoryDao object
-        verify(categoryDao).create(category);
+        // verify that create method was called on mock categoryDao object
+        verify(categoryDao).create(captor.capture());
+        assertEquals(category.getName(), captor.getValue().getName());
     }
 
     /**
@@ -84,13 +87,17 @@ public class CategoryServiceTest extends TestCase {
         CategoryDto categoryDto = createCategoryDto("name", "desc");
         Long id = categoryDto.getId();
         categoryService.create(categoryDto);
-        Category entity = CategoryConversion.convertToEntity(categoryDto);
-        verify(categoryDao).create(entity);
+        ArgumentCaptor<Category> captor1 = ArgumentCaptor.forClass(Category.class);
+        verify(categoryDao).create(captor1.capture());
+        assertEquals(captor1.getValue().getName(), categoryDto.getName());
         
         //update
         categoryDto.setName("name2");
+
         categoryService.update(categoryDto);
-        verify(categoryDao).update(CategoryConversion.convertToEntity(categoryDto));
+        ArgumentCaptor<Category> captor2 = ArgumentCaptor.forClass(Category.class);
+        verify(categoryDao).update(captor2.capture());
+        assertEquals(captor2.getValue().getName(), categoryDto.getName());
         
         // mock dao
         when(categoryDao.findById(id)).thenReturn(CategoryConversion.convertToEntity(categoryDto));
