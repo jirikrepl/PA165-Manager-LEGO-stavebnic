@@ -12,10 +12,9 @@
 
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <legend><f:message key="buildingkit.addbrick.legend"/></legend>
-            <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
 
             <s:errors/>
-
+            <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
             <%--select box for brick--%>
             <div class="form-group">
                 <s:label for="b1" class="col-sm-2 control-label"><f:message key="form.create.title"/></s:label>
@@ -40,7 +39,9 @@
                 </div>
 
                 <div class="col-sm-offset-1 col-sm-3">
-                    <s:submit class="btn" name=""><f:message key="buildingkit.addbrick.cancel"/></s:submit>
+                    <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="list">
+                        <f:message key="buildingkit.addbrick.cancel"/>
+                    </s:link>
                 </div>
             </div>
         </s:form>
@@ -66,15 +67,14 @@
                             <%--edit link--%>
                             <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openBrickCountEdit">
                                 <s:param name="brick.id" value="${brickItem.key.id}"/>
-                                <s:param name="brickCount" value="${brickItem.value}"/>
                                 <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
                                 <f:message key="brick.edit.button"/>
                             </s:link>
 
                             <%--delete button--%>
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
-                                <input name="deletedBrickId" value="${brickItem.key.id}" type="hidden"/>
+                                <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
+                                <s:hidden name="brick.id" value="${brickItem.key.id}"/>
                                 <s:submit class="btn" name="deleteBrick"><f:message key="buildingkit.addbrick.delete"/></s:submit>
                             </s:form>
                         </span>

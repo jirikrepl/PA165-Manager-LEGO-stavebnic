@@ -11,6 +11,7 @@
 
 
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+            <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
             <legend><f:message key="buildingkit.addbrick.editCount"/></legend>
 
             <%--input element for setting brick count--%>
@@ -26,19 +27,16 @@
 
                     <%--save button--%>
                 <div class="col-sm-offset-2 col-sm-1">
-                    <s:hidden name="buildingKit.brickCount" value="${actionBean.brickCount}"/>
-                    <s:param name="brick.id" value="${actionBean.brick.id}"/>
-                    <s:hidden name="brickCount" value="${actionBean.brickCount}"/>
-                    <s:hidden name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
-
+                    <s:hidden name="brick.id" value="${actionBean.brick.id}"/>
                     <s:submit class="btn" name="saveBrickCount"><f:message key="themeset.button.save"/></s:submit>
                 </div>
 
                     <%--cancel button--%>
                 <div class="col-sm-offset-1 col-sm-3">
-                    <s:submit class="btn" name="openManageBrickPage">
+                    <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
+                        <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
                         <f:message key="buildingkit.addbrick.cancel"/>
-                    </s:submit>
+                    </s:link>
                 </div>
             </div>
         </s:form>

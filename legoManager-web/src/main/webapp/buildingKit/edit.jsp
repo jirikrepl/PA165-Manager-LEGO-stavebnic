@@ -10,12 +10,13 @@
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
-        
+
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+
+            <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
             <legend><f:message key="edit.edit.title"/></legend>
-            <%@include file="buildingKitForm.jsp"%>
-            
-            <s:hidden name="buildingKit.id"/>
+            <%@include file="buildingKitForm.jsp" %>
+
 
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
@@ -24,9 +25,12 @@
                     </span>
                     
                     <span class="col-sm-offset-1 col-sm-3">
-                    <s:submit class="btn" name=""><f:message key="buildingKit.cancel.button"/></s:submit>
+                        <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
+                                event="list">
+                            <f:message key="buildingKit.cancel.button"/>
+                        </s:link>
                     </span>
-                </div>
+            </div>
         </s:form>
 
     </s:layout-component>
