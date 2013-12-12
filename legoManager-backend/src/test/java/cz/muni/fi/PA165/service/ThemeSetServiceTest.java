@@ -141,48 +141,6 @@ public class ThemeSetServiceTest {
 
         verify(dao, times(2)).findAll();
     }
-    
-    /**
-     * Test of findByPrice method, of class ThemeSetService.
-     */
-    @Test
-    public void testFindByPrice() {
-        try {
-            service.findByPrice(null);
-            fail();
-        } catch (DataAccessException e) {
-            
-        }
-        verify(dao, never()).findByPrice(null);
-
-        BigDecimal nonExistingPrice = BigDecimal.valueOf(151.151);
-        ThemeSetDto tsDto = new ThemeSetDto();
-        tsDto.setName("Sada s neexistujici cenou");
-        tsDto.setPrice(nonExistingPrice);
-
-        when(dao.findByPrice(BigDecimal.valueOf(151.151))).thenReturn(new ArrayList<ThemeSet>());
-        ArrayList<ThemeSet> emptyList = new ArrayList<ThemeSet>();
-        assertEquals(emptyList, service.findByPrice(nonExistingPrice));
-        
-        BigDecimal existingPrice = BigDecimal.valueOf(100);
-        ThemeSetDto tsDto2 = new ThemeSetDto();
-        tsDto2.setName("Sada s existujici cenou");
-        tsDto2.setPrice(existingPrice);
-
-        List<ThemeSetDto> existingList = new ArrayList<ThemeSetDto>();
-        existingList.add(tsDto2);
-
-        List<ThemeSet> entityList = new ArrayList<ThemeSet>();
-        entityList.add(ThemeSetConversion.convertToEntity(tsDto2));
-        when(dao.findByPrice(existingPrice)).thenReturn(entityList);
-
-
-        assertEquals(existingList, service.findByPrice(existingPrice));
-
-
-        verify(dao, times(1)).findByPrice(nonExistingPrice);
-        verify(dao, times(1)).findByPrice(existingPrice);
-    }
 
     /**
      * Test of findById method, of class ThemeSetService.

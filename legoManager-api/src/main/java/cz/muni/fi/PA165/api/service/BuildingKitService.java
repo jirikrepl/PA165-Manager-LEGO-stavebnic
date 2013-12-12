@@ -43,20 +43,6 @@ public interface BuildingKitService {
     public List<BuildingKitDto> findAll();
 
     /**
-     * retrieves all building kits with given price
-     *
-     * @param price the given price
-     */
-    public List<BuildingKitDto> findByPrice(BigDecimal price);
-
-    /**
-     * retrieves all building kits with given year or higher year
-     *
-     * @param yearFrom the given year
-     */
-    public List<BuildingKitDto> findByYearFrom(int yearFrom);
-
-    /**
      * retrieves building kit with given id
      *
      * @param id the given id

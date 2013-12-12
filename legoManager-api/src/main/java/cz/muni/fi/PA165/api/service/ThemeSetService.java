@@ -21,13 +21,6 @@ public interface ThemeSetService {
     public List<ThemeSetDto> findAll();
 
     /**
-     * finds entities in DB with given price
-     *
-     * @return List<ThemeSet> of all entities with given price
-     */
-    public List<ThemeSetDto> findByPrice(BigDecimal price);
-
-    /**
      * updates the ThemeSet in DB
      *
      * @param ThemeSet takes ThemeSet as parameter

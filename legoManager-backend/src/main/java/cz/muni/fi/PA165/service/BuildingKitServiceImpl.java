@@ -70,28 +70,6 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         return buildingKitDtoList;
     }
 
-    public List<BuildingKitDto> findByPrice(BigDecimal price) {
-        if (price == null){
-            throw new DataAccessException("Price cannot be null.") {};
-        }
-        List<BuildingKit> buildingKitEntities = buildingKitDao.findByPrice(price);
-        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
-        for (BuildingKit bk : buildingKitEntities) {
-            BuildingKitDto kitDto = BuildingKitConversion.convertToDto(bk);
-            buildingKitDtoList.add(kitDto);
-        }
-        return buildingKitDtoList;
-    }
-
-    public List<BuildingKitDto> findByYearFrom(int yearFrom) {
-        List<BuildingKit> buildingKitEntities = buildingKitDao.findByYearFrom(yearFrom);
-        List<BuildingKitDto> buildingKitDtoList = new ArrayList<BuildingKitDto>();
-        for (BuildingKit bk : buildingKitEntities) {
-            buildingKitDtoList.add(BuildingKitConversion.convertToDto(bk));
-        }
-        return buildingKitDtoList;
-    }
-
     public BuildingKitDto findById(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("Id of the building kit cannot be null.");

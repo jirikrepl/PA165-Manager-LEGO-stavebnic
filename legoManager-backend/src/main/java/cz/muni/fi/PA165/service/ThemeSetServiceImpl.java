@@ -51,19 +51,6 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         return themeSetDtoList;
     }
 
-    public List<ThemeSetDto> findByPrice(BigDecimal price) {
-        if (price == null){
-            throw new DataAccessExceptionService("Parameter price cannot be NULL") {
-            };
-        }
-        List<ThemeSet> tsList = themeSetDao.findByPrice(price);
-        List<ThemeSetDto> themeSetDtoList = new ArrayList<ThemeSetDto>();
-        for (ThemeSet ts : tsList) {
-            themeSetDtoList.add(ThemeSetConversion.convertToDto(ts));
-        }
-        return themeSetDtoList;
-    }
-
     public void update(ThemeSetDto setDto) {
         if (setDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
