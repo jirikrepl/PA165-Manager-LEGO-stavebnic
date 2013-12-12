@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import cz.muni.fi.PA165.conflictDto.CategoryConflictDto;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.*;
@@ -263,7 +264,7 @@ public class CategoryClient {
      *             args[0]  args[1]   args[2]
      *             category    delete    id
      */
-    private void handleDeleteOperation(String[] args) {     //zakladni delete je ok
+    private void handleDeleteOperation(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
             Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
@@ -289,26 +290,22 @@ public class CategoryClient {
             System.out.println("Category successfully deleted");
 
         } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
-            // in case of building kit or theme set conflict
-            // list building kits or theme sets that contain this category
-            try {
-                List<BuildingKitDto> buildingKitDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
-                });
-                System.out.println("Cannot delete this category, because it is contained in these building kits:");
-                for (BuildingKitDto b : buildingKitDtoList) {
-                    System.out.println(b.toString());
-                }
-            }
-            catch (Exception e) {
-                List<ThemeSetDto> themeSetDtoList = response.readEntity(new GenericType<List<ThemeSetDto>>() {
-                });
-                System.out.println("Cannot delete this category, because it is contained in these theme sets:");
-                for (ThemeSetDto t : themeSetDtoList) {
-                    System.out.println(t.toString());
-                }
+
+            System.out.println("Cannot delete this category");
+
+            CategoryConflictDto categoryConflictDto = response.readEntity(CategoryConflictDto.class);
+
+            if (!categoryConflictDto.getBuildingKitDtoList().isEmpty()) {
+                System.out.println("Because is referenced from TODO");
+                //TODO Tomas
             }
 
-        } else if (response.getStatus() == Response.Status.NO_CONTENT.getStatusCode()){
+            if (!categoryConflictDto.getBuildingKitDtoList().isEmpty()) {
+                System.out.println("Because is referenced from TODO");
+                //Todo Tomas
+            }
+
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
             System.out.println("Category with this id doesn't exist.");
         }
     }

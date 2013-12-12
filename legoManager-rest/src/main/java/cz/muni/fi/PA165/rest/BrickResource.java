@@ -14,7 +14,8 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @author: Jiri Krepl
+ * @author: Martin Rumanek
+ * @author Jiri Krepl
  * @version: 11/26/13
  */
 @Path("bricks")
@@ -53,7 +54,10 @@ public class BrickResource {
     public Response findAll(@QueryParam("color") String color, @QueryParam("name") String name) {
         List<BrickDto> brickDtoList;
 
-        if (color != null) {
+        if (color != null & name != null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        else if (color != null) {
             // find by color
             Color colorEnum = Color.parseColor(color);
             brickDtoList = brickService.findByColor(colorEnum);

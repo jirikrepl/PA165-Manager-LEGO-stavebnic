@@ -12,6 +12,5 @@ public class ApplicationConfig extends ResourceConfig {
     public ApplicationConfig() {
         register(BrickResource.class);
         register(CategoryResource.class);
-        // pridat dalsi "service" v baliku rest (podle vzoru ServiceResource)
     }
 }

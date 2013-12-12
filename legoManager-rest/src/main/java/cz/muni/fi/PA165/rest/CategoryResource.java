@@ -1,10 +1,10 @@
 package cz.muni.fi.PA165.rest;
 
-import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.*;
+import cz.muni.fi.PA165.rest.conflictDto.CategoryConflictDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Path("categories")
 public class CategoryResource {
@@ -83,27 +82,22 @@ public class CategoryResource {
         CategoryDto category = categoryService.findById(id);
 
         if(category == null) {
-            return Response.status(Response.Status.NO_CONTENT).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         // find out if category is used by some building kit first
         // otherwise removal of used category would violate the constraint
         List<BuildingKitDto> buildingKitDtoList = buildingKitService.findByCategory(category);
-        if (!buildingKitDtoList.isEmpty()) {
-            List<BuildingKitDto> dependentObjects = new ArrayList<BuildingKitDto>();
-            dependentObjects.addAll(buildingKitDtoList);
-            GenericEntity<List<BuildingKitDto>> genericEntityList = new GenericEntity<List<BuildingKitDto>>(dependentObjects){};
-            return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
-        }
-        //the same for theme sets
         List<ThemeSetDto> themeSetDtoList = themeSetService.findByCategory(category);
-        if (!themeSetDtoList.isEmpty()) {
-            List<ThemeSetDto> dependentObjects = new ArrayList<ThemeSetDto>();
-            dependentObjects.addAll(themeSetDtoList);
-            GenericEntity<List<ThemeSetDto>> genericEntityList = new GenericEntity<List<ThemeSetDto>>(dependentObjects){};
-            return Response.status(Response.Status.CONFLICT).entity(genericEntityList).build();
+
+        if (!buildingKitDtoList.isEmpty() || !themeSetDtoList.isEmpty()) {
+            CategoryConflictDto categoryConflictDto = new CategoryConflictDto();
+            categoryConflictDto.setBuildingKitDtoList(buildingKitDtoList);
+            categoryConflictDto.setThemeSetDtoList(themeSetDtoList);
+
+            return Response.status(Response.Status.CONFLICT).entity(categoryConflictDto).build();
         }
-        // lists are empty, category is not contained in any building kit or theme set => delete category
+
         categoryService.delete(id);
         return Response.status(Response.Status.OK).build();
     }
