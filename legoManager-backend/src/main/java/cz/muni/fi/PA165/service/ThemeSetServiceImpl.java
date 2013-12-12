@@ -70,9 +70,16 @@ public class ThemeSetServiceImpl implements ThemeSetService{
             throw new DataAccessExceptionService("ID cannot be NULL");
         }
         ThemeSet entity = themeSetDao.findById(id);
-        
-        return ThemeSetConversion.convertToDto(entity);
+
+        ThemeSetDto dto = null;
+        try {
+            dto = ThemeSetConversion.convertToDto(entity);
+        } catch (Exception e) {
+            return dto;
+        }
+        return dto;
     }
+
     public List<ThemeSetDto> findByCategory(CategoryDto categoryDto){
         if (categoryDto == null){
             throw new DataAccessExceptionService("Category cannost be NULL");
