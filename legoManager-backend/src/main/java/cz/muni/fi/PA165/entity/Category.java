@@ -49,42 +49,11 @@ public class Category implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Category category = (Category) o;
-
-        if (id != null ? !id.equals(category.id) : category.id != null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
     public String toString() {
-        return "Category{" + "id=" + id + ", name=" + name + '}';
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-
-    /**
-     * creates DTO object from this entity
-     * @return BrickDto dto object
-     */
-    //public CategoryDto createDto() {
-       // CategoryDto categoryDto = new CategoryDto();
-       // categoryDto.setId(id);
-       // categoryDto.setName(name);
-       // categoryDto.setDescription(description);
-       // return categoryDto;
-    //}
 }

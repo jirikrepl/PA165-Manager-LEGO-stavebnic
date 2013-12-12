@@ -53,44 +53,36 @@ public class BrickDto {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 59 * hash + (this.color != null ? this.color.hashCode() : 0);
-        hash = 59 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 59 * hash + (this.description != null ? this.description.hashCode() : 0);
-        return hash;
-    }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final BrickDto other = (BrickDto) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if (this.color != other.color) {
-            return false;
-        }
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-            return false;
-        }
-        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BrickDto)) return false;
+
+        BrickDto brickDto = (BrickDto) o;
+
+        if (color != brickDto.color) return false;
+        if (id != null ? !id.equals(brickDto.id) : brickDto.id != null) return false;
+        if (name != null ? !name.equals(brickDto.name) : brickDto.name != null) return false;
+
         return true;
     }
 
     @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        String colorString = color.getColorString();
-        return "id: " + id + ", color: " + colorString + ", name: " + name;
+        return "BrickDto{" +
+                "id=" + id +
+                ", color=" + color +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

@@ -25,7 +25,7 @@ import java.util.Set;
  * @author: Martin Rumanek
  * @version: 11/21/13
  */
-@UrlBinding("/buildingKits/{$event}")
+@UrlBinding("/buildingKits/{$event}/{buildingKit.id}")
 public class BuildingKitActionBean extends BaseActionBean {
     @SpringBean
     private BuildingKitService service;
@@ -41,6 +41,12 @@ public class BuildingKitActionBean extends BaseActionBean {
     private Long categoryId;
     private Long themeSetId;
     private Long deletedBrickId;
+
+    @ValidateNestedProperties(
+            value = {
+                    @Validate(on = {"saveBrickCount"}, required = true, minvalue = 0)
+            }
+    )
     private Integer brickCount;
 
     @ValidateNestedProperties(
@@ -48,7 +54,6 @@ public class BuildingKitActionBean extends BaseActionBean {
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", required = true, minvalue = 0, maxvalue = 100),
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0),
-                    //@Validate(on = {"saveBrickCount"}, field = "brickCount", required = true, minvalue = 0)
             }
     )
     private BuildingKitDto buildingKit;

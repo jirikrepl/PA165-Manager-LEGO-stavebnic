@@ -2,6 +2,8 @@ package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import cz.muni.fi.PA165.conflictDto.CategoryConflictDto;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -255,18 +257,29 @@ public class CategoryClient {
             System.out.println("Category successfully deleted");
 
         } else if (response.getStatus() == Response.Status.CONFLICT.getStatusCode()) {
-            // in case of building kit conflict
-            // list building kits that contain this category
-            List<BuildingKitDto> buildingKitDtoList = response.readEntity(new GenericType<List<BuildingKitDto>>() {
+            // in case of building kit or theme set conflict
+            CategoryConflictDto conflicts = response.readEntity(new GenericType<CategoryConflictDto>() {
             });
 
-            System.out.println("Cannot delete this category, because it is contained in this building kits:");
-            for (BuildingKitDto b : buildingKitDtoList) {
-                System.out.println(b.getName());
+            //write building kits in conflict
+            List<BuildingKitDto> kitConflicts = conflicts.getBuildingKitDtoList();
+            if (!kitConflicts.isEmpty()) {
+                System.out.println("Cannot delete this category, because it is contained in these building kits:");
+                for (BuildingKitDto b : kitConflicts) {
+                    System.out.println(b);
+                }
             }
 
-        } else {
-            //TODO in case that id does not exist
+            //write theme sets in conflict
+            List<ThemeSetDto> setConflicts = conflicts.getThemeSetDtoList();
+            if (!setConflicts.isEmpty()) {
+                System.out.println("Cannot delete this category, because it is contained in these theme sets:");
+                for (ThemeSetDto s : setConflicts) {
+                    System.out.println(s);
+                }
+            }
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
+            System.out.println("Category with this id doesn't exist.");
         }
     }
 
