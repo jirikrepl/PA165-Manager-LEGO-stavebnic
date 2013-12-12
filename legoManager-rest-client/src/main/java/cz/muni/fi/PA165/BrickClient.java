@@ -4,10 +4,12 @@ import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.service.Color;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.ConnectException;
 import java.util.List;
 
 /**
@@ -46,7 +48,7 @@ public class BrickClient {
         }
 
         String operation = args[1];
-
+        try {
         switch (operation) {
 
             case listOperation:
@@ -87,6 +89,9 @@ public class BrickClient {
             default:
                 Messages.unknownOperationMessage(operation);
                 System.exit(1);
+        }
+        } catch (ProcessingException e) {
+            System.out.println("Error on server, server is not available");
         }
     }
 
@@ -261,7 +266,9 @@ public class BrickClient {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
+
         Response response = invocationBuilder.get();
+
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             List<BrickDto> brickDtoList = response.readEntity(new GenericType<List<BrickDto>>() {

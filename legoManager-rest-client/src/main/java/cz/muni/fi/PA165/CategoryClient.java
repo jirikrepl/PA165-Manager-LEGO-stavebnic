@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -29,40 +30,43 @@ public class CategoryClient {
 
         String operation = args[1];
 
-        switch (operation) {
+        try {
+            switch (operation) {
+                case listOperation:
+                    // list ... no arguments
+                    handleListOperation();
+                    break;
 
-            case listOperation:
-                // list ... no arguments
-                handleListOperation();
-                break;
+                case createOperation:
+                    // create <name> <description>
+                    handleCreateOperation(args);
+                    break;
 
-            case createOperation:
-                // create <name> <description>
-                handleCreateOperation(args);
-                break;
+                case updateOperation:
+                    // update <id> <newName> <newDescription>
+                    handleUpdateOperation(args);
+                    break;
 
-            case updateOperation:
-                // update <id> <newName> <newDescription>
-                handleUpdateOperation(args);
-                break;
+                case deleteOperation:
+                    handleDeleteOperation(args);
+                    break;
 
-            case deleteOperation:
-                handleDeleteOperation(args);
-                break;
+                // find <id>
+                case findByIdOperation:
+                    handleFindById(args);
+                    break;
 
-            // find <id>
-            case findByIdOperation:
-                handleFindById(args);
-                break;
+                // find <name>
+                case findByNameOperation:
+                    handleFindByName(args);
+                    break;
 
-            // find <name>
-            case findByNameOperation:
-                handleFindByName(args);
-                break;
-
-            default:
-                Messages.unknownOperationMessage(operation);
-                System.exit(1);
+                default:
+                    Messages.unknownOperationMessage(operation);
+                    System.exit(1);
+            }
+        } catch (ProcessingException e) {
+            System.out.println("Error on server, server is not available");
         }
     }
 
