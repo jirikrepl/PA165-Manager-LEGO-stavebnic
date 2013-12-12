@@ -33,7 +33,7 @@
 
                     <%--cancel button--%>
                 <div class="col-sm-offset-1 col-sm-3">
-                    <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
+                    <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
                         <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
                         <f:message key="buildingkit.addbrick.cancel"/>
                     </s:link>

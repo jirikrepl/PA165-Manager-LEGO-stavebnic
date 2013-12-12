@@ -42,7 +42,6 @@ public class BuildingKitActionBean extends BaseActionBean {
     private BrickDto brick;
     private Long categoryId;
     private Long themeSetId;
-    private Long deletedBrickId;
 
     @ValidateNestedProperties(
             value = {
@@ -105,13 +104,6 @@ public class BuildingKitActionBean extends BaseActionBean {
         this.brickCount = brickCount;
     }
 
-    public Long getDeletedBrickId() {
-        return deletedBrickId;
-    }
-
-    public void setDeletedBrickId(Long deletedBrickId) {
-        this.deletedBrickId = deletedBrickId;
-    }
 
     @DefaultHandler
     public Resolution list() {
@@ -184,7 +176,6 @@ public class BuildingKitActionBean extends BaseActionBean {
 
         bricks.put(brickDto, brickCount);
         service.update(buildingKitDto);
-        deletedBrickId = null;
         brickCount = null;
         return new RedirectResolution(this.getClass(), "openManageBrickPage").addParameter("buildingKit.id", buildingKit.getId());
     }
@@ -207,7 +198,7 @@ public class BuildingKitActionBean extends BaseActionBean {
     public Resolution deleteBrick() {
         long idBuildingKit = buildingKit.getId();
         BuildingKitDto buildingKit = service.findById(idBuildingKit);
-        BrickDto brickDto = brickService.findById(deletedBrickId);
+        BrickDto brickDto = brickService.findById(brick.getId());
         Map<BrickDto, Integer> bricks = buildingKit.getBricks();
         bricks.remove(brickDto);
         service.update(buildingKit);

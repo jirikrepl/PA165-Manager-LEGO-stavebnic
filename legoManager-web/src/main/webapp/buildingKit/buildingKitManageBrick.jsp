@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="col-sm-offset-1 col-sm-3">
-                    <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="list">
+                    <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="list">
                         <f:message key="buildingkit.addbrick.cancel"/>
                     </s:link>
                 </div>
@@ -73,7 +73,7 @@
 
                             <%--delete button--%>
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-                                <s:param name="buildingKit.id" value="${action.buildingKit.id}"/>
+                                <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
                                 <s:hidden name="brick.id" value="${brickItem.key.id}"/>
                                 <s:submit class="btn" name="deleteBrick"><f:message key="buildingkit.addbrick.delete"/></s:submit>
                             </s:form>

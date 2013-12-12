@@ -24,7 +24,7 @@
                     </span>
                     
                     <span class="col-sm-offset-1 col-sm-3">
-                        <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
+                        <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
                                 event="list">
                             <f:message key="buildingKit.cancel.button"/>
                         </s:link>
