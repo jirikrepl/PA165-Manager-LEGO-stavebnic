@@ -23,10 +23,12 @@ import java.util.Set;
 
 /**
  * @author: Martin Rumanek
+ * @author Jiri Krepl
  * @version: 11/21/13
  */
-@UrlBinding("/buildingKits/{$event}/{buildingKit.id}")
+@UrlBinding("/buildingKits/{$event}/{buildingKit.id}/{brick.id}")
 public class BuildingKitActionBean extends BaseActionBean {
+
     @SpringBean
     private BuildingKitService service;
     @SpringBean
@@ -184,7 +186,7 @@ public class BuildingKitActionBean extends BaseActionBean {
         service.update(buildingKitDto);
         deletedBrickId = null;
         brickCount = null;
-        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+        return new RedirectResolution(this.getClass(), "openManageBrickPage").addParameter("buildingKit.id", buildingKit.getId());
     }
 
     /**
@@ -210,7 +212,7 @@ public class BuildingKitActionBean extends BaseActionBean {
         bricks.remove(brickDto);
         service.update(buildingKit);
 
-        return new ForwardResolution("/buildingKit/buildingKitManageBrick.jsp");
+        return new RedirectResolution(this.getClass(), "openManageBrickPage").addParameter("buildingKit.id", buildingKit.getId());
     }
 
     /**
@@ -241,6 +243,14 @@ public class BuildingKitActionBean extends BaseActionBean {
      * @return buildingKitBrickCountEdit.jsp
      */
     public Resolution openBrickCountEdit() {
+        buildingKit = service.findById(buildingKit.getId());
+        for (BrickDto brickDto : buildingKit.getBricks().keySet()) {
+            if (brick.getId().equals(brickDto.getId())) {
+                this.brickCount = buildingKit.getBricks().get(brickDto);
+                break;
+            }
+        }
+
         return new ForwardResolution("/buildingKit/buildingKitBrickCountEdit.jsp");
     }
 
