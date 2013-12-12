@@ -11,7 +11,7 @@
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-            <legend><f:message key="brick.edit.legend"/></legend>
+            <legend><f:message key="edit.edit.title"/></legend>
             <%@include file="brickForm.jsp"%>
 
             <s:hidden name="brick.id" value="${brick.id}"/>

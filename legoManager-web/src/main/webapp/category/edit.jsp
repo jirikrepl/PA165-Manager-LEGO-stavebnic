@@ -6,13 +6,13 @@
 <s:layout-render name="/layout.jsp" titlekey="category.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.CategoryActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="category.headline"/></h1>
+        <h1 class="text-center"><f:message key="category.edit.headline"/></h1>
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
         
         <s:form class="form-horizontal" id="brickCreateForm" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-            <legend><f:message key="category.create"/></legend>
+            <legend><f:message key="edit.edit.title"/></legend>
             <%@include file="form.jsp"%>
             
             <s:hidden name="categoryDto.id"/>

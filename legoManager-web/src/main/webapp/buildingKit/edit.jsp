@@ -6,13 +6,13 @@
 <s:layout-render name="/layout.jsp" titlekey="buildingKit.edit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
+        <h1 class="text-center"><f:message key="buildingKit.edit.headline"/></h1>
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
         
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-            <legend><f:message key="buildingKit.create"/></legend>
+            <legend><f:message key="edit.edit.title"/></legend>
             <%@include file="buildingKitForm.jsp"%>
             
             <s:hidden name="buildingKit.id"/>

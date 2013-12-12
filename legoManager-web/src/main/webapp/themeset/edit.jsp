@@ -5,10 +5,10 @@
 <s:layout-render name="/layout.jsp" titlekey="themeset.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean" var="actionBean"/>
-        <h1 class="text-center"><f:message key="themeset.headline"/></h1>
+        <h1 class="text-center"><f:message key="themeset.edit.headline"/></h1>
 
         <s:form class="form-horizontal" id="themesetCreateForm" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
-            <legend><f:message key="themeset.create.title"/></legend>
+            <legend><f:message key="edit.edit.title"/></legend>
             <%@include file="form.jsp"%>
 
             <s:hidden name="themeSetDto.id"/>
