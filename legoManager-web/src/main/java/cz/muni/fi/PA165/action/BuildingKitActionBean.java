@@ -43,11 +43,8 @@ public class BuildingKitActionBean extends BaseActionBean {
     private Long categoryId;
     private Long themeSetId;
 
-    @ValidateNestedProperties(
-            value = {
-                    @Validate(on = {"saveBrickCount"}, required = true, minvalue = 0)
-            }
-    )
+
+    @Validate(on = {"saveBrickCount"}, required = true, minvalue = 1, maxvalue = Integer.MAX_VALUE)
     private Integer brickCount;
 
     @ValidateNestedProperties(
