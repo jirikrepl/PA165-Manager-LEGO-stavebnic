@@ -12,7 +12,7 @@
 
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
             <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
-            <legend><f:message key="buildingkit.addbrick.editCount"/></legend>
+            <legend><f:message key="edit.edit.title"/></legend>
 
             <%--input element for setting brick count--%>
             <div class="form-group">
