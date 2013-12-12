@@ -61,8 +61,7 @@
                             </s:form>
 
                             <%--brick manager button--%>
-                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
-                                    event="openManageBrickPage">
+                            <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
                                 <s:param name="buildingKit.id" value="${buildingKit.id}"/>
                                 <f:message key="buildingKit.bricks.button"/>
                             </s:link>

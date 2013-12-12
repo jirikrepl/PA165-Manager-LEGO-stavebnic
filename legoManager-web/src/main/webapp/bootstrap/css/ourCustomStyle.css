@@ -8,3 +8,9 @@
     display:inline-block;
     margin-right: 20px;
 }
+
+/* for table links used with .btn bootstrap class -> just color them  */
+.anchor-to-button {
+    background-color: #F0F0F0;
+    color: black;
+}

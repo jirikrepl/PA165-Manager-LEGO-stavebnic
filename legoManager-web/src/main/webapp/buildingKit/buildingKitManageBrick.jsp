@@ -64,7 +64,7 @@
                     <td>
                         <span>
                             <%--edit link--%>
-                            <s:link beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openBrickCountEdit">
+                            <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openBrickCountEdit">
                                 <s:param name="brick.id" value="${brickItem.key.id}"/>
                                 <s:param name="brickCount" value="${brickItem.value}"/>
                                 <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
