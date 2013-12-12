@@ -13,12 +13,8 @@ import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion.convertToDto;
 
 /**
  *

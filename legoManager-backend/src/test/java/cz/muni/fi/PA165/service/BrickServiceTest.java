@@ -2,10 +2,10 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.service.BrickService;
+import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.entity.Brick;
-import cz.muni.fi.PA165.api.service.Color;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.DataAccessException;

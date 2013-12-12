@@ -5,7 +5,6 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
@@ -17,7 +16,6 @@ import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Tomas Kopecky

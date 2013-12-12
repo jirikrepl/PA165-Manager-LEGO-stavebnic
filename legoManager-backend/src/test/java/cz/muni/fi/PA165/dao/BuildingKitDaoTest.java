@@ -1,19 +1,19 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
+import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
-import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.EntityManager;
 
 /**
  * @author Pavol Bako

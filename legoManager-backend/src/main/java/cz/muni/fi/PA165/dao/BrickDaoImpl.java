@@ -1,11 +1,11 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.api.service.Color;
+import cz.muni.fi.PA165.entity.Brick;
+import org.springframework.dao.DataAccessException;
 
 import javax.persistence.Query;
 import java.util.List;
-import org.springframework.dao.DataAccessException;
 
 /**
  * DAO class for brick

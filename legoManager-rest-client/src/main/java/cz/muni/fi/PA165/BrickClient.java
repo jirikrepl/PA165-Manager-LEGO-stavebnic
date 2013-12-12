@@ -5,11 +5,14 @@ import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.service.Color;
 
 import javax.ws.rs.ProcessingException;
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.ConnectException;
 import java.util.List;
 
 /**
@@ -17,13 +20,13 @@ import java.util.List;
  * this class is responsible for handling brick operations
  */
 public class BrickClient {
-    private final String listOperation = "list";
-    private final String createOperation = "create";
-    private final String updateOperation = "update";
-    private final String deleteOperation = "delete";
-    private final String findByIdOperation = "findbyid";
-    private final String findByColorOperation = "findbycolor";
-    private final String findByNameOperation = "findbyname";
+    private static final String LIST_OPERATION = "list";
+    private static final String CREATE_OPERATION = "create";
+    private static final String UPDATE_OPERATION = "update";
+    private static final String DELETE_OPERATION = "delete";
+    private static final String FIND_BY_ID_OPERATION = "findbyid";
+    private static final String FIND_BY_COLOR_OPERATION = "findbycolor";
+    private static final String FIND_BY_NAME_OPERATION = "findbyname";
 
 
     /**
@@ -35,10 +38,6 @@ public class BrickClient {
      *             brick    update    id        name      color
      */
     //TODO nehlida se jestli neni nahodou zadano vice argumentu
-    //TODO url restu by mohlo byt konfigurovatelne
-    //TODO osetreni chybovych stavu restu
-    //TODO chyby na err vystup (system.err.println)
-    //TODO validace cisel
     public BrickClient(String[] args) {
 
         // test bad number of arguments
@@ -51,38 +50,38 @@ public class BrickClient {
         try {
         switch (operation) {
 
-            case listOperation:
+            case LIST_OPERATION:
                 // list ... no arguments
                 handleListOperation();
                 break;
 
-            case createOperation:
+            case CREATE_OPERATION:
                 // create <color> <name>
 
                 handleCreateOperation(args);
                 break;
 
-            case updateOperation:
+            case UPDATE_OPERATION:
                 // update <id> <newName> <newColor>
                 handleUpdateOperation(args);
                 break;
 
-            case deleteOperation:
+            case DELETE_OPERATION:
                 handleDeleteOperation(args);
                 break;
 
             // find <id>
-            case findByIdOperation:
+            case FIND_BY_ID_OPERATION:
                 handleFindById(args);
                 break;
 
             // find <name>
-            case findByNameOperation:
+            case FIND_BY_NAME_OPERATION:
                 handleFindByName(args);
                 break;
 
             // find <color>
-            case findByColorOperation:
+            case FIND_BY_COLOR_OPERATION:
                 handleFindByColor(args);
                 break;
 
@@ -130,7 +129,7 @@ public class BrickClient {
     private void handleCreateOperation(String args[]) {
         if (args.length < 4) {
             String requiredArgs = "<name> <color>";
-            Messages.badNumberOfArgsMessage(args.length, createOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, CREATE_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -170,7 +169,7 @@ public class BrickClient {
     private void handleFindById(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
-            Messages.badNumberOfArgsMessage(args.length, findByIdOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, FIND_BY_ID_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -209,7 +208,7 @@ public class BrickClient {
     private void handleFindByName(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<name>";
-            Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, FIND_BY_NAME_OPERATION, requiredArgs);
             System.exit(1);
         }
         String name = args[2];
@@ -246,7 +245,7 @@ public class BrickClient {
     private void handleFindByColor(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<color>";
-            Messages.badNumberOfArgsMessage(args.length, findByColorOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, FIND_BY_COLOR_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -293,7 +292,7 @@ public class BrickClient {
     private void handleUpdateOperation(String[] args) {
         if (args.length < 5) {
             String requiredArgs = "<id> <newName> <newColor>";
-            Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, UPDATE_OPERATION, requiredArgs);
             System.exit(1);
         }
         String name = args[3];
@@ -348,7 +347,7 @@ public class BrickClient {
     private void handleDeleteOperation(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
-            Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, DELETE_OPERATION, requiredArgs);
             System.exit(1);
         }
 

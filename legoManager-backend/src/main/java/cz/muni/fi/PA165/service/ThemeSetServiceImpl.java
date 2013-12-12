@@ -1,11 +1,11 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.api.service.ThemeSetService;
 import cz.muni.fi.PA165.dao.ThemeSetDao;
-import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
-import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
+import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

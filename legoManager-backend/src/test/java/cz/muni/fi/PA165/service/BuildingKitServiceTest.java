@@ -1,19 +1,22 @@
 package cz.muni.fi.PA165.service;
- 
-import cz.muni.fi.PA165.dao.BuildingKitDao;
 
-import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.dao.BuildingKitDao;
+import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
 import cz.muni.fi.PA165.entity.BuildingKit;
-import java.math.BigDecimal;
+import junit.framework.TestCase;
+import org.springframework.dao.DataAccessException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import junit.framework.TestCase;
- 
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
-import org.springframework.dao.DataAccessException;
+
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
  
 /**
  *

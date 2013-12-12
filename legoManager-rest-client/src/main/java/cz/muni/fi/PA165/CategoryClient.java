@@ -1,22 +1,25 @@
 package cz.muni.fi.PA165;
 
-import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class CategoryClient {
-    private final String listOperation = "list";
-    private final String createOperation = "create";
-    private final String updateOperation = "update";
-    private final String deleteOperation = "delete";
-    private final String findByIdOperation = "findbyid";
-    private final String findByNameOperation = "findbyname";
+    private static final String LIST_OPERATION = "list";
+    private static final String CREATE_OPERATION = "create";
+    private static final String UPDATE_OPERATION = "update";
+    private static final String DELETE_OPERATION = "delete";
+    private static final String FIND_BY_ID_OPERATION = "findbyid";
+    private static final String FIND_BY_NAME_OPERATION = "findbyname";
 
     public CategoryClient(String[] args) {
 
@@ -30,32 +33,32 @@ public class CategoryClient {
 
         switch (operation) {
 
-            case listOperation:
+            case LIST_OPERATION:
                 // list ... no arguments
                 handleListOperation();
                 break;
 
-            case createOperation:
+            case CREATE_OPERATION:
                 // create <name> <description>
                 handleCreateOperation(args);
                 break;
 
-            case updateOperation:
+            case UPDATE_OPERATION:
                 // update <id> <newName> <newDescription>
                 handleUpdateOperation(args);
                 break;
 
-            case deleteOperation:
+            case DELETE_OPERATION:
                 handleDeleteOperation(args);
                 break;
 
             // find <id>
-            case findByIdOperation:
+            case FIND_BY_ID_OPERATION:
                 //handleFindById(args);
                 break;
 
             // find <name>
-            case findByNameOperation:
+            case FIND_BY_NAME_OPERATION:
                 //handleFindByName(args);
                 break;
 
@@ -100,7 +103,7 @@ public class CategoryClient {
     private void handleCreateOperation(String args[]) {
         if (args.length < 4) {
             String requiredArgs = "<name> <description>";
-            Messages.badNumberOfArgsMessage(args.length, createOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, CREATE_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -135,7 +138,7 @@ public class CategoryClient {
     private void handleFindById(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
-            Messages.badNumberOfArgsMessage(args.length, findByIdOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, FIND_BY_ID_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -170,7 +173,7 @@ public class CategoryClient {
     private void handleFindByName(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<name>";
-            Messages.badNumberOfArgsMessage(args.length, findByNameOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, FIND_BY_NAME_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -187,7 +190,7 @@ public class CategoryClient {
     private void handleUpdateOperation(String[] args) {
         if (args.length < 5) {
             String requiredArgs = "<id> <newName> <newDescription>";
-            Messages.badNumberOfArgsMessage(args.length, updateOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, UPDATE_OPERATION, requiredArgs);
             System.exit(1);
         }
 
@@ -229,7 +232,7 @@ public class CategoryClient {
     private void handleDeleteOperation(String[] args) {
         if (args.length < 3) {
             String requiredArgs = "<id>";
-            Messages.badNumberOfArgsMessage(args.length, deleteOperation, requiredArgs);
+            Messages.badNumberOfArgsMessage(args.length, DELETE_OPERATION, requiredArgs);
             System.exit(1);
         }
 

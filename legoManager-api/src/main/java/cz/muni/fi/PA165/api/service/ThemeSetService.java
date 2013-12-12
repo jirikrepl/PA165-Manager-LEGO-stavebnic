@@ -1,10 +1,8 @@
 package cz.muni.fi.PA165.api.service;
 
-import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**

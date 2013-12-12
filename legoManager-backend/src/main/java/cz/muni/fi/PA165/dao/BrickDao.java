@@ -4,8 +4,8 @@
  */
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.api.service.Color;
+import cz.muni.fi.PA165.entity.Brick;
 
 import javax.persistence.EntityManager;
 import java.util.List;

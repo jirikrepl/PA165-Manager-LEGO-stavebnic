@@ -1,9 +1,9 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
 import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.api.service.Color;
 import cz.muni.fi.PA165.entity.ThemeSet;
 
 import java.math.BigDecimal;

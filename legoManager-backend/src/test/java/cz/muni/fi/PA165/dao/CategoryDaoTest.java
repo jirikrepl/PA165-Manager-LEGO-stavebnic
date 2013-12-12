@@ -4,11 +4,11 @@ import cz.muni.fi.PA165.TestUtils;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

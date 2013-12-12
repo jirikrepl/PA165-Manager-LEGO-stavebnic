@@ -1,13 +1,15 @@
 package cz.muni.fi.PA165.service;
-import static org.junit.Assert.*;
+
+import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.dao.CategoryDao;
 import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
-import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.entity.Category;
 import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;

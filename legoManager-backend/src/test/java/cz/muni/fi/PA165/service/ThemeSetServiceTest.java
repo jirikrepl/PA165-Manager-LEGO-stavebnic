@@ -5,25 +5,28 @@
 
 package cz.muni.fi.PA165.service;
 
-import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.api.dto.CategoryDto;
-import cz.muni.fi.PA165.dao.ThemeSetDao;
-import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
-import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
-import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.dao.ThemeSetDao;
+import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.entity.ThemeSet;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import org.springframework.dao.DataAccessException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  *

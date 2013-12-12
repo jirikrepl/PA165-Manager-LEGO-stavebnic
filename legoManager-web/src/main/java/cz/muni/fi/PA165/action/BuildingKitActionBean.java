@@ -4,13 +4,22 @@ import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
-import cz.muni.fi.PA165.api.service.*;
-import net.sourceforge.stripes.action.*;
+import cz.muni.fi.PA165.api.service.BrickService;
+import cz.muni.fi.PA165.api.service.BuildingKitService;
+import cz.muni.fi.PA165.api.service.CategoryService;
+import cz.muni.fi.PA165.api.service.ThemeSetService;
+import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
+import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author: Martin Rumanek

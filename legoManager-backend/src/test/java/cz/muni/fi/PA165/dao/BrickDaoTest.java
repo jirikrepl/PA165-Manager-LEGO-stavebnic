@@ -1,9 +1,11 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.TestUtils;
-import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.api.service.Color;
+import cz.muni.fi.PA165.entity.Brick;
 import junit.framework.TestCase;
+import org.springframework.dao.DataAccessException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,7 +13,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.springframework.dao.DataAccessException;
 
 /**
  * @author: Martin Rumanek

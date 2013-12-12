@@ -1,8 +1,6 @@
 package cz.muni.fi.PA165.api.dto;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**

@@ -5,10 +5,7 @@
 package cz.muni.fi.PA165.daoDtoConversion;
 
 import cz.muni.fi.PA165.api.dto.CategoryDto;
-import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.entity.Category;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
