@@ -30,9 +30,14 @@ Rest klient se spouští pomocí konzole z adresáře legoManager-rest-client n�
 
         mvn exec:java -Dexec.args="[parametry]"
 
-Parametry jsou poziční. První parametr je typ entity. V našem případe je to "brick" nebo "category". Druhý parametr je "akce", další argumenty jsou variabilní dle zvolené akce.
-
+Parametry jsou poziční. První parametr je typ entity. V našem případe je to "brick" nebo "category".
+Druhý parametr je "akce", další argumenty jsou variabilní dle zvolené akce.
 Když se klient spustí bez parametrů vypíše se nápověda k použití.
+
+Příkaz pro vypsání nápovědy:
+
+    mvn exec:java -Dexec.mainClass=cz.muni.fi.PA165.App -Dexec.args=""
+
 
 
 Pro entitu díly jsou dostupné tyto argumenty:
@@ -54,7 +59,7 @@ Pro entitu kategore jsou dostupné tyto argumenty:
         findbyid <id>                     
         findbyname <name>                 
 
-        
+
 
 Příklad 1: Vytvoření nového dílu:
 
