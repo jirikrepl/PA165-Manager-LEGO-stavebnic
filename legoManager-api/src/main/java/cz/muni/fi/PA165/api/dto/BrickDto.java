@@ -16,7 +16,6 @@ public class BrickDto {
     public BrickDto( String name, Color color, String description) {
         this.color = color;
         this.name = name;
-        this.description = description;
     }
 
     public BrickDto() {
@@ -36,14 +35,6 @@ public class BrickDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getId() {
@@ -82,7 +73,6 @@ public class BrickDto {
                 "id=" + id +
                 ", color=" + color +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

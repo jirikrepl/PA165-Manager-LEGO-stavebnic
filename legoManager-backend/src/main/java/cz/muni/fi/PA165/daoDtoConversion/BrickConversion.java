@@ -22,7 +22,6 @@ public class BrickConversion {
         brickDto.setId(brick.getId());
         brickDto.setName(brick.getName());
         brickDto.setColor(brick.getColor());
-        brickDto.setDescription(brick.getDescription());
         return brickDto;
     }
     
@@ -37,7 +36,6 @@ public class BrickConversion {
         Brick brick = new Brick();
         brick.setId(brickDto.getId());
         brick.setColor(brickDto.getColor());
-        brick.setDescription(brickDto.getDescription());
         brick.setName(brickDto.getName());
         return brick;
     }
