@@ -23,9 +23,6 @@ import java.util.List;
  *
  * @author Jiri Krepl
  */
-// tohle url by melo byt jine nez url slozky z jsp, jinak to dela bordel
-// predtim tam bylo "/brick/{event}" -- nefungovalo volani jine metody nez list s @defaultHandlerem
-// ted je tu: "brick/{event}" -- funguje i pro delete ^_^
 @UrlBinding("/bricks/{$event}")
 public class BrickActionBean extends BaseActionBean implements ValidationErrorHandler {
 

@@ -1,5 +1,4 @@
 package cz.muni.fi.PA165.api.dto;
-
 /**
  * @author: Martin Rumanek
  * @version: 10/30/13

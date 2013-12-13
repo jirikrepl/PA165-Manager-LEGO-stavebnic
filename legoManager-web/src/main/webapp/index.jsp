@@ -7,9 +7,6 @@
 
         <h1 class="text-center"><f:message key="index.headline"/></h1>
         <div class="text-center"><p><f:message key="index.preface"/></p></div>
-        
-        
-        <%--<p><f:message key="index.paragraph"/></p>--%>
 
     </s:layout-component>
 </s:layout-render>

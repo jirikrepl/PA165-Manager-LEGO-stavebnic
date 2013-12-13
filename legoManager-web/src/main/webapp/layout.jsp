@@ -35,7 +35,6 @@
                                 <s:link beanclass="cz.muni.fi.PA165.action.BrickActionBean"><f:message key="navigation.brick"/></s:link>
                                 </li>
                             </ul>
-                                
                             <!-- registration and login form
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
