@@ -38,7 +38,7 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     @ValidateNestedProperties(
             value = {@Validate(on = {"createThemeSet", "updateThemeSet"}, field = "name", required = true),
-                    @Validate(on = {"createThemeSet", "updateThemeSet"}, field = "price", required = true, minvalue = 0)})
+                    @Validate(on = {"createThemeSet", "updateThemeSet"}, field = "price", required = true, minvalue = 0, maxvalue = 1000000)})
     private ThemeSetDto themeSetDto;
     private Long categoryId;
 

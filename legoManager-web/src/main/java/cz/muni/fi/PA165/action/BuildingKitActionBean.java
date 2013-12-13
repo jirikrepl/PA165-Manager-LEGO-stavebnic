@@ -51,7 +51,7 @@ public class BuildingKitActionBean extends BaseActionBean {
             value = {
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "name", required = true, maxlength = 50),
                     @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "yearFrom", required = true, minvalue = 0, maxvalue = 100),
-                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0),
+                    @Validate(on = {"createBuildingKit", "updateBuildingKit"}, field = "price", required = true, minvalue = 0, maxvalue = 1000000),
             }
     )
     private BuildingKitDto buildingKit;
