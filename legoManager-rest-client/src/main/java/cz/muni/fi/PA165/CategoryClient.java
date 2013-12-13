@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.conflictDto.CategoryConflictDto;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -33,6 +34,7 @@ public class CategoryClient {
 
         String operation = args[1];
 
+        try {
         switch (operation) {
 
             case LIST_OPERATION:
@@ -56,17 +58,20 @@ public class CategoryClient {
 
             // find <id>
             case FIND_BY_ID_OPERATION:
-                //handleFindById(args);
+                handleFindById(args);
                 break;
 
             // find <name>
             case FIND_BY_NAME_OPERATION:
-                //handleFindByName(args);
+                handleFindByName(args);
                 break;
 
             default:
                 Messages.unknownOperationMessage(operation);
                 System.exit(1);
+        }
+        } catch (ProcessingException e) {
+            System.out.println("Error on server, server is not available");
         }
     }
 
@@ -162,6 +167,8 @@ public class CategoryClient {
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             CategoryDto categoryDto = response.readEntity(CategoryDto.class);
             System.out.println(categoryDto);
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Category with this id was not found.");
         } else {
             System.err.println("Error on server, server returned " + response.getStatus());
         }
@@ -179,7 +186,26 @@ public class CategoryClient {
             System.exit(1);
         }
 
-        System.out.println("find category by its name: " + args[2]);
+        String name = args[2];
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories").queryParam("name", name);
+        Invocation.Builder invocationBuilder = webTarget.request();
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.get();
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            List<CategoryDto> categoryDtoList = response.readEntity(new GenericType<List<CategoryDto>>() {});
+            for (CategoryDto c : categoryDtoList) {
+                System.out.println(c);
+            }
+        } else {
+            if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+                System.out.println("No category with this name exists");
+            }
+            else {
+                System.out.println("Error code:" + response.getStatus());
+            }
+        }
     }
 
     /**
@@ -211,14 +237,18 @@ public class CategoryClient {
         categoryDto.setDescription(description);
 
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
-        Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
+        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).put(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
 
         //successful update
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             System.out.println("updated category with id: " + args[2] +
                     "\nsetting new name to: " + args[3] +
                     "\nand new description to: " + args[4]);
+        } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+            System.out.println("Category with this id doesn't exist.");
         } else {
             System.out.println("Error code:" + response.getStatus());
         }

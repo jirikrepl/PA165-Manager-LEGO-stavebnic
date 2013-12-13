@@ -61,11 +61,6 @@ public class ThemeSetServiceTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testTodo() {
-        assert(true);
-    }
-
     /**
      * helper method to create ThemeSetDto
      */

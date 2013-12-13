@@ -37,7 +37,6 @@ public class BrickClient {
      *             <brick>  <op>      <arg1>    <arg2>    <arg3>
      *             brick    update    id        name      color
      */
-    //TODO nehlida se jestli neni nahodou zadano vice argumentu
     public BrickClient(String[] args) {
 
         // test bad number of arguments
@@ -125,7 +124,6 @@ public class BrickClient {
      *             args[0]  args[1]   args[2]   args[3]
      *             brick    create    name      color
      */
-    //TODO arguments description?
     private void handleCreateOperation(String args[]) {
         if (args.length < 4) {
             String requiredArgs = "<name> <color>";
