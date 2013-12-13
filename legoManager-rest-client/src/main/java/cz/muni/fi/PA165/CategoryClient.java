@@ -310,6 +310,8 @@ public class CategoryClient {
             }
         } else if (response.getStatus() == Response.Status.NOT_FOUND.getStatusCode()){
             System.out.println("Category with this id doesn't exist.");
+        } else {
+            System.out.println("Error code: " + response.getStatus());
         }
     }
 

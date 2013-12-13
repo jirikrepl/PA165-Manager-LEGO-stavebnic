@@ -159,7 +159,6 @@ public class ThemeSetDaoTest extends TestCase {
         assertEquals(ts.getPrice(), BigDecimal.valueOf(25));
         assertEquals(ts.getCategory(), cat2);
         assertEquals(ts.getBuildingKits().size(), 1);
-        //assertEquals(ts.getBuildingKits().get(0).getName(), "newNameBK");
     }
 
     public void testFindAll() {
@@ -247,7 +246,6 @@ public class ThemeSetDaoTest extends TestCase {
         List<ThemeSet> setList = dao.findByCategory(usedCategory);
 
         assertNotNull(setList);
-        //assertEquals(setList.size(), 2);
         for (ThemeSet s : setList) {
             assertTrue(s.getName() == "name" || s.getName() == "name2");
         }
