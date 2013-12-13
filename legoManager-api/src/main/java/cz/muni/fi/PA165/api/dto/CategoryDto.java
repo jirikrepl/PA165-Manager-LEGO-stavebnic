@@ -53,12 +53,12 @@ public class CategoryDto {
         return result;
     }
 
+    /**
+     * custom method - not generated
+     * @return
+     */
     @Override
     public String toString() {
-        return "CategoryDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Category - id: " + id +", name: '" + name + "', description: '" + description + "'";
     }
 }

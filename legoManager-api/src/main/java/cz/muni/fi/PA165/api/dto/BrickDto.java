@@ -66,12 +66,13 @@ public class BrickDto {
         return result;
     }
 
+    /**
+     * custom method - not generated
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        return "BrickDto{" +
-                "id=" + id +
-                ", color=" + color +
-                ", name='" + name + '\'' +
-                '}';
+        return "Brick - id: " + id + ", color: '" + color.getColorString() +"', name: '" + name + "'";
     }
 }
