@@ -26,14 +26,16 @@ Aplikace se zbuildí pomocí příkazu "mvn clean install".
 Aplikace je spustitelná pomocí příkazu "mvn tomcat7:run" (v adresáři legoManager-web). 
 url: http://localhost:8080/pa165/.
 
-Aplikace je taky Restful. Rest klient se spouští pomocí konzoly z adresára legoManager-rest-client nasledovným skriptem:
+Rest klient se spouští pomocí konzole z adresáře legoManager-rest-client následujícím příkazem:
 
-        mvn exec:java -Dexec.args="[parameter]"
+        mvn exec:java -Dexec.args="[parametry]"
 
-První parametr je typ entity. V našem případe je to <brick> nebo <category>. Ostatní parametre jsou příkazy zobrazené na základe nášho REST API:
+Parametry jsou poziční. První parametr je typ entity. V našem případe je to "brick" nebo "category". Druhý parametr je "akce", další argumenty jsou variabilní dle zvolené akce.
+
+Když se klient spustí bez parametrů vypíše se nápověda k použití.
 
 
-commands for brick are:
+Pro entitu díly jsou dostupné tyto argumenty:
 
         list                              
         create <name> <color>             
@@ -43,7 +45,7 @@ commands for brick are:
         findbyname <name>                 
         findbycolor <color>               
 
-commands for category are:
+Pro entitu kategore jsou dostupné tyto argumenty:
 
         list                              
         create <name> <description>       
@@ -51,14 +53,16 @@ commands for category are:
         delete <id>                       
         findbyid <id>                     
         findbyname <name>                 
-        
-Příklad: 
-Požadavek podle ID dílu: 
 
-        mvn exec:java -Dexec.args="brick findbyid <id>"
         
-Příklad: Požadavek na vytvoření entity v DB:
 
-        mvn exec:java -Dexec.args="brick create <name> <color>"
+Příklad 1: Vytvoření nového dílu:
+
+        mvn exec:java -Dexec.args="brick create Figure darkgreen"
+
+Příklad 2: Výpis všech dílů:
+
+        mvn exec:java -Dexec.args="brick list"
+
 
 Aplikace je lokalizovaná do angličtiny a češtiny.
