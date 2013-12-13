@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- *
  * @author Tomas Kopecky
  */
 public class BuildingKitDto {

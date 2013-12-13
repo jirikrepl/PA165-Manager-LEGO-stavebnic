@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.PA165.daoDtoConversion;
 
 import cz.muni.fi.PA165.api.dto.BrickDto;
@@ -17,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Tomas Kopecky
  */
 public class BuildingKitConversion {

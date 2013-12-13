@@ -6,7 +6,6 @@ import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import java.util.List;
 
 /**
- *
  * @author Pavol Bako
  */
 public interface ThemeSetService {

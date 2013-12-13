@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.entity;
 
-//import cz.muni.fi.PA165.dto.CategoryDto;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

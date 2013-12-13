@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *
  * @author Pavol Bako
  */
 public class ThemeSetDto {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.Brick;
@@ -14,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *
  * @author pc
  */
 public class BuildingKitDaoImpl extends AbstractDao<BuildingKit>

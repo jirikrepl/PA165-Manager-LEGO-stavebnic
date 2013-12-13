@@ -241,6 +241,4 @@ public class BuildingKitActionBean extends BaseActionBean {
 
         return new ForwardResolution("/buildingKit/buildingKitBrickCountEdit.jsp");
     }
-
-
 }
