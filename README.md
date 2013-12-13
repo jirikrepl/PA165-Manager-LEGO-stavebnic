@@ -31,7 +31,7 @@ mvn exec:java -Dexec.args="[parameter]"
 První parametr je typ entity. V našem případe je to <brick> nebo <category>. Ostatní parametre jsou příkazy zobrazené na základe nášho REST API:
 
 
-commands for <brick> are:
+commands for brick are:
 
         list                              
         create <name> <color>             
@@ -41,7 +41,7 @@ commands for <brick> are:
         findbyname <name>                 
         findbycolor <color>               
 
-commands for <category> are:
+commands for category are:
 
         list                              
         create <name> <description>       
