@@ -53,10 +53,5 @@ public interface CategoryService {
      * @param id the given id
      */
     public CategoryDto findById(Long id);
-    
-    /**
-     * set category dao object
-     * @param categoryDao category dao object
-     */
-    //public void setCategoryDao(CategoryDao categoryDao);
+
 }

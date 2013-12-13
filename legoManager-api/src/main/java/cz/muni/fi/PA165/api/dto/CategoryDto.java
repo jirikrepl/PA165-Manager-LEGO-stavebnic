@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.api.dto;
 
-//import cz.muni.fi.PA165.entity.Category;
 
 /**
  * @author: Martin Rumanek

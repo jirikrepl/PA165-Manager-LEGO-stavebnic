@@ -43,11 +43,9 @@ public class TestUtils {
             String description, BigDecimal price,
             List<BuildingKit> listKits, Category category){
         ThemeSet themeSet = new ThemeSet();
-        //themeSet.setName(name);
         themeSet.setDescription(description);
         themeSet.setPrice(price);
-        //themeSet.setBuildingKits(listKits);
-        //themeSet.setCategory(category);
+
 
         return themeSet;
     }

@@ -11,7 +11,6 @@ public class BrickDto {
     private Long id;
     private Color color;
     private String name;
-    private String description;
 
     public BrickDto( String name, Color color, String description) {
         this.color = color;
