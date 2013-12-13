@@ -61,10 +61,10 @@ public class CategoryResource {
     public Response findAll(@QueryParam("name") String name) {
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
         if (name != null) {
-            CategoryDto category = categoryService.findByName(name);
-            if (category != null) {
+            try {
+                CategoryDto category = categoryService.findByName(name);
                 categoryDtoList.add(category);
-            } else {
+            } catch (DataAccessException e) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
         } else {
