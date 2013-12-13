@@ -45,11 +45,6 @@ public class TestUtils {
         ThemeSet themeSet = new ThemeSet();
         themeSet.setDescription(description);
         themeSet.setPrice(price);
-<<<<<<< HEAD
-=======
-
->>>>>>> e9ccb7afcf47a02a1c99e357cf683ba41092f4fb
-
         return themeSet;
     }
 
