@@ -1,10 +1,19 @@
 package cz.muni.fi.PA165.service;
 
 import com.sun.org.apache.xpath.internal.Arg;
+import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
+import cz.muni.fi.PA165.api.dto.CategoryDto;
+import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.dao.BuildingKitDao;
+import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.daoDtoConversion.BuildingKitConversion;
+import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
+import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
+import cz.muni.fi.PA165.entity.Brick;
 import cz.muni.fi.PA165.entity.BuildingKit;
+import cz.muni.fi.PA165.entity.Category;
+import cz.muni.fi.PA165.entity.ThemeSet;
 import junit.framework.TestCase;
 import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
@@ -13,13 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
- 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.*;
+
 /**
  *
  * @author Pavol Bako
@@ -183,13 +189,132 @@ public class BuildingKitServiceTest extends TestCase {
     }
     
     public void testFindByCategory(){
-        
+        try {
+            kitService.findByCategory(null);
+            fail();
+        } catch (DataAccessException e) {
+
+        }
+        verify(kitDao, never()).findByCategory(null);
+
+        CategoryDto nonExistingCategoryDto = new CategoryDto();
+        Category nonExistingCategory = CategoryConversion.convertToEntity(nonExistingCategoryDto);
+
+        when(kitDao.findByCategory(nonExistingCategory)).thenReturn(new ArrayList<BuildingKit>());
+        ArrayList<BuildingKit> emptyList = new ArrayList<BuildingKit>();
+        assertEquals(emptyList, kitService.findByCategory(nonExistingCategoryDto));
+
+        ArgumentCaptor<Category> captor1 = ArgumentCaptor.forClass(Category.class);
+        verify(kitDao, times(1)).findByCategory(captor1.capture());
+        assertEquals(captor1.getValue().getName(), nonExistingCategory.getName());
+
+        CategoryDto existingCategoryDto = new CategoryDto();
+        Category existingCategory = CategoryConversion.convertToEntity(existingCategoryDto);
+
+        List<BuildingKitDto> existingList = new ArrayList<BuildingKitDto>();
+
+        BuildingKitDto kitWithExistingCategory = createBuildingKitDto("bk with cat", "desc");
+        existingList.add(kitWithExistingCategory);
+
+        List<BuildingKit> entityList = new ArrayList<BuildingKit>();
+        entityList.add(BuildingKitConversion.convertToEntity(kitWithExistingCategory));
+        when(kitDao.findByCategory(existingCategory)).thenReturn(entityList);
+
+        List<BuildingKitDto> resultList = kitService.findByCategory(existingCategoryDto);
+        ArgumentCaptor<Category> captor2 = ArgumentCaptor.forClass(Category.class);
+        verify(kitDao, atLeastOnce()).findByCategory(captor2.capture());
+        assertEquals(captor2.getValue().getName(), existingCategory.getName());
+
+        for (int i = 0; i < resultList.size(); i++) {
+            assertEquals(existingList.get(i).getId(), resultList.get(i).getId());
+            assertEquals(existingList.get(i).getName(), resultList.get(i).getName());
+        }
     }
+
     public void testFindByThemeSet(){
-        
+        try {
+            kitService.findByThemeSet(null);
+            fail();
+        } catch (DataAccessException e) {
+
+        }
+        verify(kitDao, never()).findByThemeSet(null);
+
+        ThemeSetDto nonExistingThemeSetDto = new ThemeSetDto();
+        ThemeSet nonExistingThemeSet = ThemeSetConversion.convertToEntity(nonExistingThemeSetDto);
+
+        when(kitDao.findByThemeSet(nonExistingThemeSet)).thenReturn(new ArrayList<BuildingKit>());
+        ArrayList<BuildingKit> emptyList = new ArrayList<BuildingKit>();
+        assertEquals(emptyList, kitService.findByThemeSet(nonExistingThemeSetDto));
+
+        ArgumentCaptor<ThemeSet> captor1 = ArgumentCaptor.forClass(ThemeSet.class);
+        verify(kitDao, times(1)).findByThemeSet(captor1.capture());
+        assertEquals(captor1.getValue().getName(), nonExistingThemeSet.getName());
+
+        ThemeSetDto existingThemeSetDto = new ThemeSetDto();
+        ThemeSet existingThemeSet = ThemeSetConversion.convertToEntity(existingThemeSetDto);
+
+        List<BuildingKitDto> existingList = new ArrayList<BuildingKitDto>();
+
+        BuildingKitDto kitWithExistingThemeSet = createBuildingKitDto("bk with ts", "desc");
+        existingList.add(kitWithExistingThemeSet);
+
+        List<BuildingKit> entityList = new ArrayList<BuildingKit>();
+        entityList.add(BuildingKitConversion.convertToEntity(kitWithExistingThemeSet));
+        when(kitDao.findByThemeSet(existingThemeSet)).thenReturn(entityList);
+
+        List<BuildingKitDto> resultList = kitService.findByThemeSet(existingThemeSetDto);
+        ArgumentCaptor<ThemeSet> captor2 = ArgumentCaptor.forClass(ThemeSet.class);
+        verify(kitDao, atLeastOnce()).findByThemeSet(captor2.capture());
+        assertEquals(captor2.getValue().getName(), existingThemeSet.getName());
+
+        for (int i = 0; i < resultList.size(); i++) {
+            assertEquals(existingList.get(i).getId(), resultList.get(i).getId());
+            assertEquals(existingList.get(i).getName(), resultList.get(i).getName());
+        }
     }
-    public void testFindBrick(){    
-        
+
+    public void testFindByBrick(){
+        try {
+            kitService.findByBrick(null);
+            fail();
+        } catch (DataAccessException e) {
+
+        }
+        verify(kitDao, never()).findByBrick(null);
+
+        BrickDto nonExistingBrickDto = new BrickDto();
+        Brick nonExistingBrick = BrickConversion.convertToEntity(nonExistingBrickDto);
+
+        when(kitDao.findByBrick(nonExistingBrick)).thenReturn(new ArrayList<BuildingKit>());
+        ArrayList<BuildingKit> emptyList = new ArrayList<BuildingKit>();
+        assertEquals(emptyList, kitService.findByBrick(nonExistingBrickDto));
+
+        ArgumentCaptor<Brick> captor1 = ArgumentCaptor.forClass(Brick.class);
+        verify(kitDao, times(1)).findByBrick(captor1.capture());
+        assertEquals(captor1.getValue().getName(), nonExistingBrick.getName());
+
+        BrickDto existingBrickDto = new BrickDto();
+        Brick existingBrick = BrickConversion.convertToEntity(existingBrickDto);
+
+        List<BuildingKitDto> existingList = new ArrayList<BuildingKitDto>();
+
+        BuildingKitDto kitWithExistingBrick= createBuildingKitDto("bk with brick", "desc");
+        existingList.add(kitWithExistingBrick);
+
+        List<BuildingKit> entityList = new ArrayList<BuildingKit>();
+        entityList.add(BuildingKitConversion.convertToEntity(kitWithExistingBrick));
+        when(kitDao.findByBrick(existingBrick)).thenReturn(entityList);
+
+        List<BuildingKitDto> resultList = kitService.findByBrick(existingBrickDto);
+        ArgumentCaptor<Brick> captor2 = ArgumentCaptor.forClass(Brick.class);
+        verify(kitDao, atLeastOnce()).findByBrick(captor2.capture());
+        assertEquals(captor2.getValue().getName(), existingBrick.getName());
+
+        for (int i = 0; i < resultList.size(); i++) {
+            assertEquals(existingList.get(i).getId(), resultList.get(i).getId());
+            assertEquals(existingList.get(i).getName(), resultList.get(i).getName());
+        }
     }
     
 }
