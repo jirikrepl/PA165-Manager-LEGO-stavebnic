@@ -28,12 +28,7 @@ import java.util.Random;
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -263,7 +258,7 @@ public class ThemeSetServiceTest {
 
         List<ThemeSetDto> resultList = service.findByCategory(existingCategoryDto);
         ArgumentCaptor<Category> captor2 = ArgumentCaptor.forClass(Category.class);
-        verify(dao, times(1)).findByCategory(captor2.capture());
+        verify(dao, atLeastOnce()).findByCategory(captor2.capture());
         assertEquals(captor2.getValue().getName(), existingCategory.getName());
 
         for (int i = 0; i < resultList.size(); i++) {
