@@ -58,18 +58,6 @@ public class ThemeSetDto {
         this.categoryDto = category;
     }
 
-
-    //TODO proc to teda zustalo v DAO
-    /*
-    public List<BuildingKitDto> getBuildingKitsDto() {
-        return buildingKitsDto;
-    }
-
-    public void setBuildingKitsDto(List<BuildingKitDto> buildingKits) {
-        this.buildingKitsDto = buildingKits;
-    }
-    */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
