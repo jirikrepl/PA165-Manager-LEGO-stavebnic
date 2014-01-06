@@ -47,6 +47,11 @@
     </bean>
     <bean id="buildingKitDao" class="cz.muni.fi.PA165.dao.BuildingKitDaoImpl"/>
 
+    <bean id="userService" class="cz.muni.fi.PA165.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="userDao" class="cz.muni.fi.PA165.dao.UserDaoImpl"/>
+
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 </beans>
