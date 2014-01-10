@@ -47,10 +47,10 @@
     </bean>
     <bean id="buildingKitDao" class="cz.muni.fi.PA165.dao.BuildingKitDaoImpl"/>
 
-    <bean id="userService" class="cz.muni.fi.PA165.service.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
+    <bean id="accountService" class="cz.muni.fi.PA165.service.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
     </bean>
-    <bean id="userDao" class="cz.muni.fi.PA165.dao.UserDaoImpl"/>
+    <bean id="accountDao" class="cz.muni.fi.PA165.dao.AccountDaoImpl"/>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 

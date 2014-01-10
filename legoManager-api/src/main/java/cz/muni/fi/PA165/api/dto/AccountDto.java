@@ -3,7 +3,7 @@ package cz.muni.fi.PA165.api.dto;
 /**
  * Created by PALO on 6.1.14.
  */
-public class UserDto {
+public class AccountDto {
 
     private Long id;
     private String name;
@@ -45,14 +45,14 @@ public class UserDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDto)) return false;
+        if (!(o instanceof AccountDto)) return false;
 
-        UserDto userDto = (UserDto) o;
+        AccountDto accountDto = (AccountDto) o;
 
-        if (!id.equals(userDto.id)) return false;
-        if (!isAdmin.equals(userDto.isAdmin)) return false;
-        if (!name.equals(userDto.name)) return false;
-        if (!password.equals(userDto.password)) return false;
+        if (!id.equals(accountDto.id)) return false;
+        if (!isAdmin.equals(accountDto.isAdmin)) return false;
+        if (!name.equals(accountDto.name)) return false;
+        if (!password.equals(accountDto.password)) return false;
 
         return true;
     }
@@ -68,7 +68,7 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "AccountDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

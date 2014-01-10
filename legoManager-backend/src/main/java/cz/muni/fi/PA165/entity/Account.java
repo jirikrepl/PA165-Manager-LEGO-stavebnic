@@ -12,10 +12,12 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class User implements Serializable{
+public class Account implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable=false,unique=true)
     private String name;
@@ -58,29 +60,4 @@ public class User implements Serializable{
         this.name = name;
     }
 
-    //Equals and Hashcode
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (!id.equals(user.id)) return false;
-        if (!isAdmin.equals(user.isAdmin)) return false;
-        if (!name.equals(user.name)) return false;
-        if (!password.equals(user.password)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + isAdmin.hashCode();
-        return result;
-    }
 }
