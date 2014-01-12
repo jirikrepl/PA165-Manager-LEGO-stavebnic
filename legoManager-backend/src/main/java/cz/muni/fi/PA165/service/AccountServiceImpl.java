@@ -75,15 +75,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountDto> findByName(String name) {
+    public AccountDto findByName(String name) {
         if (name == null) {
             throw new DataAccessExceptionService("account cannot be with null name");
         }
-        List<AccountDto> accountDtos = new ArrayList<AccountDto>();
-        List<Account> accounts = accountDao.findByName(name);
-        for(Account account : accounts){
-            accountDtos.add(AccountConversion.convertToDto(account));
-        }
-        return accountDtos;
+        AccountDto accountDto = new AccountDto();
+        Account account = accountDao.findByName(name);
+        accountDto = AccountConversion.convertToDto(account);
+        return accountDto;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface AccountDao {
     public List<Account> findAll();
-    public List<Account> findByName(String name);
+    public Account findByName(String name);
     public Account findById(Long id);
     public void create(Account account);
     public void update(Account account);

@@ -14,5 +14,5 @@ public interface AccountService {
     public void delete(Long id);
     public List<AccountDto> findAll();
     public AccountDto findById(Long id);
-    public List<AccountDto> findByName(String name);
+    public AccountDto findByName(String name);
 }
