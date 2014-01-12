@@ -1,10 +1,7 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.api.service.Color;
-import cz.muni.fi.PA165.entity.Brick;
-import cz.muni.fi.PA165.entity.BuildingKit;
-import cz.muni.fi.PA165.entity.Category;
-import cz.muni.fi.PA165.entity.ThemeSet;
+import cz.muni.fi.PA165.entity.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,6 +51,16 @@ public class TestUtils {
         category.setDescription(description);
         
         return category;
+
+    }
+
+    public static Account createAccount(String name, String password, Boolean isAdmin) {
+        Account account = new Account();
+        account.setName(name);
+        account.setPassword(password);
+        account.setIsAdmin(isAdmin);
+
+        return account;
 
     }
 

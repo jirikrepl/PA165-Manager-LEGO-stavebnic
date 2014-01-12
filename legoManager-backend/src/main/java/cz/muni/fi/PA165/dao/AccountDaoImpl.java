@@ -28,7 +28,8 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         }
         Query q = entityManager.createQuery("SELECT u FROM Account u WHERE name= :account_name", Account.class);
         q.setParameter("account_name", name);
-        return (Account) q.getParameterValue("u");
+        //return (Account) q.getParameterValue("u");
+        return (Account)q.getSingleResult();
     }
 
 

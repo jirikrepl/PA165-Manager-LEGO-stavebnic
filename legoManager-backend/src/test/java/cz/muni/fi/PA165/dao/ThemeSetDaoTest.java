@@ -48,7 +48,7 @@ public class ThemeSetDaoTest extends TestCase {
 
         try {
             dao.create(null);
-            fail("creating NULL building kit");
+            fail("creating NULL theme set");
         } catch (IllegalArgumentException ex) {
 
         }
@@ -80,7 +80,7 @@ public class ThemeSetDaoTest extends TestCase {
 
         try {
             dao.delete(null);
-            fail("removing NULL building kit");
+            fail("removing NULL account");
         } catch (IllegalArgumentException ex) {
         }
 
