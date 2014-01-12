@@ -137,7 +137,6 @@ public class BuildingKitActionBean extends BaseActionBean {
         // get all bricks used by this building kit
         Map<BrickDto, Integer> usedBricks = getBricksSaved();
         Set<BrickDto> usedBricksSet = usedBricks.keySet();
-        //List<BrickDto> usedBricksList = new ArrayList<BrickDto>(usedBricksSet);
 
         // remove all used bricks
         allBricks.removeAll(usedBricksSet);

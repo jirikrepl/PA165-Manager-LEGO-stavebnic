@@ -48,6 +48,7 @@ public class CategoryResource {
     @Path("{id}")
     public Response update(@PathParam("id") Long id, CategoryDto category) {
         try {
+            categoryService.findById(id);
             category.setId(id);
             categoryService.update(category);
             return Response.status(Response.Status.OK).build();
