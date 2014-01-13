@@ -21,6 +21,14 @@ public class AccountActionBean extends BaseActionBean {
     @SpringBean
     private AccountService accountService;
 
+    public List<AccountDto> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<AccountDto> accounts) {
+        this.accounts = accounts;
+    }
+
     List<AccountDto> accounts;
 
     @DefaultHandler

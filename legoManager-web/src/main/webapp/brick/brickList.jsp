@@ -34,25 +34,25 @@
 
             <!--creates lines of table in loop-->
             <!--uses bricks from getter from action bean-->
-            <c:forEach items="${actionBean.bricks}" var="brick">
+            <c:forEach items="${actionBean.bricks}" var="user">
                 <tr>
-                    <td>${brick.id}</td>
-                    <td><c:out value="${brick.name}"/></td>
-                    <td><f:message key="Color.${brick.color}"/></td>
+                    <td>${user.id}</td>
+                    <td><c:out value="${user.name}"/></td>
+                    <td><f:message key="Color.${user.color}"/></td>
                     <%--<td><c:out value=""/></td>--%>
 
                     <td>
                         <span>
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
-                                <s:hidden name="brick.name" value="${brick.name}"/>
-                                <s:hidden name="brick.color" value="${brick.color}"/>
+                                <s:hidden name="brick.id" value="${user.id}"/>
+                                <s:hidden name="brick.name" value="${user.name}"/>
+                                <s:hidden name="brick.color" value="${user.color}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
-                                <s:hidden name="brick.id" value="${brick.id}"/>
+                                <s:hidden name="brick.id" value="${user.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>
