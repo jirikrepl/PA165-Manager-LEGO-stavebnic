@@ -17,7 +17,7 @@
             <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="createBrick"><f:message key="acounts.create"/></s:submit>
+                    <s:submit class="btn" name="createAccount"><f:message key="acounts.create"/></s:submit>
                 </div>
             </div>
         </s:form>
@@ -27,7 +27,7 @@
             <tr>
                 <th>id</th>
                 <th><f:message key="table.acounts.name"/></th>
-                <th><f:message key="table.acounts.isAdmin"/></th>
+                <th><f:message key="admintablerole"/></th>
                 <th><f:message key="table.options"/></th>
             </tr>
 

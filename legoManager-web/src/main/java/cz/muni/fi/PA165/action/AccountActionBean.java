@@ -20,6 +20,8 @@ public class AccountActionBean extends BaseActionBean {
 
     @SpringBean
     private AccountService accountService;
+    private List<AccountDto> accounts;
+    private AccountDto account;
 
     public List<AccountDto> getAccounts() {
         return accounts;
@@ -29,18 +31,27 @@ public class AccountActionBean extends BaseActionBean {
         this.accounts = accounts;
     }
 
-    List<AccountDto> accounts;
+    public AccountDto getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountDto account) {
+        this.account = account;
+    }
 
     @DefaultHandler
     public Resolution list() {
-        //TODO remove
-//        AccountDto user = new AccountDto();
-//        user.setName("user");
-//        user.setName("password");
-//        user.setIsAdmin(true);
-//        accountService.create(user);
-
         accounts = accountService.findAll();
-        return new ForwardResolution("/account/list.jsp");
+        return new ForwardResolution("/account/accountList.jsp");
+    }
+
+    /**
+     * creates account
+     *
+     * @return
+     */
+    public Resolution createAccount() {
+        accountService.create(account);
+        return new ForwardResolution(this.getClass(), "list");
     }
 }
