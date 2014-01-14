@@ -7,6 +7,8 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
 import java.util.List;
 
@@ -21,6 +23,12 @@ public class AccountActionBean extends BaseActionBean {
     @SpringBean
     private AccountService accountService;
     private List<AccountDto> accounts;
+
+    @ValidateNestedProperties(
+            value = {
+                    @Validate(on = {"createAccount"}, field = "name", required = true, maxlength = 50)
+            }
+    )
     private AccountDto account;
 
     public List<AccountDto> getAccounts() {
@@ -52,6 +60,11 @@ public class AccountActionBean extends BaseActionBean {
      */
     public Resolution createAccount() {
         accountService.create(account);
+        return new ForwardResolution(this.getClass(), "list");
+    }
+
+    public Resolution delete() {
+        accountService.delete(account.getId());
         return new ForwardResolution(this.getClass(), "list");
     }
 }

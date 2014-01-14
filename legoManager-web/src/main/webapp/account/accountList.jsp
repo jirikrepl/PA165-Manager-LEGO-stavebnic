@@ -36,21 +36,21 @@
             <c:forEach items="${actionBean.accounts}" var="accounts">
                 <tr>
                     <td>${accounts.id}</td>
-                    <td><c:out value="${accounts.name}"/></td>
-                    <td><f:message key="Color.${accounts.color}"/></td>
+                    <td>${accounts.name}</td>
+                    <td>${accounts.isAdmin}</td>
 
                     <td>
                         <span>
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.AccountActionBean">
-                                <s:hidden name="accounts.id" value="${accounts.id}"/>
-                                <s:hidden name="accounts.name" value="${accounts.name}"/>
-                                <s:hidden name="accounts.isAdmin" value="${accounts.isAdmin}"/>
+                                <s:hidden name="account.id" value="${accounts.id}"/>
+                                <s:hidden name="account.name" value="${accounts.name}"/>
+                                <s:hidden name="account.isAdmin" value="${accounts.isAdmin}"/>
                                 <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
                             </s:form>
 
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.AccountActionBean">
-                                <s:hidden name="accounts.id" value="${accounts.id}"/>
+                                <s:hidden name="account.id" value="${accounts.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
                         </span>
