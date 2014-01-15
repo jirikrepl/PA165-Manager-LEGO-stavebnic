@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by PALO on 6.1.14.
+ * Created by Pavol Bako on 6.1.14.
  */
 
 @Service

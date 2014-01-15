@@ -11,18 +11,18 @@
     </div>
 </div>
 
-<%--<div class="form-group">--%>
-    <%--<s:label for="b2" class="col-sm-2 control-label"><f:message key="account.form.password"/></s:label>--%>
-    <%--<div class="col-sm-4">--%>
-        <%--<s:password class="form-control" id="b2" name="account.password"/>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="form-group">
+    <s:label for="b2" class="col-sm-2 control-label"><f:message key="account.form.password"/></s:label>
+    <div class="col-sm-4">
+        <s:password class="form-control" id="b2" name="account.password"/>
+    </div>
+</div>
 
-<%--<!-- second row -- option box-->--%>
-<%--<div class="form-group">--%>
-    <%--<s:label for="b4" class="col-sm-2 control-label"><f:message key="account.form.role"/></s:label>--%>
-    <%--<div class="col-sm-4">--%>
-        <%--<s:checkbox id="b4" name="account.isAdmin"/>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<!-- second row -- option box-->
+<div class="form-group">
+    <s:label for="b4" class="col-sm-2 control-label"><f:message key="account.form.role"/></s:label>
+    <div class="col-sm-4">
+        <s:checkbox id="b4" name="account.isAdmin"/>
+    </div>
+</div>
 
