@@ -9,6 +9,7 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrors;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class AccountActionBean extends BaseActionBean {
     @ValidateNestedProperties(
             value = {
                     @Validate(on = {"createAccount", "updateAccount"}, field = "name", required = true, maxlength = 50),
-                    @Validate(on = {"createAccount", "updateAccount"}, field = "password", required = true,minlength = 6, maxlength = 50)
+                    @Validate(on = {"createAccount", "updateAccount"}, field = "password", required = true, minlength = 6, maxlength = 50)
             }
     )
     private AccountDto account;
@@ -61,7 +62,7 @@ public class AccountActionBean extends BaseActionBean {
     public Resolution createAccount() {
         // checkbox is unchecked, in stripes it equals 'false'
         // set false explicitly
-        if(account.getIsAdmin() == null) {
+        if (account.getIsAdmin() == null) {
             account.setIsAdmin(false);
         }
 
@@ -71,7 +72,6 @@ public class AccountActionBean extends BaseActionBean {
             getContext().getMessages().add(new LocalizableError("accounts.usedusername"));
             return new ForwardResolution(this.getClass(), "list");
         }
-
 
         accountService.create(account);
         return new ForwardResolution(this.getClass(), "list");
@@ -94,7 +94,7 @@ public class AccountActionBean extends BaseActionBean {
     public Resolution updateAccount() {
         // checkbox is unchecked, in stripes it equals 'false'
         // set false explicitly
-        if(account.getIsAdmin() == null) {
+        if (account.getIsAdmin() == null) {
             account.setIsAdmin(false);
         }
 

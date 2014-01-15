@@ -79,9 +79,15 @@ public class AccountServiceImpl implements AccountService {
         if (name == null) {
             throw new DataAccessExceptionService("account cannot be with null name");
         }
-        AccountDto accountDto = new AccountDto();
+        AccountDto accountDto;
         Account account = accountDao.findByName(name);
-        accountDto = AccountConversion.convertToDto(account);
+        try {
+            accountDto = AccountConversion.convertToDto(account);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+
+
         return accountDto;
     }
 }
