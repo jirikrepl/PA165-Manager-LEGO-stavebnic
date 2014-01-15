@@ -55,6 +55,7 @@ public class AccountServiceTest extends TestCase {
         Account account = AccountConversion.convertToEntity(accountDto);
         // verify that create method was called on mock accountDao object
         verify(accountDao).create(captor.capture());
+        assertEquals(account.getId(), captor.getValue().getId());
         assertEquals(account.getName(), captor.getValue().getName());
         assertEquals(account.getPassword(), captor.getValue().getPassword());
         assertEquals(account.getIsAdmin(), captor.getValue().getIsAdmin());
@@ -91,6 +92,7 @@ public class AccountServiceTest extends TestCase {
         accountService.create(accountDto);
         ArgumentCaptor<Account> captor1 = ArgumentCaptor.forClass(Account.class);
         verify(accountDao).create(captor1.capture());
+        assertEquals(accountDto.getId(), captor1.getValue().getId());
         assertEquals(accountDto.getName(), captor1.getValue().getName());
         assertEquals(accountDto.getPassword(), captor1.getValue().getPassword());
         assertEquals(accountDto.getIsAdmin(), captor1.getValue().getIsAdmin());
@@ -103,6 +105,7 @@ public class AccountServiceTest extends TestCase {
         accountService.update(accountDto);
         ArgumentCaptor<Account> captor2 = ArgumentCaptor.forClass(Account.class);
         verify(accountDao).update(captor2.capture());
+        assertEquals(accountDto.getId(), captor2.getValue().getId());
         assertEquals(accountDto.getName(), captor2.getValue().getName());
         assertEquals(accountDto.getPassword(), captor2.getValue().getPassword());
         assertEquals(accountDto.getIsAdmin(), captor2.getValue().getIsAdmin());
@@ -111,6 +114,10 @@ public class AccountServiceTest extends TestCase {
         when(accountDao.findById(id)).thenReturn(AccountConversion.convertToEntity(accountDto));
         AccountDto retrievedDto = accountService.findById(id);
         assertEquals(retrievedDto, accountDto);
+        assertEquals(accountDto.getId(), retrievedDto.getId());
+        assertEquals(accountDto.getName(), retrievedDto.getName());
+        assertEquals(accountDto.getPassword(), retrievedDto.getPassword());
+        assertEquals(accountDto.getIsAdmin(), retrievedDto.getIsAdmin());
     }
 
     /**
@@ -148,7 +155,7 @@ public class AccountServiceTest extends TestCase {
         when(accountDao.findAll()).thenReturn(new ArrayList<Account>());
 
         List<AccountDto> returnedAccountDtoList = accountService.findAll();
-        assertEquals(accountDtoList, returnedAccountDtoList);
+        assertTrue(returnedAccountDtoList.isEmpty());
 
         // return some entities
         // create list of dto objects
@@ -173,7 +180,10 @@ public class AccountServiceTest extends TestCase {
         entities.add(secondEntity);
         when(accountDao.findAll()).thenReturn(entities);
         List<AccountDto> accountDtoList2 = accountService.findAll();
-        assertEquals(accountDtoList2, accountDtoList);
+        assertTrue(accountDtoList2.size() == 2);
+        for (AccountDto ac : accountDtoList) {
+            assertTrue(accountDtoList2.contains(ac));
+        }
     }
 
     /**
@@ -203,7 +213,10 @@ public class AccountServiceTest extends TestCase {
         AccountDto accountDto2 = createAccountDto("name", "pwd", Boolean.FALSE);
         when(accountDao.findById(accountDto2.getId())).thenReturn(AccountConversion.convertToEntity(accountDto2));
         returnedDto = accountService.findById(accountDto2.getId());
-        assertEquals(returnedDto, accountDto2);
+        assertEquals(accountDto2.getId(), returnedDto.getId());
+        assertEquals(accountDto2.getIsAdmin(), returnedDto.getIsAdmin());
+        assertEquals(accountDto2.getName(), returnedDto.getName());
+        assertEquals(accountDto2.getPassword(), returnedDto.getPassword());
     }
 
     /**
@@ -233,6 +246,9 @@ public class AccountServiceTest extends TestCase {
         AccountDto accountDto2 = createAccountDto("name2", "pwd", Boolean.FALSE);
         when(accountDao.findByName(accountDto2.getName())).thenReturn(AccountConversion.convertToEntity(accountDto2));
         returnedDto = accountService.findByName(accountDto2.getName());
-        assertEquals(returnedDto, accountDto2);
+        assertEquals(accountDto2.getId(), returnedDto.getId());
+        assertEquals(accountDto2.getIsAdmin(), returnedDto.getIsAdmin());
+        assertEquals(accountDto2.getName(), returnedDto.getName());
+        assertEquals(accountDto2.getPassword(), returnedDto.getPassword());
     }
 }

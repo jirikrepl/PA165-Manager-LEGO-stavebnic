@@ -79,11 +79,9 @@ public class AccountDaoTest extends TestCase {
         dao.delete(account.getId());
         em.getTransaction().commit();
 
-        List<Account> exptRslt = new ArrayList<Account>();
-
         List<Account> result = dao.findAll();
 
-        assertEquals(exptRslt, result);
+        assertTrue(result.isEmpty());
     }
 
     public void testUpdateAccount() {
@@ -126,7 +124,7 @@ public class AccountDaoTest extends TestCase {
         em.getTransaction().commit();
 
         List<Account> accountList = dao.findAll();
-        assertNotNull(accountList);
+        assertTrue(accountList.size() == 2);
         assertTrue(accountList.contains(ac1));
         assertTrue(accountList.contains(ac2));
     }
