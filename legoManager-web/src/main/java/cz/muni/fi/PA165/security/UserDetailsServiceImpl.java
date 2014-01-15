@@ -18,16 +18,17 @@ import java.util.*;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-
+    @Autowired
+    AccountService accountService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //AccountDto accountDtoList = accountService.findByName(username);
+        final AccountDto accountDto = accountService.findByName(username);
 
 
-        //if (accountDto == null) {
-        //    throw new UsernameNotFoundException("user not found");
-        //}
+        if (accountDto == null) {
+            throw new UsernameNotFoundException("user not found");
+        }
 
         return new UserDetails() {
             @Override
@@ -47,12 +48,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             @Override
             public String getPassword() {
-                return "pa165";
+                return accountDto.getPassword();
             }
 
             @Override
             public String getUsername() {
-                return "pa165";
+                return accountDto.getName();
             }
 
             @Override

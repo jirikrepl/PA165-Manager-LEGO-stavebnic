@@ -9,29 +9,29 @@
     </http>
 
 
-    <beans:bean id="userDetailsService" class="cz.muni.fi.PA165.security.UserDetailsServiceImpl">
-    </beans:bean>
+    <!--<beans:bean id="userDetailsService" class="cz.muni.fi.PA165.security.UserDetailsServiceImpl">-->
+    <!--</beans:bean>-->
 
-    <beans:bean id="authenticationManager"
-                class="org.springframework.security.authentication.ProviderManager">
-        <beans:property name="providers">
-            <beans:list>
-                <beans:ref local="daoAuthenticationProvider" />
-            </beans:list>
-        </beans:property>
-    </beans:bean>
+    <!--<beans:bean id="authenticationManager"-->
+                <!--class="org.springframework.security.authentication.ProviderManager">-->
+        <!--<beans:property name="providers">-->
+            <!--<beans:list>-->
+                <!--<beans:ref local="daoAuthenticationProvider" />-->
+            <!--</beans:list>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>-->
 
 
-    <beans:bean id="daoAuthenticationProvider"
-                class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-        <beans:property name="userDetailsService" ref="userDetailsService"/>
-    </beans:bean>
+    <!--<beans:bean id="daoAuthenticationProvider"-->
+                <!--class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">-->
+        <!--<beans:property name="userDetailsService" ref="userDetailsService"/>-->
+    <!--</beans:bean>-->
 
-    <authentication-manager>
-        <authentication-provider user-service-ref="userDetailsService">
-            <!--<password-encoder hash="md5"/>-->
-        </authentication-provider>
-    </authentication-manager>
+    <!--<authentication-manager>-->
+        <!--<authentication-provider user-service-ref="userDetailsService">-->
+            <!--&lt;!&ndash;<password-encoder hash="md5"/>&ndash;&gt;-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
 
     <!--<authentication-manager>-->
         <!--<authentication-provider>-->
