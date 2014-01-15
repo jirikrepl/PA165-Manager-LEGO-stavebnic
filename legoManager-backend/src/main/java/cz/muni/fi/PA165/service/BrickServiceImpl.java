@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.dao.BrickDao;
 import cz.muni.fi.PA165.daoDtoConversion.BrickConversion;
 import cz.muni.fi.PA165.entity.Brick;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,7 @@ public class BrickServiceImpl implements BrickService {
      *
      * @param brickDto Dto object of Brick
      */
+    @Secured("ROLE_ADMIN")
     public void create(BrickDto brickDto) {
         if (brickDto == null) {
             throw new DataAccessExceptionService("created brick cannot be null");

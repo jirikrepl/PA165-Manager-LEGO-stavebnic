@@ -39,9 +39,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         return "ROLE_USER";
                     }
                 };
-
                 List<GrantedAuthority> listAuthorities = new ArrayList<GrantedAuthority>();
                 listAuthorities.add(grantedAuthority);
+
+                if (accountDto.getIsAdmin()) {
+                    GrantedAuthority adminAuthority = new GrantedAuthority() {
+                        @Override
+                        public String getAuthority() {
+                            return "ROLE_ADMIN";
+                        }
+                    };
+                    listAuthorities.add(adminAuthority);
+                }
 
                 return Collections.unmodifiableList(listAuthorities);
             }
