@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="brick.title">
     <s:layout-component name="body">
@@ -10,6 +11,7 @@
 
         <!--form for brick creation-->
         <!--there is included file with rows in this form-->
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
             <legend><f:message key="brick.create.title"/></legend>
             <%@include file="brickForm.jsp"%>
@@ -21,6 +23,7 @@
                     </div>
                 </div>
         </s:form>
+        </sec:authorize>
 
         <!--table of bricks-->
         <table class="table">
@@ -28,8 +31,9 @@
                 <th>id</th>
                 <th><f:message key="table.brick.title"/></th>
                 <th><f:message key="table.brick.color"/></th>
-                <%--<th><f:message key="table.brick.count"/></th>--%>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <th><f:message key="table.options"/></th>
+                </sec:authorize>
             </tr>
 
             <!--creates lines of table in loop-->
@@ -43,6 +47,7 @@
 
                     <td>
                         <span>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <!--table buttons-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BrickActionBean">
                                 <s:hidden name="brick.id" value="${user.id}"/>
@@ -55,6 +60,7 @@
                                 <s:hidden name="brick.id" value="${user.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
+                            </sec:authorize>
                         </span>
 
                     </td>

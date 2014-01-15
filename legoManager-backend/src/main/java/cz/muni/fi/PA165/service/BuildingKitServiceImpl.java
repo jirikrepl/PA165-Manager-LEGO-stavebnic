@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,8 @@ public class BuildingKitServiceImpl implements BuildingKitService {
     public void setBuildingKitDao(BuildingKitDao dao) {
         buildingKitDao = dao;
     }
-    
+
+    @Secured("ROLE_ADMIN")
     public void create(BuildingKitDto buildingKit) {
         if (buildingKit == null) {
             throw new DataAccessException("Building kit cannot be null.") {};
@@ -44,6 +46,7 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         buildingKitDao.create(BuildingKitConversion.convertToEntity(buildingKit));
     }
 
+    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessException("Id of the building kit cannot be null.") {};
@@ -51,6 +54,7 @@ public class BuildingKitServiceImpl implements BuildingKitService {
         buildingKitDao.delete(id);
     }
 
+    @Secured("ROLE_ADMIN")
     public void update(BuildingKitDto buildingKit) {
         if (buildingKit == null) {
             throw new DataAccessException("Building kit cannot be null.") {};

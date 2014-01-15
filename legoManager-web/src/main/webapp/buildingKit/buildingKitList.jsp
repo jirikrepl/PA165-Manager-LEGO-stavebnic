@@ -2,26 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="buildingKit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="buildingKit.headline"/></h1>
 
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <s:form class="createForm form-horizontal" id="brickCreateForm"
+                    beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
+                <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
+                <legend><f:message key="buildingKit.createForm"/></legend>
+                <%@include file="buildingKitForm.jsp" %>
 
-        <s:form class="createForm form-horizontal" id="brickCreateForm"
-                beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
-            <s:param name="buildingKit.id" value="${actionBean.buildingKit.id}"/>
-            <legend><f:message key="buildingKit.createForm"/></legend>
-            <%@include file="buildingKitForm.jsp" %>
-
-            <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="createBuildingKit"><f:message key="buildingKit.create"/></s:submit>
+                <!--submit button, in bootstrap div class, see documentation for bootstrap forms-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <s:submit class="btn" name="createBuildingKit"><f:message key="buildingKit.create"/></s:submit>
+                    </div>
                 </div>
-            </div>
-        </s:form>
+            </s:form>
+        </sec:authorize>
 
 
         <table class="table">
@@ -49,6 +51,7 @@
                     <!--table buttons-->
                     <td>
                         <span>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <%--building kit edit button--%>
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean">
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
@@ -57,7 +60,9 @@
                             </s:form>
 
                             <%--brick manager button--%>
-                            <s:link class="btn anchor-to-button table-buttons" beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean" event="openManageBrickPage">
+                            <s:link class="btn anchor-to-button table-buttons"
+                                    beanclass="cz.muni.fi.PA165.action.BuildingKitActionBean"
+                                    event="openManageBrickPage">
                                 <s:param name="buildingKit.id" value="${buildingKit.id}"/>
                                 <f:message key="buildingKit.bricks.button"/>
                             </s:link>
@@ -67,6 +72,7 @@
                                 <s:hidden name="buildingKit.id" value="${buildingKit.id}"/>
                                 <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
                             </s:form>
+                            </sec:authorize>
                         </span>
 
                     </td>

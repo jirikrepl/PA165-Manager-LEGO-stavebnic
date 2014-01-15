@@ -49,6 +49,7 @@ public class BrickServiceImpl implements BrickService {
      *
      * @param brickDto Dto object of Brick
      */
+    @Secured("ROLE_ADMIN")
     public void update(BrickDto brickDto) {
         if (brickDto == null) {
             throw new DataAccessExceptionService("updated brick cannot be null");
@@ -62,6 +63,7 @@ public class BrickServiceImpl implements BrickService {
      *
      * @param id id of brick
      */
+    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("cannot delete brick with null id");

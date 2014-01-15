@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ public class ThemeSetServiceImpl implements ThemeSetService{
     public void setThemeSetDao(ThemeSetDao themeSetDao) {
         this.themeSetDao = themeSetDao;
     }
-    
+
+    @Secured("ROLE_ADMIN")
     public void create(ThemeSetDto setDto) {
 
         if (setDto == null) {
@@ -50,6 +52,7 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         return themeSetDtoList;
     }
 
+    @Secured("ROLE_ADMIN")
     public void update(ThemeSetDto setDto) {
         if (setDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
@@ -58,6 +61,7 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         themeSetDao.update(ts);
     }
 
+    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("ID cannot be NULL");

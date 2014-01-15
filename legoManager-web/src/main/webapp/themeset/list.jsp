@@ -2,12 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="themeset.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="themeset.headline"/></h1>
 
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <s:form class="createForm form-horizontal" id="themesetCreateForm" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
             <legend><f:message key="themeset.create.title"/></legend>
             <%@include file="form.jsp"%>
@@ -19,6 +21,7 @@
                 </div>
             </div>
         </s:form>
+        </sec:authorize>
             
         <table class="table">
             <tr>
@@ -37,6 +40,7 @@
                     <td><c:out value="${themeSet.categoryDto.name}"/></td>
                     <td>
                         <span>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <!--table buttons-->
                             <!--edit-->
                             <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.ThemeSetActionBean">
@@ -51,6 +55,7 @@
                                 <s:hidden name="themeSetDto.id" value="${themeSet.id}"/>
                                 <s:submit class="btn" name="deleteThemeSet"><f:message key="themeset.delete.button"/></s:submit>
                             </s:form>
+                            </sec:authorize>
                         </span>
                     </td>
                     

@@ -2,23 +2,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="category.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.PA165.action.CategoryActionBean" var="actionBean"/>
         <h1 class="text-center"><f:message key="category.headline"/></h1>
 
-
-        <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-            <fieldset><legend><f:message key="category.create"/></legend>
-                <%@include file="form.jsp"%>
-                <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
-                    <s:submit class="btn" name="add"><f:message key="category.create"/></s:submit>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <s:form class="createForm form-horizontal" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+                <fieldset>
+                    <legend><f:message key="category.create"/></legend>
+                    <%@include file="form.jsp" %>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <s:submit class="btn" name="add"><f:message key="category.create"/></s:submit>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-        </s:form>
+                </fieldset>
+            </s:form>
+        </sec:authorize>
 
         <table class="table">
             <tr>
@@ -37,18 +40,22 @@
                     <td>${category.description}</td>
                     <td>
                         <span>
-                            <!--table buttons-->
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-                                <s:hidden name="categoryDto.id" value="${category.id}"/>
-                                <s:hidden name="categoryDto.name" value="${category.name}"/>
-                                <s:hidden name="categoryDto.description" value="${category.description}"/>
-                                <s:submit class="btn" name="openEditPage"><f:message key="brick.edit.button"/></s:submit>
-                            </s:form>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <!--table buttons-->
+                                <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+                                    <s:hidden name="categoryDto.id" value="${category.id}"/>
+                                    <s:hidden name="categoryDto.name" value="${category.name}"/>
+                                    <s:hidden name="categoryDto.description" value="${category.description}"/>
+                                    <s:submit class="btn" name="openEditPage"><f:message
+                                            key="brick.edit.button"/></s:submit>
+                                </s:form>
 
-                            <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
-                                <s:hidden name="categoryDto.id" value="${category.id}"/>
-                                <s:submit class="btn" name="delete"><f:message key="table.buttons.delete"/></s:submit>
-                            </s:form>
+                                <s:form class="table-buttons" beanclass="cz.muni.fi.PA165.action.CategoryActionBean">
+                                    <s:hidden name="categoryDto.id" value="${category.id}"/>
+                                    <s:submit class="btn" name="delete"><f:message
+                                            key="table.buttons.delete"/></s:submit>
+                                </s:form>
+                            </sec:authorize>
                         </span>
 
                     </td>

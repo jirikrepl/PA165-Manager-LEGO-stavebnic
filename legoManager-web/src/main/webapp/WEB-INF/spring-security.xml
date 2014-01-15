@@ -5,7 +5,7 @@
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http>
-        <form-login login-page="/login.jsp" default-target-url="/index.jsp" authentication-failure-url="/login.jsp"/>
+        <form-login login-page="login.jsp" default-target-url="index.jsp" authentication-failure-url="login.jsp"/>
     </http>
 
     <!--<beans:bean id="userDetailsService" class="cz.muni.fi.PA165.security.UserDetailsServiceImpl">-->
