@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <s:layout-definition>
     
     <!DOCTYPE html>
@@ -34,10 +35,12 @@
                                 <li>
                                 <s:link beanclass="cz.muni.fi.PA165.action.BrickActionBean"><f:message key="navigation.brick"/></s:link>
                                 </li>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <li>
                                     <s:link beanclass="cz.muni.fi.PA165.action.AccountActionBean"><f:message
                                             key="navigation.account"/></s:link>
                                 </li>
+                            </sec:authorize>
                             </ul>
                             <!-- registration and login form
                             <ul class="nav navbar-nav navbar-right">

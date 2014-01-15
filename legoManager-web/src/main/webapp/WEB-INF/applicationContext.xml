@@ -7,6 +7,8 @@
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+    <security:global-method-security secured-annotations="enabled" />
+
     <import resource="classpath*:/META-INF/applicationContext.xml" />
 
     <context:component-scan base-package="cz.muni.fi.PA165.action"/>
@@ -30,8 +32,10 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <property name="userDetailsService" ref="userDetailsService"/>
     </bean>
 
-    <security:http auto-config="true">
-        <security:intercept-url pattern="/*" access="ROLE_USER" />
+    <security:http use-expressions="true">
+        <security:intercept-url pattern="/**" access="authenticated"/>
+        <security:form-login />
+        <security:http-basic />
     </security:http>
 
     <security:authentication-manager>
