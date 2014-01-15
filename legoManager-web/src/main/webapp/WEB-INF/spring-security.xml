@@ -4,10 +4,9 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/*" access="ROLE_USER" />
+    <http>
+        <form-login login-page="/login.jsp" default-target-url="/index.jsp" authentication-failure-url="/login.jsp"/>
     </http>
-
 
     <!--<beans:bean id="userDetailsService" class="cz.muni.fi.PA165.security.UserDetailsServiceImpl">-->
     <!--</beans:bean>-->
