@@ -79,7 +79,7 @@ public class AccountActionBean extends BaseActionBean {
 
     public Resolution delete() {
         accountService.delete(account.getId());
-        return new ForwardResolution(this.getClass(), "list");
+        return new RedirectResolution(this.getClass(), "list");
     }
 
     /**
