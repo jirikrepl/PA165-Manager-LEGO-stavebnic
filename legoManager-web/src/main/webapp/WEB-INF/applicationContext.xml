@@ -33,10 +33,17 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     </bean>
 
     <security:http use-expressions="true">
+        <security:intercept-url pattern="/login.jsp" access="permitAll"/>
+        <security:intercept-url pattern="/error.jsp" access="permitAll"/>
         <security:intercept-url pattern="/**" access="authenticated"/>
-        <security:form-login />
-        <security:http-basic />
+            <security:form-login login-page="/login.jsp"
+                             authentication-failure-handler-ref="authenticationFailureHandler" />
     </security:http>
+
+        <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/login.jsp?error=1" />
+    </bean>
+
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsService">

@@ -21,6 +21,7 @@
                         <a href="${pageContext.request.contextPath}" class="navbar-brand">Lego Manager</a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <sec:authorize access="isAuthenticated()">
                         <ul class="nav navbar-nav">
                             <!--<li class="active">-->
                             <li>
@@ -42,24 +43,7 @@
                                 </li>
                             </sec:authorize>
                             </ul>
-                            <!-- registration and login form
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <div class="navbar-collapse collapse">
-                                        <form class="navbar-form navbar-right">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Email" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" placeholder="Password" class="form-control">
-                                            </div>
-                                            <button type="submit" class="btn btn-success">Sign in</button>
-                                            <button type="submit" class="btn btn-success">Sign up</button>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                            -->
+                        </sec:authorize>
                                 
                         </nav>
                     </div>
