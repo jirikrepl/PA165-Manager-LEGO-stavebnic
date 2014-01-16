@@ -36,7 +36,6 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <security:intercept-url pattern="/login.jsp" access="permitAll"/>
         <security:intercept-url pattern="/error.jsp" access="permitAll"/>
         <security:intercept-url pattern="/bootstrap/**" access="permitAll"/>
-        <security:intercept-url pattern="/rest/**" access="ROLE_ADMIN"/>
         <security:intercept-url pattern="/**" access="authenticated"/>
         <security:form-login login-page="/login.jsp" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <security:logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true"/>
@@ -50,9 +49,6 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsService">
-            <user-service>
-                <user name="rest" password="rest" authorities="ROLE_ADMIN" />
-            </user-service>
             <!--<password-encoder hash="md5"/>-->
         </security:authentication-provider>
     </security:authentication-manager>
