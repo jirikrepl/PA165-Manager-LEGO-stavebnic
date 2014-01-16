@@ -7,9 +7,9 @@
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <security:global-method-security secured-annotations="enabled" />
+    <security:global-method-security secured-annotations="enabled"/>
 
-    <import resource="classpath*:/META-INF/applicationContext.xml" />
+    <import resource="classpath*:/META-INF/applicationContext.xml"/>
 
     <context:component-scan base-package="cz.muni.fi.PA165.action"/>
 
@@ -18,30 +18,32 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     </bean>
 
     <bean id="authenticationManager"
-                class="org.springframework.security.authentication.ProviderManager">
+          class="org.springframework.security.authentication.ProviderManager">
         <property name="providers">
             <list>
-                <ref local="daoAuthenticationProvider" />
+                <ref local="daoAuthenticationProvider"/>
             </list>
         </property>
     </bean>
 
 
     <bean id="daoAuthenticationProvider"
-                class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userDetailsService"/>
     </bean>
 
     <security:http use-expressions="true">
         <security:intercept-url pattern="/login.jsp" access="permitAll"/>
         <security:intercept-url pattern="/error.jsp" access="permitAll"/>
+        <security:intercept-url pattern="/bootstrap/**" access="permitAll"/>
         <security:intercept-url pattern="/**" access="authenticated"/>
-            <security:form-login login-page="/login.jsp"
-                             authentication-failure-handler-ref="authenticationFailureHandler" />
+        <security:form-login login-page="/login.jsp"
+                             authentication-failure-handler-ref="authenticationFailureHandler"/>
     </security:http>
 
-        <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-        <property name="defaultFailureUrl" value="/login.jsp?error=1" />
+    <bean id="authenticationFailureHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/login.jsp?error=1"/>
     </bean>
 
 
