@@ -37,8 +37,8 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <security:intercept-url pattern="/error.jsp" access="permitAll"/>
         <security:intercept-url pattern="/bootstrap/**" access="permitAll"/>
         <security:intercept-url pattern="/**" access="authenticated"/>
-        <security:form-login login-page="/login.jsp"
-                             authentication-failure-handler-ref="authenticationFailureHandler"/>
+        <security:form-login login-page="/login.jsp" authentication-failure-handler-ref="authenticationFailureHandler"/>
+        <security:logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true"/>
     </security:http>
 
     <bean id="authenticationFailureHandler"

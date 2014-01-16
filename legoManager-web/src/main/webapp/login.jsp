@@ -22,7 +22,7 @@
                     </p>
                 </c:if>
                 <c:if test="${param.logout != null}">
-                    <p style="color: red">
+                    <p style="color: green">
                         <f:message key="loginform.userLogout"/>
                     </p>
                 </c:if>
