@@ -34,7 +34,9 @@
                 <th><f:message key="table.buildingKit.price"/></th>
                 <th><f:message key="table.buildingKit.category"/></th>
                 <th><f:message key="table.buildingKit.themeSet"/></th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <th><f:message key="table.options"/></th>
+                </sec:authorize>
             </tr>
 
             <!--creates lines of table in loop-->

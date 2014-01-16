@@ -29,7 +29,9 @@
                 <th><f:message key="table.themeset.name"/></th>
                 <th><f:message key="table.themeset.price"/></th>
                 <th><f:message key="table.themeset.category"/></th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <th><f:message key="table.options"/></th>
+                </sec:authorize>
             </tr>
 
             <c:forEach items="${actionBean.themeSets}" var="themeSet">
