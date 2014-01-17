@@ -59,7 +59,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void update(CategoryDto categoryDto) {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
@@ -69,7 +68,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if(id == null) {
             throw new DataAccessExceptionService("ID cannot be NULL");
@@ -78,7 +76,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void create(CategoryDto categoryDto) {
         if(categoryDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");

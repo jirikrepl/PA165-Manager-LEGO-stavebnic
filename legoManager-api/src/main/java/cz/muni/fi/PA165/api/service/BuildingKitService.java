@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public interface BuildingKitService {
      *
      * @param buildingKit instance of BuildingKit DTO class
      */
+    @Secured("ROLE_ADMIN")
     public void create(BuildingKitDto buildingKit);
 
     /**
@@ -26,6 +28,7 @@ public interface BuildingKitService {
      *
      * @param id id of the instance of the building kit to remove
      */
+    @Secured("ROLE_ADMIN")
     public void delete(Long id);
 
     /**
@@ -33,12 +36,14 @@ public interface BuildingKitService {
      *
      * @param buildingKit instance of BuildingKit DTO class
      */
+    @Secured("ROLE_ADMIN")
     public void update(BuildingKitDto buildingKit);
     
     /**
      * retrieves all building kits
      *
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<BuildingKitDto> findAll();
 
     /**
@@ -46,6 +51,7 @@ public interface BuildingKitService {
      *
      * @param id the given id
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public BuildingKitDto findById(Long id);
 
     /**
@@ -53,6 +59,7 @@ public interface BuildingKitService {
      *
      * @param categoryDto the given category
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<BuildingKitDto> findByCategory(CategoryDto categoryDto);
 
     /**
@@ -60,6 +67,7 @@ public interface BuildingKitService {
      *
      * @param themeSetDto the given theme set
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<BuildingKitDto> findByThemeSet(ThemeSetDto themeSetDto);
     
     /**
@@ -67,6 +75,7 @@ public interface BuildingKitService {
      * @param brickDto give brick dto
      * @return List of buildinkKits dto
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<BuildingKitDto> findByBrick(BrickDto brickDto);
 
 }

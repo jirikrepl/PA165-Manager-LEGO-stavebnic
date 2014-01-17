@@ -32,7 +32,6 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         this.themeSetDao = themeSetDao;
     }
 
-    @Secured("ROLE_ADMIN")
     public void create(ThemeSetDto setDto) {
 
         if (setDto == null) {
@@ -52,7 +51,6 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         return themeSetDtoList;
     }
 
-    @Secured("ROLE_ADMIN")
     public void update(ThemeSetDto setDto) {
         if (setDto == null) {
             throw new DataAccessExceptionService("DTO object cannot be NULL");
@@ -61,7 +59,6 @@ public class ThemeSetServiceImpl implements ThemeSetService{
         themeSetDao.update(ts);
     }
 
-    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("ID cannot be NULL");

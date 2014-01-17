@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.api.service;
 
 import cz.muni.fi.PA165.api.dto.CategoryDto;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface CategoryService {
      *
      * @return List<Category> list of brick objects
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_REST" })
     public List<CategoryDto> findAll();
 
     /**
@@ -23,6 +25,7 @@ public interface CategoryService {
      * @param name String, name of brick
      * @return List<Brick> list of brick with desired color
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_REST" })
     public CategoryDto findByName(String name);
 
     /**
@@ -30,6 +33,7 @@ public interface CategoryService {
      *
      * @param category instance of Category entity class
      */
+    @Secured({"ROLE_ADMIN", "ROLE_REST" })
     public void update(CategoryDto category);
 
     /**
@@ -37,6 +41,7 @@ public interface CategoryService {
      *
      * @param id id of the instance of the category to remove
      */
+    @Secured({"ROLE_ADMIN", "ROLE_REST" })
     public void delete(Long id);
 
     /**
@@ -44,6 +49,7 @@ public interface CategoryService {
      *
      * @param category instance of Category entity class
      */
+    @Secured({"ROLE_ADMIN", "ROLE_REST" })
     public void create(CategoryDto category);
 
     /**
@@ -51,5 +57,6 @@ public interface CategoryService {
      *
      * @param id the given id
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_REST" })
     public CategoryDto findById(Long id);
 }

@@ -30,7 +30,6 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void create(AccountDto dto) {
         if (dto == null) {
             throw new DataAccessExceptionService("created account cannot be null");
@@ -40,7 +39,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void update(AccountDto dto) {
         if (dto == null) {
             throw new DataAccessExceptionService("updated account cannot be null");
@@ -50,7 +48,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("deleted account id cannot be null");
