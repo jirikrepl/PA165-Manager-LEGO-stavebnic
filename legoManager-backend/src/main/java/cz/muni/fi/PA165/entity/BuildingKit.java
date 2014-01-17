@@ -14,7 +14,7 @@ public class BuildingKit implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BuildingKitSequence")
-    @SequenceGenerator(name = "BuildingKitSequence", sequenceName = "BUILDINGKIT_SEQ", initialValue=150, allocationSize=1)
+    @SequenceGenerator(name = "BuildingKitSequence", sequenceName = "BUILDINGKIT_SEQ", initialValue=150)
     private Long id;
     private String name;
     private int yearFrom;

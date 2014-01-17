@@ -13,7 +13,7 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CategorySequence")
-    @SequenceGenerator(name = "CategorySequence", sequenceName = "CATEGORY_SEQ", initialValue=150, allocationSize=1)
+    @SequenceGenerator(name = "CategorySequence", sequenceName = "CATEGORY_SEQ", initialValue=150)
     private Long id;
     @Column(unique=true)
     private String name;
