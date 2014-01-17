@@ -9,6 +9,7 @@ import cz.muni.fi.PA165.entity.Account;
 import junit.framework.TestCase;
 import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class AccountServiceTest extends TestCase {
         verify(accountDao).create(captor.capture());
         assertEquals(account.getId(), captor.getValue().getId());
         assertEquals(account.getName(), captor.getValue().getName());
-        assertEquals(account.getPassword(), captor.getValue().getPassword());
+        assertEquals(new ShaPasswordEncoder(256).encodePassword(account.getPassword(),null), captor.getValue().getPassword());
         assertEquals(account.getIsAdmin(), captor.getValue().getIsAdmin());
     }
 
@@ -91,7 +92,7 @@ public class AccountServiceTest extends TestCase {
         verify(accountDao).create(captor1.capture());
         assertEquals(accountDto.getId(), captor1.getValue().getId());
         assertEquals(accountDto.getName(), captor1.getValue().getName());
-        assertEquals(accountDto.getPassword(), captor1.getValue().getPassword());
+        assertEquals(new ShaPasswordEncoder(256).encodePassword(accountDto.getPassword(),null), captor1.getValue().getPassword());
         assertEquals(accountDto.getIsAdmin(), captor1.getValue().getIsAdmin());
 
         //update
@@ -104,7 +105,7 @@ public class AccountServiceTest extends TestCase {
         verify(accountDao).update(captor2.capture());
         assertEquals(accountDto.getId(), captor2.getValue().getId());
         assertEquals(accountDto.getName(), captor2.getValue().getName());
-        assertEquals(accountDto.getPassword(), captor2.getValue().getPassword());
+        assertEquals(new ShaPasswordEncoder(256).encodePassword(accountDto.getPassword(),null), captor2.getValue().getPassword());
         assertEquals(accountDto.getIsAdmin(), captor2.getValue().getIsAdmin());
 
         // mock dao
