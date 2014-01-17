@@ -9,7 +9,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -64,8 +63,7 @@ public class CategoryServiceTest extends TestCase {
      */
     private CategoryDto createCategoryDto(String name, String desc) {
         CategoryDto categoryDto = new CategoryDto();
-        Random random = new Random(System.currentTimeMillis());
-        Long id = random.nextLong();
+        Long id = new Long(5);
         categoryDto.setId(id);
         categoryDto.setDescription(desc);
         categoryDto.setName(name);

@@ -15,10 +15,8 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
@@ -61,9 +59,7 @@ public class ThemeSetServiceTest {
      */
     private ThemeSetDto createThemeSetDto(String name) {
         ThemeSetDto themeSetDto = new ThemeSetDto();
-        Random random = new Random(System.currentTimeMillis());
-        Long id = random.nextLong();
-        themeSetDto.setId(id);
+        themeSetDto.setId(new Long(5));
         themeSetDto.setName(name);
         return themeSetDto;
     }

@@ -12,7 +12,6 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.mockito.Mockito.*;
 
@@ -66,9 +65,7 @@ public class AccountServiceTest extends TestCase {
      */
     private AccountDto createAccountDto(String name, String password, Boolean isAdmin) {
         AccountDto accountDto = new AccountDto();
-        Random random = new Random(System.currentTimeMillis());
-        Long id = random.nextLong();
-        accountDto.setId(id);
+        accountDto.setId(new Long(5));
         accountDto.setName(name);
         accountDto.setPassword(password);
         accountDto.setIsAdmin(isAdmin);
@@ -210,8 +207,13 @@ public class AccountServiceTest extends TestCase {
         catch (DataAccessException e) {}
 
         // test - save some entity in table, return it by id
+
         AccountDto accountDto2 = createAccountDto("name", "pwd", Boolean.FALSE);
-        when(accountDao.findById(accountDto2.getId())).thenReturn(AccountConversion.convertToEntity(accountDto2));
+        accountDto2.setId(new Long(6));
+        Account account = AccountConversion.convertToEntity(accountDto2);
+        Long id = accountDto2.getId();
+        when(accountDao.findById(accountDto2.getId())).thenReturn(account);
+
         returnedDto = accountService.findById(accountDto2.getId());
         assertEquals(accountDto2.getId(), returnedDto.getId());
         assertEquals(accountDto2.getIsAdmin(), returnedDto.getIsAdmin());

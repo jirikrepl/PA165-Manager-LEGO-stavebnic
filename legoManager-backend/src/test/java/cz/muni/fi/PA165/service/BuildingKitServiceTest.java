@@ -20,7 +20,6 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -70,8 +69,7 @@ public class BuildingKitServiceTest extends TestCase {
      */
     private BuildingKitDto createBuildingKitDto(String name, String desc) {
         BuildingKitDto dto = new BuildingKitDto();
-        Random random = new Random(System.currentTimeMillis());
-        Long id = random.nextLong();
+        Long id = new Long(5);
         dto.setId(id);
         dto.setName(name);
         dto.setDescription(desc);
