@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.dao.AccountDao;
 import cz.muni.fi.PA165.daoDtoConversion.AccountConversion;
 import cz.muni.fi.PA165.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +29,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-
     @Override
+    @Secured("ROLE_ADMIN")
     public void create(AccountDto dto) {
         if (dto == null) {
             throw new DataAccessExceptionService("created account cannot be null");
@@ -39,6 +40,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void update(AccountDto dto) {
         if (dto == null) {
             throw new DataAccessExceptionService("updated account cannot be null");
@@ -48,6 +50,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void delete(Long id) {
         if (id == null) {
             throw new DataAccessExceptionService("deleted account id cannot be null");
@@ -86,7 +89,6 @@ public class AccountServiceImpl implements AccountService {
         } catch (IllegalArgumentException e) {
             return null;
         }
-
 
         return accountDto;
     }
