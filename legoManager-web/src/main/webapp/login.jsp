@@ -42,13 +42,12 @@
                 <div class="row col-md-3 col-sm-3 col-md-offset-4 col-sm-offset-4 col-xs-3 col-xs-offset-4">
                     <div class="form-group">
                         <label for="exampleInputEmail1"><f:message key="loginform.username"/></label>
-                        <input class="form-control" name="j_username" id="exampleInputEmail1" placeholder=<f:message key="loginform.username"/>>
+                        <input class="form-control" name="j_username" id="exampleInputEmail1" />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputPassword1"><f:message key="loginform.password"/></label>
-                        <input type="password" name="j_password" class="form-control" id="exampleInputPassword1"
-                               placeholder=<f:message key="loginform.password"/>>
+                        <input type="password" name="j_password" class="form-control" id="exampleInputPassword1"/>
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </div>
