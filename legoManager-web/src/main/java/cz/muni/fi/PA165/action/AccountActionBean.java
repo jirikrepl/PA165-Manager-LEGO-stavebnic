@@ -4,10 +4,7 @@ import cz.muni.fi.PA165.api.dto.AccountDto;
 import cz.muni.fi.PA165.api.service.AccountService;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.LocalizableError;
-import net.sourceforge.stripes.validation.Validate;
-import net.sourceforge.stripes.validation.ValidateNestedProperties;
-import net.sourceforge.stripes.validation.ValidationErrors;
+import net.sourceforge.stripes.validation.*;
 
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.List;
  * @author: Martin Rumanek
  */
 @UrlBinding("/accounts/{$ event}")
-public class AccountActionBean extends BaseActionBean {
+public class AccountActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean
     private AccountService accountService;
@@ -103,7 +100,9 @@ public class AccountActionBean extends BaseActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
+
+    @Override
+    public Resolution handleValidationErrors(ValidationErrors validationErrors) throws Exception {
         accounts = accountService.findAll();
         return null;
     }

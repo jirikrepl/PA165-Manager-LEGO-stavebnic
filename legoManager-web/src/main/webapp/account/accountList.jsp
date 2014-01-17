@@ -37,7 +37,7 @@
                 <tr>
                     <td>${accounts.id}</td>
                     <td>${accounts.name}</td>
-                    <td>${accounts.isAdmin}</td>
+                    <td><f:message key="account.isAdmin.${accounts.isAdmin}"/></td>
 
                     <td>
                         <span>
