@@ -23,6 +23,7 @@
             <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/pa165"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
