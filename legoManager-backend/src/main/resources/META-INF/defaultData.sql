@@ -1,23 +1,3 @@
--- create table Account (id bigint not null, isAdmin integer not null, name varchar(255) not null, password varchar(255) not null, primary key (id));
--- create table Brick (id bigint not null, color integer, description varchar(255), name varchar(255), primary key (id));
--- create table BuildingKit (id bigint not null, description varchar(255), name varchar(255), price numeric(19,2), yearFrom integer not null, category_id bigint, themeSet_id bigint, primary key (id));
--- create table BuildingKit_bricks (BuildingKit_id bigint not null, bricks integer, bricks_KEY bigint not null, primary key (BuildingKit_id, bricks_KEY));
--- create table Category (id bigint not null, description varchar(255), name varchar(255), primary key (id));
--- create table ThemeSet (id bigint not null, description varchar(255), name varchar(255), price numeric(19,2), category_id bigint, primary key (id));
--- alter table Account add constraint UK_5ymbq1k3unixgcda1p89qnjv0 unique (name);
--- create unique index UK_foei036ov74bv692o5lh5oi66 on Category (name);
--- alter table BuildingKit add constraint FK_4eli3jjqukr0at6oqq5ft9sxx foreign key (category_id) references Category;
--- alter table BuildingKit add constraint FK_6lhggwgoi7q674jsbgwst9yse foreign key (themeSet_id) references ThemeSet;
--- alter table BuildingKit_bricks add constraint FK_qrsmsovm1u9u7b8echd3lplwo foreign key (bricks_KEY) references Brick;
--- alter table BuildingKit_bricks add constraint FK_y37cdjeuk8bmyihpe4ngdrvw foreign key (BuildingKit_id) references BuildingKit;
--- alter table ThemeSet add constraint FK_ilkxm83fimc0y4cwllrsr66c4 foreign key (category_id) references Category;
--- create sequence ACCOUNT_SEQ START WITH 150;
--- create sequence BRICK_SEQ START WITH 150;
--- create sequence BUILDINGKIT_SEQ START WITH 150;
--- create sequence CATEGORY_SEQ START WITH 150;
--- create sequence THEMESET_SEQ START WITH 150;
-
-
 INSERT INTO CATEGORY (ID, DESCRIPTION, NAME) VALUES (39, 'inspired by the Middleages', 'Middleages');
 INSERT INTO CATEGORY (ID, DESCRIPTION, NAME) VALUES (40, 'inspired by Fantasy', 'Fantasy');
 INSERT INTO CATEGORY (ID, DESCRIPTION, NAME) VALUES (41, 'inspired by Video Games', 'Video Games');
@@ -100,6 +80,6 @@ INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (27, 
 INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (26, 5, 57);
 INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (23, 5, 58);
 
-INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (1, 1, 'admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9');
-INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (2, 0, 'user', 'e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446');
+INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (1, true, 'admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9');
+INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (2, false, 'user', 'e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446');
 

@@ -1,10 +1,8 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.api.dto.AccountDto;
-import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.dao.AccountDao;
 import cz.muni.fi.PA165.daoDtoConversion.AccountConversion;
-import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.entity.Account;
 import junit.framework.TestCase;
 import org.mockito.ArgumentCaptor;

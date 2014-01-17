@@ -8,7 +8,6 @@ import cz.muni.fi.PA165.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
 import java.util.List;

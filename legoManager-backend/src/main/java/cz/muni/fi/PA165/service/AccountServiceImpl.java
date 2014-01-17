@@ -6,7 +6,6 @@ import cz.muni.fi.PA165.dao.AccountDao;
 import cz.muni.fi.PA165.daoDtoConversion.AccountConversion;
 import cz.muni.fi.PA165.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

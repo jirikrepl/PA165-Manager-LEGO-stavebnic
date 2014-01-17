@@ -7,11 +7,7 @@ import cz.muni.fi.PA165.daoDtoConversion.CategoryConversion;
 import cz.muni.fi.PA165.daoDtoConversion.ThemeSetConversion;
 import cz.muni.fi.PA165.entity.Category;
 import cz.muni.fi.PA165.entity.ThemeSet;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.ArgumentCaptor;
 import org.springframework.dao.DataAccessException;
 

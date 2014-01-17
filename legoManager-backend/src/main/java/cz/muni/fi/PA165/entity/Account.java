@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

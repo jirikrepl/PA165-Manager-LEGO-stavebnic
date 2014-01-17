@@ -2,16 +2,16 @@ package cz.muni.fi.PA165.security;
 
 import cz.muni.fi.PA165.api.dto.AccountDto;
 import cz.muni.fi.PA165.api.service.AccountService;
-import cz.muni.fi.PA165.dao.AccountDao;
-import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by rumanekm on 12.1.14.
