@@ -24,7 +24,6 @@
             <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                 <sec:authorize access="isAuthenticated()">
                     <ul class="nav navbar-nav">
-                        <!--<li class="active">-->
                         <li>
                             <s:link beanclass="cz.muni.fi.PA165.action.CategoryActionBean"><f:message
                                     key="navigation.category"/></s:link>
@@ -49,8 +48,8 @@
                         </sec:authorize>
                     </ul>
 
-
-                    <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><sec:authentication property="principal.username" /></li>
                         <li>
                             <button style="margin-top: 8px" type="submit" class="btn"
                                     onclick="location.href='${pageContext.request.contextPath}' + '/j_spring_security_logout';">

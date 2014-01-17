@@ -77,7 +77,7 @@ public class ThemeSetActionBean extends BaseActionBean {
 
     @DefaultHandler
     public Resolution list() {
-        return new RedirectResolution("/themeset/list.jsp");
+        return new ForwardResolution("/themeset/list.jsp");
     }
 
     public Resolution createThemeSet() {
