@@ -38,7 +38,7 @@
                 <tr>
                     <td>${themeSet.id}</td>
                     <td><c:out value="${themeSet.name}"/></td>
-                    <td><c:out value="${themeSet.price}"/></td>
+                    <td><c:out value="${themeSet.price}"/> Kč</td>
                     <td><c:out value="${themeSet.categoryDto.name}"/></td>
                     <td>
                         <span>

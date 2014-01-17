@@ -46,7 +46,7 @@
                     <td>${buildingKit.id}</td>
                     <td>${buildingKit.name}</td>
                     <td>${buildingKit.yearFrom}</td>
-                    <td>${buildingKit.price}</td>
+                    <td>${buildingKit.price} Kč</td>
                     <td>${buildingKit.category.name}</td>
                     <td>${buildingKit.themeSet.name}</td>
 
