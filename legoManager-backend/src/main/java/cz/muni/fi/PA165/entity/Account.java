@@ -1,11 +1,9 @@
 package cz.muni.fi.PA165.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  * Created by Pavol Bako on 6.1.14.
@@ -17,13 +15,15 @@ public class Account implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AccountSequence")
+    @SequenceGenerator(name = "AccountSequence", sequenceName = "ACCOUNT_SEQ", initialValue = 150)
     private Long id;
     @Column(nullable=false,unique=true)
     private String name;
     @Column(nullable=false)
     private String password;
     @Column(nullable=false)
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean isAdmin;
 
 

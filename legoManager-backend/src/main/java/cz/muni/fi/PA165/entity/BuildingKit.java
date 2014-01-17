@@ -1,11 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -18,7 +13,8 @@ public class BuildingKit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BuildingKitSequence")
+    @SequenceGenerator(name = "BuildingKitSequence", sequenceName = "BUILDINGKIT_SEQ", initialValue = 150)
     private Long id;
     private String name;
     private int yearFrom;

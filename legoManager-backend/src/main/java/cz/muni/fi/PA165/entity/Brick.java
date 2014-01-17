@@ -2,10 +2,7 @@ package cz.muni.fi.PA165.entity;
 
 import cz.muni.fi.PA165.api.service.Color;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -18,7 +15,8 @@ public class Brick implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BrickSequence")
+    @SequenceGenerator(name = "BrickSequence", sequenceName = "BRICK_SEQ", initialValue = 150)
     private Long id;
     private Color color;
     private String name;

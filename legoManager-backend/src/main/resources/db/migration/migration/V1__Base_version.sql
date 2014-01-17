@@ -1,54 +1,21 @@
-CREATE TABLE CATEGORY
-(
-    ID BIGINT PRIMARY KEY NOT NULL,
-    DESCRIPTION VARCHAR(255),
-    NAME VARCHAR(255)
-);
-CREATE TABLE THEMESET
-(
-    ID BIGINT PRIMARY KEY NOT NULL,
-    DESCRIPTION VARCHAR(255),
-    NAME VARCHAR(255),
-    PRICE BIGINT,
-    CATEGORY_ID BIGINT,
-    FOREIGN KEY ( CATEGORY_ID ) REFERENCES CATEGORY ( ID )
-);
-CREATE TABLE BUILDINGKIT
-(
-    ID BIGINT PRIMARY KEY NOT NULL,
-    DESCRIPTION VARCHAR(255),
-    NAME VARCHAR(255),
-    PRICE BIGINT,
-    YEARFROM INT NOT NULL,
-    THEMESET_ID BIGINT,
-    CATEGORY_ID BIGINT,
-    FOREIGN KEY ( CATEGORY_ID ) REFERENCES CATEGORY ( ID ),
-    FOREIGN KEY ( THEMESET_ID ) REFERENCES THEMESET ( ID )
-);
-CREATE TABLE BRICK
-(
-    ID BIGINT PRIMARY KEY NOT NULL,
-    COLOR INT,
-    DESCRIPTION VARCHAR(255),
-    NAME VARCHAR(255)
-);
-CREATE TABLE BUILDINGKIT_BRICKS
-(
-    BUILDINGKIT_ID BIGINT NOT NULL,
-    BRICKS INT,
-    BRICKS_KEY BIGINT NOT NULL,
-    PRIMARY KEY ( BUILDINGKIT_ID, BRICKS_KEY ),
-    FOREIGN KEY ( BRICKS_KEY ) REFERENCES BRICK ( ID ),
-    FOREIGN KEY ( BUILDINGKIT_ID ) REFERENCES BUILDINGKIT ( ID )
-);
-
-CREATE TABLE ACCOUNT
-(
-    ID BIGINT PRIMARY KEY NOT NULL,
-    ISADMIN SMALLINT NOT NULL,
-    NAME VARCHAR(255) NOT NULL,
-    PASSWORD VARCHAR(255) NOT NULL
-);
+create table Account (id bigint not null, isAdmin integer not null, name varchar(255) not null, password varchar(255) not null, primary key (id));
+create table Brick (id bigint not null, color integer, description varchar(255), name varchar(255), primary key (id));
+create table BuildingKit (id bigint not null, description varchar(255), name varchar(255), price numeric(19,2), yearFrom integer not null, category_id bigint, themeSet_id bigint, primary key (id));
+create table BuildingKit_bricks (BuildingKit_id bigint not null, bricks integer, bricks_KEY bigint not null, primary key (BuildingKit_id, bricks_KEY));
+create table Category (id bigint not null, description varchar(255), name varchar(255), primary key (id));
+create table ThemeSet (id bigint not null, description varchar(255), name varchar(255), price numeric(19,2), category_id bigint, primary key (id));
+alter table Account add constraint UK_5ymbq1k3unixgcda1p89qnjv0 unique (name);
+create unique index UK_foei036ov74bv692o5lh5oi66 on Category (name);
+alter table BuildingKit add constraint FK_4eli3jjqukr0at6oqq5ft9sxx foreign key (category_id) references Category;
+alter table BuildingKit add constraint FK_6lhggwgoi7q674jsbgwst9yse foreign key (themeSet_id) references ThemeSet;
+alter table BuildingKit_bricks add constraint FK_qrsmsovm1u9u7b8echd3lplwo foreign key (bricks_KEY) references Brick;
+alter table BuildingKit_bricks add constraint FK_y37cdjeuk8bmyihpe4ngdrvw foreign key (BuildingKit_id) references BuildingKit;
+alter table ThemeSet add constraint FK_ilkxm83fimc0y4cwllrsr66c4 foreign key (category_id) references Category;
+create sequence ACCOUNT_SEQ START WITH 150;
+create sequence BRICK_SEQ START WITH 150;
+create sequence BUILDINGKIT_SEQ START WITH 150;
+create sequence CATEGORY_SEQ START WITH 150;
+create sequence THEMESET_SEQ START WITH 150;
 
 
 INSERT INTO CATEGORY (ID, DESCRIPTION, NAME) VALUES (39, 'inspired by the Middleages', 'Middleages');
@@ -133,4 +100,6 @@ INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (27, 
 INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (26, 5, 57);
 INSERT INTO BUILDINGKIT_BRICKS (BUILDINGKIT_ID, BRICKS, BRICKS_KEY) VALUES (23, 5, 58);
 
-INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (1, 0, 'pa165', 'pa165');
+INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (1, 1, 'admin', 'admin');
+INSERT INTO PA165.ACCOUNT (ID, ISADMIN, NAME, PASSWORD) VALUES (2, 0, 'user', 'user');
+
