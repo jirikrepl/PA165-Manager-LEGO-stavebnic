@@ -49,7 +49,7 @@
                     </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><sec:authentication property="principal.username" /></li>
+                    <li class="user-info"><sec:authentication property="principal.username" /></li>
                         <li>
                             <button style="margin-top: 8px" type="submit" class="btn"
                                     onclick="location.href='${pageContext.request.contextPath}' + '/j_spring_security_logout';">

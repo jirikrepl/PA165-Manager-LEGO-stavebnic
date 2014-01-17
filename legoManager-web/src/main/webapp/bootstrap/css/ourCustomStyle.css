@@ -14,3 +14,10 @@
     background-color: #F0F0F0;
     color: black;
 }
+
+.user-info {
+    position: relative;
+    top: 15px;
+    left: -17px;
+    color: #CCCCCC;
+}
