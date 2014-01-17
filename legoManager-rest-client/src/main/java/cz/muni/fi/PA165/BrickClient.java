@@ -3,6 +3,7 @@ package cz.muni.fi.PA165;
 import cz.muni.fi.PA165.api.dto.BrickDto;
 import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.service.Color;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
@@ -27,7 +28,7 @@ public class BrickClient {
     private static final String FIND_BY_ID_OPERATION = "findbyid";
     private static final String FIND_BY_COLOR_OPERATION = "findbycolor";
     private static final String FIND_BY_NAME_OPERATION = "findbyname";
-
+    private static final HttpAuthenticationFeature auth = HttpAuthenticationFeature.basic("rest", "rest");
 
     /**
      * handles various operations of brick
@@ -100,6 +101,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/");
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
 
@@ -148,6 +150,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/");
+        webTarget.register(auth);
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(brickDto, MediaType.APPLICATION_JSON_TYPE));
 
         // print out some response
@@ -181,6 +184,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -213,6 +217,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("name", name);
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request();
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -260,6 +265,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks").queryParam("color", color.getColorString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -320,6 +326,7 @@ public class BrickClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -352,6 +359,7 @@ public class BrickClient {
         Long id = Long.parseLong(args[2]);
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 

@@ -31,11 +31,13 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
           class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userDetailsService"/>
     </bean>
-
+    <security:http use-expressions="true" pattern="/rest/**">
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_REST')"  />
+        <security:http-basic />
+    </security:http>
     <security:http use-expressions="true">
         <security:intercept-url pattern="/login.jsp" access="permitAll"/>
         <security:intercept-url pattern="/bootstrap/**" access="permitAll"/>
-        <security:intercept-url pattern="/rest/**" access="ROLE_ADMIN"/>
         <security:intercept-url pattern="/**" access="authenticated"/>
         <security:form-login login-page="/login.jsp" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <security:logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true"/>
@@ -53,7 +55,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         </security:authentication-provider>
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="rest" password="rest" authorities="ROLE_ADMIN" />
+                <security:user name="rest" password="rest" authorities="ROLE_REST" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>

@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.api.dto.BuildingKitDto;
 import cz.muni.fi.PA165.api.dto.CategoryDto;
 import cz.muni.fi.PA165.api.dto.ThemeSetDto;
 import cz.muni.fi.PA165.conflictDto.CategoryConflictDto;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
@@ -23,6 +24,7 @@ public class CategoryClient {
     private static final String DELETE_OPERATION = "delete";
     private static final String FIND_BY_ID_OPERATION = "findbyid";
     private static final String FIND_BY_NAME_OPERATION = "findbyname";
+    private static final HttpAuthenticationFeature auth = HttpAuthenticationFeature.basic("rest", "rest");
 
     public CategoryClient(String[] args) {
 
@@ -82,6 +84,7 @@ public class CategoryClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
 
@@ -125,6 +128,7 @@ public class CategoryClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/");
+        webTarget.register(auth);
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
 
         // print out some response
@@ -159,6 +163,7 @@ public class CategoryClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -189,6 +194,7 @@ public class CategoryClient {
         String name = args[2];
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories").queryParam("name", name);
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request();
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
@@ -238,6 +244,7 @@ public class CategoryClient {
 
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
         Response response = webTarget.request(MediaType.APPLICATION_JSON).put(Entity.entity(categoryDto, MediaType.APPLICATION_JSON_TYPE));
@@ -277,6 +284,7 @@ public class CategoryClient {
         }
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/categories/" + id.toString());
+        webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
 
