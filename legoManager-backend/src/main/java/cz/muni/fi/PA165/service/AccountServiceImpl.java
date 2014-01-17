@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.daoDtoConversion.AccountConversion;
 import cz.muni.fi.PA165.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class AccountServiceImpl implements AccountService {
             throw new DataAccessExceptionService("created account cannot be null");
         }
         Account accountEntity = AccountConversion.convertToEntity(dto);
+        String passwordHash =
+                new ShaPasswordEncoder(256).encodePassword(accountEntity.getPassword(), null);
+        accountEntity.setPassword(passwordHash);
         accountDao.create(accountEntity);
     }
 
@@ -44,6 +48,8 @@ public class AccountServiceImpl implements AccountService {
             throw new DataAccessExceptionService("updated account cannot be null");
         }
         Account account = AccountConversion.convertToEntity(dto);
+        String passwordHash = new ShaPasswordEncoder(256).encodePassword(account.getPassword(), null);
+        account.setPassword(passwordHash);
         accountDao.update(account);
     }
 

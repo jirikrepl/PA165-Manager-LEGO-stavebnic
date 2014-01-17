@@ -51,7 +51,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsService">
-            <!--<password-encoder hash="md5"/>-->
+            <security:password-encoder hash="sha-256" />
         </security:authentication-provider>
         <security:authentication-provider>
             <security:user-service>
