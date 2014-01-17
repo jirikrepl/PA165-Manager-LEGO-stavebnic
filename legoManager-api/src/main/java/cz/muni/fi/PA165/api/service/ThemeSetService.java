@@ -16,6 +16,7 @@ public interface ThemeSetService {
      *
      * @return List<ThemeSet> all entities in DB
      */
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<ThemeSetDto> findAll();
 
     /**

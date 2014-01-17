@@ -23,7 +23,6 @@ public class Account implements Serializable{
     @Column(nullable=false)
     private String password;
     @Column(nullable=false)
-    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean isAdmin;
 
 
