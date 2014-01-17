@@ -16,7 +16,7 @@ public class Brick implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BrickSequence")
-    @SequenceGenerator(name = "BrickSequence", sequenceName = "BRICK_SEQ", initialValue = 150)
+    @SequenceGenerator(name = "BrickSequence", sequenceName = "BRICK_SEQ", initialValue=150, allocationSize=1)
     private Long id;
     private Color color;
     private String name;

@@ -15,7 +15,7 @@ public class ThemeSet implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ThemeSetSequence")
-    @SequenceGenerator(name = "ThemeSetSequence", sequenceName = "THEMESET_SEQ", initialValue = 150)
+    @SequenceGenerator(name = "ThemeSetSequence", sequenceName = "THEMESET_SEQ", initialValue=150, allocationSize=1)
     private Long id;
     private BigDecimal price;
     private String description;
