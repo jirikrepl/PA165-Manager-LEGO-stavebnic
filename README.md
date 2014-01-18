@@ -21,17 +21,22 @@ Existují různé tématické kategorie pod které se stavebnice budou řadit. J
 - Set i samotná stavebnice musí evidovat do které kategorie je přiřazena
 - Kategorie také nese stručný popis
 
-Aplikace se zbuildí pomocí příkazu "mvn clean install".
 
-Aplikace je spustitelná pomocí příkazu "mvn tomcat7:run" (v adresáři legoManager-web). 
+Spuštění
+============================
+
+Doporučujeme použít <b>Derby verze alespoň 10.7</b>.
+
+Aplikace se zbuildí pomocí příkazu "<b>mvn clean install</b>".
+
+Aplikace je spustitelná pomocí příkazu "<b>mvn tomcat7:run</b>" (v adresáři legoManager-web). 
 url: http://localhost:8080/pa165/.
 
-Poté je nutné provést naplnění databáze pomocí příkazu "mvn sql:execute" (v adresáři legoManager-backend). Bez tohoto kroku není možné se přihlásit (uživatelé jsou uloženi v databázi)
+Poté je nutné provést naplnění databáze pomocí příkazu "<b>mvn sql:execute</b>" (v adresáři legoManager-backend). Bez tohoto kroku není možné se přihlásit (uživatelé jsou uloženi v databázi)
 
 pro roli uživatel (pouze prohlížení) je přihlašovací jméno <b>user</b>, heslo je <b>heslo123</b>
 pro roli administrátor (úprava dat a přidávání uživatelů) je přihlašovací jméno <b>admin</b>, heslo je <b>admin123</b>
 
-Doporučujeme použít Derby verze alespoň 10.7.
 
 
 Rest klient se spouští pomocí konzole z adresáře legoManager-rest-client následujícím příkazem:
