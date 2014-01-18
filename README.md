@@ -26,6 +26,14 @@ Aplikace se zbuildí pomocí příkazu "mvn clean install".
 Aplikace je spustitelná pomocí příkazu "mvn tomcat7:run" (v adresáři legoManager-web). 
 url: http://localhost:8080/pa165/.
 
+Poté je nutné provést naplnění databáze pomocí příkazu "mvn sql:execute" (v adresáři legoManager-backend). Bez tohoto kroku není možné se přihlásit (uživatelé jsou uloženi v databázi)
+
+pro roli uživatel (pouze prohlížení) je přihlašovací jméno <b>user</b>, heslo je <b>heslo123</b>
+pro roli administrátor (úprava dat a přidávání uživatelů) je přihlašovací jméno <b>admin</b>, heslo je <b>admin123</b>
+
+Doporučujeme použít Derby verze alespoň 10.7.
+
+
 Rest klient se spouští pomocí konzole z adresáře legoManager-rest-client následujícím příkazem:
 
         mvn exec:java -Dexec.args="[parametry]"
