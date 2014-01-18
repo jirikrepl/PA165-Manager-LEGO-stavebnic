@@ -59,7 +59,7 @@ public interface BuildingKitService {
      *
      * @param categoryDto the given category
      */
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_REST"})
     public List<BuildingKitDto> findByCategory(CategoryDto categoryDto);
 
     /**
@@ -75,7 +75,7 @@ public interface BuildingKitService {
      * @param brickDto give brick dto
      * @return List of buildinkKits dto
      */
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_REST"})
     public List<BuildingKitDto> findByBrick(BrickDto brickDto);
 
 }

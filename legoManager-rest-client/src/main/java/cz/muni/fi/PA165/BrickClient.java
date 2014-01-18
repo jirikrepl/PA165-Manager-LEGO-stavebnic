@@ -361,7 +361,7 @@ public class BrickClient {
         }
 
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
+                WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
         webTarget.register(auth);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header("accept", MediaType.APPLICATION_JSON);
