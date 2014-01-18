@@ -352,7 +352,14 @@ public class BrickClient {
             System.exit(1);
         }
 
-        Long id = Long.parseLong(args[2]);
+        Long id = null;
+        try {
+            id = Long.parseLong(args[2]);
+        } catch (NumberFormatException e) {
+            System.out.println("Error - argument '" + args[2] + "' must be a number");
+            System.exit(1);
+        }
+
         Client client = ClientBuilder.newBuilder().build();
         WebTarget webTarget = client.target("http://localhost:8080/pa165/rest/bricks/" + id.toString());
         webTarget.register(auth);
