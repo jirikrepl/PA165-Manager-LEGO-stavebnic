@@ -34,7 +34,7 @@ url: http://localhost:8080/pa165/.
 
 Poté je nutné provést naplnění databáze pomocí příkazu "<b>mvn sql:execute</b>" (v adresáři legoManager-backend). Bez tohoto kroku není možné se přihlásit (uživatelé jsou uloženi v databázi)
 
-pro roli uživatel (pouze prohlížení) je přihlašovací jméno <b>user</b>, heslo je <b>heslo123</b>
+pro roli uživatel (pouze prohlížení) je přihlašovací jméno <b>user</b>, heslo je <b>user123</b>
 
 pro roli administrátor (úprava dat a přidávání uživatelů) je přihlašovací jméno <b>admin</b>, heslo je <b>admin123</b>
 
