@@ -1,5 +1,7 @@
 PA165 Manažer LEGO stavebnic
 ============================
+
+[![Join the chat at https://gitter.im/jirikrepl/PA165-Manager-LEGO-stavebnic](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jirikrepl/PA165-Manager-LEGO-stavebnic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Oficiální zadání:
 
 Vžijme se opět do dětských let. Mějme firmu prodávající stavebnice Lego.
